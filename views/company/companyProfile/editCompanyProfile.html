@@ -1,0 +1,279 @@
+<div class="gp-pageTitle"><h2>Edit Organization Profile</h2></div>
+<md-tabs md-dynamic-height md-border-bottom class="md-gpBlue-theme" md-selected="selectedTabNumber.inputTab" md-no-select-click="true"  id="editToastAnchor" ng-class="isErrorInTabField()">
+  <!--/////////////// TAB 1 /////////////// -->
+  <md-tab label="Organization Profile" md-on-select="onTabSelected(selectedTabNumber.inputTab)" ng-click="isErrorInTabField0()" >
+    <md-content class="md-padding">
+      <form name="companyInfoForm">
+        <div class="row">
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="companyName">Organization Name</label>
+              <input type="text" class="form-control" name="companyName" ng-model="companyInfo.companyName" readonly>
+              <div ng-messages="companyInfoForm.companyName.$error" role="alert">
+               <div ng-message="required">
+                 This field is required
+               </div>
+             </div>
+             <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="address">Address 1</label>
+              <input type="text" class="form-control" name="address" ng-model="companyInfo.address" readonly>
+              <div ng-messages="companyInfoForm.address.$error" role="alert">
+               <div ng-message="required">
+                 This field is required
+               </div>
+             </div>
+             <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="address2">Address 2</label>
+              <input type="text" class="form-control" name="address2" ng-model="companyInfo.address2" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="city">City</label>
+              <input type="text" class="form-control" name="city" ng-model="companyInfo.city" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="city">State</label>
+              <input type="text" class="form-control" name="city" ng-model="companyInfo.state.name" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="zip">Zip</label>
+              <input type="text" class="form-control" name="zip" ng-model="companyInfo.zip" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label for="website">Website</label>
+              <input type="text" class="form-control" name="website" ng-model="companyInfo.website">
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" name="phone" ng-model="companyInfo.phone" phone-input>
+              <div ng-messages="companyInfoForm.phone.$error" role="alert">
+               <div ng-message="required">
+                 This field is required
+               </div>
+             </div>
+             <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label style="opacity: 1;top: -24px;height: 16px;color: #2e7491;">POC Name</label>
+              <md-select class="md-gpBlue-theme" ng-model="companyInfo.poc" md-selected-text="companyInfo.poc.name" placeholder="POC Name">
+                <md-option ng-repeat="poc in companyPointOfContacts" ng-value="poc" >
+                  {{poc.name}}
+                </md-option>
+              </md-select>
+              <div class="md-errors-spacer"></div>
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="duns">DUNS #</label>
+              <input type="text" class="form-control" name="duns" ng-model="companyInfo.duns" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme gp-readOnly ">
+              <label for="cage">CAGE #</label>
+              <input type="text" class="form-control" name="cage" ng-model="companyInfo.cage" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-12">
+            <label class="gp-greyLogo">Upload Organization Logo/Image</label>
+          </div>
+          <div class="col col-md-12">
+            <label class="gp-upload">
+              <img ngf-src="companyProfileImage">
+              <img ng-src="{{envURL+companyInfo.imageFilename}}" ng-if="companyInfo.imageFilename && !companyProfileImage">
+            </label>
+            <div class="uploadImgHover">
+              <div class="uploadImgInstruction">
+                <i class="fa fa-camera"></i>
+                <div>change photo</div>
+              </div>
+              <div id="profilePhoto"  ngf-select="companyProfileImage" ngf-drop="companyProfileImage" ng-model="companyProfileImage" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"  ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="orientation" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                &nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gp-ProfileButtons">
+          <md-button class="btn btn-default btn-outline" ng-click="closeEditProfile()">Close</md-button>
+          <md-button ng-click="saveAndCloseCompanyProfileForm(companyInfo, companyProfileImage)"  class="btn btn-primary">Save</md-button>
+          <!-- NOTE: Do not erase following -->
+          <!-- <md-button ng-click="saveAndCloseCompanyProfileForm(companyInfo, companyProfileImage)"  class="btn btn-primary" ng-disabled="!companyInfo.companyName || !companyInfo.address || !companyInfo.phone || (!primaryNaicsSelected && !companyInfo.primaryNaicsCode.name)">Save</md-button> -->
+        </div>
+        <!-- NOTE: Do Note erase following -->
+        <!-- <div class="gp-error btn-errorMsg" ng-if="!companyInfo.companyName || !companyInfo.address || !companyInfo.phone || (!primaryNaicsSelected && !companyInfo.primaryNaicsCode.name)">Please fill out all required fields in order to save</div> -->
+      </form>
+    </md-content>
+  </md-tab>
+
+  <!--/////////////// TAB 2 /////////////// -->
+  <md-tab label="Additional Info"  md-on-select="onTabSelected(selectedTabNumber.inputTab)" ng-click="isErrorInTabField1()">
+    <md-content class="md-padding">
+      <form name="companyInfoForm2">
+      <div class="row">
+        <div class="col col-md-6">
+          <md-input-container class="md-block md-gpBlue-theme">
+            <label>Certifications (multiple selections possible)</label>
+            <md-select class="md-gpBlue-theme" ng-model="selectedCertification" ng-change="addCertification(selectedCertification)">
+              <md-option><em>None</em></md-option>
+              <md-option ng-repeat="certification in companyCertifications" ng-value="certification" >
+                {{certification.name}}
+              </md-option>
+            </md-select>
+            </md-input-container>
+            <div class="gp-certifications">
+              <label>Certifications (selected list)</label>
+              <ul>
+                <li ng-repeat="certification in certificationList track by $index">{{certification.name}}
+                  <i class="far fa-times-circle" ng-click="removeCertification($index, certification)"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label>Business Types (multiple selections possible)</label>
+              <md-select class="md-gpBlue-theme" ng-model="selectedBusinessType"  ng-change="addBusinessType(selectedBusinessType)">
+                <md-option ng-repeat="bt in businessTypes" ng-value="bt" >
+                  {{bt.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div class="gp-businessTypeList">
+              <label>Business Types (selected list)</label>
+              <ul>
+                <li ng-repeat="businessType in businessTypeList track by $index">{{businessType.name}}
+                  <i class="far fa-times-circle" ng-click="removeBusinessType($index, businessType)"></i></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-6">
+            <md-input-container class="md-block md-gpBlue-theme gp-addInputField" ng-repeat="emptyContract in emptyContracts track by $index" ng-show="$last">
+              <label for="emptyContract">Contracts (type and enter to add)</label>
+              <input type="text" class="form-control" name="emptyContract" ng-model="emptyContracts[$index]">
+              <i class="fa fa-plus-circle" ng-click="addNewContract($index, emptyContract)" ng-if="emptyContracts[$index]"></i>
+            </md-input-container>
+            <div class="gp-contractList">
+              <label>Contracts (added list)</label>
+              <ul>
+                <li ng-repeat="contract in companyInfo.contracts track by $index">{{contract}}
+                  <i class="far fa-times-circle" ng-click="removeContract($index, contract)" ng-if="companyInfo.contracts[$index]"></i></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label>Security Clearance</label>
+              <md-select class="md-gpBlue-theme" ng-model="companyInfo.securityClearance">
+                <md-option><em>None</em></md-option>
+                <md-option ng-repeat="clearance in securityClearances" ng-value="clearance" >
+                  {{clearance.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div class="gp-securityClearance">
+              <label>Security Clearance</label>
+              <ul>
+                <li>{{companyInfo.securityClearance.name}}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-6">
+            <md-input-container class="md-block gp-readOnly md-gpBlue-theme gp-addInputField">
+              <label for="emptyContract">Primary NAICS</label>
+              <input type="text" class="form-control" name="primaryNaics" ng-model="primaryNaics.name" readonly>
+              <div role="alert" class="showAlertOnHover gp-error">This field is imported from SAM and cannot be edited.</div>
+            </md-input-container>
+            <div class="gp-securityClearance">
+              <label>Primary NAICS</label>
+              <ul>
+                <li>{{primaryNaics.name}}</li>
+                <li ng-hide="primaryNaics.name">{{companyInfo.primaryNaicsCode.name}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <md-autocomplete
+                ng-disabled="!primaryNaicsSelected && !companyInfo.primaryNaicsCode.name"
+                flex
+                md-min-length = 3
+                md-delay = 3
+                md-selected-item="selectedSecondaryItem"
+                md-search-text="searchSecondaryText"
+                md-items="secondaryItem in searchNAICS(searchSecondaryText)"
+                md-item-text="secondaryItem.name"
+                md-selected-item-change="addSecondaryNAICS(secondaryItem)"
+                md-floating-label="Secondary NAICS Codes (add multiple)"
+                md-clear-button="true">
+              <md-item-template>
+                <span md-highlight-text="searchSecondaryText">{{secondaryItem.name}}</span>
+              </md-item-template>
+              <md-not-found>
+                No matches found.
+              </md-not-found>
+              {{secondaryItem.name}}
+            </md-autocomplete>
+            <div class="gp-naicsCode">
+              <label>Secondary NAICS</label>
+              <ul>
+                <li ng-repeat="naics in additionalNaicsCodes track by $index">{{naics.name}}
+                  <i class="far fa-times-circle" ng-click="removeSecondaryNAICS($index)"></i></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-md-12">
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="productsServicesOffered">Products and Services Offered</label>
+              <textarea type="text" class="form-control" rows="4" name="productsServicesOffered" ng-model="companyInfo.productsServicesOffered"></textarea>
+            </md-input-container>
+          </div>
+        </div>
+        <div class="gp-ProfileButtons">
+          <md-button class="btn btn-default btn-outline" ng-click="closeEditProfile()">Close</md-button>
+          <!-- <md-button ng-click="saveAndCloseCompanyProfileForm(companyInfo, companyProfileImage)"  class="btn btn-primary" ng-disabled="!companyInfo.companyName || !companyInfo.address || !companyInfo.phone || (!primaryNaicsSelected && !companyInfo.primaryNaicsCode.name)">Save</md-button> -->
+          <md-button ng-click="saveAndCloseCompanyProfileForm(companyInfo, companyProfileImage)"  class="btn btn-primary">Save</md-button>
+        </div>
+        <!-- <div class="gp-error btn-errorMsg" ng-if="!companyInfo.companyName || !companyInfo.address || !companyInfo.phone || (!primaryNaicsSelected && !companyInfo.primaryNaicsCode.name)">Please fill out all required fields in order to save</div> -->
+      </form>
+    </md-content>
+  </md-tab>
+</md-tabs>

@@ -1,0 +1,162 @@
+<div login-header class="gp-min480"></div>
+<div login-responsive-header class="gp-max480"></div>
+<div id="signUpStep4" class="view gp-signUpView" ng-init="planSelectionStep()">
+  <div class="gp-signUpStatusBar gp-min480" layout-align="center center">
+    <h1>app1url Subscription Plans</h1>
+  </div>
+  <md-toolbar class="md-hue-custom gp-min480">
+    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+      <div layout="column" layout-align="center center">
+        <h2 class="md-flex">Start project engagements with freelancers and more</h2>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <div class="gp-mainBodyWidth gp-StepContainer md-whiteframe-3dp">
+    <div class="panel panel-default gp-min480" data-ng-if="false">
+      <div>
+        <div class="gp-businessModelTable">
+          <div class="gp-tableLeft">
+            <div class="divTableBody">
+              <div class="gp-leftTableColumn">
+                <div class="gp-tableTitle">&nbsp;</div>
+                <div class="tablePlansFeatures"><h3>Plans & Features</h3></div>
+                <div class="gp-tableRow">
+                  <div >
+                    <h4>Active Projects</h4>
+                    <div>A project is an active search for a consultant you want to hire.</div>
+                  </div>
+                </div>
+                <div class="gp-tableRow">
+                  <div >
+                    <h4>Expert Matching Engine</h4>
+                    <div>Advanced filters enable super-fast drill down capability.</div>
+                  </div>
+                </div>
+                <div class="gp-tableRow">
+                  <div >
+                    <h4>Consultant Quotes & Engagement</h4>
+                    <div>Shortlist and request quotes from consultants and choose the one best for your project.</div>
+                  </div>
+                </div>
+                <div class="gp-tableRow">
+                  <div >
+                    <h4>Digital Administration</h4>
+                    <div>We handle NDAs, OCIs, invoices, and 1099 tax reporting to save time and cost.</div>
+                  </div>
+                </div>
+                <div class="gp-tableRow">
+                  <div >
+                    <h4>In-App Customer Support</h4>
+                    <div>Online help, FAQs, and tutorials are available.</div>
+                  </div>
+                </div>
+                <div class="gp-tableRowLast">
+                  <div >
+                    <h4>On-Demand PMO</h4>
+                    <div style="margin-bottom:3px;"><strong>CSR - </strong> Customer Support Representatives assist with training, trouble shooting, and general support.</div>
+                    <div><strong>PM - </strong> Project Manager saves you time and manages your business project needs from oversight of project requirements to identifying matching consultants inside or outside of the marketplace.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gp-tableRight">
+            <div class="divTableBody">
+              <div class="divTableColumn" data-ng-click="planSelected(0)">
+                <fieldset>
+                  <legend align="center">&nbsp;</legend>
+                  <div ><div class="gp-tableTitle">Basic</div></div>
+                  <div ><div class="gp-tableAmmt bg-info"><div class="gp-tableAmmtInner">Free</div></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableProjectLimit">Up to 2 per/mo.</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableLimit">Limited</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div ><div class="gp-tableManager bg-info">Up to 2 hrs per/mo.</div></div>
+                  <div class="gp-tableRow"><div>CSR</div></div>
+                </fieldset>
+              </div>
+              <div class="divTableColumn gp-essentialPackage gp-BestValue" data-ng-click="planSelected(1)">
+                <fieldset>
+                  <legend align="center">Best Value</legend>
+                  <div ><div class="gp-tableTitle">Essential</div></div>
+                  <div ><div class="gp-tableAmmt bg-primary"><div class="gp-tableAmmtInner">$1,995</div></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableProjectLimit">Up to 4 per/mo.</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableLimit">Unlimited</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div ><div class="gp-tableManager bg-primary">Up to 4 hrs per/mo.</div></div>
+                  <div class="gp-tableRow"><div>CSR</div></div>
+                </fieldset>
+              </div>
+              <div class="divTableColumn"  data-ng-click="planSelected(2)">
+                <fieldset>
+                  <legend align="center">&nbsp;</legend>
+                  <div ><div class="gp-tableTitle">Professional</div></div>
+                  <div ><div class="gp-tableAmmt bg-success"><div class="gp-tableAmmtInner">$3,595</div></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableProjectLimit">Up to 12 per/mo.</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableLimit">Unlimited</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div ><div class="gp-tableManager bg-success">Up to 12 hrs per/mo.</div></div>
+                  <div class="gp-tableRow"><div>CSR</div></div>
+                </fieldset>
+              </div>
+              <div class="divTableColumn"  data-ng-click="planSelected(3)">
+                <fieldset>
+                  <legend align="center">&nbsp;</legend>
+                  <div ><div class="gp-tableTitle">Enterprise</div></div>
+                  <div ><div class="gp-tableAmmt bg-warning"><div class="gp-tableAmmtInner">$8,995</div></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableProjectLimit">Unlimited</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableLimit">Unlimited</div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div class="gp-tableRow"><div class="gp-tableCheck"><i class="fa fa-check"></i></div></div>
+                  <div ><div class="gp-tableManager bg-warning">Up to 20 hrs per/mo.</div></div>
+                  <div class="gp-tableRow"><div>PM</div></div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gp-Step">
+      <!-- ///////////////////////////////// SELECT license //////////////////////////////////// -->
+      <div class="form-group gp-info">
+        <select class="form-control gp-selectLicenses" ng-class="{'gp-errOutline' : licenseNeeded && !amountDue}"  ng-options="license as license.name + '    ' + license.ProjectLimit + ' users, ' + license.Fee * 100 + '% $' + license.UnitPrice + ' per month' for license in licenses " ng-model="appInfo.item" ng-change="displaylicenseAmount(appInfo.item)" required>
+          <option value="" style="display:none;">*Choose Your Plan</option>
+        </select>
+        <i class="glyphicon glyphicon-info-sign" ng-click="showLicenseInfo($event)" data-ng-hide="true"></i>
+      </div>
+      <div class="text-right" style="margin-right:45px;">Click <a href="https://www.app1url.com/pricing/" target="_blank"><strong>here</strong></a> to see more details on our plans</div>
+      <div class="gp-price" ng-if="amountDue">Total Amount Due: ${{amountDue}}</div>
+      <!-- ///////////////////////////////// ECOMMERCE //////////////////////////////////// -->
+      <div class="gp-ecommerceWrapper" ng-show="appInfo.item && (appInfo.item.UnitPrice > 0)">
+        <form id="js-ecommercePayments" name="ecommercePayments"></form>
+      </div>
+      <!-- ///////////////////////////////// ADDRESS //////////////////////////////////// -->
+      <div class="gp-price" ng-if="amountDue">Total Amount Due: ${{amountDue}}</div>
+      <div class="gp-paymentAgreement abPayDetailECheckOnline" style="display:none;">  {{PaymentAcknowledgementContent}} </div>
+      <div class="gp-SubmitError col col-md-12">
+        <div class="gp-errorMsg" ng-class="{'gp-error' : licenseNeeded}" ng-if="licenseNeeded">Please Choose a Plan</div>
+        <div class="row errorMsg gp-error gp-errorMsg" ng-show="ccError"><span class="fieldError">{{errorMsg}}</span></div>
+      </div>
+      <div class="row gp-btnWrapper">
+        <div class="col col-md-6 gp-backBtn">
+          <button class="btn btn-default btn-outline" ng-click="goBackToStep3()">Back</button>
+        </div>
+        <div class="col col-md-6 gp-nextBtn">
+          <button class="btn btn-primary" type="submit" ng-click="submitPayment(appInfo)">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

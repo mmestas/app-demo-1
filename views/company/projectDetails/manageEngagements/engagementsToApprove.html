@@ -1,0 +1,42 @@
+<div class="gp-quotesReceivedWrapper">
+  <!-- <div ng-show="engagementsToApprove.length < 1">You have no engagements to manage at this time</div> -->
+  <div ng-show="engagements.length < 1">You have no engagements to manage at this time</div>
+  <div >
+    <ul class="gp-quotesReceivedList">
+      <!-- <li ng-repeat="eng in engagements" ng-click="showEngagementsToApproveModal($event, eng)" ng-hide="eng.isCompleted && !engagementIsCompleted" ng-if="eng.companyApproved  && eng.actionNeeded"> -->
+      <li ng-repeat="eng in engagements" ng-click="showEngagementsToApproveModal($event, eng)" ng-hide="eng.isCompleted && !engagementIsCompleted" ng-if="eng.companyApproved">
+        <div>
+          <img ng-src="{{envURL+eng.consultant.imageFilename}}">
+          <div class="gp-quoteReceivedLIInfo">
+            <div>
+              <span><h4>{{eng.consultant.name}}</h4></span>
+            </div>
+            <h4><small>Replied: {{eng.consultantSubmittedDate | dateConverter | date: 'medium'}}</small></h4>
+
+          </div>
+          <div style="margin-left: 20px; width:85px;">
+            <h5>Start Date</h5>
+            <h4><small>{{eng.startDate | dateConverter | date: 'mediumDate'}}</small></h4>
+          </div>
+          <div style="margin-left: 20px; width:85px;">
+            <h5>End Date</h5>
+            <h4><small>{{eng.endDate | dateConverter | date: 'mediumDate'}}</small></h4>
+          </div>
+          <div style="margin-left: 20px; width:85px;">
+            <h5>Amount</h5>
+            <h4><small>{{eng.engagementAmount | currency}}</small></h4>
+          </div>
+        </div>
+        <div>
+          <div class="gp-labelWrapper">
+            <!-- <span><label class="label-success" ng-if="!eng.actionNeeded && !eng.needsRating && !eng.isCompleted">Approved</label></span> -->
+            <span><label class="label-warning" ng-if="eng.actionNeeded">Accept & Pay</label></span>
+            <span><label class="label-primary" ng-if="eng.needsRating">Rate</label></span>
+            <span><label class="label-default" ng-if="eng.isCompleted">Completed</label></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>

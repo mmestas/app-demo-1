@@ -1,0 +1,195 @@
+<md-dialog aria-label="Organization Profile" class="gp-lgModal">
+  <form name="companyProfile">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Organization Profile</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:100%;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <!--/////////////// TAB 1 /////////////// -->
+        <md-tab label="Organization Profile">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Organization Profile</h1>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="companyName">Organization Name</label>
+                <input type="text" class="form-control" name="companyName" ng-model="companyInfo.companyName">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="address">Address 1</label>
+                <input type="text" class="form-control" name="address" ng-model="companyInfo.address">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="address2">Address 2</label>
+                <input type="text" class="form-control" name="address2" ng-model="companyInfo.address2">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="city">City</label>
+                <input type="text" class="form-control" name="city" ng-model="companyInfo.city">
+              </md-input-container>
+              <div class="form-group">
+                <label for="mobileCarrier">State</label>
+                <select class="form-control input-sm gp-selectLimitSize" name="state" ng-model="companyInfo.state" ng-options="state as state.name for state in statesList">
+                  <option value="" style="display:none;">Select State</option>
+                </select>
+              </div>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" name="zip" ng-model="companyInfo.zip">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="website">Website</label>
+                <input type="text" class="form-control" name="website" ng-model="companyInfo.website">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="duns">DUNS #</label>
+                <input type="text" class="form-control" name="duns" ng-model="companyInfo.duns">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="cage">CAGE #</label>
+                <input type="text" class="form-control" name="cage" ng-model="companyInfo.cage">
+              </md-input-container>
+              <div class="form-group">
+                <label for="pointOfContact">POC Name</label>
+                <select class="form-control input-sm gp-selectLimitSize" name="pointOfContact" ng-model="companyInfo.poc" ng-options="poc as poc.name for poc in pointOfContacts">
+                  <option value="" style="display:none;">Choose</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="businessType">Business Type</label>
+                <select class="form-control input-sm gp-selectLimitSize" name="businessType" ng-model="companyInfo.businessType" ng-options="businessType as businessType.name for businessType in businessTypes">
+                  <option value="" style="display:none;">Choose</option>
+                </select>
+              </div>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="annualRevenue">Annual Revenue (in Millions)</label>
+                <input type="number" class="form-control" name="annualRevenue" ng-model="companyInfo.annualRevenue">
+              </md-input-container>
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="numberOfEmployees">Number of Employees</label>
+                <input type="number" class="form-control" name="numberOfEmployees" ng-model="companyInfo.numberOfEmployees">
+              </md-input-container>
+          </md-content>
+        </md-tab>
+        <!--/////////////// TAB 2 /////////////// -->
+        <md-tab label="Organization Profile 2">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Organization Profile - Additional Information</h1>
+            <div class="form-group">
+              <label for="securityClearance">Security Clearance</label>
+              <select class="form-control input-sm gp-selectLimitSize" name="securityClearance" ng-model="companyInfo.securityClearance" ng-options="clearance as clearance.name for clearance in securityClearances">
+                <option value="" style="display:none;">Choose</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="certification">Certification</label>
+              <select class="form-control input-sm gp-selectLimitSize" name="certification" ng-model="companyInfo.certification" ng-options="certification as certification.name for certification in certifications">
+                <option value="" style="display:none;">Choose</option>
+              </select>
+            </div>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="password">Products and Services Offered</label>
+              <textarea type="text" class="form-control" rows="4" name="password" ng-model="companyInfo.password"></textarea>
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme gp-addInputField" ng-repeat="contract in companyInfo.contracts track by $index">
+              <label for="phone">Contracts</label>
+              <input type="text" class="form-control" name="contract" ng-model="companyInfo.contracts[$index]">
+              <i class="fa fa-minus-circle" ng-click="removeContract(contract)"></i>
+            </md-input-container>
+            <i class="fa fa-plus-circle" ng-click="addContractField(companyInfo.contracts)"></i>
+            <i class="fa fa-plus" ng-click="saveToObject(companyInfo.contracts)"></i>
+            <div class="form-group">
+              <label for="mobileCarrier">Business Designations</label>
+              <select class="form-control input-sm gp-selectLimitSize" name="mobileCarrier" ng-model="companyInfo.mobileCarrier" ng-options="carrier as carrier.name for carrier in mobileCarriers" ng-init="appDemo1GetMobileCarriers()">
+                <option value="" style="display:none;">Choose</option>
+              </select>
+            </div>
+            <md-autocomplete flex
+                md-min-length = 5
+                md-delay = 3
+                md-selected-item="selectedItem"
+                md-search-text="searchText"
+                md-items="item in searchNAICS(searchText)"
+                md-item-text="item.name"
+                md-floating-label="Primary NAICS Code"
+                md-clear-button="true">
+              <md-item-template>
+                <span md-highlight-text="searchText">{{item.name}}</span>
+              </md-item-template>
+              <md-not-found>
+                No matches found.
+              </md-not-found>
+              {{item.name}}
+            </md-autocomplete>
+          </md-content>
+        </md-tab>
+        <!--/////////////// TAB 3 /////////////// -->
+        <md-tab label="New User">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">New User Profile</h1>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" name="firstName" ng-model="companyInfo.firstName">
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" name="lastName" ng-model="companyInfo.lastName">
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="email">Email (username)</label>
+              <input type="email" class="form-control" name="email" ng-model="companyInfo.email">
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="password">Password</label>
+              <input type="text" class="form-control" name="password" ng-model="companyInfo.password">
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" name="phone" ng-model="companyInfo.phone" phone-input>
+            </md-input-container>
+            <md-input-container class="md-block md-gpBlue-theme">
+              <label for="mobile">Mobile Phone</label>
+              <input type="text" class="form-control" name="mobile" ng-model="companyInfo.mobilePhone" phone-input>
+            </md-input-container>
+            <div class="form-group">
+              <label for="mobileCarrier">Mobile Carrier</label>
+              <select class="form-control input-sm gp-selectLimitSize" name="mobileCarrier" ng-model="companyInfo.mobileCarrier" ng-options="carrier as carrier.name for carrier in mobileCarriers" ng-init="appDemo1GetMobileCarriers()">
+                <option value="" style="display:none;">Choose</option>
+              </select>
+            </div>
+            <div>
+              <label for="lastname">Allow Text Notifications</label>
+              <md-checkbox ng-model="companyInfo.allowTextNotifications" aria-label="textNotifications" class="md-gpSolidBlue"></md-checkbox>
+            </div>
+            <div class="form-group">
+              <label for="mobileCarrier">System Role</label>
+              <select class="form-control input-sm gp-selectLimitSize" name="systemRole" ng-model="companyInfo.systemRole" ng-options="role as role.title for role in systemRoles" ng-init="appDemo1GetSystemRoles()">
+                <option value="" style="display:none;">Choose</option>
+              </select>
+            </div>
+            <div class="gp-ProfileButtons">
+              <button class="btn btn-warning" ng-click="goToDashboard()">Cancel</button>
+              <button class="btn btn-primary" ng-click="updateUserProfile(companyInfo)">Send Invite</button>
+            </div>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+      <!--/////////////// END DIALOG /////////////// -->
+    </md-dialog-content>
+
+    <!--/////////////// FOOTER BUTTONS /////////////// -->
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="saveAndCloseCompanyProfileForm(companyInfo)" >
+        Save & Close
+      </md-button>
+      <md-button ng-click="cancel()" style="margin-right:20px;" >
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+    </form>
+  </md-dialog>

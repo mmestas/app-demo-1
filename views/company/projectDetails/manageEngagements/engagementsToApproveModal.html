@@ -1,0 +1,503 @@
+<md-dialog id="EngagementsToApproveModal" class="gp-900Modal">
+<!-- <div block-ui> -->
+  <div ng-hide="showRating || showRated">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Approve Tasks <small></small></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <section class="gp-modalHeader">
+        <div class="gp-projectInfo gp-modalHeaderWrapper">
+          <div>
+            <img ng-src="{{envURL+engagementDetails.consultant.imageFilename}}">
+            <h3>{{engagementDetails.consultant.name}}</h3>
+          </div>
+          <div class="gp-quickData">
+            <div>
+              <div><label>Completion Date</label></div>
+              <div>{{engagementDetails.endDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+            </div>
+            <div ng-if="engagementDetails.quoteInvitationInfo.quoteType===0">
+              <div><label>Quoted Hours</label></div>
+              <div>{{engagementDetails.hoursQuoted}}</div>
+            </div>
+            <div ng-if="engagementDetails.quoteInvitationInfo.quoteType===0">
+              <div><label>Rate</label></div>
+              <div>{{consultantHourlyRate | currency}}</div>
+            </div>
+            <div>
+              <div><label>Amount</label></div>
+              <div>{{engagementDetails.engagementAmount | currency}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <md-toolbar class="md-hue-custom">
+          <div class="md-toolbar-tools">
+            <i class="fa fa-plus-circle" ng-hide="openQR" ng-click="openQuoteOverview()"></i>
+            <i class="fa fa-minus-circle" ng-show="openQR" ng-click="closeQuoteOverview()"></i>
+            &nbsp; <h4>Quote Details</h4>
+          </div>
+        </md-toolbar>
+        <div class="gp-dialogueInnerContent panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openQR}">
+          <section>
+            <div style="display:flex;">
+              <div style="width:50%;">
+                <div><label>Project</label></div>
+                <div>{{engagementDetails.project.title}}</div>
+              </div>
+              <div style="width:50%;">
+                <div><label>RFP/Solicitation Reference</label></div>
+                <div>{{engagementDetails.project.solicitationNumber}} - {{engagementDetails.project.solicitationTitle}}</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section>
+        <div class="gp-dialogueInnerContent">
+
+          <!-- ***************************** -->
+          <!-- Start Before Quote Invitation -->
+          <section ng-if="engagementDetails.quoteInvitationInfo.quoteType===0">
+
+            <div ng-repeat="td in engagementDetails.tasks track by $index">
+              <div class="row">
+                <div class="col col-md-7">
+                  <h5> Description </h5>
+                  <span data-ng-bing-html="td.workDescription"></span>
+                </div>
+                <div class="col col-md-2">
+                  <h5> Hours Quoted </h5>
+                  {{td.hoursQuoted}}
+                </div>
+                <div class="col col-md-1">
+                  <h5> Hours</h5>
+                  <span ng-if="td.completed">{{td.hoursCompleted}}</span>
+                  <span ng-if="!td.completed"> pending </span>
+                </div>
+                <div class="col col-md-2">
+                  <h5> Invoice Amount </h5>
+                  {{td.hoursCompleted * consultantHourlyRate | currency}}
+                </div>
+                <!-- <div class="col col-md-1">
+                  <h5><button class="btn btn-sm btn-primary btn-outline" ng-show="td.approved  && !td.rated" ng-click="rateConsultant(td)">Rate</button></h5>
+                  <div class="gp-rated" ng-show="td.approved && td.rated" ng-click="displayRating(td)"><h5>Rated!</h5></div>
+                  <md-checkbox ng-model="td.addThisToTheArray" ng-if="!td.approved && td.completed" ng-change="getTotalForSelectedTasks()">&nbsp;</md-checkbox>
+                </div> -->
+              </div>
+              <div ng-if="td.itemizedExpenses.length > 0">
+                <div class="row">
+                  <div class="col col-md-9"><h5>Itemized Expenses</h5></div>
+                  <div class="col col-md-3"><h5>Amount</h5></div>
+                </div>
+
+                  <ol>
+                    <li ng-repeat="ie in td.itemizedExpenses">
+                      <!-- <div class="row" > -->
+                        <div class="col col-md-9">{{ie.description}}</div>
+                        <div class="col col-md-3">{{ie.amount | currency}}</div>
+                      <!-- </div> -->
+                    </li>
+                  </ol>
+
+              </div>
+            </div>
+
+            <div class="row gp-totalLineDivider">
+              <div class="col col-md-6"></div>
+              <div class="col col-md-2"><h5><strong>Hours:</strong></h5> {{taskTotalHoursCompleted}}</div>
+              <div class="col col-md-1"></div>
+              <div class="col col-md-2"><h5><strong>Total:</strong></h5> {{taskTotalAmount | currency}}</div>
+              <div class="col col-md-1"></div>
+            </div>
+
+            <!-- ADDED From QUOTES Modal -->
+            <form name="funding" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+              <h5>By clicking the "Accept & Pay" button, you confirm you have reviewed and accept the work as complete and agree to pay the invoice amount of <strong>{{taskTotalAmount | currency}}</strong> in accordance with the <a class="gp-text-warning" href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">Terms of Service</a>.</h5>
+              <div class="gp-engagementFeesWrapper">
+                <div class="gp-engagementFeesSection">
+                  <div class="row">
+                    <div class="col col-md-12">
+                      <select class="form-control input-sm" ng-model="fundingTerm" name="fundingTermName" ng-options="ft as ft.name for ft in fundingTerms" ng-change="calculateEngagementAgreementTotal(fundingTerm, taskTotalAmount)" ng-if="accountStatusInfo.allowappDemo1Terms" required>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="gp-engagementFees row">
+                    <div class="col col-md-12">
+                      <div class="gp-currencyLabel">Due Date: </div>
+                      <div class="gp-currency">{{dueDate | date}}</div>
+                    </div>
+                    <div class="col col-md-12">
+                      <div class="gp-currencyLabel">Engagement Amount: </div>
+                      <div class="gp-currency">{{taskTotalAmount | currency}}</div>
+                    </div>
+                    <div class="col col-md-12">
+                      <div class="gp-currencyLabel">Finance Fee: </div>
+                      <div class="gp-currency gp-lastBeforeTotal" ng-if="financeFee">{{financeFee | currency}}</div>
+                      <div class="gp-currency gp-lastBeforeTotal" ng-if="!financeFee">$0.00</div>
+                    </div>
+                    <div class="col col-md-12">
+                      <div class="gp-currencyLabel"><strong>Agreement Total:</strong> </div>
+                      <div class="gp-currency" ng-if="engagementAgreementTotal"><strong>{{engagementAgreementTotal | currency}}</strong></div>
+                      <div class="gp-currency" ng-if="!engagementAgreementTotal"><strong>{{taskTotalAmount | currency}}</strong></div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-12" style="margin-top:15px; text-align:right;">
+                      <button class="btn btn-sm btn-primary" ng-click="approveTask()" ng-disabled="differentFeeNeeded || taskKeyArray.length < 1 || doubleClickPrevention">Accept & Pay</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- This section is for ecommercy payment on receipt option -->
+            <div ng-if="showPayOnReceipt" class="gp-ecommerceWrapper">
+              <h4><strong>Total Amount Due:</strong>
+                <span ng-if="engagementAgreementTotal">{{engagementAgreementTotal | currency}}</span>
+                <span ng-if="!engagementAgreementTotal">{{taskTotalAmount | currency}}</span>
+              </h4>
+              <form id="js-ecommercePayments2" name="ecommercePayments"></form> <!-- This is an example... things need to change -->
+              <button class="btn btn-primary" type="submit" ng-click="submitTaskPayment()">Submit Payment</button>
+            </div>
+            <!-- end -->
+
+            <!-- END Added from quotes modal -->
+          </section>
+          <!-- End Before Quote Invitation -->
+          <!-- ***************************** -->
+
+          <!-- ***************************** -->
+          <!-- Start After Quote Invitation -->
+
+          <!-- ********************** -->
+          <!-- Start Fixed Engagement -->
+          <section ng-if="engagementDetails.quoteInvitationInfo.quoteType===1">
+            <div ng-repeat="td in engagementDetails.quoteInvitationInfo.qFix track by $index">
+              <div class="row">
+                <div class="col col-md-7">
+                  <h5> Supporting Narrative </h5>
+                  {{td.supportingNarrative}}
+                </div>
+                <div class="col col-md-2">
+                  <h5> Milestone Price</h5>
+                  <span ng-if="td.completed">{{td.milestonePrice | currency}}</span>
+                  <span ng-if="!td.completed"> pending </span>
+                </div>
+                <div class="col col-md-3">
+                  <!-- <h5><button class="btn btn-sm btn-primary btn-outline" ng-show="td.approved  && !td.rated" ng-click="rateConsultant(td)">Rate</button></h5>
+                  <div class="gp-rated" ng-show="td.approved && td.rated" ng-click="displayRating(td)"><h5>Rated!</h5></div> -->
+                  <div>
+                    <md-checkbox ng-model="td.uiApproved" ng-if="!td.approved && td.completed" >Select to approve Milestone</md-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div ng-if="td.itemizedExpenses.length > 0">
+
+                <div class="row">
+                  <div class="col col-md-8"></div>
+                  <div class="col col-md-4">
+                      <md-checkbox ng-model="td.uiExpenseApproved" ng-if="!td.approved && td.completed">Select to approve Expense</md-checkbox>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-9"><h5>Itemized Expenses</h5></div>
+                  <div class="col col-md-3"><h5>Amount</h5></div>
+                </div>
+
+                <ol>
+                  <li ng-repeat="ie in td.itemizedExpenses">
+                      <div class="col col-md-9">{{ie.description}}</div>
+                      <div class="col col-md-3">{{ie.amount | currency}}</div>
+                  </li>
+                </ol>
+
+              </div>
+            </div>
+
+            <div class="row gp-totalLineDivider" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+                <div class="col col-md-1"></div>
+                <div class="col col-md-2"><h5><strong>Total:</strong></h5> {{getTotalForSelectedFixedTasks() | currency}}</div>
+                <div class="col col-md-1"></div>
+            </div>
+
+            <!-- ADDED From QUOTES Modal -->
+            <form name="funding" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+                <!-- <md-checkbox class="md-gpSolidBlue" ng-model="$parent.terms" aria-label="terms" required> -->
+                <h5>By clicking the "Accept & Pay" button, you confirm you have reviewed and accept the work as complete and agree to pay the invoice amount of <strong>{{taskTotalAmount | currency}}</strong> in accordance with the <a class="gp-text-warning" href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">Terms of Service</a>.</h5>
+                <!-- </md-checkbox> -->
+                <div class="gp-engagementFeesWrapper">
+                  <div class="gp-engagementFeesSection">
+                    <div class="row">
+                      <div class="col col-md-12">
+                        <select class="form-control input-sm" ng-model="fundingTerm" name="fundingTermName" ng-options="ft as ft.name for ft in fundingTerms" ng-change="calculateEngagementAgreementTotal(fundingTerm, taskTotalAmount)" ng-if="accountStatusInfo.allowappDemo1Terms" required>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="gp-engagementFees row">
+                      <div class="col col-md-12">
+                        <div class="gp-currencyLabel">Due Date: </div>
+                        <div class="gp-currency">{{dueDate | date}}</div>
+                      </div>
+                      <div class="col col-md-12">
+                        <div class="gp-currencyLabel">Engagement Amount: </div>
+                        <div class="gp-currency">{{taskTotalAmount | currency}}</div>
+                      </div>
+                      <div class="col col-md-12" ng-if="bypassProcessingFee">
+                        <div class="gp-currencyLabel">Processing Fee: </div>
+                        <div class="gp-currency gp-lastBeforeTotal">{{processingFee | currency}}</div>
+                      </div>
+                      <div class="col col-md-12">
+                        <div class="gp-currencyLabel">Finance Fee: </div>
+                        <div class="gp-currency gp-lastBeforeTotal" ng-if="financeFee">{{financeFee | currency}}</div>
+                        <div class="gp-currency gp-lastBeforeTotal" ng-if="!financeFee">$0.00</div>
+                      </div>
+                      <div class="col col-md-12">
+                        <div class="gp-currencyLabel"><strong>Agreement Total:</strong> </div>
+                        <div class="gp-currency" ng-if="engagementAgreementTotal"><strong>{{engagementAgreementTotal | currency}}</strong></div>
+                        <div class="gp-currency" ng-if="!engagementAgreementTotal"><strong>{{taskTotalAmount | currency}}</strong></div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col col-md-12" style="margin-top:15px; text-align:right;">
+                        <button class="btn btn-sm btn-primary" ng-click="approveFixedTask()" ng-disabled="differentFeeNeeded || taskKeyArray.length < 1 || doubleClickPrevention">Accept & Pay</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </form>
+
+            <!-- This section is for ecommercy payment on receipt option -->
+            <div ng-if="showPayOnReceipt" class="gp-ecommerceWrapper">
+                <h4><strong>Total Amount Due:</strong>
+                  <span ng-if="engagementAgreementTotal">{{engagementAgreementTotal | currency}}</span>
+                  <span ng-if="!engagementAgreementTotal">{{taskTotalAmount | currency}}</span>
+                </h4>
+                <form id="js-ecommercePaymentsFixed" name="ecommercePayments"></form> <!-- This is an example... things need to change -->
+                <button class="btn btn-primary" type="submit" ng-click="submitTaskFixedPayment()">Submit Payment</button>
+            </div>
+            <!-- end -->
+          </section>
+          <!-- End Fixed Engagement -->
+          <!-- ******************** -->
+
+          <!-- *********************** -->
+          <!-- Start Hourly Engagement -->
+          <section ng-if="engagementDetails.quoteInvitationInfo.quoteType===2">
+            <div ng-repeat="td in engagementDetails.quoteInvitationInfo.qHours track by $index">
+              <div class="row">
+                <div class="col col-md-4">
+                  <h5> Supporting Narrative </h5>
+                  {{td.supportingNarrative}}
+                </div>
+                <div class="col col-md-2">
+                  <h5> Hours Quoted </h5>
+                  {{td.hoursQuoted}}
+                </div>
+                <div class="col col-md-1">
+                  <h5> Hours</h5>
+                  <span ng-if="td.completed">{{td.hoursCompleted}}</span>
+                  <span ng-if="!td.completed"> pending </span>
+                </div>
+                <div class="col col-md-3">
+                  <h5> Invoice Amount </h5>
+                  {{td.hoursCompleted * td.freelanceHourlyRate | currency}}
+                </div>
+                <div class="col col-md-3">
+                  <!-- <h5><button class="btn btn-sm btn-primary btn-outline" ng-show="td.approved  && !td.rated" ng-click="rateConsultant(td)">Rate</button></h5>
+                  <div class="gp-rated" ng-show="td.approved && td.rated" ng-click="displayRating(td)"><h5>Rated!</h5></div> -->
+                  <div>
+                    <md-checkbox ng-model="td.uiApproved" ng-if="!td.approved && td.completed" >Select to approve Milestone</md-checkbox>
+                  </div>
+                </div>
+              </div>
+              <div ng-if="td.itemizedExpenses.length > 0">
+
+                <div class="row">
+                  <div class="col col-md-8"></div>
+                  <div class="col col-md-4">
+                      <md-checkbox ng-model="td.uiExpenseApproved" ng-if="!td.approved && td.completed">Select to approve Expense</md-checkbox>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-9"><h5>Itemized Expenses</h5></div>
+                  <div class="col col-md-3"><h5>Amount</h5></div>
+                </div>
+
+                <ol>
+                  <li ng-repeat="ie in td.itemizedExpenses">
+                      <!-- <div class="row" > -->
+                      <div class="col col-md-9">{{ie.description}}</div>
+                      <div class="col col-md-3">{{ie.amount | currency}}</div>
+                      <!-- </div> -->
+                  </li>
+                </ol>
+
+              </div>
+            </div>
+
+            <div class="row gp-totalLineDivider" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+                <div class="col col-md-1"></div>
+                <div class="col col-md-2"><h5><strong>Total:</strong></h5> {{getTotalForSelectedHourlyTasks() | currency}}</div>
+                <div class="col col-md-1"></div>
+            </div>
+
+              <!-- ADDED From QUOTES Modal -->
+              <form name="funding" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+                  <!-- <md-checkbox class="md-gpSolidBlue" ng-model="$parent.terms" aria-label="terms" required> -->
+                  <h5>By clicking the "Accept & Pay" button, you confirm you have reviewed and accept the work as complete and agree to pay the invoice amount of <strong>{{taskTotalAmount | currency}}</strong> in accordance with the <a class="gp-text-warning" href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">Terms of Service</a>.</h5>
+                  <!-- </md-checkbox> -->
+                  <div class="gp-engagementFeesWrapper">
+                    <div class="gp-engagementFeesSection">
+                      <div class="row">
+                        <div class="col col-md-12">
+                          <select class="form-control input-sm" ng-model="fundingTerm" name="fundingTermName" ng-options="ft as ft.name for ft in fundingTerms" ng-change="calculateEngagementAgreementTotal(fundingTerm, taskTotalAmount)" ng-if="accountStatusInfo.allowappDemo1Terms" required>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="gp-engagementFees row">
+                        <div class="col col-md-12">
+                          <div class="gp-currencyLabel">Due Date: </div>
+                          <div class="gp-currency">{{dueDate | date}}</div>
+                        </div>
+                        <div class="col col-md-12">
+                          <div class="gp-currencyLabel">Engagement Amount: </div>
+                          <div class="gp-currency">{{taskTotalAmount | currency}}</div>
+                        </div>
+                        <div class="col col-md-12" ng-if="bypassProcessingFee">
+                          <div class="gp-currencyLabel">Processing Fee: </div>
+                          <div class="gp-currency gp-lastBeforeTotal">{{processingFee | currency}}</div>
+                        </div>
+                        <div class="col col-md-12">
+                          <div class="gp-currencyLabel">Finance Fee: </div>
+                          <div class="gp-currency gp-lastBeforeTotal" ng-if="financeFee">{{financeFee | currency}}</div>
+                          <div class="gp-currency gp-lastBeforeTotal" ng-if="!financeFee">$0.00</div>
+                        </div>
+                        <div class="col col-md-12">
+                          <div class="gp-currencyLabel"><strong>Agreement Total:</strong> </div>
+                          <div class="gp-currency" ng-if="engagementAgreementTotal"><strong>{{engagementAgreementTotal | currency}}</strong></div>
+                          <div class="gp-currency" ng-if="!engagementAgreementTotal"><strong>{{taskTotalAmount | currency}}</strong></div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col col-md-12" style="margin-top:15px; text-align:right;">
+                          <button class="btn btn-sm btn-primary" ng-click="approveHourlyTask()" ng-disabled="differentFeeNeeded || taskKeyArray.length < 1 || doubleClickPrevention">Accept & Pay</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+              <!-- This section is for ecommercy payment on receipt option -->
+              <div ng-if="showPayOnReceipt" class="gp-ecommerceWrapper">
+                  <h4><strong>Total Amount Due:</strong>
+                    <span ng-if="engagementAgreementTotal">{{engagementAgreementTotal | currency}}</span>
+                    <span ng-if="!engagementAgreementTotal">{{taskTotalAmount | currency}}</span>
+                  </h4>
+                  <form id="js-ecommercePaymentsHourly" name="ecommercePayments"></form> <!-- This is an example... things need to change -->
+                  <button class="btn btn-primary" type="submit" ng-click="submitTaskHourlyPayment()">Submit Payment</button>
+              </div>
+              <!-- end -->
+          </section>
+          <!-- End Hourly Engagement -->
+          <!-- ******************** -->
+
+          <!-- ************************** -->
+          <!-- Start Recurring Engagement -->
+          <section ng-if="engagementDetails.quoteInvitationInfo.quoteType===3">
+              <div>
+                <div class="row">
+                  <div class="col col-md-4">
+                    <h5>Recurring Period</h5>
+                    {{engagementDetails.quoteInvitationInfo.qRecurring.periodAmount.recurringPeriod == 1 ? 'Weekly' : (engagementDetails.quoteInvitationInfo.qRecurring.periodAmount.recurringPeriod == 2 ? 'Bi-Weekly' : 'Monthly' ) }}
+                  </div>
+                  <div class="col col-md-4">
+                    <h5>Period Amount</h5>
+                    {{engagementDetails.quoteInvitationInfo.qRecurring.periodAmount | currency}}
+                  </div>
+                  <div class="col col-md-4">
+                    <h5>Auto Bill Start Date</h5>
+                    {{engagementDetails.quoteInvitationInfo.qRecurring.autoBillStartDate | dateConverter | date: 'MM/dd/yyyy'}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-4">
+                    <h5>Number of Periods</h5>
+                    {{engagementDetails.quoteInvitationInfo.qRecurring.numberPeriods}}
+                  </div>
+                  <div class="col col-md-8">
+                      <h5>Deliverable</h5>
+                      {{engagementDetails.quoteInvitationInfo.qRecurring.deliverableDescription}}
+                  </div>
+
+                  <!-- <div class="col col-md-4">
+                    <h5><button class="btn btn-sm btn-primary btn-outline" ng-show="engagementDetails.quoteInvitationInfo.qRecurring.approved  && !engagementDetails.quoteInvitationInfo.qRecurring.rated" ng-click="rateConsultant(engagementDetails.quoteInvitationInfo.qRecurring)">Rate</button></h5>
+                    <div class="gp-rated" ng-show="engagementDetails.quoteInvitationInfo.qRecurring.approved && engagementDetails.quoteInvitationInfo.qRecurring.rated" ng-click="displayRating(engagementDetails.quoteInvitationInfo.qRecurring)"><h5>Rated!</h5></div>
+
+                  </div> -->
+                </div>
+
+
+              </div>
+
+              <div class="row gp-totalLineDivider" ng-show="taskKeyArray.length >= 1 && !showPayOnReceipt">
+                  <div class="col col-md-1"></div>
+                  <div class="col col-md-2"><h5><strong>Total:</strong></h5> {{getTotalForSelectedRecurringTask() | currency}}</div>
+                  <div class="col col-md-1"></div>
+              </div>
+
+                <!-- This section is for ecommercy payment on receipt option -->
+                <div ng-if="showPayOnReceipt" class="gp-ecommerceWrapper">
+                    <h4><strong>Total Amount Due:</strong>
+                      <span ng-if="engagementAgreementTotal">{{engagementAgreementTotal | currency}}</span>
+                      <span ng-if="!engagementAgreementTotal">{{taskTotalAmount | currency}}</span>
+                    </h4>
+                    <form id="js-ecommercePaymentsRecurring" name="ecommercePayments"></form> <!-- This is an example... things need to change -->
+                    <button class="btn btn-primary" type="submit" ng-click="submitTaskRecurringPayment()">Submit Payment</button>
+                </div>
+                <!-- end -->
+          </section>
+            <!-- End Recurring Engagement -->
+          <!-- ************************ -->
+
+
+          <!-- End After Quote Invitation -->
+          <!-- *************************** -->
+
+        </div>
+    </section>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" id="triggerToast">
+      <md-button ng-click="showRatingForm()" data-ng-if="showRatingBtn">
+       Rate Consultant
+      </md-button>
+      <md-button ng-click="displayRating()" data-ng-if="engagementDetails.rated">
+       Show Rating
+      </md-button>
+      <md-button ng-click="closeDialogue()">
+       Close
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
+  <div id="rateConsultant" ng-show="showRating" ng-include="'/views/company/projectDetails/consultantRating/consultantRating.html'"></div>
+  <div id="ratedConsultant" ng-show="showRated" ng-include="'/views/company/projectDetails/consultantRating/consultantRated.html'"></div>
+
+<!-- </div> -->
+</md-dialog>

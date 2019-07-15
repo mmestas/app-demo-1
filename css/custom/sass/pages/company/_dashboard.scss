@@ -1,0 +1,680 @@
+
+.gp-dashWrapper {padding-top: 70px;width:100%; }
+.gp-dashWrapper md-toolbar.md-hue-custom {margin-top: 0;}
+/******************************** HEADER ******************************/
+.gp-flexSpaceBetween {justify-content: space-between;}
+.gp-flexSpaceAround {justify-content: space-around;}
+
+/*********************************** NEW DASHBOARD *********************************/
+#companyDashboard {}
+#companyDashboard md-tabs {max-width:1200px; width:100%; margin:auto;}
+
+#companyDashboard md-tabs .row {margin:0;display: flex;}
+#companyDashboard md-tabs.arrow-steps[md-border-bottom] > md-tabs-wrapper {margin:5px;}
+#companyDashboard  md-content {margin: 5px;margin: -10px;}
+#companyDashboard .dash-right-column .gp-companyDashboardSystemNotifications .panel-heading > div {
+  display:flex; justify-content:space-between; align-items:center;
+}
+/****************** ADDED 6.13.18 ********************/
+.gp-systemNotificationsWrapper md-tab-content.md-no-scroll {
+    overflow-x: visible;
+    overflow-y: visible;
+    overflow: visible;
+    overflow-x: visible;
+    overflow-y: visible;
+}
+#companyDashboard > .panel-default > .panel-heading { color: $govBlue; background-color: white; border-color: $govLtBorderGrey;}
+#companyDashboard .collapsible-header {
+  display: block;
+  cursor: pointer;
+  height: 60px;
+  line-height: 19px;
+  padding: 5px 10px;
+  background-color: white;
+  color: $govBlue;
+  font-weight: 500;
+  font-size: 17px;
+}
+  #dashTab-Projects {}
+    .dash-left-column {background: $govMedLtGrey; padding:15px;}
+      .dash-companyOverview {padding: 15px 0;font-size:14px;padding: 12px;background: $govMedGrey; color:#bed3dc;}
+      .gp-greyBG .dash-companyOverview.md-whiteframe-2dp,
+      .dash-companyOverview.gp-greyBG .md-whiteframe-3dp {background: $govMedGrey;}
+      .dash-companyOverview h3, .dash-companyOverview h4, .dash-companyOverview h5 {color:white;font-weight:500;font-size:17px; margin:0;}
+      .dash-companyOverview > div {margin-bottom:10px;}
+    .dash-right-column {padding:15px;}
+      .gp-companyLogo {text-align:center; display: flex;flex-direction: column;justify-content: center;align-items: center;}
+      .gp-companyLogo img {max-width: 100%;max-height: 185px;}
+  #dashTab-Search {}
+  #dashTab-Engagements {}
+  #dashTab-AcceptPay {}
+
+#dashboardProjects .list-group-item h4 {font-size: 16px;}
+#dashboardProjects md-tabs.md-dynamic-height md-tabs-content-wrapper {
+    margin-bottom: 27px;
+}
+.gp-dashProjectLinks {margin-bottom: 15px;}
+.gp-dashProjectLinks span {margin-right:10px;}
+.gp-dashProjectLinks span.active {color:$govBlue;text-decoration: underline;}
+
+.gp-actions {}
+select.gp-actions {
+    font-family: FontAwesome, sans-serif;
+    padding: 0;
+    border: 0;
+    height: 30px;
+    background: transparent;
+    font-family: Font Awesome\ 5 Free, sans-serif;
+    font-size: 19px;
+    color: $govBlue;
+    }
+
+select.gp-actions option  {font-size: 13px;}
+select.gp-actions option:first-child  {font-family: FontAwesome, sans-serif; font-family: Font Awesome\ 5 Free, sans-serif; font-size: 16px;color: $govBlue;}
+
+/*************** Dashboard take 5 **********************/
+.ng-table th.sortable.sort-asc, .ng-table th.sortable.sort-desc,
+.ng-table .ng-table-group-header th {
+    background-color: $govBlue;
+    text-shadow: none;
+    color: white;
+    background: white;
+    color:$govBlue;
+}
+.ng-table th a {color:white;}
+.ng-table .ng-table-group-header th a {color:$govBlue;}
+.ng-table th .list-group a {color:  $govBlue;}
+.ng-table th.sortable .sort-indicator {font-weight: 300;}
+
+td.gp-status label {
+  width: 100%;
+    text-align: center;
+    border-radius: 2px;
+}
+.ng-table-sort-header {background: $govBlue;color: white;}
+.ng-table>thead>tr>th,
+.ng-table>tbody>tr.tableCustomWidths>td {}
+  .ng-table .ng-table-group  a:not(.btn) {text-decoration: none;}
+/******************************** DASH LANDING ******************************/
+#sidebar {padding: 0 15px;}
+#sidebar .list-group-item {border-radius: 0;}
+#companyDashboard #sidebar {padding: 12px 12px;}
+#companyDashboard .gp-mainBodyWidth {}
+.gp-dashActiveProject {background: $govBlue;color: white;}
+.gp-dashActiveProject select {color:white;}
+.gp-dashActiveProject select.gp-actions option {color:$govMedGrey;}
+.gp-dashActiveProject h5,.gp-dashActiveProject h4 {color:white;}
+.gp-dashActiveProject h5 small,.gp-dashActiveProject h4 small {color:white;}
+.dash-projectHeader {background: $govBlue;display:flex; padding: 10px;}
+.dash-projectHeader h4 {color:white;margin:0;font-size: 14px;}
+.gp-dashInner {padding-top:40px;}
+.gp-dashLeftColumn {width:250px;padding:10px; background: rgba(233, 30, 99, 0.13);}
+.gp-dashBody {width:calc(100% - 250px);padding:10px 20px;background:rgba(128, 0, 128, 0.28);}
+
+.list-group-item {margin-left:0;padding: 10px 10px;font-size: 85%;}
+.list-group-item.gp-companyDashInnerEngagements {padding: 10px 15px 10px 30px;}
+.list-group-item h5, .list-group-item h4 {margin:0;}
+.list-group-item .fa {font-size: 16px;}
+
+
+.dash-projectQuotes .btn.dropdown-toggle {padding:0;width: 65px;background: transparent;text-align: left;}
+.dash-projectQuotes ul.dropdown-menu {width: 80px;max-width: 80px;min-width: unset;padding: 5px;box-shadow: none;border-radius: 0;}
+.dash-projectQuotes li:hover {background: $govBorderGrey;}
+  /******************** LEFT MENU ***************/
+  // .gp-leftMenuUL {list-style-type: none;}
+  // .gp-leftMenuUL li {font-size: 18px;}
+  // .gp-leftMenuUL li a:hover {text-decoration: none;}
+  .gp-catTrue {}
+  .gp-catFalse {}
+    md-checkbox:not([disabled]).md-gpSolidInfo.gp-catTrue.md-checked .md-icon {}
+    md-checkbox:not([disabled]).md-gpSolidInfo.gp-catFalse.md-checked .md-icon {}
+  /******************** DASH BODY ***************/
+  .gp-companySnapshot {display:flex;justify-content: space-between;flex-wrap: wrap;}
+  .gp-companySnapshotData h4 {font-weight: 600;}
+  .gp-companyInfo {display:flex; justify-content: flex-start; align-items: center;}
+  .gp-companyDashLogo {width: 165px;}
+  .gp-companyAddress {margin-left:15px;}
+  .gp-companyAddress h2 {margin:0;}
+  .gp-dashTile {border: 2px solid $govGrey; border-radius: 4px;padding: 0 15px;margin-bottom: 20px; position:relative; max-width: 320px;  max-height: 320px;  margin: 0 auto 20px;}
+  .gp-dashTile h2 {text-align: center;color: white;font-weight: bold;}
+  .gp-tileNumber {font-size:55px; font-weight:bold;text-align: center;color: $govDkGrey;}
+  .gp-tileStarRating {text-align: center;}
+  .gp-tileNumWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  @media screen and (max-width: 1024px) {
+    .gp-nav {display: none;}
+    .gp-dashToolbar {display: none;}
+  }
+
+/********************** DASH My Projects *****************/
+
+/******************************** Table ******************************/
+table.gp-listTable > thead > tr, table.gp-listTable > tbody > tr {display:flex;flex-wrap:wrap;margin-bottom:7px;align-items: center;border:1px solid transparent;transition: 0.3s;}
+table.gp-listTable > tbody > tr:hover {border-color: $govBlue;box-shadow: 0 1px 5px 0 lighten( $govBlue, 40% ), 0 2px 2px 0 lighten( $govBlue, 40% ), 0 3px 1px -2px lighten( $govBlue, 40% );transform: scale(1.01) translate(0);}
+table.gp-listTable > tbody > tr i.fa {transition: 0.7s;font-size: 22px;}
+table.gp-listTable > tbody > tr:hover i.fa {opacity: 1;color: $govBlue;}
+table.gp-listTable.table > thead > tr > th {text-align: left; padding:0; color:$govMedGrey;}
+table.gp-listTable > thead > tr > th:nth-child(1),
+table.gp-listTable > thead > tr > th:nth-child(2),
+table.gp-listTable > thead > tr > th:nth-child(3) {padding-right:5px;}
+table.gp-listTable > thead > tr > th:nth-child(1), table.gp-listTable > tbody > tr > td:nth-child(1){flex-grow:1;max-width: 550px;width:100%;}
+table.gp-listTable > thead > tr > th:nth-child(2), table.gp-listTable > tbody > tr > td:nth-child(2){max-width: 258px;width:100%;}
+table.gp-listTable > thead > tr > th:nth-child(3), table.gp-listTable > tbody > tr > td:nth-child(3){max-width: 160px;width:100%;}
+table.gp-listTable > thead > tr > th:nth-child(4), table.gp-listTable > tbody > tr > td:nth-child(4){max-width: 230px; width:100%;}
+
+table.gp-listTable > tbody > tr > td:nth-child(4) {display:flex; justify-content: space-between;}
+table.gp-listTable > tbody > tr > td h5 {/* font-weight: 600; */max-width:565px;margin-left: 10px;}
+table.gp-listTable label {width: 100%;text-align: center;border-radius: 3px;padding: 7px 18px 7px;margin: 0;}
+table.gp-listTable img, table.gp-listTable .gp-initialsLogo {height:35px; width:35px; min-width:35px;}
+table.gp-listTable td[title="'Project'"] > div {display: flex; align-items: center;}
+.ng-table th.filter .input-filter {height: 32px; font-weight: 300;}
+
+@media screen and (max-width: 1024px) {
+   table.gp-listTable > thead > tr > th:nth-child(1), table.gp-listTable > tbody > tr > td:nth-child(1){width:100%}
+   table.gp-listTable > thead > tr > th:nth-child(2), table.gp-listTable > tbody > tr > td:nth-child(2){max-width: 100%; width:100%;}
+   table.gp-listTable > thead > tr > th:nth-child(3), table.gp-listTable > tbody > tr > td:nth-child(3){max-width: 100%; width:100%;}
+   table.gp-listTable > thead > tr > th:nth-child(4), table.gp-listTable > tbody > tr > td:nth-child(4){max-width: 100%; width:100%;}
+ }
+
+ @media screen and (max-width: 992px) {
+ }
+ @media screen and (max-width: 768px) {
+
+ }
+ @media screen and (max-width: 667px) {
+ }
+ @media screen and (max-width: 568px) {
+
+ }
+ @media screen and (max-width: 480px) {
+ }
+
+
+table .fa-chevron-circle-right {font-size: 22px;color: $govBlue}
+table .fa-chevron-right {font-size: 22px;color: $govBorderGrey}
+/******************************** UL LI ******************************/
+.gp-listGroup {}
+.gp-listGroup .badge {font-size: .9em; min-width: 2rem;}
+.gp-listItem {padding: 10px 5px;margin:0;border: 1px solid $govBorderGrey;margin-bottom: 12px;background: white;font-size: 13px;min-height: 120px;display: flex;}
+.gp-listItem:hover {border-color: $govBlue;box-shadow: 0 1px 5px 0 lighten( $govBlue, 14% ), 0 2px 2px 0 lighten( $govBlue, 14% ), 0 3px 1px -2px lighten( $govBlue, 12% );}
+.gp-listItem:hover .fa-chevron-right {color:$govMedGrey;}
+.gp-listItem:after, .gp-listItem2:after {font-family: FontAwesome;content: "\f105";width: 25px;font-size: 24px;padding: 0 10px 0 10px;display: flex;color: $govMedLtGrey;align-items: center;justify-content: center;}
+.gp-listItem:hover:after, .gp-listItem:hover:after {color:$govBlue;}
+.gp-listBtn {min-width: 230px;text-align: center;padding: 0 5px;display: flex;flex-direction: column;align-items: center;}
+.gp-listBtn button {width: 100%; margin-bottom: 10px;}
+.gp-listBtn button:last-of-type {margin-bottom: 0;}
+
+.gp-listInfo {padding: 0 5px;flex-grow:1;}
+.gp-listInfo h3 {padding-top:5px;font-size: 1.5em;margin-bottom: 3px;}
+.gp-listIcon {padding: 0 5px;text-align: center;width:125px;display: flex;align-items: center;margin-right: 5px;}
+.gp-agencyIcon {width: 100%;height: 100%;border-radius: 50%;}
+.gp-list-chevron {display: flex;align-items: center;font-size:20px;color:#eaeaea;width: 25px;padding: 0 30px;}
+
+
+.gp-listItem2 {display:none; padding: 10px 5px;margin:0;border: 1px solid $govBorderGrey;margin-bottom: 12px;background: white;font-size: 13px;min-height: 120px;}
+.gp-projectListItem-image {width: 100px;height: 100px;display: flex;flex-direction: column;justify-content: center;padding:5px;}
+.gp-projectListItem-description {flex-grow: 1; padding:5px;}
+.gp-projectListItem-description h3 {margin:0; padding:0;}
+.gp-projectListItem-badges {padding: 0 15px; margin-right: 20px;}
+.gp-projectListItem-badges  div {margin-bottom:3px;}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 992px) {
+}
+@media screen and (max-width: 768px) {
+  .test-image {width: 85px; min-width: 85px;}
+}
+@media screen and (max-width: 667px) {
+}
+@media screen and (max-width: 568px) {
+  .gp-listItem2 {display:flex;}
+  .gp-listItem {display: none;}
+}
+@media screen and (max-width: 480px) {
+}
+
+
+@media screen and (max-width: 990px) {
+  .gp-projectDetailHeader {flex-wrap:wrap;}
+  .gp-listBtn {width: 100%;}
+  .gp-listInfo {width: 100%;}
+  .gp-listIcon {width: 100%;}
+}
+@media screen and (max-width: 767px) {
+  .gp-listInfo {text-align: center;}
+}
+
+/********************** DASH My Projects DETAILS *****************/
+.gp-detailWrapper {width:100%;padding: 70px 0;}
+
+.gp-panelSection {padding:0;padding-top: 15px;padding-top: 0;}
+.gp-panelSection .gp-collapse {padding:4px 7px;}
+.gp-panelTitle {font-size: 20px;font-weight: 700;}
+.gp-panelTitle .fa-chevron-circle-down, .gp-panelTitle .fa-chevron-circle-up {font-size: 25px;}
+.gp-collapse {display: none;-webkit-transition: 1s; -moz-transition: 1s; -o-transition: 1s; transition: 1s;}
+.gp-collapse.gp-in {display: block;-webkit-transition: 1s; -moz-transition: 1s; -o-transition: 1s; transition: 1s;}
+ .gp-collapse.gp-in:hover {
+
+ }
+
+
+
+/* changed this on 4.10.18 Due to border on consultant profile edit references*/
+md-input-container.md-input-resized .md-input, md-input-container .md-input.ng-invalid.ng-dirty,
+md-input-container.md-input-resized .md-input,
+md-input-container .md-input.ng-invalid.ng-dirty {}
+
+.gp-innerTab {padding-left:0; padding-right:0;}
+/* .arrow-steps  md-tab.step  div.gp-innerTab {padding-left:0; padding-right:0;} */
+.arrow-steps > md-tabs-content-wrapper > md-tab-content {margin-top: 15px;}
+.arrow-steps md-tabs-canvas {
+    height: 40px;
+}
+
+.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper {  height: 40px; width: 100%;}
+md-tabs.arrow-steps[md-border-bottom] > md-tabs-wrapper {
+    border-color: transparent;
+    background: $govMedLtGrey;
+    padding: 1px;
+    padding: 0;
+    margin: 0 5px;
+    border: 0;
+    md-tabs.arrow-steps[md-border-bottom] > md-tabs-wrapper {      border-color: transparent;
+    background: $govMedLtGrey;
+    /* padding: 1px; */
+    padding: 0;
+    border: 0;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);  }
+    padding: 0;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+}
+md-tabs.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-ink-bar {
+    display: none;
+}
+
+.arrow-steps .step {
+  font-size: 11.5px;
+  font-size: 14.5px;
+  text-align: center;
+  color: $govBlue;
+  cursor: default;
+  margin: 0 2px 0 0;
+  padding: 10px 10px 10px 30px;
+  width: calc(25% - 6px);
+  float: left;
+  position: relative;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  overflow: visible;
+}
+ md-tabs.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item {
+  font-size: 11.5px;
+  font-size: 14.5px;
+  text-align: center;
+  color: $govBlue;
+  cursor: pointer;
+  margin: 0px 0px 0 0;
+  padding: 10px 10px 10px 30px;
+  min-width: 25%;
+  width: 25%;
+  float: left;
+  position: relative;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: background-color 0.2s ease;
+  overflow: visible;
+}
+ md-tabs.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:hover {background-color:$govBlue; color:white;}
+  md-tabs.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:hover:after {border-left-color:$govBlue;}
+
+.arrow-steps .step:after,
+.arrow-steps .step:before,
+.arrow-steps md-tab-item:after,
+.arrow-steps md-tab-item:before
+ {
+	content: " ";
+	position: absolute;
+	top: -2px;
+	right: -17px;
+	width: 0;
+	height: 0;
+	border-top: 22.5px solid transparent;
+	border-bottom: 21.5px solid transparent;
+	border-left: 19px solid white;
+	z-index: 2;
+	transition: border-color 0.2s ease;
+}
+.arrow-steps .step:last-child:after {color: transparent;}
+.arrow-steps .step:before, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:before {
+	right: auto;
+	left: 0px;
+	border-left: 19px solid $govMedLtGrey;
+	z-index: 0;
+}
+.arrow-steps .step:before, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active:before {
+    border-left: 17px solid $govBlue;
+}
+
+.arrow-steps .step:first-child:before, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:first-child:before {
+	border: none;
+}
+
+.arrow-steps .step:first-child, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:first-child {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.arrow-steps .step span, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item span {
+	position: relative;
+}
+.arrow-steps .step span, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item span.tabNumber {
+	background-color: $govMedLtGrey;
+	color: $govBlue;
+	padding: 3px 9px;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	position:absolute;
+	left: 27px;
+	top: 6px;
+}
+.arrow-steps .step span, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active span.tabNumber,
+md-tabs.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:hover span.tabNumber
+ {background-color: white;}
+.arrow-steps .step span:before, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item span:before {
+	opacity: 0;
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -20px;
+}
+
+.arrow-steps .step.done span:before, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.done span:before {
+	opacity: 1;
+	-webkit-transition: opacity 0.3s ease 0.5s;
+	-moz-transition: opacity 0.3s ease 0.5s;
+	-ms-transition: opacity 0.3s ease 0.5s;
+	transition: opacity 0.3s ease 0.5s;
+}
+
+.arrow-steps .step.current, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.current,
+.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active {
+	color: white;
+	background-color: $govBlue;
+}
+
+.arrow-steps .step.current:after, .arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.current:after,
+.arrow-steps > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item.md-active:after {
+	border-left: 19px solid $govBlue;
+}
+
+
+
+/******************* FIND EXPERT MODAL - EXPERT DETAILS ***************/
+.expertDetailsModal-leftColumn {font-size: 13px;}
+.expertDetailsModal-leftColumn label {font-size: 15px; margin-bottom:0;}
+.expertDetailsModal-profileImg-wrapper {position:relative;/* background: $govBlue; */}
+.expertDetailsModal-profileImg-wrapper img {width:100%;margin-bottom:7px;/* border-radius: 50%; */}
+.expertDetailsModal-profileImg-wrapper > div {font-size:16px;position:absolute;bottom: 7px;left: 0px;color:white;width: 100%;background: transparent;padding-left: 3px;}
+/********************** EXPERT DETAILS PAGE *****************/
+#expertDetails {}
+#expertDetails .row {margin:0;}
+#expertDetails .gp-dashInner > div {padding:15px;}
+#expertDetails md-tabs.md-dynamic-height md-tab-content.md-active {
+    min-height: 300px;
+}
+/********************** DASH POST a PROJECT*****************/
+
+
+  /*
+   * Off Canvas
+   * --------------------------------------------------
+   */
+   /* @media screen and (max-width: 767px) { */
+   .gp-visible-md {display: none;}
+  @media screen and (max-width: 1024px) {
+    .gp-visible-md {display: block!important;}
+    .row-offcanvas {
+      position: relative;
+      -webkit-transition: all .25s ease-out;
+           -o-transition: all .25s ease-out;
+              transition: all .25s ease-out;
+    }
+
+    .row-offcanvas-right {right: 0;}
+    .row-offcanvas-left {left: 0;}
+    .row-offcanvas-right
+    .sidebar-offcanvas {right: -60%; }
+    .row-offcanvas-left
+    .sidebar-offcanvas {left: -60%; }
+    .row-offcanvas-right.active {right: 60%; }
+    .row-offcanvas-left.active {left: 62%; left: calc(60% + 19px);}
+    .sidebar-offcanvas {position: absolute;top: 0;width: 60%; }
+    .gp-dashWrapper, .gp-dashInner {padding-top:0;}
+  }
+
+//IS THIS USED????
+  .my-custom-stars .button .material-icons {font-size: 50px;}
+  .my-custom-stars .star-button.star-on .material-icons {color: #003399;}
+  .my-custom-stars .star-button.star-off .material-icons {color: #99ccff;}
+
+/* DASH - DETAILS SHORTLIST */
+.gp-slEIProjectType md-radio-button {display:inline-block; font-size:16px; margin-bottom: 0; margin-right: 15px;}
+
+/****************** DASH - DETAILS - QUOTES RECEIVED *************/
+.gp-detailWrapper md-content.md-default-theme, md-content {background: transparent;}
+
+
+.gp-quotesReceivedWrapper {padding: 10px; margin: auto; background: white;}
+.gp-quotesReceivedList {}
+.gp-quotesReceivedList {}
+.gp-quotesReceivedList li {display:flex;align-items: center;justify-content: space-between;padding: 5px 12px;background: white;border: 1px solid $govMedLtGrey;margin-bottom: 5px;transition:0.4s;}
+.gp-quotesReceivedList li:hover {border-color:$govBlue; transform: scale(1.01) translate(0);}
+.gp-quotesReceivedList li > div {display:flex; align-items:center;}
+.gp-quotesReceivedList img {height: 50px;width: 50px;border-radius: 30px;margin-right: 15px;}
+.gp-quotesReceivedList button {margin-left: 15px;width: 150px;}
+.gp-quotesReceivedList .gp-labelWrapper {min-width:160px;}
+.gp-quotesReceivedList .gp-labelWrapper label {width: 100%;text-align: center;border-radius: 3px;padding: 7px 18px 7px;margin: 0;}
+.gp-engagementTitle {max-width:470px; margin-right:10px;}
+.gp-quoteReceivedLIInfo {flex-grow: 1;color: $govBlue; min-width:250px;}
+.gp-quotesReceivedList h4, .gp-quotesReceivedList h5 {margin:0;}
+.gp-quotesReceivedList h5 {font-size:16px;}
+.gp-approvedText {color: #69d2ff}
+.gp-invoiceAuthorizationRadioGroup md-radio-button .md-container{top:10px;}
+.gp-invoiceAuthorizationInputGroup md-input-container {width:100%;}
+@media screen and (max-width: 480px) {
+ .gp-quotesReceivedList li {display: block; text-align: center;}
+ .gp-quotesReceivedList li button {margin:0;}
+}
+// #gp-ecommerceWrapper .gp-ecommerceWrapper {}
+/******************* My Profile **************/
+.myProfileForm {padding: 15px;background-color: $govBorderGrey;margin-top: 30px;}
+.gp-upload {background: transparent;height: 154px;width: 154px;height: 150px;width: 150px;padding: 0;margin: 0;border: 2px solid $govBlue;display: table-cell;vertical-align: middle;text-align: center;}
+.gp-upload img {width:150px; max-height:150px;}
+  .profilePhotoWrapper {position: relative;}
+.profilePhotoUploadWrapper {width:150px; height:150px; background:$govBlue; }
+.uploadImgHover {}
+.uploadImgInstruction {display:none;position: absolute;z-index: 10;top: 45px;left: 17px;left: 50px;top: 50px;padding: 5px;height: 52px;height: 36px;text-align: center;background: transparent;color: white;}
+.uploadImgInstruction i {font-size: 16px;font-weight: 600;}
+.uploadImgInstruction div {font-size:12px}
+.uploadImgInstructionConsultant {display: none;position: absolute;z-index: 10;left: 44px;top: 73px;padding: 5px;height: 36px;text-align: center;background: transparent;color: white;}
+.uploadImgInstructionConsultant i {font-size: 16px;font-weight: 600;}
+.uploadImgInstructionConsultant div {font-size:15px;}
+.uploadImgInstruction .fa, .uploadImgInstructionConsultant .fa {font-size: 28px;}
+.uploadImgHover:hover #profilePhoto, .uploadImgHover:hover #consultantProfilePic {background-color: #333333a8;}
+.uploadImgHover:hover .uploadImgInstruction, .uploadImgHover:hover .uploadImgInstructionConsultant {display:block;}
+#profilePhoto {background: transparent;width: 152px;height: 150px;position: absolute;top: 0;cursor:pointer;}
+.gp-ProfileButtons, .gp-ProfileButtons-add {padding:15px; display:flex; justify-content: flex-end;}
+.gp-ProfileButtons button, .gp-ProfileButtons-add button {margin-left:15px;}
+.gp-cropperInstructions {font-weight:500;font-size: 16px;color: white;padding: 5px;border: 1px solid;background: #2f7492;}
+.gp-selectLimitSize {max-width: 300px;width: 100%;}
+@media screen and (max-width: 768px) {
+  .gp-selectLimitSize {max-width: 100%;}
+  .myProfileForm {margin-top:0;}
+  .gp-dashWrapper h1 {margin:0;padding: 15px;text-align: center;}
+  .profilePhotoWrapper {display: flex;flex-direction: column;align-items: center;}
+  .gp-ProfileButtons, .gp-ProfileButtons-add {justify-content: center;}
+  .gp-ProfileButtons button, .gp-ProfileButtons-add button  {width: 45%; margin: auto;}
+  .profilePhotoWrapper button {width: 150px;padding: 6px 9px;font-size: 13px;line-height: 1.5;border-radius: 3px;}
+}
+option {max-width:100%;width: 200px;}
+
+/******************* Company Profile Dialog **************/
+.gp-addInputField input {width: calc(100% - 30px);margin-right: 30px;}
+.gp-addInputField i.fa-minus-circle {font-size: 20px; color:$govOrange;}
+.gp-addInputField i.fa-plus-circle {font-size: 20px; color:#2f7492;}
+.gp-businessTypeList, .gp-securityClearance, .gp-contractList, .gp-naicsCode, .gp-certifications {margin-left:4px;}
+.gp-businessTypeList i.fa-minus-circle,
+.gp-companyProfileForm i.fa-minus-circle,
+.gp-companyProfileForm i.fa-times-circle,
+.gp-companyProfileForm i.fa-times-circle-o {font-size: 20px;color:$govOrange;color: $govBlue;margin-left:5px;}
+.gp-companyProfileForm {}
+.gp-companyProfileForm .gp-dashInner {padding-top: 25px;}
+.gp-companyProfileForm md-tabs {
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+.md-select-value {}
+.gp-companyProfileForm .col md-input-container {width:100%;}
+.gp-companyProfileForm .gp-businessTypeList label,
+.gp-companyProfileForm .gp-contractList label,
+.gp-companyProfileForm .gp-securityClearance label,
+.gp-companyProfileForm .gp-naicsCode label,
+ .gp-companyProfileForm .gp-certifications label {color: $govBlue;}
+.gp-companyProfileForm .gp-businessTypeList li {}
+.gp-greyLogo {color:$govGrey;}
+
+/* 2.9.18 */
+#gp-companyProfile {}
+#gp-companyProfile .panel-heading {display: flex; justify-content: space-between;}
+#gp-editCompanyProfile {}
+
+  .gp-allowTexts {margin: 18px 0; line-height: 34px;}
+  .gp-allowTexts label {font-weight:700;color: rgba(0,0,0,0.38);color: $govBlue;}
+
+
+#companyProfileSections .col {padding:10px;}
+
+form[name="companyInfoForm2"] md-input-container .md-errors-spacer {
+    float: right;
+    min-height: 24px;
+    min-width: 1px;
+    display: none;
+}
+
+/*************************** COMPANY PROFILE - DISPLAY *******************************/
+/*************************** Sections ***************************/
+.gp-companyProfile-header {min-height:250px; padding:10px;}
+.gp-companyProfile-addtlInfo {background: white; border-top:2px solid #555; padding:10px;}
+.gp-companyProfile-accoutUsers {background: white; overflow:hidden;padding:0px;}
+.gp-companyProfile-accoutUsers ul {overflow:hidden;}
+.gp-companyProfile-accoutUsers ul li {overflow:hidden;padding: 4px;font-size: 12px;}
+.gp-companyProfile-accoutUsers ul li:nth-child(even) {background: white;}
+.gp-companyProfileFlexHeader {display: flex; justify-content: space-between; align-items: center;}
+#companyProfileSections {padding:15px;}
+.gp-companyHeaderData ul li {font-size:12px;}
+.gp-companyHeaderData ul li .gp-companyListLabel {font-weight: bold; text-align: right; margin-right:10px; width:130px;}
+.gp-companyHeaderData .gp-addtlInfoTitle {font-weight: bold;font-size: 16px;color: $govBlue;}
+.gp-planInformation .gp-addtlInfoTitle {color: $govBlue; font-size: 16px; margin-right:7px;}
+.gp-planInformation ul li {display:flex;justify-content: space-between;}
+.gp-snapshotTop {background: white;padding: 10px;margin-bottom: 15px;}
+.gp-dashWrapper .list-group-item.gp-addtlInfoTitle {font-weight:bold;font-size:16px;border-top: 0;border: 0;padding-top: 0;}
+.gp-addtlInfoTitle {font-weight:bold; font-size:16px;}
+.gp-companyProfile-accoutUsers .gp-listItemTable {padding:0;text-overflow: ellipsis;overflow: hidden;}
+
+
+/****************************************** INVITED AUTH PAYER *****************************************/
+
+/******************* IAP Sign In ************************/
+/******************* IAP Quote Details ******************/
+#invitedAuthPayerEngagementQuoteDetails .gp-projectInfo img {width: 60px;height: 60px;border-radius: 30px;}
+#rateConsultant {}
+#rateConsultant md-dialog-actions button {margin-left:10px;}
+// .gp-rateExpertInputs {
+//     /* padding: 5px; */
+// }
+// .gp-rateExpertInputs li {display: flex; align-items: center; padding:10px;}
+// .gp-rateExpertInputs li.list-group-item {padding: 2px 10px;width: 100%;border: 0;line-height: 45px;}
+// .gp-rateExpertInputs li.list-group-item:hover {background: transparent;}
+// .gp-rateExpertInputs li .rating-container {margin-left:25px;display: flex;align-items: center;line-height: 30px;}
+// .gp-rateExpertInputs li .gp-ratingLabel {width:125px; text-align: right;}
+// .gp-rateExpertInputs li .rating-container .caption {margin-top:0;}
+// .gp-rateExpertInputs textarea {width:100%; max-width: 600px; padding:10px;}
+// .gp-checkboxRatingLabel {margin-left:20px;}
+
+.gp-rateExpertInputs {
+   li {display: flex; align-items: center; padding:10px;
+     &.list-group-item {padding: 2px 10px;width: 100%;border: 0;line-height: 45px;
+       &:hover {background: transparent;}
+      }
+      .rating-container {margin-left:25px;display: flex;align-items: center;line-height: 30px;
+        .caption {margin-top:0;}
+      }
+      .gp-ratingLabel {width:125px; text-align: right;}
+      label {margin:0; margin-right:7px;}
+      md-radio-group {display: flex;}
+      md-radio-button {margin:0; margin-right:7px;}
+   }
+   textarea {width:100%; max-width: 600px; padding:10px;}
+}
+
+.gp-checkboxRatingLabel {margin-left:20px;}
+
+@media screen and (max-width:500px) {
+  .gp-rateExpertInputs li {display:list-item;}
+}
+
+
+/******************************** Ecommerce Overrides ******************************/
+.gp-dashWrapper .gp-dashInner #abMyAccountWrapper {
+    border-top: 1px solid transparent;
+    padding: 20px 0 20px 0;
+}
+
+form[name="companyInfoForm2"] {}
+form[name="companyInfoForm2"] .row {padding: 10px 0;margin: 0;display: flex;}
+form[name="companyInfoForm2"] .row.gp-odd {}
+.gp-formQuad {border-right:1px solid $govMedLtGrey;}
+
+/********************* UPGRADE PLANS **************/
+#upgradePlan {}
+#upgradePlan  .divTableBody {justify-content: space-around;}
+
+/************* ADDED 4.12.18 *****************/
+.gp-sortFilterList {}
+  .gp-sortFilterList li {text-indent:4px; font-size:13px;}
+.gp-sortFilterList li:hover {background: $govBorderGrey;color: $govDkGrey;}
+.gp-selectedFilter {color: white;background: $govBlue;}
+
+.gp-addBorder {border: 1px solid $govBlue; margin-bottom: 20px;}
+
+
+.gp-totalLineDivider {border-top: 1px dashed #bfbfbf;
+    margin-top: 7px;}
+.gp-rated {transition: .5s;}
+.gp-rated h5 {color: $govBlue;}
+.gp-rated:hover {transform: scale(1.05);}
+.gp-rated:hover h5 {color: $govBlue;}

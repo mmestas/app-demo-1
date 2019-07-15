@@ -1,0 +1,35 @@
+<div class="list-group">
+  <div class="dash-projectHeader">
+    <span class="dash-projectTitle" style="width:40%;"><h4>Title</h4></span>
+    <span class="dash-projectEngagements" style="width:20%;"><h4>Created</h4></span>
+    <span class="dash-projectMessages" style="width:15%;"><h4>Completed</h4></span>
+    <span class="dash-projectQuotes" style="width:15%;"><h4>Total</h4></span>
+    <span class="dash-projectQuotes" style="width:10%;"><h4>Action</h4></span>
+  </div>
+  <!-- <div class="list-group-item gp-flex" ng-repeat="project in myDashProjects" ng-class="{'gp-dashActiveProject' : project.active}" ng-if="project.status.gpKey === '{74699447-4fad-47f9-9f68-48a3e86b7f5e}'"> -->
+  <div class="list-group-item gp-flex" ng-repeat="project in myDashProjects" ng-if="project.status.gpKey === '{74699447-4fad-47f9-9f68-48a3e86b7f5e}'">
+    <span class="dash-projectTitle" style="width:40%;" ng-click="goToProjectDetails(project)">
+      <h5>{{ project.title }}
+      <br> <small>Project Owner: {{project.owner.name}}</small>
+    </h5>
+    </span>
+    <span class="dash-projectEngagements" style="width:20%;">{{project.dateCreated | dateConverter | date: 'MM-dd-yyyy'}}</span>
+    <span class="dash-projectMessages" style="width:15%;">{{project.dateClosed | dateConverter | date: 'MM-dd-yyyy'}}</span>
+    <span class="dash-projectQuotes" style="width:15%;">Total</span>
+    <span class="dash-projectQuotes" style="width:10%;">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fa fa-cog"></i>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li ng-click="statusChangeSelect(1, project)">View</li>
+          <!-- <li ng-click="statusChangeSelect(2, project)">Edit</li> -->
+          <!-- <li ng-click="statusChangeSelect(3, project)" ng-if="project.status.gpKey === '{A40E44D2-332E-4D01-9039-28E52B5193FB}'">Close</li> -->
+          <li ng-click="statusChangeSelect(4, project)" ng-if="project.status.gpKey === '{74699447-4fad-47f9-9f68-48a3e86b7f5e}'">Archive</li>
+          <!-- <li ng-click="statusChangeSelect(5, project)" ng-if="project.status.gpKey === '{79839C99-B83A-4420-A867-10ACF3BBDAB5}'">Delete</li> -->
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>

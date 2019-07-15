@@ -1,0 +1,143 @@
+<div class="gp-nav" company-dash-header></div>
+<div class="gp-dashWrapper" ng-cloak>
+    <div id="invitedAuthPayerEngagementQuoteDetails" class="md-whiteframe-3dp" style="max-width:900px; margin:auto; margin-top:30px;">
+      <md-toolbar class="md-gpBlue-theme">
+        <div class="md-toolbar-tools">
+          <h2>Authorized Payer for {{iaQuoteDetails.project.title}} Engagement</h2>
+        </div>
+      </md-toolbar>
+      <div class="gp-dialogInnerMsg">Please review the completion date of your project engagement and select an invoice term to authorize {{iaQuoteDetails.consultant.name}} to begin work.</div>
+      <!--///////////// QUOTE OVERVIEW ////////////////// -->
+      <section>
+        <div class="gp-dialogueInnerContent gp-filterPanel">
+          <section>
+            <div class="gp-projectInfo gp-modal-consultantInfo">
+              <div><img ng-src="{{envURL+iaQuoteDetails.consultant.imageFilename}}"></div>
+              <div class="gp-modal-consultantInfoLeftSide">
+                <div class="font-md gp-mr15">{{iaQuoteDetails.consultant.name}}, {{iaQuoteDetails.consultant.title}}</div>
+                <div class="font-s">{{iaQuoteDetails.consultant.city}}, {{iaQuoteDetails.consultant.state.name}}</div>
+                <div class="font-s">
+                  projects: {{iaQuoteDetails.consultant.numberProjects}} |
+                  certifications: {{iaQuoteDetails.consultant.certifications.length}}
+                </div>
+              </div>
+              <div class="gp-modal-consultantInfoRightSide">
+                <div class="gp-expertRatingForModal">
+                  <input id="star{{$index}}" ng-model="iaQuoteDetails.consultant.numValU" value="{{iaQuoteDetails.consultant.averageReview}}" type="number" class="myrating" data-min=0 data-max=5 data-step=0.5 data-size="xxs" title=""  >
+                </div>
+                <div>Silver Verified {{iaQuoteDetails.consultant.verified}}</div>
+              </div>
+            </div>
+          </section>
+          <div class="well">
+            <div>
+                <h5>This is {{beforeEngagementType}} <strong>{{engagementtype}}</strong> agreement</h5>
+            </div>
+            <div><strong>Project Title:</strong> {{iaQuoteDetails.project.title}}</div>
+            <div><strong>Project RFP:</strong>
+              {{iaQuoteDetails.project.solicitationNumber}}
+            </div>
+            <!-- <div><strong>Supporting Narrative for Quote:</strong></div>
+            <div ng-bind-html="iaQuoteDetails.supportingNarrative"></div> -->
+            <div ng-show="showRecurringInfo"><strong>Recurring Billing Period:</strong>  {{RecurringBillingPeriod}}</div>
+            <div ng-show="showRecurringInfo"><strong>Billing Start Date:</strong>  {{RecurringBillingStartDate | dateConverter | date: 'MM/dd/yyyy'}}</div>
+            <div ng-show="showRecurringInfo"><strong>Number of Periods:</strong>  {{RecurringNumberOfPeriods}}</div>
+            <div ng-show="showRecurringInfo"><strong>Recurring Billing Amount:</strong>  {{RecurringBillingAmount}}</div>
+
+            <div ng-show="showHours"><strong>Quoted Hours:</strong>  {{hoursQuoted}}</div>
+            <div><strong>Engagement Amount:</strong>  {{iaQuoteDetails.engagementAmount | currency}}</div>
+          </div>
+        </div>
+      </section>
+      <!--///////////// ENGAGEMENT CONSULTANT - INVOICE AUTHORIZATION ////////////////// -->
+      <section ng-hide="showProjectFunding || showFundingAgreement">
+        <form name="invoiceAuth">
+          <div class="gp-dialogueInnerContent gp-filterPanel">
+            <div class="gp-text-danger gp-mb10">*Consultant Engagement cannot start until a person duly authorized by the organization agrees to the invoice payment terms.</div>
+            <div class="row gp-invoiceAuthorizationRadioGroup">
+              <md-radio-group ng-model="authorization">
+                <div class="col col-md-6">
+                  <md-radio-button ng-value="true" value="true" class="gpBlue">
+                    I certify that I am the person duly authorized by the organization and I agree to pay for this consultant engagement according to the invoice payment terms indicated herein. I understand I must also pay the app1url Processing fee to start this engagement.
+                  </md-radio-button>
+                </div>
+                <div class="col col-md-6">
+                  <md-radio-button ng-value="false" value="false" class="gpBlue">
+                    I am NOT duly authorized by the organization to approve the invoice payment terms for this consultant engagement. Email a request for authorization to the person below.
+                  </md-radio-button>
+                </div>
+              </md-radio-group>
+            </div>
+            <div class="row gp-invoiceAuthorizationInputGroup">
+              <div class="col col-md-6">
+                <md-input-container class="md-block md-gpBlue-theme" >
+                  <label for="signature">Signature</label>
+                  <input type="text" class="form-control" name="signature" ng-model="Signature" ng-disabled="!authorization">
+                </md-input-container>
+                <button class="btn btn-primary" ng-disabled="!authorization || !Signature" ng-click="agreeToPayProcessingFee()">Pay Processing Fee</button>
+              </div>
+              <div class="col col-md-6">
+                <select class="form-control input-sm" style="margin-top: 19px; margin-bottom: 19px" ng-disabled="(authorization == null) || (authorization == true)" ng-model="$parent.authorizedPayer" name="fundingTerm" ng-options="payer as payer.name for payer in authorizedPayersForAP" ng-change="selectAuthorizedPayer($parent.authorizedPayer)">
+                  <option value="" style="display:none;">Select Authorized Payer</option>
+                </select>
+                <div class="md-errors-spacer" style=" min-height: 24px; min-width: 1px;"></div>
+                <md-input-container class="md-block md-gpBlue-theme" ng-show="showAddNewAP">
+                  <label for="addNewAP">Enter Email Address </label>
+                  <input type="email"  name="addNewAP" ng-model="addNewAPSignature">
+                  <div ng-messages="invoiceAuth.addNewAP.$error" ng-show="invoiceAuth.addNewAP.$dirty">
+                    <div ng-message="email">Please enter a valid email.</div>
+                  </div>
+                </md-input-container>
+                <button id="sendAuthPayerRequest" class="btn btn-primary" ng-disabled="!addNewAPSignature && invoiceAuth.addNewAP.$error" ng-show="addNewAPSignature" ng-click="processEngagementInvoiceAuthorizedUserSelected(iaQuoteDetails.gpKey)">Send Request</button>
+                <button class="btn btn-primary" ng-disabled="(authorization == null) || (authorization == true)" ng-show="showRequestAuthBtn" ng-click="processEngagementInvoiceAuthorizedUserSelected(iaQuoteDetails.gpKey, $parent.authorizedPayer)">Request Authorization</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+      <!--///////////// Project Engagement Invoice Agreement ////////////////// -->
+      <section ng-show="showProjectFunding || showFundingAgreement">
+        <div class="gp-dialogueInnerContent">
+          <div class="gp-notToExceed well" ng-show="showProjectFunding">
+            <div class="text-danger">**NOTICE** you are about to legally bind your organization in a pay for hire agreement and iniatiate an engagement fee invoice please select your preferred terms below:</div>
+            <div><h4>app1url Processing Fee: <span class="text-muted">{{(iaQuoteDetails.engagementAmount * feeAmt) | currency}}</span> </h4></div>
+            <div class="gp-ecommerceWrapper">
+              <form id="js-ecommercePayments3" name="ecommercePayments"></form>
+              <button class="btn btn-primary" type="submit" ng-click="agreeToPaymentFee(iaQuoteDetails.gpKey, Signature, quoteDetails)">Submit Payment</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!--///////////// FOOTER BUTTONS ////////////////// -->
+      <div layout="row" id="invitedAuthFooter">
+      <md-button ng-click="reject()" class="btn">
+       Reject Quote
+      </md-button>
+      <md-button ng-click="approve()" ng-disabled="!showApproveToStartBtn && !quoteDetails.companyInvoiceApproved" ng-if="!quoteDetails.companyRejected && !quoteDetails.companyApproved" class="gp-SolidOrange btn btn-warning">Approve to Start</md-button>
+    </div>
+      <!--///////////// REJECTION DIALOG ////////////////// -->
+      <div ng-if="rejectDialog" style="padding:20px;">
+      <div>
+        <select class="form-control input-sm gp-mb10" ng-model="explanationSelect" name="fundingTerm" ng-change="selectRejectionReason(explanationSelect)">
+          <option value="" style="display:none;">Select a Reason</option>
+          <option value="'Too many hours quoted'">Too many hours quoted</option>
+          <option value="'Rate higher than expected'">Rate higher than expected</option>
+          <option value="'Project changed'">Project changed</option>
+          <option value="0">Other</option>
+        </select>
+        <textarea ng-show="showTextareaRejection" ng-model="explanation" rows="4" style="width:100%;"></textarea>
+      </div>
+      <div layout="row">
+        <md-button ng-click="cancelExplanation()">
+         Cancel
+        </md-button>
+        <md-button ng-click="processEngagementReject(explanation, explanationSelect)">
+         Submit with explanation
+        </md-button>
+      </div>
+    </div>
+
+    </div>
+</div>

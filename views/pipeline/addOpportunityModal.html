@@ -1,0 +1,86 @@
+<md-dialog>
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>Add Opportunity to Pipeline</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content class="gp-p20">
+    <form name="addOpportunityToPipelineForm">
+      <div layout="row" layout-xs="column" layout-sm="column">
+        <md-autocomplete flex
+            md-no-cache ="true"
+            md-selected-item="opportunity.agency"
+            md-search-text="searchAgencyText.searchText"
+            md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText.searchText)"
+            md-item-text="agencyItem.name"
+            md-floating-label="Agency (Autocomplete)"
+            md-clear-button="true">
+          <md-item-template>
+            <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+            <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+          </md-item-template>
+          <md-not-found>
+            No matches found.
+          </md-not-found>
+        </md-autocomplete>
+        <md-input-container class="md-block" flex-gt-sm="">
+            <label>Opportunity Name</label>
+            <input ng-model="opportunity.name" required>
+        </md-input-container>
+      </div>
+      <div layout="row" layout-xs="column" layout-sm="column">
+        <md-input-container flex-gt-sm="">
+            <label>Opportunity Description</label>
+            <textarea ng-model="opportunity.description"></textarea>
+        </md-input-container>
+      </div>
+      <div layout="row" layout-xs="column" layout-sm="column">
+        <md-input-container class="md-block" flex-gt-sm="">
+            <label>Opportunity Link</label>
+            <input ng-model="opportunity.opportunityLink">
+        </md-input-container>
+        <md-input-container class="md-block"  flex-gt-sm="">
+          <label>Set Aside</label>
+          <md-select class="md-gpBlue-theme" ng-model="opportunity.businessType">
+            <md-option ng-repeat="bt in pipelineSetAsideTypes track by $index" ng-value="bt" >
+              {{bt.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div layout="row" layout-xs="column" layout-sm="column" class="md-inline-form">
+        <md-input-container class="md-block"  flex-gt-sm="">
+          <label>Contract Type</label>
+          <md-select class="md-gpBlue-theme" ng-model="opportunity.contractType">
+            <md-option ng-repeat="ct in contractTypes track by $index" ng-value="ct" >
+              {{ct.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block"  flex-gt-sm="">
+            <label>NAICS</label>
+            <input ng-model="opportunity.naicsCode ">
+        </md-input-container>
+        <md-datepicker ng-model="opportunity.closeDate" md-placeholder="Close date" flex-gt-sm=""></md-datepicker>
+      </div>
+      <div layout="row" layout-xs="column" layout-sm="column">
+        <md-input-container class="md-block" flex-gt-sm="">
+            <label>Estimated Contract Value</label>
+            <input type="number" ng-model="opportunity.value" required>
+        </md-input-container>
+      </div>
+    </form>
+
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button class="btn-primary" ng-click="appDemo1SetPipelineOpportunity(opportunity)" data-ng-disabled="addOpportunityToPipelineForm.$invalid">
+     Add to Pipeline
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

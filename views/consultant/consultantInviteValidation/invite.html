@@ -1,0 +1,34 @@
+<div login-header></div>
+<div id="invitedConsultantLanding" class="view gp-signUpView" ng-init="consultantInviteInit()">
+  <div class="gp-signInContainer">
+    <div class="gp-signIn">
+      <div class="well">Please accept the Terms & Conditions, and create a password to continue</div>
+      <form id="invitedConsultantForm" name="invitedConsultantForm" novalidate >
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header">
+              Terms & Conditions
+              <i class="material-icons expand">expand_more</i>
+              <i class="material-icons collapse">expand_less</i>
+            </div>
+            <div class="collapsible-body">
+              <div class="well" ng-include="'views/consultant/consultantInviteValidation/termsAndConditions.html'" style="background: #ecf0f1; height:400px; padding: 5px 12px; overflow-y: scroll;"></div>
+            </div>
+          </li>
+        </ul>
+        <div class="form-group">
+          <label>I agree to the app1url Terms & Conditions</label>
+          <md-checkbox ng-model="terms" aria-label="agree" class="md-gpSolidBlue"></md-checkbox>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" id="gp-password" placeholder="*Password" ng-model="consultantInviteValidation.password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" name="confirmPass" class="form-control" id="gp-confirmPass" placeholder="*Confirm Password" ng-model="consultantInviteValidation.confirmPass" compare-to="consultantInviteValidation.password">
+          <span ng-show="invitedConsultantForm.confirmPass.$error.compareTo && invitedConsultantForm.confirmPass.$touched" class="gp-error">This field must match what you entered in the above password field</span>
+        </div>
+        <div class="gp-btnWrapper gp-thankYouBtn"><button class="btn btn-primary gp-wideBtn" ng-click="agreeToTerms(consultantInviteValidation.password)" ng-disabled="!terms || invitedConsultantForm.$invalid">I agree</button></div>
+      </form>
+    </div>
+  </div>
+</div>

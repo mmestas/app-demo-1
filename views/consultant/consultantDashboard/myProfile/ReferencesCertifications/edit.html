@@ -1,0 +1,152 @@
+<div id="consultantEditReferencesAndCertifications" ng-show="showConsultantEditReferencesAndCertificationsFields">
+  <!-- <form name="consultantEditRCForm" ng-submit="addConsultantReference(reference, consultantInfo)" novalidate> -->
+  <form name="consultantEditRCForm" novalidate>
+    <div class="gp-consultantEditSectionWithBtn"><h4>Edit References & Certifications (15%)</h4>
+      <div>
+        <i class="fa fa-times gp-closePanel" ng-click="cancelEditReferencesAndCertifications()"></i>
+      </div>
+    </div>
+      <div >
+        <h3 class="h3"><span class="small">Add the Contact Information for at least 3 references (10%)</span></h3>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label>First Name</label>
+              <input type="text" name="firstname" class="form-control" ng-model="reference.firstName" required>
+              <div ng-messages="consultantEditRCForm.firstname.$error"  ng-show="consultantEditRCForm.referenceEmail.$dirty || consultantEditRCForm.$submitted">
+               <div ng-message="required">
+                 This field is required
+               </div>
+              </div>
+            </md-input-container>
+
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label>Last Name</label>
+              <input type="text" name="lastname" class="form-control" ng-model="reference.lastName" required>
+              <div ng-messages="consultantEditRCForm.lastname.$error"  ng-show="consultantEditRCForm.referenceEmail.$dirty || consultantEditRCForm.$submitted">
+               <div ng-message="required">
+                 This field is required
+               </div>
+              </div>
+            </md-input-container>
+
+          </div>
+          <div class="col col-md-4">
+            <md-input-container class="md-gpBlue-theme">
+              <label>Company</label>
+              <input type="text" name="referenceCompany" class="form-control" ng-model="reference.company" aria-label="referenceCompany">
+            </md-input-container>
+          </div>
+          <div class="col col-md-6">
+            <md-input-container class="md-gpBlue-theme">
+              <label>Email</label>
+              <input name="referenceEmail" ng-model="reference.email" type="email" required>
+              <!-- <div ng-messages="consultantEditRCForm.referenceEmail.$error || consultantEditRCForm.referenceEmail.$invalid"  ng-show="consultantEditRCForm.referenceEmail.$dirty || consultantEditRCForm.$submitted"> -->
+              <div ng-messages="consultantEditRCForm.referenceEmail.$error"  ng-show="consultantEditRCForm.referenceEmail.$dirty || consultantEditRCForm.$submitted">
+               <div ng-message="required">
+                 This field is required
+               </div>
+               <div ng-message="email">
+                 Please enter a valid email address
+               </div>
+               <!-- <span ng-show="consultantEditRCForm.referenceEmail.$dirty && consultantEditRCForm.referenceEmail.$invalid" class="gp-error">Please enter a valid email address</span> -->
+             </div>
+            </md-input-container>
+          </div>
+          <div class="col col-md-6">
+            <md-input-container class="md-gpBlue-theme">
+              <label>Phone</label>
+              <input type="text" name="referencePhone" class="form-control" ng-model="reference.phone" phone-input aria-label="referencePhone">
+            </md-input-container>
+          </div>
+          <!-- NOTE: Don't Erase TBUL -->
+          <!-- <div class="col col-md-12">
+            <div>
+              <md-checkbox ng-model="reference.sendEmailRequest" class="md-gpSolidBlue"></md-checkbox>
+              <label for="lastname">Send Email to reference for feedback?</label>
+            </div>
+          </div> -->
+          <div class="col col-md-12">
+            <button class="btn btn-sm btn-primary" ng-click="addConsultantReference(reference, consultantInfo)" type="submit">Add Reference</button>
+          </div>
+        <!-- </form> -->
+      </div>
+
+    </form>
+    <div class="col col-md-12 gp-consultantListWrapper">
+      <h3 class="h3"><span class="small">Your References</span></h3>
+      <!-- <div class="gp-consultantList" ng-repeat="savedreference in consultantReferences track by $index"> -->
+      <div class="gp-consultantList" ng-repeat="savedreference in consultantReferences">
+        <!-- NOTE: Don't Erase TBUL -->
+        <!-- <button class="btn btn-sm btn-warning" ng-click="removeReference($index, reference, consultantInfo)"><i class="fa fa-close"></i></button>
+        <button class="btn btn-sm btn-primary" ng-click="editCertification($index, reference, consultantInfo)"><i class="fa fa-pencil-alt"></i></button> -->
+        {{savedreference.name}}, <small>{{savedreference.company}}</small> <span ng-if="!savedreference.completed" style="color:red;"><i>*Pending*</i></span>
+      </div>
+    </div>
+    <form name="consultantEditCertForm">
+      <!-- <div class="gp-expertSkills"> -->
+      <div>
+        <!-- <h3 class="h3"><span class="small">Current Certification Information</span></h3> -->
+          <div class="row">
+            <div class="col col-md-12">
+              <h3 class="h3"><span class="small">Current Certification Information (5%)</span></h3>
+                <div class="col col-md-6">
+                  <md-autocomplete flex
+                      md-no-cache = "true"
+                      md-selected-item="selectedCertificationItem"
+                      md-search-text="searchCertificationText.searchText"
+                      md-items="certificationItem in getCertificationsForAutoComplete(searchCertificationText.searchText)"
+                      md-item-text="certificationItem.name"
+                      md-floating-label="Certifications"
+                      md-selected-item-change="addCertification(certificationItem)"
+                      md-clear-button="true"
+                      >
+
+                    <md-item-template>
+                      <span md-highlight-text="searchCertificationText.searchText">{{certificationItem.name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No matches found.
+                    </md-not-found>
+                  </md-autocomplete>
+                </div>
+                <div class="col col-md-6">
+                  <md-input-container class="md-gpBlue-theme">
+                    <label>Certification Authority</label>
+                    <input type="text" name="certificationAuthority" class="form-control" ng-model="certification.authority" aria-label="certificationAuthority">
+                  </md-input-container>
+                </div>
+                <div class="col col-md-6">
+                  <md-input-container class="md-gpBlue-theme">
+                    <label>Certification/License #</label>
+                    <input type="text" name="certificationLicense" ng-model="certification.license">
+                    <div ng-messages="consultantEditCertForm.certificationLicense.$error">
+                     <div ng-message="required">
+                       This field is required
+                     </div>
+                   </div>
+                  </md-input-container>
+                </div>
+                <div class="col col-md-6">
+                  <md-input-container class="md-gpBlue-theme">
+                    <label>Certification URL</label>
+                    <input type="text" name="certificationUrl" class="form-control" ng-model="certification.url" aria-label="certificationUrl">
+                  </md-input-container>
+                </div>
+                <div class="col col-md-12">
+                  <button class="btn btn-sm btn-primary" ng-click="addConsultantCertification(selectedCertificationItem, searchCertificationText.searchText, certification, consultantInfo)">Add Certification</button>
+                </div>
+            </div>
+            <div class="col col-md-12 gp-consultantListWrapper" id="gp-consultantList">
+              <h3 class="h3"><span class="small">Your Certifications</span></h3>
+              <div class="gp-consultantList" ng-repeat="certification in certificationFilterArray track by $index">
+                <!-- <button class="btn btn-sm btn-warning" ng-click="removeCertification($index, certification, consultantInfo)"><i class="fa fa-close"></i></button> -->
+                <i class="far fa-times-circle" ng-click="removeCertification($index, certification, consultantInfo)"></i>  &nbsp; {{certification.certificationName}}
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>

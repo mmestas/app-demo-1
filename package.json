@@ -1,0 +1,29 @@
+{
+  "name": "app1url",
+  "version": "2.0",
+  "description": "app1 App",
+  "dependencies": {
+    "angular-input-masks": "^4.2.1",
+    "bootstrap": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-rev-easy": "^1.2.3"
+  },
+  "engines": {
+    "node": "10.15.0"
+  },
+  "keywords": [
+    "government",
+    "agencies",
+    "consultants"
+  ],
+  "license": "Contensive",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-rev-easy": "^1.2.3",
+    "gulp-sass": "^4.0.2",
+    "gulp-watch-sass": "^1.4.1",
+    "node-sass": "^4.11.0"
+  }
+}

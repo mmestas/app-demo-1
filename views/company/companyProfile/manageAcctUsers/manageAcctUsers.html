@@ -1,0 +1,13 @@
+<div class="gp-pageTitle"><h2>Manage Account Users</h2></div>
+<div>
+<!-- <div  ng-init="companyProfileInit()"> -->
+<!-- <div  ng-init="manageAccountUsersInit()"> -->
+<md-tabs md-dynamic-height md-border-bottom class="md-gpBlue-theme">
+   <md-tab label="Edit Organization Users">
+     <md-content  ng-include="'views/company/companyProfile/manageAcctUsers/editCompanyUsers.html'"></md-content>
+   </md-tab>
+    <md-tab label="Add New User">
+      <md-content  ng-include="'views/company/companyProfile/manageAcctUsers/addNewUser.html'"></md-content>
+    </md-tab>
+</md-tabs>
+</div>

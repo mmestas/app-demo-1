@@ -1,0 +1,21 @@
+<div ng-hide="showConsultantResumeEditFields">
+  <!-- <div class="customTooltip">
+    <span class="customTooltip-panels">Please upload a current resume in this section. When customers are looking for expertise, we also search the resume to match you with opportunities.</span>
+    <div class="gp-consultantEditSectionWithBtn"><h4>Resume (20%)</h4><i class="fa fa-pencil-alt" ng-click="editConsultantResume(consultantInfo)"></i></div>
+  </div> -->
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">Resume (20%)
+        <span class="customTooltip-panels">Please upload a current resume in this section. When customers are looking for expertise, we also search the resume to match you with opportunities.</span>
+      </span>
+    </h4>
+    <i class="fa fa-pencil-alt" ng-click="editConsultantResume(consultantInfo)"></i>
+  </div>
+  <div class="profileSectionInner">
+    <h3 class="h3"><span class="small">Resume</span></h3>
+    <ul class="gp-consultantCategoriesList">
+      <li ng-show="consultantInfo.consultantResumeFilename"><a ng-href="{{consultantInfo.consultantResumeUrl}}" target="_blank">{{consultantInfo.consultantResumeFilename}}</a></li>
+      <li ng-show="!consultantInfo.consultantResumeFilename">No Resume</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<md-dialog class="gp-simpleDialogue">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Are you sure?</h2>
+
+      </div>
+    </md-toolbar>
+
+
+    <md-dialog-content>
+      <div>This action cannot be undone</div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+      <button class="btn btn-warning" ng-click="deleteOpportunityFromList()">
+       Confirm Delete
+      </button>
+    </md-dialog-actions>
+</md-dialog>

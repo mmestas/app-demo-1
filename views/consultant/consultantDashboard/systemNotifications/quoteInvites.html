@@ -1,0 +1,143 @@
+<div class="gp-systemNotificationsWrapper">
+  <div class=" md-whiteframe-2dp">
+    <div>
+
+      <div class="panel-heading">
+        <div>RFQ Invites</div>
+        <div class="gp-readNotification">
+          <div class="gp-hideShowMsgs" ng-hide="readMsgsVisible"><span ng-click="loadReadMsgs()"> Show Archived Invites</span> <i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i></div>
+          <div class="gp-hideShowMsgs" ng-show="readMsgsVisible"><span ng-click="hideReadMsgs()"> Hide Archived Invites</span> <i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i></div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div>
+          <ul class="collapsible popout" data-collapsible="accordion" >
+
+            <!-- ACTIVE/CURRENT QUOTES -->
+            <li ng-repeat="msg in quoteInvitesList" ng-init="initializeCollapse()" data-ng-show="activeQuoteInvites" data-ng-hide="archivedQuoteInvites">
+                <div class="collapsible-header">
+                  <div class="gp-flex">
+
+                    <div class="col col-md-1 gp-flex gp-flex-column" data-ng-class="{'gp-text-success': (msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) > 7, 'gp-text-warning': (msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) > 3 && (msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) <= 7,  'gp-text-danger': (msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) <= 3}">
+
+                        <i class="far fa-clock" data-ng-if="(msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) >= 0 && !msg.engagementQuoteInvitation.companyApproved"></i>
+                        <div class="font-xxs" data-ng-if="(msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) >= 0 && !msg.engagementQuoteInvitation.companyApproved"">{{msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft}} day<span data-ng-if="(msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) !== 1">s</span> left</div>
+                        <!-- <div class="font-xxs" data-ng-if="(msg.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) < 0"></div> -->
+
+                    </div>
+
+                    <div class="col col-md-7">
+                      <h4>{{msg.engagementQuoteInvitation.ProjectTitle | limitTo : 40}}<span ng-show="msg.engagementQuoteInvitation.ProjectTitle.length > 40">...</span></h4>
+                      <h4><small>{{msg.subTitle | limitTo : 60}}<span ng-show="msg.subTitle.length > 60">...</span></small></h4>
+                    </div>
+
+                    <div class="col col-md-2">
+                      <span class="label-primary" data-ng-if="msg.engagementQuoteInvitation.consultantSubmitted && !msg.engagementQuoteInvitation.companyApproved && !msg.engagementQuoteInvitation.companyRejected">Submitted</span>
+                      <span class="label-success" data-ng-if="msg.engagementQuoteInvitation.companyApproved">Accepted</span>
+                      <span class="label-warning" data-ng-if="!msg.engagementQuoteInvitation.consultantSubmitted">Not Submitted</span>
+                      <span class="label-danger" data-ng-if="msg.engagementQuoteInvitation.consultantRejected">Rejected</span>
+                      <span class="label-danger" data-ng-if="msg.engagementQuoteInvitation.companyRejected">Not Approved</span>
+                    </div>
+                    <div class="col col-md-2">
+                      <span data-ng-if="msg.engagementQuoteInvitation.consultantSubmitted && !msg.engagementQuoteInvitation.companyApproved">{{msg.engagementQuoteInvitation.consultantSubmittedDate | dateConverter | date: 'MM-dd-yyyy'}}</span>
+                      <span data-ng-if="msg.engagementQuoteInvitation.companyApproved">{{msg.engagementQuoteInvitation.consultantSubmittedDate | dateConverter | date: 'MM-dd-yyyy'}}</span>
+                      <span data-ng-if="!msg.engagementQuoteInvitation.consultantSubmitted">&nbsp;</span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="collapsible-body">
+                  <div><strong>Subject: {{msg.subject}}</strong></div>
+                  <div>From: {{msg.fromAddress}}</div>
+                  <div>{{msg.notificationDate | dateConverter | date: 'MM-dd-yyyy HH:mm'}}</div>
+                  <div>Quote Deadline: {{msg.engagementQuoteInvitation.quoteDeadline | dateConverter | date: 'MM-dd-yyyy'}}</div>
+                  <div>Start Date: {{msg.engagementQuoteInvitation.startDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+                  <div>End Date: {{msg.engagementQuoteInvitation.endDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+
+                  <div>
+                    <div class="gp-msgText" ng-bind-html="msg.message"></div>
+                    <div class="gp-msgText">
+                      <p>Click <a ng-click="getQuoteInviteDetails(msg)">here</a> to access the details of the project scope and submit your quote.</p>
+                    </div>
+                  </div>
+                  <div ng-if="msg.engagementQuoteInvitation.consultantRejected">
+                    You have rejected this invite
+                  </div>
+                  <div class="gp-collapsable-footer">
+                    <div ng-hide="msg.markAsRead"><i class="fa fa-envelope gp-msgIcon" ng-click="markAsRead(msg)"></i> Archive </div>
+                    <!-- <div ng-show="msg.markAsRead"><i class="fa fa-envelope-open gp-msgIcon" ng-click="markAsUnread(msg)"></i> Unarchive </div> -->
+                    <div>
+                      <span ng-if="msg.engagementQuoteInvitation.notificationType == 1"><i class="fa fa-reply gp-msgIcon" ng-click="openReplyToMsgModal(msg)"></i> Reply</span>
+                      <span><i class="fa fa-trash gp-msgIcon" ng-click="deleteMsg(msg)"></i> Delete</span>
+                    </div>
+                  </div>
+                </div>
+            </li>
+
+            <!-- ARCHIVED QUOTES -->
+            <li ng-repeat="aqi in archivedQuoteInvitesList" ng-init="initializeCollapse()" data-ng-show="archivedQuoteInvites" data-ng-hide="activeQuoteInvites">
+                <div class="collapsible-header">
+                  <div class="gp-flex">
+
+                    <div class="col col-md-1 gp-flex gp-flex-column gp-text-danger">
+                      <!-- <i class="far fa-clock" ></i>
+                      <div class="font-xxs">{{aqi.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft}} day<span data-ng-if="(aqi.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) !== 1">s</span> ago</div> -->
+                    </div>
+
+                    <div class="col col-md-7">
+                      <h4>{{aqi.engagementQuoteInvitation.ProjectTitle}}</h4>
+                      <h4><small>{{aqi.subTitle | limitTo : 60}}<span ng-show="aqi.subTitle.length > 60">...</span></small></h4>
+                    </div>
+
+                    <div class="col col-md-2">
+                      <span class="label-primary" data-ng-if="aqi.engagementQuoteInvitation.consultantSubmitted && !aqi.engagementQuoteInvitation.companyApproved && !aqi.engagementQuoteInvitation.companyRejected">Submitted</span>
+                      <span class="label-success" data-ng-if="aqi.engagementQuoteInvitation.companyApproved">Accepted</span>
+                      <span class="label-warning" data-ng-if="!aqi.engagementQuoteInvitation.consultantSubmitted">Unsubmitted</span>
+                      <span class="label-danger" data-ng-if="aqi.engagementQuoteInvitation.consultantRejected">Rejected</span>
+                      <span class="label-danger" data-ng-if="aqi.engagementQuoteInvitation.companyRejected">Not Approved</span>
+                    </div>
+                    <div class="col col-md-2 gp-flex gp-flex-column gp-alignFlexEnd">
+                      <!-- <span class="label-danger" data-ng-if="(aqi.engagementQuoteInvitation.quoteDeadline | dateConverter | daysLeft) < 0 && !aqi.engagementQuoteInvitation.consultantSubmitted">Expired</span> -->
+                      <!-- <i class="fa fa-envelope-open gp-msgIcon" ng-click="markAsUnread(aqi)"></i> -->
+                      <!-- <i class="fa fa-trash gp-msgIcon" ng-click="deleteMsg(aqi)"></i> -->
+                    </div>
+
+                  </div>
+                </div>
+                <div class="collapsible-body">
+                  <div><strong>Subject: {{aqi.subject}}</strong></div>
+                  <div>From: {{aqi.fromAddress}}</div>
+                  <div>{{aqi.notificationDate | dateConverter | date: 'MM-dd-yyyy HH:mm'}}</div>
+                  <div>Quote Deadline: {{aqi.engagementQuoteInvitation.quoteDeadline | dateConverter | date: 'MM-dd-yyyy'}}</div>
+                  <div>Start Date: {{aqi.engagementQuoteInvitation.startDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+                  <div>End Date: {{aqi.engagementQuoteInvitation.endDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+
+                  <div>
+                    <div class="gp-msgText" ng-bind-html="aqi.message"></div>
+                    <div class="gp-msgText">
+                      <p>Click <a ng-click="getQuoteInviteDetails(aqi)">here</a> to access the details of the project scope and submit your quote.</p>
+                    </div>
+                  </div>
+                  <div ng-if="aqi.engagementQuoteInvitation.consultantRejected">
+                    You have rejected this invite
+                  </div>
+                  <div class="gp-collapsable-footer">
+                    <!-- <div ng-hide="aqi.engagementQuoteInvitation.markAsRead"><i class="fa fa-envelope gp-msgIcon" ng-click="markAsRead(aqi)"></i> Archive </div> -->
+                    <!-- <div ng-hide="aqi.markAsRead"><i class="fa fa-envelope gp-msgIcon" ng-click="markAsRead(aqi)"></i> Archive </div> -->
+                    <div ng-show="aqi.markAsRead"><i class="fa fa-envelope-open gp-msgIcon" ng-click="markAsUnread(aqi)"></i> Unarchive </div>
+                    <!-- <div ng-show="aqi.engagementQuoteInvitation.markAsRead"><i class="fa fa-envelope-open gp-msgIcon" ng-click="markAsUnread(aqi)"></i> Unarchive </div> -->
+                    <div>
+                      <span><i class="fa fa-trash gp-msgIcon" ng-click="deleteMsg(aqi)"></i> Delete</span>
+                    </div>
+                  </div>
+                </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

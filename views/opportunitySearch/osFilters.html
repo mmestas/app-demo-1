@@ -1,0 +1,163 @@
+<div class="saveOSSearch">
+  <div class="saveOSSearchDrpDwn">
+    <select class="form-control input-sm" data-ng-model="$parent.mySavedSearch" data-ng-options="sf as sf.name for sf in savedOpportunitySearches" data-ng-change="ApplySavedFilters(mySavedSearch)">
+      <option value="" style="display: none;">Saved Searches</option>
+    </select>
+  </div>
+  <div class="gp-filterInputs saveOSSearchHeart">
+    <div class="gp-total gp-fa-o text-default" ng-click="showSaveSearchModal($event)"><i class="far fa-heart gp-fa-o-rollover"></i><i class="fa fa-heart gp-fa-rollover"></i> Save Search</div>
+  </div>
+</div>
+<div class="gp-applyFilters">
+  <button class="btn btn-primary btn-outline btn-sm" ng-click="ApplyFilters()">Apply Filters</button>
+</div>
+<!-- OPEN/CLOSE Date Filter--> <!-- NOTE: KEEP - Comment out until next Sprint -->
+<!-- <div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openDateFilter" ng-click="openOSDateFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openDateFilter" ng-click="closeOSDateFilter()"></i>
+      &nbsp; Search by Date Range
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openDateFilter}">
+    <div>
+    <label style="width:37px;">From</label>
+      <md-datepicker ng-model="dateFilter.startDate" md-placeholder="Enter date"  md-max-date="StartDateMax" ng-change="getStartDate(dateFilter.startDate)"></md-datepicker>
+    </div>
+    <div>
+      <label style="width:37px;">To</label>
+      <md-datepicker ng-model="dateFilter.endDate" md-placeholder="Enter date" md-min-date="EndDateMin" ng-disabled="!dateFilter.startDate" ng-change="getEndDate(dateFilter.endDate)"></md-datepicker>
+    </div>
+  </div>
+</div> -->
+<!-- OPEN/CLOSE Agencies Filter-->
+<div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openAgenciesFilter" ng-click="openOSAgenciesFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openAgenciesFilter" ng-click="closeOSAgenciesFilter()"></i>
+      &nbsp; Agencies
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openAgenciesFilter}">
+    <md-autocomplete flex
+        md-min-length = 3
+        md-no-cache = "true"
+        md-selected-item="selectedAgencyItem"
+        md-search-text="searchAgencyText.searchText"
+        md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText.searchText)"
+        md-item-text="agencyItem.name"
+        md-floating-label="Agencies"
+        md-selected-item-change="addAgency(selectedAgencyItem)"
+        md-clear-button="true">
+      <md-item-template>
+        <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+        <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+      </md-item-template>
+      <md-not-found>
+        No matches found.
+      </md-not-found>
+    </md-autocomplete>
+    <div ng-repeat="agency in filter.AgencyFilter" ng-click="clearAgency($index, agency)" style="font-size:12px;">{{agency.name}} <i class="fa fa-times"></i></div>
+  </div>
+</div>
+<!-- OPEN/CLOSE NAICS Filter-->
+<div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openNAICSFilter" ng-click="openOSNAICSFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openNAICSFilter" ng-click="closeOSNAICSFilter()"></i>
+      &nbsp; NAICS
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openNAICSFilter}">
+    <md-autocomplete
+        flex
+        md-min-length = 3
+        md-selected-item="selectedItem"
+        md-search-text="searchNaicsText.searchText"
+        md-items="Item in searchNAICS(searchNaicsText.searchText)"
+        md-item-text="Item.name"
+        md-selected-item-change="addOpportunityNAICS(Item)"
+        md-floating-label="NAICS Codes (add multiple)"
+        md-clear-button="true">
+      <md-item-template>
+        <span md-highlight-text="searchNaicsText">{{Item.code}}</span>
+      </md-item-template>
+      <md-not-found>
+        No matches found.
+      </md-not-found>
+      {{Item.name}}
+    </md-autocomplete>
+  </div>
+</div>
+<!-- OPEN/CLOSE Set Aside Filter-->
+<div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <!-- <span class="customTooltiptext">tooltip</span> -->
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openSetAsideFilter" ng-click="openOSSetAsideFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openSetAsideFilter" ng-click="closeOSSetAsideFilter()"></i>
+      &nbsp; Set Aside Type
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openSetAsideFilter}">
+    <select ng-model="selectedSAT.setAsideType" ng-options="setAside as setAside.name for setAside in setAsideList" ng-change="addSetAsideFilter(selectedSAT.setAsideType)">
+    <option value="">Select</option>
+  </select>
+  </div>
+</div>
+<!-- OPEN/CLOSE Ceiling Filter-->
+<!-- NOTE: Keep below - to be brought back later -->
+<!-- <div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openCeilingFilter" ng-click="openOSCeilingFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openCeilingFilter" ng-click="closeOSCeilingFilter()"></i>
+      &nbsp; Ceiling Amount
+    </h4>
+  </div>
+  <div class="panel-collapse gp-collapse gp-filterPanel ceilingFilter" ng-class="{'gp-in' : openCeilingFilter}">
+    <md-input-container class="md-block" ng-class="{'inputClearBtn' : filter.ceiling}">
+      <label>Ceiling</label>
+      <input ng-model="filter.ceiling" placeholder="$" ng-keypress="addCeiling($event, filter.ceiling)">
+      <a class="clear" ng-click="clearCeiling(filter.ceiling)">
+          <i class="material-icons">clear</i>
+      </a>
+    </md-input-container>
+  </div>
+</div> -->
+<!-- OPEN/CLOSE Contracts Filter-->
+<div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <!-- <span class="customTooltiptext">tooltip</span> -->
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openOpportunityFilter" ng-click="openOSOpportunityFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openOpportunityFilter" ng-click="closeOSOpportunityFilter()"></i>
+      &nbsp; Opportunity Type
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openOpportunityFilter}">
+    <select ng-model="selectedOT.opportunityType" ng-options="opportunity as opportunity.name for opportunity in opportunityTypes" ng-change="addContractTypeFilter(selectedOT.opportunityType)">
+      <option value="">Select</option>
+    </select>
+
+  </div>
+</div>
+<!-- OPEN/CLOSE Opportunity Relevance Filter-->
+<!-- NOTE: Keep below - to be brought back later -->
+<!-- <div class="panel panel-primary ">
+  <div class="panel-heading customTooltip">
+    <h4 class="panel-title gp-FilterTitle">
+      <i class="fa fa-plus-circle" ng-hide="openOpportunityRelevanceFilter" ng-click="openOSOpportunityRelevanceFilter()"></i>
+      <i class="fa fa-minus-circle" ng-show="openOpportunityRelevanceFilter" ng-click="closeOSOpportunityRelevanceFilter()"></i>
+      &nbsp; Opportunity Relevance
+    </h4>
+  </div>
+  <div id="" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openOpportunityRelevanceFilter}">
+    <select ng-model="opportunityRelevance" ng-options="opportunty as opportunty.name for opportunty in opportunityRelevanceList" ng-change="selectOpportunityRelevance(opportunityRelevance)">
+      <option value="">Select</option>
+    </select>
+  </div>
+</div> -->

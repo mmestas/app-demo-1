@@ -1,0 +1,54 @@
+<div class="gp-nav" company-dash-header data-ng-if="!userInfo.isConsultant"></div>
+<div class="gp-nav" consultant-dash-header data-ng-if="userInfo.isConsultant"></div>
+<div id="opportunitySearch" class="gp-mainBodyWidth gp-detailWrapper" ng-init="opportunityInit()">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp gp-p20 osInnerPageWrapper">
+      <!-- Comment for Github-->
+      <div class="gp-usabilitySpace searchResultsTab" ng-show="selectedTabIndex == 0">
+        <div class="osHeader">
+          <h3>Opportunity Search</h3>
+        </div>
+        <div class="osKeySearch">
+          <div class="input-group">
+            <input type="text" class="form-control" name="keywordInput"  ng-model="keywordInput" ng-keypress="addKeyword($event, keywordInput);" placeholder="Enter keywords that describe the opportunity you seek...">
+            <span class="input-group-addon btn btn-primary active btn-sm" ng-click="searchKeywords(keywordInput); keywordInput = '';" ng-disabled="!keywordInput"><i class="fa fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gp-usabilitySpace" ng-show="selectedTabIndex == 1">
+        <h3 ng-show="selectedTabIndex == 1">Your Favorites</h3>
+      </div>
+
+      <div class="osSources">Data Sources: FedBizOpps & Grants.gov</div>
+
+      <md-tabs id="" md-dynamic-height md-border-bottom class="gp-thickInkBar gp-transparentTabs" md-selected="selectedTabIndex">
+        <md-tab class="step">
+          <md-tab-label>
+              Search Results ({{opportunityResults.totalResults}})
+          </md-tab-label>
+          <md-tab-body>
+            <div class="row gp-row gp-panelSection">
+              <div class="col col-md-3 gp-expertSearchFilters">
+                <div ng-include="'views/opportunitySearch/osFilters.html'" class="osFilters"></div>
+              </div>
+              <div class="col col-md-9 gp-expertSearchResults">
+                <div ng-include="'views/opportunitySearch/osResults.html'"></div>
+              </div>
+            </div>
+          </md-tab-body>
+        </md-tab>
+        <md-tab class="step" ng-class="{'current': true}" md-on-select="favoriteOpportunitiesTab()">
+          <md-tab-label>
+            Favorites ({{favoriteOpportunities.length}})
+          </md-tab-label>
+          <md-tab-body>
+            <div ng-include="'views/opportunitySearch/osFavorites.html'"></div>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="gp-Step">
+  <!-- ///////////////////////////////// SELECT license //////////////////////////////////// -->
+  <div class="form-group gp-info">
+    <!-- <select class="form-control gp-selectLicenses" ng-class="{'gp-errOutline' : licenseNeeded && !amountDue}"  ng-options="license as license.name for license in licenses | filter: license.active = true" ng-model="selectedPlan.item" ng-change="displaylicenseAmount(selectedPlan.item)" required> -->
+    <select class="form-control gp-selectLicenses" ng-class="{'gp-errOutline' : licenseNeeded && !amountDue}" ng-options="license as license.name + ':     ' + license.ProjectLimit + '  users, ' + license.Fee * 100 + '% $' + license.UnitPrice + ' per month' for license in licenses " ng-model="selectedPlan.item" ng-change="displaylicenseAmount(selectedPlan.item)" required>
+      <option value="" style="display:none;">*Choose Your Plan</option>
+    </select>
+    <i class="glyphicon glyphicon-info-sign" ng-click="showLicenseInfo($event)"></i>
+  </div>
+  <div class="gp-price" ng-if="amountDue">Total Amount Due: {{amountDue | currency:USD}}</div>
+  <!-- ///////////////////////////////// ECOMMERCE //////////////////////////////////// -->
+  <div class="gp-ecommerceWrapper" ng-show="selectedPlan.item && (selectedPlan.item.UnitPrice > 0)">
+    <form id="js-ecommercePayments" name="ecommercePayments"></form>
+  </div>
+  <!-- ///////////////////////////////// ADDRESS //////////////////////////////////// -->
+  <div class="gp-price" ng-if="amountDue">Total Amount Due: {{amountDue | currency:USD}}</div>
+  <div class="gp-paymentAgreement abPayDetailECheckOnline" style="display:none;">  {{PaymentAcknowledgementContent}} </div>
+  <div class="gp-SubmitError col col-md-12">
+    <div class="gp-errorMsg" ng-class="{'gp-error' : licenseNeeded}" ng-if="licenseNeeded">Please Choose a Plan</div>
+    <div class="row errorMsg gp-error gp-errorMsg" ng-show="ccError"><span class="fieldError">{{errorMsg}}</a></div>
+  </div>
+  <!-- </div> -->
+  <div class="row gp-btnWrapper">
+    <div class="col col-md-6 gp-backBtn">
+      <button class="btn btn-default btn-outline" ng-click="backToPlans()">Back</button>
+    </div>
+    <div class="col col-md-6 gp-nextBtn">
+      <button class="btn btn-primary" type="submit" ng-click="submitPayment(selectedPlan)">Submit</button>
+    </div>
+  </div>
+</div>

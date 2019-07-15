@@ -1,0 +1,80 @@
+<div id="consultantEditRateAvailabilityFields" ng-show="showConsultantRateAvailabilityEditFields">
+  <div class="gp-consultantEditSectionWithBtn"><h4>Edit Rate & Availability (5%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-click="saveRateAvailability(consultantInfoEditField, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-click="saveRateAvailability(consultantInfoEditField, false)">Save & Close</button>
+      &nbsp;
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditRateAvailability()"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div>
+        <label for="lastname">Available as a Freelance Consultant (1099)</label>
+        <md-checkbox ng-model="consultantInfoEditField.availableAsFreelance" class="md-gpSolidBlue" ng-change="notAvailableForFreelance(consultantInfoEditField.availableAsFreelance)" ng-disabled="!consultantInfoEditField.availableAsFullTime"></md-checkbox>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <md-input-container class="md-gpBlue-theme" ng-show="consultantInfoEditField.availableAsFreelance">
+        <label>How many hours per week are you available to work?</label>
+        <md-select class="md-block md-gpBlue-theme" ng-model="consultantInfoEditField.availability" ng-model-options="{trackBy: '$value.name'}">
+          <md-option ng-repeat="availability in availabilities" ng-value="availability">
+            {{availability.name}}
+          </md-option>
+        </md-select>
+        <div class="md-errors-spacer"></div>
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-6">
+      <md-input-container class="md-gpBlue-theme" ng-show="consultantInfoEditField.availableAsFreelance">
+        <label>My Hourly Rate</label>
+        <input type="text" numbers-only class="form-control" name="hourlyRate" ng-model="consultantInfoEditField.freelanceHourlyRate" required>
+      </md-input-container>
+    </div>
+    <div class="col col-md-6">
+      <md-input-container class="md-gpBlue-theme"  ng-show="consultantInfoEditField.availableAsFreelance">
+        <label>Minimum Project Size</label>
+        <input type="text" numbers-only class="form-control" name="minProjectSize" ng-model="consultantInfoEditField.amountMinimumProjectSize">
+      </md-input-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div>
+        <label for="lastname">Available as a Full-Time Employee (W2)</label>
+        <md-checkbox ng-model="consultantInfoEditField.availableAsFullTime" class="md-gpSolidBlue" ng-change="notAvailableFullTime(consultantInfoEditField.availableAsFullTime)"></md-checkbox>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <md-input-container class="md-gpBlue-theme" ng-show="consultantInfoEditField.availableAsFullTime" ng-show="consultantInfoEditField.availableAsFullTime">
+        <label>Annual Salary Expectation</label>
+        <input type="text" numbers-only class="form-control" name="salaryExpectations" ng-model="consultantInfoEditField.fullTimeAnnualSalary">
+      </md-input-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <div>
+        <label for="lastname">Available as an Advisory Board Candidate</label>
+        <md-checkbox ng-model="consultantInfoEditField.adviser" aria-label="adviser" class="md-gpSolidBlue"></md-checkbox>
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <md-input-container class="md-gpBlue-theme">
+        <label>Willingness to Travel</label>
+        <md-select class="md-block md-gpBlue-theme" ng-model="consultantInfoEditField.willingToTravel" ng-model-options="{trackBy: '$value.name'}">
+          <md-option ng-repeat="option in travelOptions" ng-value="option">
+            {{option.name}}
+          </md-option>
+        </md-select>
+        <div class="md-errors-spacer"></div>
+      </md-input-container>
+    </div>
+  </div>
+</div>

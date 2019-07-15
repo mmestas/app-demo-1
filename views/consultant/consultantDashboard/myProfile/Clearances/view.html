@@ -1,0 +1,17 @@
+<div id="consultantClearances" ng-hide="showConsultantEditClearancesFields">
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">Clearances (5%)
+        <span class="customTooltip-panels">Indicate the highest level of active security clearance that you hold in this section.</span>
+      </span>
+    </h4>
+    <i class="fa fa-pencil-alt" ng-click="editClearanceLevel(consultantInfo)"></i>
+  </div>
+  <div class="profileSectionInner">
+    <h3 class="h3"><span class="small">Level of Active Clearance</span></h3>
+    <ul class="gp-consultantCategoriesList">
+      <li ng-show="!consultantInfo.securityClearance.name">No Clearance Selected</li>
+      <li ng-show="consultantInfo.securityClearance.name">{{consultantInfo.securityClearance.name}}</li>
+    </ul>
+  </div>
+</div>

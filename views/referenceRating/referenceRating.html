@@ -1,0 +1,78 @@
+<!-- HEADER -->
+<div class="login-container-header">
+  <div class="container contrast-blue">
+    <div class="row">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top ">
+          <a class=" navbar-brand " href="/">
+            app1url
+          </a>
+          <ul class="nav navbar-nav pull-right">
+            <li>
+              &nbsp;
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  </div>
+</div>
+<div style="max-width:800px; margin:auto; margin-top: 110px;" class="md-whiteframe-3dp" ng-init="invitedReferenceInit()">
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>Please tell us about your experience with {{consultantInfo.firstname}} {{consultantInfo.lastname}}</h2>
+
+    </div>
+  </md-toolbar>
+  <div style="padding:15px;">
+    <div>
+      <h5>Please rate {{consultantInfo.firstname}} on a scale of 1-5, with 1 being lowest and 5 being highest</h5>
+    </div>
+    <div>
+      <ul class="list-group gp-rateExpertInputs">
+        <!-- Stars -->
+        <li class="list-group-item">
+          <strong class="gp-ratingLabel">Quality</strong>
+          <input id="quality" ng-model="referenceRating.quality"  type="number" class="referenceReviewRating" data-size="sm">
+        </li>
+        <li class="list-group-item">
+          <strong class="gp-ratingLabel">Timeliness</strong>
+          <input id="timeliness" ng-model="referenceRating.timeliness"  type="number" class="referenceReviewRating" data-size="sm">
+        </li>
+        <li class="list-group-item">
+          <strong class="gp-ratingLabel">Responsiveness</strong>
+          <input id="responsiveness" ng-model="referenceRating.responsiveness"  type="number" class="referenceReviewRating" data-size="sm">
+        </li>
+        <li class="list-group-item">
+          <strong class="gp-ratingLabel">Cost</strong>
+          <input id="cost" ng-model="referenceRating.cost"  type="number" class="referenceReviewRating" data-size="sm">
+        </li>
+        <!-- Checkboxes/Radios -->
+        <li>
+          <label>I would use {{consultantInfo.firstname}} again for similar projects.</label>
+          <md-radio-group ng-model="referenceRating.useForSimilarProjects">
+            <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Yes</md-radio-button>
+            <md-radio-button ng-value="false" class="gpBlue" aria-label="No">No</md-radio-button>
+          </md-radio-group>
+        </li>
+        <li>
+          <label> I would recommend {{consultantInfo.firstname}} to others.</label>
+          <md-radio-group ng-model="referenceRating.wouldRecomendToOthers">
+            <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Yes</md-radio-button>
+            <md-radio-button ng-value="false" class="gpBlue" aria-label="No">No</md-radio-button>
+          </md-radio-group>
+        </li>
+        <!-- Comments -->
+        <li >
+          <textarea ng-model="referenceRating.comments" aria-label="comments"  placeholder="Additional Comments" rows="4"></textarea>
+        </li>
+      </ul>
+    </div>
+
+    <div layout="row">
+      <button class="btn btn-sm btn-primary" ng-click="submitReferenceRating(referenceRating)">
+       Submit
+      </button>
+    </div>
+  </div>
+</div>

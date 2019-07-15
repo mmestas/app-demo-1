@@ -1,0 +1,40 @@
+<div class="gp-nav" consultant-dash-header></div>
+<div class="gp-dashWrapper gp-mainBodyWidth" ng-init="personalSettings()">
+
+  <div class="gp-dashInner" id="editUsernamePassword">
+    <div  style=" margin:auto;">
+      <div><h1>Change Password</h1></div>
+      <md-content class="myProfileForm md-whiteframe-2dp" >
+        <form name="userProfile">
+
+          <div class="row">
+            <div class="col col-md-12">
+              <h5>To change/update your password, type in your new password in both fields to confirm and click save to update.</h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-md-6">
+              <div class="form-group">
+                <input type="password" name="password" class="form-control" id="gp-password" placeholder="*New Password" ng-model="password" required>
+              </div>
+            </div>
+            <div class="col col-md-6">
+              <div class="form-group">
+                <input type="password" name="confirmPass" class="form-control" id="gp-confirmPass" placeholder="*Confirm New Password" ng-model="confirmPass" compare-to="password">
+                <span ng-show="userProfile.confirmPass.$error.compareTo && userProfile.confirmPass.$touched" class="gp-error">Both password fields must match</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gp-ProfileButtons">
+            <button class="btn btn-warning" ui-sref="consultant.dashboard">Cancel</button>
+            <button class="btn btn-primary" ng-click="updatePassword(password, confirmPass)" ng-disabled="userProfile.$invalid">Save & Update</button>
+          </div>
+        </form>
+      </md-content>
+    </div>
+  </div>
+
+
+</div>

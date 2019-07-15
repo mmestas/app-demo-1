@@ -1,0 +1,17 @@
+<div class="gp-nav" consultant-dash-header></div>
+<div class="gp-dashWrapper gp-companyProfileForm gp-mainBodyWidth" ng-init="myLegalDocsInit()">
+  <div class="gp-dashInner">
+    <div class="gp-pageTitle"><h2>Legal Documents</h2></div>
+      <md-tabs md-dynamic-height md-border-bottom class="md-gpBlue-theme">
+        <md-tab label="Non-Disclosure Agreements">
+          <div class="md-padding" ng-include="'/views/consultant/legalDocs/nonDisclosureAgreements.html'"></div>
+        </md-tab>
+        <md-tab label="OCI Agreements">
+          <div class="md-padding" ng-include="'/views/consultant/legalDocs/conflictsOfInterest.html'"></div>
+        </md-tab>
+        <md-tab label="Invoices">
+          <div class="md-padding" ng-include="'/views/consultant/legalDocs/invoices.html'"></div>
+        </md-tab>
+      </md-tabs>
+  </div>
+</div>

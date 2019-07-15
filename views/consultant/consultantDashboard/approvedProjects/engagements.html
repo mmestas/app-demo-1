@@ -1,0 +1,21 @@
+<div id="approvedProjects" class="gp-systemNotificationsWrapper" ng-controller="approvedProjectsCtrl">
+  <div class="md-whiteframe-2dp">
+    <div>
+      <div class="panel-heading">
+        <div><span ng-hide="consultantCompletedEngagements">Active</span><span ng-show="consultantCompletedEngagements">Completed</span> Engagements</div>
+        <div>
+          <!-- NOTE: Hide these for now - put back later -->
+          <!-- <button class="btn btn-sm btn-warning" ng-click="showCompletedEngagements()" ng-hide="consultantCompletedEngagements">Show Completed</button> -->
+          <!-- <button class="btn btn-sm btn-warning" ng-click="showActiveEngagements()" ng-show="consultantCompletedEngagements">Show Active</button> -->
+          <i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i>
+          <!-- <span class="gp-circleReturnBtn miniBtn gp-closePanel"><i class="fa fa-reply" ui-sref="consultant.dashboard"></i></span> -->
+        </div>
+      </div>
+      <div class="panel-body">
+        <div ng-include="'/views/consultant/consultantDashboard/approvedProjects/approvedProjects.html'" ng-hide="consultantCompletedEngagements"></div>
+        <div ng-include="'/views/consultant/consultantDashboard/approvedProjects/completedEngagements.html'" ng-show="consultantCompletedEngagements"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

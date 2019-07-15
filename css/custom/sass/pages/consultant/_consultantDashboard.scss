@@ -1,0 +1,341 @@
+#gp-consultantDashboard .panel-default>.panel-heading {
+    color: #2E7492;
+    background-color: #fff;
+    border-color: #ecf0f1;
+}
+
+.gp-conDashSideBox {}
+  .gp-displayResponsive {display:none;}
+  @media screen and (max-width: 1024px) {
+    .gp-conDashSideBox {display:none;}
+    .gp-displayResponsive {display:block;}
+    .gp-sideMenu .list-group-item.gp-displayResponsive.gp-listHeader {height:45px;background: #2f7392;font-size: 18px;}
+  }
+.gp-conDashSideBox .row {margin:0;margin-bottom:15px;}
+.gp-conDashSideBox .gp-conDashProfPic {height:200px;border-bottom: 1px solid #ddd;border: 0;text-align: center;padding: 10px;/* background: #2f7492; */}
+.gp-conDashSideBox .gp-conDashProfPic img {height: calc(100% - 24px);border-radius: 100px;}
+.gp-conDashSideBox .gp-consDashSideBoxInfo {}
+.gp-conDashSideBox .gp-consDashSideBoxInfo .gp-consDashLeftInfo {
+    padding: 12px 0;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.gp-conDashSideBox .md-whiteframe-2dp, .gp-conDashSideBox .md-whiteframe-3dp {
+    background: #7a7a7a;
+    color: #fff;
+}
+.gp-conDashProfPicName {font-weight: bold;font-size: 20px;color: #2f7492;}
+.gp-conDashSideBox .md-whiteframe-2dp .gp-conDashProfPicName {color:#fff;}
+
+form[name="consultantContactInfoForm"]  {padding:10px 0;}
+.gp-consultantEditPic {display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+align-content: center;
+padding: 0;
+min-width: 150px;
+background: transparent;}
+.gp-sideSectionTitle {height: 35px;padding: 4px;font-size:20px;background: #555;color: #fff;text-align: center;}
+.gp-sideSectionTile-sm {height:75px; padding:3px; font-size: 14px; text-align: center;border:1px solid #555;}
+.gp-sideSectionTile-lg {height:200px;border: 1px solid #ddd;text-align: center;padding: 10px;}
+
+.alertDanger {color: rgb(249, 0, 12);}
+.panel-default>.panel-heading .badge.badge-outline.alertNewNotification {color: #fd8724;background: transparent;border-color: #fd8724;}
+.gp-msgIcon:hover {
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.5);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.5);
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.5);
+    transition: all 200ms ease-in;
+    transform: scale(1.5);
+    margin-right:10px;
+}
+.gp-msgImg {height: calc(100% - 4px);height: 100%;padding: 0;float:left;margin-right: 10px;border-radius: 50%;}
+.collapsible-body div.gp-msgText {margin-top:30px; margin-bottom:25px;}
+.gp-msgText a {cursor: pointer; font-weight: bold;text-decoration: underline;}
+.collapsible-body div.gp-collapsable-footer {padding: 7px;background: #ddd;display: flex;justify-content: space-between;}
+.collapsible-body div.gp-collapsable-footer i {font-size: 18px;}
+.gp-hideShowMsgs {text-align: right;/*width: 95%;*/margin-left: auto;margin-right: auto;padding-left: 15px;padding-right: 15px;}
+.gp-collapseSubTitle {margin-top: -34px;font-size: 13px;margin-left: 45px;}
+.gp-msgSubTitle {background: transparent;color: #6a6a6a;margin-top: 8px;margin-left: -10px;margin-right: -10px;padding: 3px 10px;font-size: 13px;
+  p {font-size: 13px;}
+}
+.gp-msgTitleWrapper {padding: 6px;}
+
+/****************************** MY PROFILE ******************************/
+#gp-consultantMyProfile  {overflow: hidden;}
+
+  .gp-consultantEditSection {padding: 7px; border: 1px solid #eee;}
+#gp-consultantMyProfile .gp-consultantEditSection:nth-child(even) {background: #ecf0f1;}
+    .gp-consultantEditSectionWithBtn {display: flex;justify-content: space-between;background: $govBlue;margin: -8px -8px 3px;padding: 0px 15px;color:#fff;align-items: center;}
+    .gp-consultantEditSectionWithBtn h4 {color:#fff;}
+    .gp-consultantEditSectionWithBtn i {font-size: 20px;vertical-align: middle;transition:0.3s;}
+    .gp-consultantEditSectionWithBtn .svg-inline--fa {font-size:20px;}
+    .gp-consultantEditSectionWithBtn i:hover {font-size:23px;}
+    .gp-consultantSkillsList, .gp-consultantCategoriesList {width:100%;overflow: hidden;display: flex;flex-wrap: wrap;}
+    .gp-consultantSkillsList li,.gp-consultantCategoriesList li {float:left;margin-right: 15px;margin-top: 5px;border: 1px solid #c3c3c3;padding: 5px 15px;border-radius: 15px;display: flex;align-items: center;}
+    .gp-consultantSkillsList li:first-child,.gp-consultantCategoriesList li:first-child {margin-top:5px;}
+    .gp-consultantAgencyLogo {height:40px;}
+    .gp-consultantEditSection .h3 {padding:0;}
+    .gp-consultantEditSection .h3 .small {font-weight: bold; color:#2e7492;}
+    .gp-consultantEditSection .h3 .gp-rateAvailabilityResponse {font-size: 17px; color:#555;}
+#consultantContactInfo h3, #consultantContactInfo h4, #consultantContactInfo h5, #consultantContactInfo h2 {/*NOT sure why this was here - overriding somewhere else?*//* margin:0; */}
+#consultantContactInfo .gp-expertName {font-weight: 700;}
+#consultantContactInfo .gp-expertAddress i.fa {width:20px;}
+.profileSectionInner {padding: 25px 10px;}
+  /************* EDIT MY PROFILE  CONTACT INFO************/
+  .gp-readMoreLink {margin-top:15px; font-weight:bold; margin-left:20px; }
+  .gp-readMoreLink a {font-weight: 600;cursor: pointer;}
+  #consultantProfilePic {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 2px solid #2e7292;
+      top: 0;
+    }
+.gp-consultantPic  {margin-bottom: 8px;width: 100%;height: 200px;max-width: 200px;max-height: 200px;position: relative;cursor: pointer;}
+.gp-consultantPic img {width:100%;max-height:100%;}
+.gp-consultantEditPic .gp-consultantPic img {max-height: 200px;}
+  #consultantContactInfoFields  md-input-container {margin-bottom:0;width: 100%;}
+/*   #consultantContactInfo .gp-expertAddress {font-size: 17px;} */
+
+.gp-profileReference {}
+.gp-profileReference h4 {margin-bottom: 5px;}
+.gp-profileReference .fa-check {color: $govGreen;}
+.gp-profileReference .fa-times {color: #F44336;}
+  /************* EDIT MY PROFILE SKILLS ************/
+  #consultantSkillsFields md-input-container, #consultantEditAgencies md-input-container {margin:0;width: 100%;}
+  #consultantSkillsFields md-input-container.last-item {margin-bottom:15px;width: 100%;}
+  #consultantSkillsFields md-input-container input, #consultantEditAgencies md-input-container input {width: calc(100% - 30px);background-color: transparent;}
+  #consultantSkillsFields md-input-container i {font-size:20px;color:#2e7292;}
+  #consultantSkillsFields md-input-container .svg-inline--fa {font-size:20px;}
+  #consultantcategorySelects {margin-top: 30px;margin-bottom: 15px;}
+  .gp-resumeUploadBtn {
+    background: $govBlue;
+    padding: 9px;
+    color: #fff;
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+#consultantEditRateAvailabilityFields md-input-container {margin-bottom:0;width: calc(100% - 50px);}
+/************* EDIT Clearance Level ************/
+#consultantEditClearances md-input-container {margin-bottom:0;width:100%; max-width:300px;}
+/************* EDIT References and Certifications ************/
+#consultantEditReferencesAndCertifications md-input-container {margin-bottom:0;width:100%;}
+.gp-reviewPic {width:50px; height:50px; border-radius:25px;}
+.gp-consultantListWrapper {margin-top:15px;}
+.gp-consultantList {margin-bottom:5px; font-size: 17px; color:#555;}
+.gp-consultantList button.btn.btn-sm {padding: 2px 6px;}
+/************* EDIT Agencies ************/
+#consultantEditAgencies md-input-container .md-errors-spacer {display: none;}
+#consultantEditAgencies md-autocomplete[md-floating-label] .md-show-clear-button button {top:21px;}
+/************** QUOTE INVITATION *************/
+.gp-systemNotificationsWrapper {padding:10px;}
+.gp-systemNotificationsWrapper .collapsible.popout > li {margin-bottom:5px;}
+.gp-systemNotificationsWrapper md-tab-content {box-shadow: none; padding:0;}
+#gp-customConsultantDash .gp-systemNotificationsWrapper {padding:0;}
+
+
+.gp-circleReturnBtn {border:1px solid;border-radius: 25px;height: 40px;width: 40px;padding:5px;margin: 5px;text-align: center;display: inline-block;color: #f77a24;background: #f77a24;}
+.gp-circleReturnBtn.miniBtn {height: 26px;
+    width: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;}
+.gp-circleReturnBtn i {font-size: 20px;color: #fff;}
+.gp-circleReturnBtn.miniBtn i {font-size: 14px;}
+.gp-circleReturnBtn .svg-inline--fa {font-size:20px;}
+.gp-backToNotifications span {color: #2f7492;}
+.gp-backToNotifications {}
+  .gp-qiAgencymgWrapper{text-align: center;}
+  .gp-qiAgencymgWrapper img {height:75px; width:75px;}
+.blur {filter: blur(6px);}
+  #NDAOverlay {
+      position: fixed;
+      display: none;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 2;
+  }
+  #NDALink {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 42px;
+      color: white;
+      transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      cursor: pointer;
+      text-align: center;
+  }
+#NDALink:hover {color: #b8e8ff;}
+
+
+.gp-ndaDialogPadding {padding: 10px 15px;}
+.gp-ndaOciChecboxes {}
+.gp-ndaOciChecboxes .gp-ndaOciCheckbox {display: flex; align-items:flex-start;}
+.gp-ndaOciChecboxes .gp-ndaOciCheckbox label {color:#636363;}
+.gp-ndaOciChecboxes .gp-ndaOciCheckbox label a {font-weight:600}
+.gp-ndaOciChecboxes .gp-ndaOciCheckbox md-checkbox[disabled] label, .gp-ndaOciChecboxes .gp-ndaOciCheckbox md-checkbox[disabled] label a {color:$govMedLtGrey;}
+.gp-ndaOciChecboxes .gp-ndaOciCheckbox md-checkbox .md-container {top: 0; -webkit-transform: translateY(0); transform: translateY(0);}
+/************************* SEND MESSAGE ************************/
+.gp-interestedOpportunities .collapsible-header {height:47px;padding: 12px 8px;line-height: 24px;}
+
+
+/************************* APPROVED Projects *******************/
+#approvedProjects {}
+#approvedProjects .collapsible-header {display: flex; align-items: center;}
+#approvedProjects .collapsible-header h4, .gp-systemNotificationsWrapper .collapsible-header h4 {color: #2e7492;margin:0;margin-bottom:5px;margin-top: 3px;}
+#approvedProjects .collapsible-header h5 {color: #2e7492;margin:0;}
+#approvedProjects .collapsible-body {padding:0;}
+#approvedProjects .collapsible-body .gp-taSection img {max-width: 100%;/* border-radius: 50px; */max-height: 150px;}
+
+#taskApproveWorkDescription {}
+#taskApproveWorkDescription > div > div {padding:0;border: 1px solid #eee;padding: 0 8px 8px;margin: 7px -5px;background: rgba(238, 238, 238, 0.2509803922);}
+#taskApproveWorkDescription   .row {display: flex;padding:0;}
+#taskApproveWorkDescription   h5 {background: #2f7492;color: #fff; padding: 5px;}
+#taskApproveWorkDescription   input {border: 1px solid #2f739252;}
+#taskApproveWorkDescription  .gp-apWD {flex-grow:1; width:333px; padding:2px;}
+#taskApproveWorkDescription  .gp-apHQ {width:155px; padding:2px;}
+#taskApproveWorkDescription  .gp-apHC {width:155px; padding:2px;}
+#taskApproveWorkDescription  .gp-apAc {padding:2px;width: 115px;}
+#taskApproveWorkDescription  .gp-apAc button {width:100%;}
+#taskApproveWorkDescription  .gp-apHC input {width:75px;}
+
+#taskApproveWorkDescription  .gp-ieDes {flex-grow:1; padding:2px;}
+#taskApproveWorkDescription  .gp-ieDes textarea {width:100%; height:45px;}
+#taskApproveWorkDescription  .gp-ieAmt {width: 115px;padding:2px;}
+#taskApproveWorkDescription  .gp-ieAmt input {width: 90px;display:inline-block;margin-right:5px;}
+#taskApproveWorkDescription  .gp-ieAmt .fa-times {color:#F44336;}
+#taskApproveWorkDescription  .gp-ieIndex {width:35px;padding:2px;}
+#taskApproveWorkDescription  .gp-ieIndex span {font-size: 17px;}
+#taskApproveWorkDescription .gp-ieDes h5, #taskApproveWorkDescription .gp-ieAmt h5, #taskApproveWorkDescription .gp-ieIndex h5 {background: #c0ddea;color: #114b65;padding: 5px;}
+#approvedProjects .gp-taSection {margin: auto;padding: 5px 15px 15px;border-bottom: 2px solid #ebebeb;}
+#approvedProjects .gp-taSection-last {border-bottom:0;}
+.gp-apCompanyImg {display:flex; flex-direction:column; justify-content:center; align-items:center;}
+
+
+
+/********************* NEW 2.19.18 *************************/
+#gp-consultantDashInner {}
+.gp-dashInnerWrapper {display: flex; justify-content: space-between; padding:20px;}
+
+.gp-dashboardBoxesWrapper {display:flex;justify-content: space-between;flex-wrap:wrap;padding: 0px 0;}
+.gp-dashboardBoxes {}
+.gp-dashboardBox {display: flex; flex-direction: column; justify-content: center; align-items: center;background: #ebebeb;background: #fff;
+  margin: 5px;padding: 25px;box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  -webkit-transition: 1s;transition: 1s;cursor: pointer;}
+.gp-dashboardBox:hover {background: #2f739240;}
+.gp-dashboardBox:hover i {color:#446e82;color:#6d8794;}
+.gp-dashboardBox:hover .gp-dashBoxTitle, .gp-dashboardBox:hover .gp-dashBoxNumber {color:#6d8794;}
+.gp-dashboardBoxXL {width:100%;}
+  .gp-dashboardBoxLg {width:calc(50% - 15px);}
+  .gp-dashboardBoxMd {width: calc(33% - 10px);}
+  .gp-dashboardBoxSm {width: calc(25% - 10px);}
+
+@media screen and (max-width: 768px) {
+  .gp-dashboardBoxLg {width:100%;}
+  .gp-dashboardBoxMd {width:100%;}
+  .gp-dashboardBoxSm {width:100%;}
+}
+    .gp-dashBoxTitle {color:#2f7492;transition: 1s;}
+.gp-dashBoxNumber {font-size: 20px;font-weight: 700;transition: 1s;color: #2f739254;}
+.gp-dashboardBox {
+  i {font-size: 35px;color:#2f7492;transition: 1s;}
+  &.gp-text-danger {color: $govDangerRed; background-color: lighten($govDangerRed, 50%);
+    i, .gp-dashBoxTitle {color: $govDangerRed;}
+    .gp-dashBoxNumber {color: $govDangerRed; opacity: 0.3;}
+  }
+//
+}
+.gp-dashboardBox .svg-inline--fa {font-size: 30px;color:#2f7492;transition: 1s;}
+
+.gp-width9 {width:75%; margin:5px;}
+.gp-width6 {width:50%; margin:5px;}
+.gp-width3 {width:25%; margin:5px;}
+
+#gp-consultantDashInner .gp-width6 li {font-size:18px;}
+#gp-consultantDashInner .list-group {margin-bottom:0;}
+#gp-consultantDashInner li.list-group-item {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+#gp-consultantDashInner li.list-group-item .svg-inline--fa {font-size:16px;}
+#gp-consultantDashInner .gp-width6 li i {color:#2f7492;}
+
+
+#gp-consultantDashboard .panel-heading {    border-radius: 0;
+    padding: 8px 15px;
+    background: #2f7492;
+    color: #fff;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;}
+.gp-readNotification {min-width: 260px;}
+#gp-consultantDashboard .collapsible-header {
+    display: block;
+    cursor: pointer;
+    height: 60px;
+    line-height: 19px;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #2f7392;
+    font-weight: 500;
+    font-size: 17px;
+}
+/* #gp-consultantDashboard .collapsible-body {border-top: 2px solid #eee;} */
+#consultantProfile {overflow: hidden;}
+
+#gp-consultantDashboard .gp-consultantEditSection .collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  height: 38px;
+  line-height: 17px;
+  padding: 5px 10px;
+  background-color: #2f7392;
+  color: #fff;
+  font-weight: 500;
+  font-size: 19px;
+}
+#gp-consultantDashboard .progress {
+    background-color: #ffffff;
+}
+
+.profileDivider {border-bottom:1px dashed #999; padding:10px 0;}
+.showFullRating {display:flex; justify-content:space-between;}
+.showRatingDetails {display: none; align-items: center; margin-top: 0px; margin-left: 2px; font-size: 12px; color: #2f7392;}
+.showFullRating:hover .showRatingDetails {display:inline-flex;}
+.ratingNumber {font-size:14px; color:$govMedLtGrey;}
+.ratingDetails {display:flex; justify-content:space-between; margin-bottom: 7px;}
+.underlineSelection {text-decoration:underline;}
+
+#invitedConsultantLanding .collapsible {border:0;}
+#invitedConsultantLanding .collapsible .expand, #invitedConsultantLanding .collapsible .collapse  {float:right;}
+#invitedConsultantLanding .collapsible .expand {display:block;}
+#invitedConsultantLanding .collapsible .collapse {display:none;}
+#invitedConsultantLanding .collapsible li.active .expand {display:none;}
+#invitedConsultantLanding .collapsible li.active .collapse {display:block;}
+/* #invitedConsultantLanding .collapsible .collapse {display:none; float:right;}
+
+#invitedConsultantLanding .collapsible.active .collapse {display:block;} */
+/* #invitedConsultantLanding .collapsible li {border-bottom:1px solid #2f7392; } */
+#invitedConsultantLanding .collapsible-header {height: unset;padding: 12px;/*background: transparent;color: #2f7392;*/ transition: 0.3s;}
+#invitedConsultantLanding .collapsible-header:hover {}
+#invitedConsultantLanding  .collapsible-body {padding:0;border: 0;}
+#invitedConsultantForm {}
+#invitedConsultantForm input {}

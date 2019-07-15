@@ -1,0 +1,8 @@
+<div class="gp-nav" company-dash-header></div>
+<div class="gp-dashWrapper gp-companyProfileForm gp-mainBodyWidth" ng-init="companyProfileInit()">
+  <div class="gp-dashInner">
+    <div id="gp-companyProfile" class="md-whiteframe-2dp" ng-include="'/views/company/companyProfile/displayCompanyProfile.html'" ng-hide="viewEditProfile || viewEditUsers"></div>
+    <div id="gp-editCompanyProfile"  ng-include="'/views/company/companyProfile/editCompanyProfile.html'" ng-show="viewEditProfile"></div>
+    <div id="gp-editCompanyUsers"  ng-include="'/views/company/companyProfile/manageAcctUsers/manageAcctUsers.html'" ng-show="viewEditUsers"></div>
+  </div>
+</div>

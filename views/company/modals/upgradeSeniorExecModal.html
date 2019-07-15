@@ -1,0 +1,43 @@
+<md-dialog>
+  <form ng-cloak name="infoModal">
+    <md-toolbar class="md-gpBlue-theme"">
+      <div class="md-toolbar-tools">
+        <h2>Notice</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div layout-gt-sm="row">
+          <!-- Upgrade Msg -->
+          <div class="gp-flex-column" data-ng-if="showUpgradeMsg">
+            <div>
+              Upgrade to &nbsp;<a target="_blank" href="http://helpcenter.app1urlapp.com/getting-started-with-app1url/customer-success-packages/app1url-subscription-plans">Enterprise Edition</a>&nbsp; to access this profile.
+            </div>
+            <div class="gp-text-center gp-mt15">
+              <button class="btn btn-primary" data-ng-click="requestSEUpgrade()">Request Upgrade</button>
+            </div>
+          </div>
+          <!-- Upgrade message Sent -->
+          <div class="gp-flex-column" data-ng-if="showUpgradeMessageSent">
+            <div>A message was sent to sales@app1url.com requesting an upgrade.</div>
+          </div>
+          <!-- Upgrade message failed -->
+          <div class="gp-flex-column" data-ng-if="showUpgradeMessageFailed">
+            <div>Something went wrong and a message was not sent. Please try again later or contact app1url directly.</div>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+       Close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

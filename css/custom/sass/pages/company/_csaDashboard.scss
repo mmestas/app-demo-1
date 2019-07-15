@@ -1,0 +1,15 @@
+#csaDashboard {
+
+    .impersonateInputRow { padding: 18px 15px; max-width:100%; margin:auto;
+      .impersonationBoundingBox {flex-direction:column; border:1px solid $govLtGreyBlue; margin:2px;}
+      button.btn {margin:18px 15px 18px 0;width: 100%;}
+    }
+    md-input-container .md-errors-spacer {
+      min-height: 0;
+      height:0;
+    }
+
+    md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-placeholder label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float) {
+      font-size:12px;
+    }
+}

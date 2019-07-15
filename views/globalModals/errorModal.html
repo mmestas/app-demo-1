@@ -1,0 +1,27 @@
+<md-dialog>
+  <form ng-cloak name="errorModal">
+    <md-toolbar class="md-gpBlue-theme"">
+      <div class="md-toolbar-tools">
+        <h2>Error!</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div layout-gt-sm="row">
+          {{dialogErrorMsg}}
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+       Okay
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,56 @@
+<md-dialog>
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>Account Info</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div class="md-dialog-content submit-invite-nda" ng-show="!isLoading && !formSubmitted">
+        <span>Name: {{account.name}}</span><br/>
+        <span>Company: {{account.company}}</span><br/>
+        <span>Email: {{account.email}}</span><br/>
+        <span>Referral Code: {{account.referralCode}}</span><br/>
+        <span>From: NAME, COMPANY</span>
+        <div class="account-info">
+            <input class="form-control "type="password" ng-model="login.password" placeholder="password" />
+            <input class="form-control" type="password" ng-model="login.confirmPassword" placeholder="Confirm Password"/>
+        </div>
+        <p>
+            In order to access the detailed information you must agree to and abide by the Non-disclosure agreement and the app1url Application <a ng-href="{{TERMS_LINK}}">Terms and conditions</a>
+        </p>
+        <p>
+            By checking the box and entering your name you are agreeing that you have read the NDA above and a free app1url company account. If you do not agree to the terms click "Cancel"
+        </p>
+        <input type="checkbox" ng-model="values.agreeToNDA" ng-value="false"/>
+        <label>Yes, I agree to the terms of the app1url teammate match NDA</label>
+        <br/>
+        <input type="checkbox" ng-model="values.agreeToTerms" ng-value="false"/>
+        <label>Yes, I agree to the terms and conditions of the app1url application</label>
+        <div ng-show="values.agreeToNDA && values.agreeToTerms">
+            <br/>
+            <input type="text" class="form-control" ng-model="values.signature"/>
+            <span>Signature (typing in your name acts as your signature)</span>
+        </div>
+    </div>
+    <div class="md-dialog-content" ng-show="isLoading && !formSubmitted">
+        <center><h5>Sending message..</h5></center>
+    </div>
+    <div class="md-dialog-content" ng-show="!isLoading && formSubmitted">
+        <center><h5>Message sent..</h5></center>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+     Close
+    </md-button>
+    <md-button ng-show="!formSubmitted" class="md-primary" ng-click="submit()">
+     I agree to the NDA
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

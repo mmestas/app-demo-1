@@ -1,0 +1,173 @@
+<form name="addNewPaymentInfoForm" id="addNewPaymentInfo">
+  <div style="overflow:hidden;">
+    <md-radio-group ng-model="paymentInfo.consultantAccountType" name="acctType" required md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.acctType.$invalid">
+      <h4>Consultant Account Type *</h4>
+       <md-radio-button ng-value="1" value="1" class="gpBlue gp-ml10">Individual</md-radio-button>
+       <md-radio-button ng-value="2" value="2" class="gpBlue gp-ml10">Business</md-radio-button>
+    </md-radio-group>
+  </div>
+
+
+  <h4>Add Bank Information</h4>
+  <div class="row">
+    <!-- <div class="col col-md-12"><h4>Add Bank Information</h4></div> -->
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.BRN.$invalid">
+        <label for="BRN">Bank Routing Number</label>
+        <input type="text" class="form-control" name="BRN" ng-model="paymentInfo.bankRoutingNumber" limit-number maxlength="9" required>
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.BAN.$invalid">
+        <label for="BAN">Bank Account Number</label>
+        <input type="text" class="form-control" name="BAN" ng-model="paymentInfo.bankAccountNumber" required>
+      </md-input-container>
+    </div>
+  </div>
+
+  <h4>Account Holder Information</h4>
+
+  <div class="row" ng-if="paymentInfo.consultantAccountType === 2">
+    <div class="col col-md-12">
+       <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.companyName.$invalid">
+        <label for="companyName">Legal Name of the Company</label>
+        <input type="text" class="form-control" name="companyName" ng-model="paymentInfo.businessName" required>
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-4" >
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.AHFN.$invalid">
+        <label for="AHFN">First Name</label>
+        <input type="text" class="form-control" name="AHFN" ng-model="paymentInfo.accountHolderFirstName" required>
+      </md-input-container>
+    </div>
+    <div class="col col-md-4" >
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.AHLN.$invalid">
+        <label for="AHLN">Last Name</label>
+        <input type="text" class="form-control" name="AHLN" ng-model="paymentInfo.accountHolderLastName" required>
+      </md-input-container>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col col-md-6">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.EIN.$invalid">
+        <label for="EIN">
+          <span ng-if="paymentInfo.consultantAccountType === 1">Social Security Number</span>
+          <span ng-if="paymentInfo.consultantAccountType === 2">Employee Identification Number</span>
+        </label>
+        <input type="text" class="form-control" name="EIN" ng-model="paymentInfo.identificationNumber" ssn-formated placeholder="###-##-####" required ng-if="paymentInfo.consultantAccountType === 1">
+        <input type="text" class="form-control" name="EIN" ng-model="paymentInfo.identificationNumber" ein-formated placeholder="##-#######" required ng-if="paymentInfo.consultantAccountType === 2">
+      </md-input-container>
+    </div>
+    <div class="col col-md-6">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.dob.$invalid">
+        <label>Date of Birth</label>
+        <md-datepicker ng-model="paymentInfo.dob" md-current-view="year" name="dob" ng-required="true" md-max-date="dobMaxDate" md-min-date="dobMinDate"></md-datepicker>
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.Address.$invalid">
+        <label for="Address">Address</label>
+        <input type="text" class="form-control" name="Address" ng-model="paymentInfo.address" required>
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.City.$invalid">
+        <label for="City">City</label>
+        <input type="text" class="form-control" name="City" ng-model="paymentInfo.city" required>
+      </md-input-container>
+    </div>
+    <div class="col col-md-2">
+      <md-input-container class="md-gpBlue-theme gp-width-100" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.state.$invalid" ng-class="{'addError': (paymentFormSubmitted && addNewPaymentInfoForm.state.$invalid)}">
+            <label><span>State</span></label>
+            <md-select class="md-block md-gpBlue-theme" name="state" ng-model="paymentInfo.state" ng-model-options="{trackBy: '$value.id'}" required>
+              <md-option ng-repeat="state in statesList" ng-value="state">
+                {{state.name}}
+              </md-option>
+            </md-select>
+            <!-- <div class="md-errors-spacer"></div> -->
+          </md-input-container>
+    </div>
+    <div class="col col-md-2">
+      <md-input-container class="md-block md-gpBlue-theme" md-is-error="paymentFormSubmitted && addNewPaymentInfoForm.zip.$invalid">
+        <label for="zip">Postal Code</label>
+        <input type="text" class="form-control" name="zip" ng-model="paymentInfo.zip" required>
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row" ng-if="paymentInfo.consultantAccountType === 2">
+    <div class="col col-md-12">
+      <!-- <h4 style="padding-bottom:15px;">Additional Owners</h4> -->
+      <div>Additional Owners of the Company with more than 25% ownership (enter first and last names seperated by comma)</div>
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="additionalOwners">Additional Owners</label>
+        <input type="text" class="form-control" name="additionalOwners" ng-model="paymentInfo.additionalOwners">
+      </md-input-container>
+    </div>
+  </div>
+
+  <h4>Photo ID</h4>
+  <div class="row gp-pb20">
+    <div class="col col-md-3">
+     <div class="consultantPhotoID">
+        <label class="upload" for="identificationPhoto">
+          <img ngf-src="identification.imageFilename" >
+        </label>
+          <div class="centeredUploadIcon"><i class="fa fa-camera" ng-if="!identification.imageFilename"></i></div>
+          <div id="identificationPhoto" class="dragNDrop" name="identificationPhoto"
+          ngf-select ngf-drop
+          ng-model="identification.imageFilename"
+          ngf-model-invalid="invalidFiles"
+          ngf-model-options="modelOptionsObj"
+          ngf-multiple="false"
+          ngf-pattern="'.jpg, .png, .jpeg'"
+          ngf-accept="acceptSelect"
+          ng-disabled="disabled"
+          ngf-capture="capture"
+          ngf-drag-over-class="dragOverClassObj"
+          ngf-validate="validateObj"
+          ngf-resize="resizeObj"
+          ngf-resize-if="resizeIfFn($file, $width, $height)"
+          ngf-dimensions="dimensionsFn($file, $width, $height)"
+          ngf-duration="durationFn($file, $duration)"
+          ngf-keep="keepDistinct ? 'distinct' : keep"
+          ngf-fix-orientation="true"
+          ngf-max-files="1"
+          ngf-max-size = "5MB"
+          ngf-ignore-invalid="ignoreInvalid"
+          ngf-run-all-validations="runAllValidations"
+          ngf-allow-dir="allowDir" class="drop-box"
+          ngf-drop-available="dropAvailable" required>
+            &nbsp;
+          </div>
+      </div>
+    </div>
+    <div class="col col-md-9 gp-flex gp-flex-column " style="font-size:14px;">
+      <div class="gp-mb5">*Upload a photo (.jpg or .png) of an indentifying document (passport, driver's license, or ID Card).</div>
+      <ul class="gp-ml15">
+        <li><strong>Passport: </strong><span>Preferred when available.</span></li>
+        <li>
+          <strong>Driver's Liscence or Photo ID: </strong>
+          <span>Upload must include a scan of <strong>BOTH</strong> sides of the ID</span>
+        </li>
+        <li><strong>File: </strong><span>JPEGs or PNGs only (Stripe cannot verify PDFs)</span></li>
+        <li><strong>Size: </strong><span>Must be smaller than 5MB</span></li>
+        <li><strong>Color: </strong><span>Files should be in color, be rotated with image right-side up, and have all information clearly legible</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row gp-pb20">
+    <div class="col col-md-12">
+      <md-checkbox aria-label="Checkbox 1" ng-model="terms" class="md-gpSolidBlue md-raised" style="margin-left:15px; font-size:14px;" required> I have read and agree to the <a href="https://stripe.com/us/ssa" target="_blank"><strong>Terms and Conditions</strong></a> for the payment processor, <a href="https://stripe.com/" target="_blank"><strong>Stripe</strong></a></md-checkbox>
+    </div>
+  </div>
+
+  <div class="gp-error" ng-show="paymentFormSubmitted && addNewPaymentInfoForm.$invalid">Please fill out all fields before continuing</div>
+  <div class="gp-error" ng-show="showResponseError">{{errorMsg}}</div>
+
+  <button class="btn btn-primary" ng-click="appDemo1SetUserNewPaymentInformation(paymentInfo, addNewPaymentInfoForm, identification.imageFilename)" ng-disabled="!terms">Save</button>
+</form>

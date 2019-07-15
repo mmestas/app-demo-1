@@ -1,0 +1,19 @@
+<input id="fileInput" type="file" class="ng-hide" ng-model="file">
+<md-button id="uploadButton" class="md-fab md-mini gp-SolidBlue" aria-label="attach_file"><md-icon class="material-icons">attach_file</md-icon></md-button>
+<md-input-container  md-no-float style="width: calc(100% - 130px);">
+  <input id="textInput" ng-model="fileName" type="text" placeholder="No file chosen" ng-readonly="true">
+</md-input-container>
+<div ng-show="button1">
+  <input id="fileInput1" type="file" class="ng-hide" ng-model="file1">
+  <md-button id="uploadButton1" class="md-fab md-mini gp-SolidBlue" aria-label="attach_file"><md-icon class="material-icons">attach_file</md-icon></md-button>
+  <md-input-container  md-no-float style="width: calc(100% - 130px);">
+    <input id="textInput1" ng-model="fileName1" type="text" placeholder="No file chosen" ng-readonly="true">
+  </md-input-container>
+</div>
+<div ng-show="button2">
+  <input id="fileInput2" type="file" class="ng-hide" ng-model="file2">
+    <md-button id="uploadButton2" class="md-fab md-mini gp-SolidBlue" aria-label="attach_file"><md-icon class="material-icons">attach_file</md-icon></md-button>
+    <md-input-container  md-no-float style="width: calc(100% - 130px);">
+      <input id="textInput2" ng-model="fileName2" type="text" placeholder="No file chosen" ng-readonly="true">
+    </md-input-container>
+</div>

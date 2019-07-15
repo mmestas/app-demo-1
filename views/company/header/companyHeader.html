@@ -1,0 +1,57 @@
+<!-- HEADER -->
+<div class="login-container-header gp-dashboard-header">
+  <div class="container contrast-blue">
+    <div class="row">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top ">
+          <div style="display: flex;">
+            <a class=" navbar-brand " href="/">
+              appDemo1
+            </a>
+            <ul class="nav navbar-nav">
+              <li ng-class="{ active: $state.includes('company')}" ui-sref="company" data-ng-if="activeAccount">DASHBOARD</li>
+              <li ui-sref="legalDocs" data-ng-if="activeAccount">LEGAL DOCS</li>
+              <li data-ng-if="activeAccount">
+                <span data-toggle="dropdown" aria-expanded="false" ui-sref-active="is-active"> APPS <i class="fa fa-angle-down"></i></span>
+                <ul class="dropdown-menu">
+                  <li><a href="https://app1url.coglide.com/pwin"><i class="fa fa-calculator"></i> &nbsp; PWIN Calculator</a></li>
+                  <li><a href="#" ui-sref="opportunity" ng-disabled="false"><i class="fa fa-handshake"></i> &nbsp; Opportunity Search (v2.1)</a></li>
+                  <li><a href="#" ui-sref="pipeline" ng-disabled="false"><i class="fa fa-link"></i> &nbsp; Pipeline Tool (v2.1)</a></li>
+                  <li><a href="#" ui-sref="teammateMatch" ng-disabled="true"><i class="fa fa-users"></i> &nbsp; Teammate Match (v2.1)</a></li>
+                </ul>
+              </li>
+              <a href="http://helpcenter.app1urlapp.com/academy" target="_blank" data-ng-if="activeAccount"><li>ACADEMY</li></a>
+              <a href="http://helpcenter.app1urlapp.com" target="_blank"><li>HELP CENTER</li></a>
+            </ul>
+          </div>
+          <ul class="nav navbar-nav pull-right">
+            <li class="impersonateIcon" ng-click="restoreUser(userInfo)" ng-if="userInfo.isImpersonateSession"><i class="fas fa-user-friends"></i> Stop Impersonation</li>
+            <li class="text-warning" style="text-align: center;" ui-sref="upgradePlan" data-ng-if="allowUpgrade">
+              <div style="margin-bottom:4px;">Upgrade Plan</div>
+              <div><label class="label label-default label-outline" style="padding:1px 18px; font-size:11px;">{{planInformation.SupportPackageName}}</label></div>
+            </li>
+            <li>
+              <span data-toggle="dropdown" aria-expanded="false">
+                <img ng-src="{{envURL+userInfo.ImageFilename}}" style="height:45px; width:45px; border-radius:50%;" ng-if="userInfo.ImageFilename">
+                <span>Hi {{userInfo.firstname}}! </span>
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <ul class="dropdown-menu">
+                <li><a href="#" ui-sref="myProfile"><i class="glyphicon glyphicon-user"></i> &nbsp; Personal Settings</a></li>
+                <!-- NOTE: To be used when the user has roles assigned -->
+                <li ng-if="(userInfo.role.gpKey === '{d9a2b6db-92e1-45f2-a9fa-db8240a7145b}') || (userInfo.role.gpKey === '{f87dc87e-d4c4-4e22-b025-f212cd659910}')" data-ng-if="activeAccount">
+                  <a href="#"  ng-click="goToManageAcctUsers()"><i class="fa fa-users"></i> &nbsp; Manage Account Users</a>
+                </li>
+                <li><a href="#" ui-sref="myAccount"><i class="fa fa-credit-card"></i> &nbsp; My Account</a></li>
+                <li data-ng-if="activeAccount"><a href="#" ng-click="goToCompanyProfile()"><i class="fa fa-briefcase"></i> &nbsp; Organization Profile</a></li>
+                <li data-ng-if="activeAccount" class="impersonateIcon"><a href="#" ui-sref="adminDashboard" ng-if="userInfo.isImpersonateAdmin"><i class="fa fa-id-card"></i> CSA Dashboard</a></li>
+                <li class="divider"></li>
+                <li><a href="#" data-ng-click="appDemo1ProcessLogout()"><i class="fa fa-sign-out-alt"></i> &nbsp; Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  </div>
+</div>

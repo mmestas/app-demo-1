@@ -1,0 +1,106 @@
+#opportunitySearch {
+  .osInnerPageWrapper {position: relative;
+    .osSources {position: absolute;top: 105px;left: 29px;font-size:13px;
+      @media (max-width: $breakpoint-tablet) {position: static;padding-left:10px;}
+    }
+  }
+  md-tab-content {
+    background: #fff;
+    padding: 0px;
+    box-shadow: none;
+  }
+  .searchResultsTab {align-items: center;    padding-top: 0;
+    .osHeader {min-width:350px; margin-right:25px;}
+    .osKeySearch {flex-grow:1;
+      div {max-width:460px; }
+    }
+  }
+  .gp-expertSearchFilters {border-top:0;}
+  .osFilters {
+    .saveOSSearch {
+      display:flex; margin: 0 0 10px 0; align-items: center;
+      .saveOSSearchDrpDwn {width:calc(100% - 118px);}
+      .saveOSSearchHeart {width:118px; text-align: right;}
+    }
+    .gp-applyFilters {margin-bottom:10px;
+      button.btn {width:100%; padding: 8px 9px;}
+    }
+    .panel {
+      .ceilingFilter {
+        input {padding-right: 24px;}
+        .clear {display: none;position: absolute;right: 0;}
+        .inputClearBtn {position: relative;}
+        .inputClearBtn .clear {display: block;}
+      }
+    }
+  }
+  .osResultsPanel {
+    font-size: 13px;
+    // word-break: break-all;
+    .panel-heading {padding: 7px;}
+    .row {margin: 0 0 5px;
+
+    }
+    .col-md-2 {padding: 0 5px;}
+    .osrlAgency {width:10%;
+      img {width:100%;}
+    }
+    .osrlOpportunity {width:38%; cursor: pointer; word-break: normal;
+        &:hover {text-decoration: underline;}
+      }
+    .osrlContract {width:17%;}
+    .osrlNAICS {width:14%;}
+    .osrlClose {width:13%;}
+    .osrlAction {width:8%;
+      .btn.dropdown-toggle, .btn.dropdown-toggle:active, .btn.dropdown-toggle:focus {
+        padding:0;
+      }
+      .btn.focus, .btn:focus, .btn:hover {
+        color: $govDkBlue;
+        text-decoration: none;
+      }
+      .dropdown-menu {
+        left: unset;
+        right: -8px;
+        padding: 5px 4px;
+        font-size: 12px;
+        min-width: 180px;
+        li {
+          cursor: pointer;
+          &:hover {
+            background-color: $govLtGrey;
+          }
+        }
+      }
+    }
+
+    .osResultsList {
+      padding:7px;
+      .row {
+        &:hover {background-color: desaturate( $govLtGrey, 30% );}
+        &:not(:last-child) {
+        padding-bottom: 5px;
+        border-bottom: 1px solid $govLtGrey;
+      }
+
+      }
+    }
+
+  }
+
+}
+
+
+//Opportunity Search Details Dialogue
+#osDetailsDialog {min-width:50%; max-width: 1024px;
+  h5 {margin-bottom:0; font-weight: 600;}
+  .oppDetailsAgencyLogo {
+    img {
+      max-width: 100%;
+      max-height: 145px;
+    }
+  }
+  // .col-md-3 {width: 20%;}
+  // .col-md-9 {width: 80%;}
+
+}

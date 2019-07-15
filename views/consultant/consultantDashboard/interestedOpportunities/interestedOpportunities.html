@@ -1,0 +1,80 @@
+<div class="gp-systemNotificationsWrapper">
+  <div class="gp-interestedOpportunities md-whiteframe-2dp">
+    <div>
+      <div class="panel-heading">
+        <div>Opportunities</div>
+        <div class="gp-readNotification">
+          <div class="gp-hideShowMsgs" ng-hide="readMsgsVisible"><span ng-click="loadReadMsgs()"> Show Read Notifications</span> <i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i></div>
+          <div class="gp-hideShowMsgs" ng-show="readMsgsVisible"><span ng-click="hideReadMsgs()"> Hide Read Notifications</span> <i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div>
+          <ul class="collapsible popout" data-collapsible="accordion" >
+            <li ng-repeat="project in publicProjects" ng-init="initializeCollapse()">
+              <div class="collapsible-header">
+                <div class="gp-flex gp-justifyFlexSpaceBetween">
+                <!-- <div class="gp-flex"> -->
+                  <div class="gp-flex" style="width:calc(100% - 300px);"> <!-- gp-flex-grow-1-->
+                    <div style="margin-right:3px;">
+                      <i ng-if="!project.agency.imageFilename" class="fa fa-lightbulb gp-mr0" style="width:24px;"></i>
+                      <img ng-if="project.agency.imageFilename" ng-src="{{envURL+project.agency.imageFilename}}" style="width:24px;">
+                    </div>
+                    <div>
+                      <div><strong> {{project.title}}</strong></div>
+                      <div class="gp-mt10">{{project.agency.name}} &nbsp;</div>
+                    </div>
+                  </div>
+                  <div style="width:220px; min-width:220px; flex-basis:250px;">
+                    Original Post Date: <small style="color:#777;">{{project.dateCreated | dateConverter | date}}</small>
+                  </div>
+                  <!-- <div class="gp-flex-column gp-justifyFlexCenter"> -->
+                  <div class="gp-flex" style="width:30px;">
+                    <!-- <button class="btn btn-danger">Delete</button> -->
+                    <i class="fas fa-trash" data-ng-click="deleteOpportunityFromListModal(project)"></i>
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="collapsible-body">
+                <div><h4><strong>Project:</strong> {{project.title}}</h4></div>
+                <div ng-if="project.agency.name">
+                  <div><strong>Agency:</strong> {{project.agency.name}}</div>
+                </div>
+                <div ng-if="!project.agency.name">
+                  <div><strong>Agency:</strong> None</div>
+                </div>
+                <div>
+                  <div><strong>Description:</strong></div>
+                  <div class="gp-ml10">{{project.description}}</div>
+                </div>
+                <div>
+                  <div>
+                    <strong>Work on site required?</strong>
+                    <span ng-if="project.workOnSiteRequired">Yes</span>
+                    <span ng-if="!project.workOnSiteRequired">No</span>
+                  </div>
+                </div>
+                <div><strong>Keywords:</strong></div>
+                <div class="gp-ml10">
+                  <span>{{project.keywords.keyword1}}</span><span ng-if="project.keywords.keyword2">,</span>
+                  <span> {{project.keywords.keyword2}}</span><span ng-if="project.keywords.keyword3">,</span>
+                  <span> {{project.keywords.keyword3}}</span><span ng-if="project.keywords.keyword4">,</span>
+                  <span> {{project.keywords.keyword4}}</span><span ng-if="project.keywords.keyword5">,</span>
+                  <span> {{project.keywords.keyword5}}</span>
+                </div>
+
+                <div class="gp-collapsable-footer">
+                  <div ng-click="openIOSendMsgModal(project)"><i class="fa fa-paper-plane"></i> &nbsp; Send Message</div>
+                  <i class="fas fa-trash" data-ng-click="deleteOpportunityFromListModal(project)"></i>
+                </div>
+
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

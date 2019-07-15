@@ -1,0 +1,103 @@
+<div class="list-group">
+  <div class="dash-projectHeader">
+    <span class="dash-projectTitle" style="width:40%;"><h4>Title</h4></span>
+    <span class="dash-projectEngagements" style="width:20%;"><h4>Engagements</h4></span>
+    <span class="dash-projectMessages" style="width:15%;"><h4>Messages</h4></span>
+    <span class="dash-projectQuotes" style="width:15%;"><h4>Quotes</h4></span>
+    <span class="dash-projectQuotes" style="width:10%;"><h4>Action</h4></span>
+  </div>
+  <div ng-repeat="project in myDashProjects track by $index" ng-if="project.status.gpKey !== '{74699447-4fad-47f9-9f68-48a3e86b7f5e}'" ng-class="{'gp-addBorder': !closeProjectEngagmentDashList}">
+    <div class="list-group-item gp-flex" >
+      <span style="width:20px;">
+        <i class=" govBlueIcon"  ng-click="closeProjectEngagmentDashList = !closeProjectEngagmentDashList" ng-class="{'fa fa-minus-circle':!closeProjectEngagmentDashList, 'fa fa-plus-circle': closeProjectEngagmentDashList}"></i>
+      </span>
+      <span class="dash-projectTitle" style="width:calc(40% - 20px);" ng-click="goToProjectDetails(project)">
+        <h5>{{ project.title }}
+        <br> <small>Posted {{ getDifference(project.dateCreated) }} days ago</small>
+        <br> <small>Owner: {{project.owner.name}} </small>
+      </h5>
+      </span>
+      <span class="dash-projectEngagements" style="width:20%;">{{project.totalEgagements}}</span>
+      <span class="dash-projectMessages" style="width:15%;">{{project.totalMessages}}</span>
+      <span class="dash-projectQuotes" style="width:15%;">{{project.totalConsultantSubmittedEgagements}}</span>
+      <span class="dash-projectQuotes" style="width:10%;">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog"></i>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li ng-click="statusChangeSelect(1, project)">View</li>
+            <li ng-click="statusChangeSelect(2, project)">Edit</li>
+            <li ng-click="statusChangeSelect(6, project)">Copy</li>
+            <li ng-click="statusChangeSelect(3, project)" ng-if="project.status.gpKey === '{A40E44D2-332E-4D01-9039-28E52B5193FB}'" ng-hide="!project.projectIsAllowedToClose">Close</li>
+            <li ng-click="statusChangeSelect(4, project)" ng-if="project.status.gpKey === '{74699447-4fad-47f9-9f68-48a3e86b7f5e}'">Archive</li>
+            <li ng-click="statusChangeSelect(5, project)" ng-if="project.status.gpKey === '{79839C99-B83A-4420-A867-10ACF3BBDAB5}'">Delete</li>
+          </ul>
+        </div>
+      </span>
+    </div>
+    <!-- 3.3.18 -->
+    <div class="list-group" ng-hide="closeProjectEngagmentDashList" style="margin-bottom:0;">
+      <div class="list-group-item  gp-companyDashInnerEngagements" style="display:flex;">
+        <span style="width:40%;"><h4>Consultant</h4></span>
+        <span style="width:15%;"><h4>Start Date</h4></span>
+        <span style="width:15%;"><h4>End Date</h4></span>
+        <span class="dash-projectMessages" style="width:15%;"><h4>Estimate</h4></span>
+        <span class="dash-projectQuotes" style="width:15%;"><h4>Status</h4></span>
+      </div>
+      <div class="list-group-item gp-flex gp-companyDashInnerEngagements" ng-repeat="engagement in project.Engagements" ng-click="openEngagementModal($event, engagement, userInfo)">
+        <span style="width:40%; display:flex; align-items:center;">
+            <img ng-src="{{envURL+engagement.consultant.imageFilename}}" style="height:50px; width:50px; border-radius:30px; margin-right:5px;">
+            <div>
+              <h5 style="margin:0;">{{ engagement.consultant.title }} </h5>
+              <div> {{ engagement.consultant.name }} </div>
+            </div>
+         </span>
+        <span style="width:15%;  display:flex; align-items:center;">{{engagement.startDate | dateConverter | date}}</span>
+        <span style="width:15%;  display:flex; align-items:center;">{{engagement.endDate | dateConverter | date}}</span>
+        <span class="dash-projectMessages" style="width:15%;  display:flex; align-items:center;">
+          <span>{{engagement.engagementAmount | currency}}</span>
+        </span>
+        <span class="dash-projectQuotes" style="width:15%;  display:flex; align-items:center;">
+          <!-- <span ng-if="engagement.consultantOCINDARejected"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-danger">
+              <span ng-if="engagement.nda">NDA</span>
+              <span ng-if="engagement.oci && engagement.nda"> & </span>
+              <span ng-if="engagement.oci">OCI</span> Rejected</label>
+            </span>
+          <span ng-if="engagement.companyRejected"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-danger">Rejected</label>
+          </span>
+          <span ng-if="engagement.companyApproved && engagement.consultantSubmitted && !engagement.ratingNeeded && !engagement.actionNeeded && !engagement.completed"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-success">Approved</label>
+          </span>
+          <span ng-if="(engagement.companyApproved && engagement.consultantSubmitted && engagement.actionNeeded) || (engagement.actionNeeded && engagement.ratingNeeded)"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-warning">Accept & Pay</label>
+          </span>
+          <span ng-if="engagement.companyApproved && engagement.consultantSubmitted && engagement.ratingNeeded && !engagement.actionNeeded"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-primary">Rate</label>
+          </span>
+          <span ng-if="engagement.companyApproved && engagement.consultantSubmitted && engagement.completed && !engagement.ratingNeeded && !engagement.actionNeeded"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-default">Completed</label>
+          </span>
+          <span ng-if="(!engagement.companyApproved && !engagement.companyRejected && !engagement.consultantRejected) && (engagement.RequestAuthorizationEmails.length == 0) && (engagement.consultantSubmitted)"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-primary">Submitted</label>
+          </span>
+          <span ng-if="engagement.consultantRejected"  style="width:100%;">
+              <label style="width:100%; text-align:center; border-radius:2px;" class="label-danger">Rejected</label>
+          </span>
+          <span ng-if="!engagement.consultantSubmitted && !engagement.consultantOCINDARejected && !engagement.companyRejected && !engagement.consultantRejected"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-default">Waiting</label>
+          </span>
+          <span ng-if="(engagement.RequestAuthorizationEmails.length > 0) && (!engagement.companyApproved && !engagement.companyRejected)"  style="width:100%;">
+            <label style="width:100%; text-align:center; border-radius:2px;" class="label-default">Pending</label>
+          </span> -->
+          <span><label class="{{engagement.labelClass}} dashLabel">{{engagement.label}}</label></span>
+        </span>
+      </div>
+    </div>
+    <!-- End 3.3.18 -->
+  </div>
+
+</div>

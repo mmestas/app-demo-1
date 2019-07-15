@@ -1,0 +1,47 @@
+<div id="invitedAuthNewUserProfileForm">
+  <div>
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Authorized Payer for {{iaQuoteDetails.project.title}} Engagement</h2>
+      </div>
+    </md-toolbar>
+    <div class="gp-dashWrapper">
+      <form name="newCompanyAuthPayerForm">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" ng-model="newCompanyAuthPayer.firstName" required>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" ng-model="newCompanyAuthPayer.lastName" required>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" name="title" ng-model="newCompanyAuthPayer.title">
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="email">Email (This will be your new username)</label>
+          <input type="email" class="form-control" name="email" ng-model="newCompanyAuthPayer.email" required>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="password">Create New Password</label>
+          <input type="password" name="password" class="form-control" ng-model="newCompanyAuthPayer.password" required>
+          <div ng-messages="newCompanyAuthPayerForm.password.$error" ng-show="newCompanyAuthPayerForm.password.$dirty">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="confirmPass">Confirm Password</label>
+          <input type="password" name="confirmPass" class="form-control" ng-model="newCompanyAuthPayer.confirmPass" compare-to="newCompanyAuthPayer.password" required>
+          <div ng-messages="newCompanyAuthPayerForm.confirmPass.$error" ng-show="newCompanyAuthPayerForm.confirmPass.$dirty">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="compareTo">The passwords must match</div>
+          </div>
+        </md-input-container>
+        <div id="gp-NewUserProfileInfo">
+          <md-button  class="btn btn-primary" ng-click="saveInvitedAuthNewUser(newCompanyAuthPayer)" ng-disabled="newCompanyAuthPayerForm.$invalid">Save & Continue</md-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

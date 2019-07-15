@@ -1,0 +1,177 @@
+<!-- EDIT -->
+<div class="row gp-row gp-editProject" ng-show="showEditProjectFields">
+  <div ng-form="editProjectForm" id="editProjectForm" novalidate>
+    <div style="padding:20px;">
+      <div class="row">
+        <div class="col col-md-12">
+          <div class="row" id="title">
+            <div class="col col-md-6">
+              <div class="form-group">
+                <label for="projectTitle">*What title best describes your project?</label>
+                <input type="text" name="projectTitle" class="form-control" id="gp-projectTitle" placeholder="*Enter Project Title" ng-model="projectDetails.title" required>
+              </div>
+            </div>
+            <div class="col col-md-6">
+              <div class="form-group">
+                <label for="projectTitle">*Who will own this project?</label>
+                <select class="form-control" ng-model="projectDetails.owner" ng-options="owner as owner.name for owner in companyUsers">
+                  <option value="" style="display:none;">{{projectDetails.owner.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="solicitation">
+            <div class="col col-md-12">
+              <div class="form-group">
+                <label>*Is this project associated with a Government Solicitation?</label>
+                <md-radio-group ng-model="projectDetails.isSolicitation" ng-change="isSolicitation(projectDetails.isSolicitation)" required>
+                    <md-radio-button ng-value="false" value="false" class="gpBlue"> No </md-radio-button>
+                    <md-radio-button ng-value="true" value="true" class="gpBlue">Yes</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="agencies">
+            <div class="col col-md-12">
+              <div  ng-if="showAgencies">
+                <md-autocomplete flex
+                    required
+                    md-no-cache = "true"
+                    md-selected-item="selectedAgencyItem"
+                    md-search-text="searchAgencyText.searchText"
+                    md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText.searchText)"
+                    md-item-text="agencyItem.name"
+                    md-floating-label="Agency (Autocomplete)"
+                    md-selected-item-change="addAgencyForProject(selectedAgencyItem)"
+                    md-clear-button="true">
+                  <md-item-template>
+                    <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+                    <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                    No matches found.
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="solicitationTitleNo">
+            <div class="col col-md-6">
+              <div class="form-group" ng-if="showAgencies">
+                <input type="text" class="form-control" id="gp-RFPTitle" placeholder="*Enter RFP Solicitation Title" ng-model="projectDetails.solicitationTitle" required>
+              </div>
+            </div>
+            <div class="col col-md-6">
+              <div class="form-group" ng-if="showAgencies">
+                <input type="text" class="form-control" id="gp-RFPNumber" placeholder="*Enter RFP Solicitation Number" ng-model="projectDetails.solicitationNumber" required>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="description">
+            <div class="col col-md-12">
+              <div class="form-group">
+                <label for="comment">*Project Description:</label>
+                <textarea class="form-control" rows="5" id="description" ng-model="projectDetails.description" required></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="radios">
+            <div class="col col-md-12">
+              <div class="form-group">
+                <label>Is expert required to work onsite?</label>
+                <md-radio-group ng-model="projectDetails.workOnSiteRequired">
+                  <md-radio-button ng-value="false" class="gpBlue" aria-label="No">No</md-radio-button>
+                  <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Yes</md-radio-button>
+                </md-radio-group>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="keywords">
+            <div class="col col-md-12">
+              <div class="form-group">
+                <label>*What are the essential keywords an expert should match? <small>(5 maximum)</small>
+                </label>
+                <div class="gp-projectKeywords">
+                  <div class="keywordBubble" ng-if="projectDetails.keywords.keyword1" ng-click="removeKeyword(projectDetails, '1')">
+                    <span class="addedKeyword">{{projectDetails.keywords.keyword1}}</span> <i class="fa fa-times"></i>
+                  </div>
+                  <div class="keywordBubble" ng-if="projectDetails.keywords.keyword2" ng-click="removeKeyword(projectDetails, '2')">
+                    <span class="addedKeyword">{{projectDetails.keywords.keyword2}}</span> <i class="fa fa-times"></i>
+                  </div>
+                  <div class="keywordBubble" ng-if="projectDetails.keywords.keyword3" ng-click="removeKeyword(projectDetails, '3')">
+                    <span class="addedKeyword">{{projectDetails.keywords.keyword3}}</span> <i class="fa fa-times"></i>
+                  </div>
+                  <div class="keywordBubble" ng-if="projectDetails.keywords.keyword4" ng-click="removeKeyword(projectDetails, '4')">
+                    <span class="addedKeyword">{{projectDetails.keywords.keyword4}}</span> <i class="fa fa-times"></i>
+                  </div>
+                  <div class="keywordBubble" ng-if="projectDetails.keywords.keyword5" ng-click="removeKeyword(projectDetails, '5')">
+                    <span class="addedKeyword">{{projectDetails.keywords.keyword5}}</span> <i class="fa fa-times"></i>
+                  </div>
+                  <input type="text" class="form-control" id="keyword1" ng-model="projectKeyword.word" ng-class="" ng-keyup="postKeywords($event, projectDetails, projectKeyword)" ng-disabled="projectDetails.keywords.keyword1 && projectDetails.keywords.keyword2 && projectDetails.keywords.keyword3 && projectDetails.keywords.keyword4 && projectDetails.keywords.keyword5" click-outside="addKeywordOnClickOutside(projectDetails, projectKeyword)">
+                </div>
+              </div>
+            </div>
+            <div class="col col-md-12">
+              <label>Would you like expert profiles to contain "Any" or "All" of the keywords above?</label>
+              <md-radio-group ng-model="projectDetails.keywords.anyKeyword">
+                <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Any</md-radio-button>
+                <md-radio-button ng-value="false" class="gpBlue" aria-label="No">All</md-radio-button>
+              </md-radio-group>
+            </div>
+          </div>
+          <div class="row" id="documents">
+            <div class="col col-md-12">
+              <label>Reference Document (Max 3)</label>
+            </div>
+            <div class="gp-mb15"><project-file-upload></project-file-upload></div>
+          </div>
+          <div class="row" id="radios">
+            <div class="col col-md-12">
+                <div>
+                  <label>How much exposure do you want your project to get?</label>
+                  <md-radio-group ng-model="projectDetails.exposure" class="radioColumn">
+                    <md-radio-button ng-value="2" class="gpBlue" aria-label="Targeted">Targeted <small>(Broadcast to experts that match a Keyword or Category of Expertise I selected)</small></md-radio-button>
+                    <!-- <md-radio-button ng-value="3" class="gpBlue" aria-label="Global">Global <small>(Broadcast this project to all experts registered in app1url)</small></md-radio-button> -->
+                    <md-radio-button ng-value="1" class="gpBlue" aria-label="None">None <small>(Only the experts I invite can see this project)</small></md-radio-button>
+                  </md-radio-group>
+
+                </div>
+                <div>
+                  <label>Privacy Mode</label>
+                  <md-radio-group ng-model="projectDetails.keepPrivate" class="radioColumn">
+                    <md-radio-button ng-value="true" class="gpBlue" aria-label="On">On <small>(Hide my organization name and contact information)</small></md-radio-button>
+                    <md-radio-button ng-value="false" class="gpBlue" aria-label="Off">Off <small>(It's okay to show my organization name and contact information)</small></md-radio-button>
+                  </md-radio-group>
+                </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+
+        <!--NOTE: Keep This... they'll be wanting it back later -->
+        <!-- <div class="col col-md-4">
+          <div>
+            <label>Select a Category of Expertise</label>
+              <ul class="list-group categorySelectionList">
+                <li ng-repeat="category in categories track by $index"  class="gp-categoryCheckboxes list-group-item">
+                  <div style="padding-bottom:10px;">
+                    <md-checkbox ng-model="category.selected" aria-label="Checkbox 1" class="md-gpSolidBlue md-raised" ng-change="topCatSelected(category)"></md-checkbox>
+                    <span style="font-weight:600;">{{category.name}}</span>
+                  </div>
+                  <ul class="gp-subCategoryCheckboxes list-group">
+                    <li ng-repeat="subCategory in category.subCategories track by $index" class="list-group-item" >
+                        <md-checkbox ng-model="subCategory.selected" aria-label="Checkbox 1" class="md-gpSolidBlue md-raised" ng-change="subCatSelect(category, subcategory.selected)"></md-checkbox>
+                        {{subCategory.name}}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+        </div> -->
+
+
+      </div>
+    </div>
+  </div>
+</div>

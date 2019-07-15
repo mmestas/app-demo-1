@@ -1,0 +1,81 @@
+#addNewPaymentInfo, #editConsultantStripeBankInfo {
+	.well {
+		p {font-size: 12px;}
+	}
+	section {border: 1px solid $govBorderGrey; padding:7px; margin-bottom:10px;
+		.form-group {
+			label {font-size:13px;}
+			input, select {border: 1px solid rgba(0,0,0,0.12);}
+			md-input-container {margin: 0;
+				input.md-input {height: 45px; padding: 10px 15px;}
+			}
+			.md-datepicker-open .md-datepicker-input-container, .md-datepicker-open input.md-input {border-color:transparent;}
+			.md-datepicker-triangle-button.md-button.md-icon-button {height: 45px;width: 36px;position: absolute;padding: 8px;bottom: 0;right: 5px;}
+			span.gp-error {font-size:12px;}
+		}
+	}
+	.consultantPhotoID {
+		max-width: 100%;
+	    max-height: 160px;
+	    height: 160px;
+	    width: 100%;
+	    border: 1px solid $govMedLtBorderGrey;
+	    padding: 10px;
+	    position: relative;
+	    background: transparent;
+	    label {
+	    	height: 100%;
+		    position: absolute;
+		    width: 100%;
+		    max-width: 100%;
+		    top: 0;
+		    left: 0;
+		    cursor: pointer;
+		    img {
+		    	max-height: 100%;
+			    max-width: 100%;
+			    position: absolute;
+			    left: 50%;
+			    top: 50%;
+			    transform: translate(-50%, -50%);
+			    // z-index: 15;
+		    }
+	    }
+		.centeredUploadIcon {
+			text-align: center;
+		    background: transparent;
+		    color: $govBlue;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			i.fa {font-size: 30px;}
+		}
+		#identificationPhoto {
+			background: transparent;
+		    height: 100%;
+		    position: absolute;
+		    width: 100%;
+		    top: 0;
+		    left: 0;
+		    cursor: pointer;
+		}
+	}
+	// This is a hack for the md-select showing as $touched when it isn't
+	md-select.md-default-theme.ng-invalid.ng-touched .md-select-value,
+	md-select.ng-invalid.ng-touched .md-select-value {
+		color: rgba(0,0,0,0.38) !important; border-bottom-color: rgba(0,0,0,0.12)!important;
+	}
+	.addError {
+		md-select.md-default-theme.ng-invalid.ng-touched .md-select-value,
+		md-select.ng-invalid.ng-touched .md-select-value {
+		    color: rgb(221,44,0)!important; border-bottom-color: rgb(221,44,0)!important;
+		}
+	}
+	.fa-paperclip {position: relative; font-size: 18px;
+		#identificationPhoto {
+			position: absolute;width: 18px;top: 0;left: 0;
+		}
+		span {font-family: 'Libre Franklin', sans-serif;font-size: 12px;font-weight: 200;}
+	}
+}

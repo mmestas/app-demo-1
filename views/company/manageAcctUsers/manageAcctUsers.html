@@ -1,0 +1,14 @@
+<div class="gp-nav" company-dash-header></div>
+<div class="gp-dashWrapper gp-companyProfileForm gp-mainBodyWidth" ng-init="companyProfileInit()">
+  <div class="gp-dashInner">
+    <div class="gp-pageTitle"><h2>Manage Account Users</h2></div>
+    <md-tabs md-dynamic-height md-border-bottom class="md-gpBlue-theme gp-formSize">
+       <md-tab label="Edit Organization Users">
+         <md-content class="md-padding" ng-include="'views/company/manageAcctUsers/editCompanyUsers.html'"></md-content>
+       </md-tab>
+        <md-tab label="Add New User">
+          <md-content class="md-padding" ng-include="'views/company/manageAcctUsers/addNewUser.html'"></md-content>
+        </md-tab>
+    </md-tabs>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div login-header class="gp-min480"></div>
+<div id="signUpLanding" class="view gp-signUpView" ng-init="signUpLanding()">
+  <div login-responsive-header class="gp-max480"></div>
+
+  <div class="gp-signUpStatusBar  gp-min480" layout-align="center center">
+    <h1>Let's Get Started!</h1>
+  </div>
+  <md-toolbar class="md-hue-custom gp-min480">
+      <div class="md-toolbar-tools" layout="row" layout-align="center center">
+        <h1 class="md-flex">Tell us, what do you want to do?</h1>
+      </div>
+    </md-toolbar>
+  <div class="container gp-mainBodyWidth md-whiteframe-3dp">
+    <div class="row">
+      <div class="col col-md-12" layout-gt-sm="row">
+        <div class="col col-md-6 gp-signUpBox gp-companyBox" href="#" layout="column" layout-align="center center">
+          <h4>Contractors</h4>
+          <img class="gp-image-lg" src="/images/iconGovtBuilding2.png">
+            <div class="gp-flex-grow"><h4>I am a Government Contractor</h4></div>
+            <div><h3>I want to search and hire consultants</h3></div>
+          <button class="btn btn-primary" ng-click="goToStep1()">Find Consultants</button>
+        </div>
+        <hr class="hr-text" data-content="OR">
+        <div class="col col-md-6 gp-signUpBox gp-consultantBox" href="#" layout="column" layout-align="center center">
+          <h4>Consultants</h4>
+          <img class="gp-image-lg" src="/images/iconPeople2.png">
+            <div class="gp-flex-grow"><h4>I am a consultant or consultant company</h4></div>
+            <div><h3>I am looking for freelance project work</h3></div>
+          <button class="btn btn-primary btn-outline" ng-click="goToConsultantSignUp()">Find Work</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- </div> -->
+
+<!-- <script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "95%";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script> -->

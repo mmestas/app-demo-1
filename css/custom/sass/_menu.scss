@@ -1,0 +1,113 @@
+.dropdown-menu {
+  li {
+    a {}
+    a[disabled='disabled'] {color:$govMedGrey;
+      &:hover {color:$govMedGrey;}
+    }
+  }
+}
+
+.gp-dashboard-header {
+  nav {
+    display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 600;color: $govGrey;
+      ul {
+        padding: 12px;
+        li {
+          margin: 0 10px;cursor: pointer;
+        }
+        li:hover, li:active, li.active{
+          color:$govBlue;
+        }
+      }
+      ul:not(.dropdown-menu) {
+        display: flex;align-items: center;
+      }
+      a {
+          li {
+            color: $govGrey;font-weight: 600;
+          }
+      }
+  }
+}
+
+.gp-dashToolbar {
+    button {margin-right:15px;}
+    .btn-group {
+        button {margin:0;}
+        li {
+          margin: 0 10px;
+          cursor: pointer;
+        }
+        li:hover, li:active, li.active {
+          color:$govBlue;
+        }
+        md-radio-button {display:inline-block; font-size:16px; margin-bottom: 0; margin-right: 15px;
+          .md-off {width:17px; height:17px;}
+          .md-on {width:17px; height:17px;}
+          .md-label {margin-left: 20px; margin-right:0px;}
+        }
+    }
+    .gp-dashItems {margin-right:15px;}
+}
+
+// .gp-dashToolbar .gp-dashItems {margin-right:15px;}
+// .gp-dashToolbar button {margin-right:15px;}
+// .gp-dashToolbar .btn-group button {margin:0;}
+// .gp-dashToolbar md-radio-button {display:inline-block; font-size:16px; margin-bottom: 0; margin-right: 15px;}
+// .gp-dashToolbar md-radio-button .md-off, .gp-dashToolbar md-radio-button .md-on {width:17px; height:17px;}
+// .gp-dashToolbar md-radio-button .md-label {margin-left: 20px; margin-right:0px;}
+.nav.navbar-nav.pull-right .dropdown-menu {left: inherit; right: 0;}
+.navbar-default .badge.badge-danger {background-color: $govDangerRed; color:white;padding: 1px 5px 4px;}
+.gp-dashBell {font-size: 24px;color: $govDangerRed;}
+.gp-dashAlertWrapper {position:relative; width: 25px;display: inline;}
+.gp-dashBellNumber { position: absolute; left: 8px; top: -6px; color: white; font-weight: bold;}
+.gp-dashboard-header .gp-dashIcon {font-size:45px;color: $govDkGrey;cursor: pointer;}
+.gp-searchLI {width: 200px;}
+.gp-headerSearchBtn {
+    height: 45px;
+    background: transparent;
+    border: 1px solid $govMedLtBorderGrey;
+    border-right: 0;
+    padding: 10px 5px 10px 15px;
+    font-size: 18px;
+    color: $govBlue;
+    }
+.gp-headerSearchInput {border-left:0;font-size: 13px;width: 175px;}
+.form-control.gp-headerSearchInput:focus {
+    border-color: $govMedLtBorderGrey;
+    outline: 0;
+}
+.gp-hamburgerMenu {
+    font-size: 30px;
+    padding: 0 6px;
+    background: transparent;
+    border: 0;
+    color: $govBlue;}
+.btn-primary.gp-hamburgerMenu.active, .btn-primary.gp-hamburgerMenu:active, .btn-primary.gp-hamburgerMenu:hover, .open>.dropdown-toggle.btn-primary.gp-hamburgerMenu {
+  color: $govBlue;
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn-primary.gp-hamburgerMenu.focus, .btn-primary.gp-hamburgerMenu:focus {
+    color: $govBlue;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+
+
+// *************** SIDE MENU ******************/
+.gp-sideMenu {/*Note: remove margin when doing responsive side menu*//* margin-right:15px; */}
+.gp-sideMenu .list-group-item {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  margin-bottom: 3px;
+  background: #777;
+  color: #fff;
+  border: #777;
+  /* border-radius: 0; */
+  padding: 10px 10px;
+}
+.gp-sideMenu .list-group-item.gp-getStarted {background: #fd8724; border:#fd8724;}
+.gp-sideMenu .list-group-item.gp-getStarted:hover,
+.gp-sideMenu .list-group-item.gp-getStarted:active,
+.gp-sideMenu .list-group-item.gp-getStarted:focus {background: $govHoverOrange; border:$govHoverOrange; color:#fff;}

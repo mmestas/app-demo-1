@@ -1,0 +1,20 @@
+<div id="consultantRateAvailabilityFields" ng-hide="showConsultantRateAvailabilityEditFields">
+    <div class="gp-consultantEditSectionWithBtn">
+      <h4>
+        <span class="customTooltip">Rate & Availability (5%)
+          <span class="customTooltip-panels">Provide how many hours per week you are available to assist a client and the rate of pay that you desire. In this section, you can also indicate if you will consider W2 employment.</span>
+        </span>
+      </h4>
+      <i class="fa fa-pencil-alt" ng-click="editRateAvailability(consultantInfo)"></i>
+    </div>
+  <div class="profileSectionInner">
+    <h3 class="h3"><span class="small">Available as a Freelance Consultant (1099): </span><span class="gp-rateAvailabilityResponse" ng-if="consultantInfo.availableAsFreelance">Yes</span><span class="gp-rateAvailabilityResponse" ng-if="!consultantInfo.availableAsFreelance">No</span></h3>
+    <h3 class="h3"><span class="small">My Hourly Rate: </span><span class="gp-rateAvailabilityResponse">{{consultantInfo.freelanceHourlyRate | currency}}</span></h3>
+    <h3 class="h3"><span class="small">Minimum Project Size: </span><span class="gp-rateAvailabilityResponse">{{consultantInfo.amountMinimumProjectSize | currency}}</span></h3>
+    <h3 class="h3"><span class="small">Freelance Availability: </span><span class="gp-rateAvailabilityResponse">{{consultantInfo.availability.name}}</span></h3>
+    <h3 class="h3"><span class="small">Available as Full-Time Employee (W2): </span><span class="gp-rateAvailabilityResponse" ng-if="consultantInfo.availableAsFullTime">Yes</span><span class="gp-rateAvailabilityResponse" ng-if="!consultantInfo.availableAsFullTime">No</span></h3>
+    <h3 class="h3"><span class="small">Annual Salary Expectation: </span><span class="gp-rateAvailabilityResponse">{{consultantInfo.fullTimeAnnualSalary | currency}}</span></h3>
+    <h3 class="h3"><span class="small">Willingess to Travel: </span><span class="gp-rateAvailabilityResponse">{{consultantInfo.willingToTravel.name}}</span></h3>
+    <h3 class="h3"><span class="small">Available as an Advisory Board Candidate: </span><span class="gp-rateAvailabilityResponse"><span ng-show="consultantInfo.adviser">Yes</span><span ng-show="!consultantInfo.adviser">No</span></span></h3>
+  </div>
+</div>

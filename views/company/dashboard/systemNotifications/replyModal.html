@@ -1,0 +1,63 @@
+<md-dialog id="replyModal" class="gp-ConsultantRequestInfoModal">
+  <form ng-cloak name="sendIOMsg">
+    <md-toolbar class="md-gpBlue-theme" ng-hide="msgSentSuccess">
+      <div class="md-toolbar-tools">
+        <h2>Message</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-toolbar class="md-gpBlue-theme" ng-show="msgSentSuccess">
+      <div class="md-toolbar-tools">
+        <h2>Success!</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div ng-hide="msgSentSuccess">
+        <section ng-if="projectData.fromUser.name">
+          <div class="gp-projectInfo">
+            <div>
+              <span class="gp-mr15"><img ng-src="{{envURL+projectData.fromUser.ImageFilename}}"></span>
+              <h4>
+                <span >{{projectData.fromUser.name}}</span>
+                <small>{{projectData.fromUser.Company.city}}, {{projectData.fromUser.Company.state.Abbreviation}}</small>
+              </h4>
+            </div>
+          </div>
+        </section>
+        <div class="gp-subjectForMsg">Re: {{projectData.subject}}</div>
+        <md-input-container class="md-block gp-width-100">
+          <label><span class="gp-error fa fa-asterisk"></span> Enter Message</label>
+          <!-- <textarea ng-model="theMessage" md-maxlength="250" rows="5" md-select-on-focus></textarea> -->
+          <textarea ng-model="theMessage" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+        <div>From: {{userInfoData.name}}, {{userInfoData.title}}</div>
+      </div>
+      <div ng-show="msgSentSuccess">
+        Your message was sent!
+      </div>
+      <div ng-show="errorMsg" class="gp-error">
+        There was an error
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()" ng-hide="msgSentSuccess">
+       Cancel
+      </md-button>
+      <button class="btn btn-primary" ng-click="reply(projectData, theMessage)" ng-hide="msgSentSuccess" ng-disabled="!theMessage">
+       <i class="fa fa-paper-plane"></i> Send Message
+      </button>
+      <md-button ng-click="cancel()" ng-show="msgSentSuccess">
+       Close Window
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,53 @@
+<div id="consultantContactInfo"  ng-hide="showConsultantContactInfoEditFields">
+
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">Personal/Contact Info (20%)
+        <span class="customTooltip-panels">Provide details on your contact information, upload a head-shot, and a brief overview of your experience in this section.</span>
+      </span>
+    </h4>
+    <i class="fa fa-pencil-alt" ng-click="editConsultantContactInfo(consultantInfo)"></i>
+  </div>
+
+  <div class="profileSectionInner">
+    <div class="col col-md-3 gp-consultantEditPic">
+      <div class="gp-consultantPic"><img ng-src="{{envURL+consultantInfo.imageFilename}}"></div>
+      <div class="gp-expertRating">
+        <!-- <input id="gp-consultantStar" ng-value="consultantInfo.averageReview" type="number" class="consultantRating" data-min=0 data-max=5 data-step=0.5 data-size="xs" ng-init="callLastFunction2(consultantInfo.averageReview)"> -->
+        <input id="gp-consultantStar" ng-value="consultantInfo.averageReview" type="number" class="consultantRating" data-min=0 data-max=5 data-step=0.5 data-size="xs">
+        <div ng-if="consultantInfo.verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"><i class="fa fa-certificate gp-silver"></i> Silver Verified</div>
+        <div ng-if="consultantInfo.verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"><i class="fa fa-certificate gp-gold"></i> Gold Verified</div>
+        <div ng-if="consultantInfo.verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"><i class="fa fa-certificate gp-platinum"></i> Platinum Verified</div>
+        <div>Member since {{myConvertDate(consultantInfo.joinDate) | date}}</div>
+        <div ng-show="consultantInfo.adviser">Adviser</div>
+      </div>
+    </div>
+    <div class="col col-md-9 gp-expertInfo">
+      <div class="gp-mb10">
+        <h4 class="gp-expertName">{{consultantInfo.name}}<span class="small" ng-if="consultantInfo.title">, {{consultantInfo.title}}</span>
+          <small ng-show="consultantInfo.profileNamePrivate">(Name is Private)</small>
+          <small ng-show="!consultantInfo.profileNamePrivate">(Name is Public)</small>
+        </h4>
+        <h4><small ng-if="consultantInfo.company">{{consultantInfo.company}}</small><span  ng-if="consultantInfo.yearsProfessionalExperience.name && consultantInfo.company">, </span><small ng-show="consultantInfo.yearsProfessionalExperience.name">{{consultantInfo.yearsProfessionalExperience.name}} Professional Experience</small></h4>
+      </div>
+
+      <div class="gp-mb10">
+        <h5>Address</h5>
+        <div class="gp-expertAddress gp-mt10">
+          <i class="fa fa-map-marker-alt"></i>
+          {{consultantInfo.address}} | {{consultantInfo.city}},
+          {{consultantInfo.state.name}} | {{consultantInfo.zip}}, {{consultantInfo.country.name}}
+        </div>
+        <div class="gp-expertAddress"><i class="fa fa-envelope"></i> {{consultantInfo.email}}</div>
+        <div class="gp-expertAddress"><i class="fa fa-phone"></i> phone: {{consultantInfo.phone | tel}}
+          <span ng-if="consultantInfo.mobilePhone">| cell: {{consultantInfo.mobilePhone | tel}} |
+          <span ng-if="!consultantInfo.allowTextNotifications">don't</span> allow texts <i ng-if="consultantInfo.allowTextNotifications" class="fa fa-check"></i></span>
+        </div>
+      </div>
+      <div >
+        <h5>Overview</h5>
+        <div class="gp-expertDescription">{{consultantInfo.consultantDescription}}</div>
+      </div>
+    </div>
+  </div>
+</div>

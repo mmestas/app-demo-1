@@ -1,0 +1,154 @@
+//BUTTONS
+.btn-default{color: $govWhite; background-color: $govMedGrey; border-color:$govMedGrey; background-color: #bbb; border-color: #bbb; background-color: $govGreyBG; border-color: $govMedLtGrey; color: $govDkGrey; }
+.btn-default.focus,.btn-default:focus{color:$govWhite; background-color:#606161; border-color:#3a3b3b; background-color: $govGreyBG; border-color: $govGreyBG; color: $govDkGrey; }
+.btn-default.active,.btn-default:active,.btn-default:hover,.open>.dropdown-toggle.btn-default{color:$govWhite; background-color: #adadad; border-color: #adadad; }
+.btn-default.active.focus,.btn-default.active:focus,.btn-default.active:hover,.btn-default:active.focus,.btn-default:active:focus,.btn-default:active:hover,.open>.dropdown-toggle.btn-default.focus,.open>.dropdown-toggle.btn-default:focus,.open>.dropdown-toggle.btn-default:hover{color:$govWhite; background-color:#4e4f4f; border-color:#3a3b3b; background-color: $govGreyBG; border-color: $govGreyBG; color: $govDkGrey; }
+.btn-default.disabled.focus,.btn-default.disabled:focus,.btn-default.disabled:hover,.btn-default[disabled].focus,.btn-default[disabled]:focus,.btn-default[disabled]:hover,fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:focus,fieldset[disabled] .btn-default:hover{background-color:$govMedGrey; border-color:$govMedGrey}
+.btn-default .badge{color:$govMedGrey; background-color:$govWhite}
+
+.btn-primary{color: $govWhite; background-color: $govBlue; border-color:$govBlue; }
+.btn-primary.focus,.btn-primary:focus{color:$govWhite; background-color:$govBlueHover; border-color:$govBlueHover}
+.btn-primary.active,.btn-primary:active,.btn-primary:hover,.open>.dropdown-toggle.btn-primary{color:$govWhite; background-color:$govBlueHover; border-color:$govBlueHover}
+.btn-primary.active.focus,.btn-primary.active:focus,.btn-primary.active:hover,.btn-primary:active.focus,.btn-primary:active:focus,.btn-primary:active:hover,.open>.dropdown-toggle.btn-primary.focus,.open>.dropdown-toggle.btn-primary:focus,.open>.dropdown-toggle.btn-primary:hover{color:$govWhite; background-color:$govBlue; border-color:$govBlueHover}
+.btn-primary.disabled.focus,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled].focus,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary.focus,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover{background-color:$govBlue; border-color:$govBlue}
+.btn-primary .badge{color:$govBlue; background-color:$govWhite}
+
+.btn-success{color:$govWhite; background-color:$govGreen; border-color:$govGreen}
+.btn-success.focus,.btn-success:focus{color:$govWhite; background-color:#53b153; border-color:#397e39}
+.btn-success.active,.btn-success:active,.btn-success:hover,.open>.dropdown-toggle.btn-success{color:$govWhite; background-color:#53b153; border-color:#4eac4e}
+.btn-success.active.focus,.btn-success.active:focus,.btn-success.active:hover,.btn-success:active.focus,.btn-success:active:focus,.btn-success:active:hover,.open>.dropdown-toggle.btn-success.focus,.open>.dropdown-toggle.btn-success:focus,.open>.dropdown-toggle.btn-success:hover{color:$govWhite; background-color:#469a46; border-color:#397e39}
+.btn-success.active,.btn-success:active,.open>.dropdown-toggle.btn-success{background-image:none}
+.btn-success.disabled.focus,.btn-success.disabled:focus,.btn-success.disabled:hover,.btn-success[disabled].focus,.btn-success[disabled]:focus,.btn-success[disabled]:hover,fieldset[disabled] .btn-success.focus,fieldset[disabled] .btn-success:focus,fieldset[disabled] .btn-success:hover{background-color:$govGreen; border-color:$govGreen}
+.btn-success .badge{color:$govGreen; background-color:$govWhite}
+
+.btn-info{color:$govWhite; background-color:#3498db; border-color:#3498db}
+.btn-info.focus,.btn-info:focus{color:$govWhite; background-color: #2b96b5; border-color: #2188a7; }
+.btn-info.active,.btn-info:active,.btn-info:hover,.open>.dropdown-toggle.btn-info{color:$govWhite; background-color: #2b96b5; border-color: #2188a7; }
+.btn-info.active.focus,.btn-info.active:focus,.btn-info.active:hover,.btn-info:active.focus,.btn-info:active:focus,.btn-info:active:hover,.open>.dropdown-toggle.btn-info.focus,.open>.dropdown-toggle.btn-info:focus,.open>.dropdown-toggle.btn-info:hover{color:$govWhite; background-color: #2486a2; border-color: #175669; }
+.btn-info.disabled.focus,.btn-info.disabled:focus,.btn-info.disabled:hover,.btn-info[disabled].focus,.btn-info[disabled]:focus,.btn-info[disabled]:hover,fieldset[disabled] .btn-info.focus,fieldset[disabled] .btn-info:focus,fieldset[disabled] .btn-info:hover{background-color:#3498db; border-color:#3498db}
+.btn-info .badge{color:#3498db; background-color:$govWhite}
+
+.btn-warning{color:$govWhite; background-color:$govOrange; border-color:$govOrange}
+.btn-warning.focus,.btn-warning:focus{color:$govWhite; background-color:#d68d24; border-color:#956219}
+.btn-warning.active,.btn-warning:active,.btn-warning:hover,.open>.dropdown-toggle.btn-warning{color: $govWhite; background-color: #d68d24; border-color: #cd8722; }
+.btn-warning.active.focus,.btn-warning.active:focus,.btn-warning.active:hover,.btn-warning:active.focus,.btn-warning:active:focus,.btn-warning:active:hover,.open>.dropdown-toggle.btn-warning.focus,.open>.dropdown-toggle.btn-warning:focus,.open>.dropdown-toggle.btn-warning:hover{color:$govWhite; background-color:#b8791f; border-color:#956219}
+.btn-warning.disabled.focus,.btn-warning.disabled:focus,.btn-warning.disabled:hover,.btn-warning[disabled].focus,.btn-warning[disabled]:focus,.btn-warning[disabled]:hover,fieldset[disabled] .btn-warning.focus,fieldset[disabled] .btn-warning:focus,fieldset[disabled] .btn-warning:hover{background-color:$govOrange; border-color:$govOrange}
+.btn-warning .badge{color:$govOrange; background-color:$govWhite}
+
+.btn-danger{color:$govWhite; background-color:$govDangerRed !important; border-color:$govDangerRed}
+.btn-danger.focus,.btn-danger:focus{color:$govWhite; background-color:#d62c1a; border-color:#921e12}
+.btn-danger.active,.btn-danger:active,.btn-danger:hover,.open>.dropdown-toggle.btn-danger{color:$govWhite; background-color:#d62c1a; border-color:#cd2a19}
+.btn-danger.active.focus,.btn-danger.active:focus,.btn-danger.active:hover,.btn-danger:active.focus,.btn-danger:active:focus,.btn-danger:active:hover,.open>.dropdown-toggle.btn-danger.focus,.open>.dropdown-toggle.btn-danger:focus,.open>.dropdown-toggle.btn-danger:hover{color:$govWhite; background-color:#b62516; border-color:#921e12}
+.btn-danger.disabled.focus,.btn-danger.disabled:focus,.btn-danger.disabled:hover,.btn-danger[disabled].focus,.btn-danger[disabled]:focus,.btn-danger[disabled]:hover,fieldset[disabled] .btn-danger.focus,fieldset[disabled] .btn-danger:focus,fieldset[disabled] .btn-danger:hover{background-color:$govDangerRed; border-color:$govDangerRed}
+.btn-danger .badge {color:$govDangerRed; background-color:$govWhite}
+
+
+.btn-outline {
+  background-color: transparent !important;
+  color: inherit;
+  transition: all .5s;
+}
+.btn-outline.btn-white{
+  background-color: white;
+}
+
+.btn-default.btn-outline {color: $govMedGrey;border-color: $govMedGrey;}
+.btn-primary.btn-outline {color: $govBlue;border-color: $govBlue;}
+.btn-success.btn-outline {color: $govGreen;border-color: $govGreen;}
+.btn-info.btn-outline {color: #5bc0de;border-color: #5bc0de;}
+.btn-warning.btn-outline {color: $govOrange;border-color: $govOrange;}
+.btn-danger.btn-outline {color: $govDangerRed;border-color: $govDangerRed;}
+
+.btn-default.btn-outline:hover, .btn-default.btn-outline:active {color: lighten($govMedGrey, 20%); border-color: lighten($govMedGrey, 20%);}
+.btn-primary.btn-outline:hover, .btn-primary.btn-outline:active {color: lighten($govBlue, 20%); border-color: lighten($govBlue, 20%);}
+.btn-success.btn-outline:hover, .btn-success.btn-outline:active {color: lighten($govGreen, 20%); border-color: lighten($govGreen, 20%);}
+.btn-info.btn-outline:hover, .btn-info.btn-outline:active {color: lighten(#5bc0de, 20%); border-color: lighten(#5bc0de, 20%);}
+.btn-warning.btn-outline:hover, .btn-warning.btn-outline:active {color: lighten($govOrange, 20%); border-color: lighten($govOrange, 20%);}
+.btn-danger.btn-outline:hover, .btn-danger.btn-outline:active {color: lighten($govDangerRed, 20%); border-color: lighten($govDangerRed, 20%);}
+
+.btn-default.btn-outline:focus {color: $govMedGrey;}
+.btn-primary.btn-outline:focus {color: $govBlue;}
+.btn-success.btn-outline:focus {color: $govGreen;}
+.btn-info.btn-outline:focus {color: #3498db;}
+.btn-warning.btn-outline:focus {color: $govOrange;}
+.btn-danger.btn-outline:focus {color: #e74c3c;}
+.btn-outline.btn-white:hover, .btn-outline.btn-white:active {background: rgba(255, 255, 255, 0.36);}
+/******************* For Badges inside Buttons *******************/
+.btn-default.btn-outline .badge {color:$govMedGrey;background-color:$govWhite; border: 1px solid $govMedGrey;}
+.btn-primary.btn-outline .badge {color:$govBlue;background-color:$govWhite; border: 1px solid $govBlue;}
+.btn-success.btn-outline .badge {color:$govGreen;background-color:$govWhite; border: 1px solid $govGreen;}
+.btn-info.btn-outline .badge {color:#3498db;background-color:$govWhite; border: 1px solid #3498db;}
+.btn-warning.btn-outline .badge {color:$govOrange;background-color:$govWhite; border: 1px solid $govOrange;}
+.btn-danger.btn-outline .badge {color:#e74c3c;background-color:$govWhite; border: 1px solid #e74c3c;}
+
+.btn-default.btn-outline:hover .badge{color:$govMedGrey;background-color:$govWhite;}
+.btn-primary.btn-outline:hover .badge{color:$govBlue;background-color:$govWhite;}
+.btn-success.btn-outline:hover .badge{color:$govGreen;background-color:$govWhite;}
+.btn-info.btn-outline:hover .badge{color:#3498db;background-color:$govWhite;}
+.btn-warning.btn-outline:hover .badge{color:$govOrange;background-color:$govWhite;}
+.btn-danger.btn-outline:hover .badge{color:#e74c3c;background-color:$govWhite;}
+
+.badge.badge-default.badge-outline  {color:$govMedGrey;background-color:$govWhite; border: 1px solid $govMedGrey;}
+.badge.badge-primary.badge-outline  {color:$govBlue;background-color:$govWhite; border: 1px solid $govBlue;}
+.badge.badge-success.badge-outline  {color:$govGreen;background-color:$govWhite; border: 1px solid $govGreen;}
+.badge.badge-info.badge-outline  {color:#3498db;background-color:$govWhite; border: 1px solid #3498db;}
+.badge.badge-warning.badge-outline  {color:$govOrange;background-color:$govWhite; border: 1px solid $govOrange;}
+.badge.badge-danger.badge-outline  {color:#e74c3c;background-color:$govWhite; border: 1px solid #e74c3c;}
+
+.badge.badge-default.badge-outline:hover {color:$govMedGrey;background-color:$govWhite;}
+.badge.badge-primary.badge-outline:hover {color:$govBlue;background-color:$govWhite;}
+.badge.badge-success.badge-outline:hover {color:$govGreen;background-color:$govWhite;}
+.badge.badge-info.badge-outline:hover {color:#3498db;background-color:$govWhite;}
+.badge.badge-warning.badge-outline:hover {color:$govOrange;background-color:$govWhite;}
+.badge.badge-danger.badge-outline:hover {color:#e74c3c;background-color:$govWhite;}
+
+
+//Sizing and Alignment
+
+/****************************** BUTTONS ************************/
+button {margin: 0;padding: 0.8rem 1rem;border: none;display: inline-block;font-size: 1.5rem;}
+button:focus,
+button:hover {color: $govBlue;cursor: pointer;outline: none;}
+button:disabled {border:1px;}
+a.list-group-item:hover .badge.btn-white {background: $govMedGrey; color:$govWhite;}
+.gp-centerBtn {text-align: center;}
+.gp-btnWrapper {padding:20px;}
+.gp-nextBtn button, .gp-backBtn button {width: 150px;}
+.gp-backBtn {text-align: right;}
+.gp-thankYouBtn {text-align: center;}
+.gp-wideBtn {width:200px;}
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: 4px 7px;
+    font-size: 10px;
+    line-height: 1.4;
+    border-radius: 1px;
+}
+
+.btn-shadow {
+  -webkit-box-shadow: $boxShadowBtn;
+  -moz-box-shadow: $boxShadowBtn;
+  box-shadow:$boxShadowBtn;
+}
+
+/****************************** BADGES ************************/
+.circle { border-radius: 50%; display:flex; align-items: center; justify-content: center;
+  span {}
+  &.cir-sm {height:23px; width:23px;
+    span {font-size:12px;}
+  }
+  &.cir-md {}
+  &.cir-lg {}
+  &.cir-default {background-color: $govBlue; color: $govWhite;}
+  &.cir-warning {background-color: $govOrange; color: $govWhite;}
+  &.cir-danger {background-color:$govDangerRed; color: $govWhite;}
+  &.cir-info {background-color: $govLtBlue; color: $govWhite;}
+}
+
+
+
+//LABLES
+//perhaps make this the default for all labels??
+//
+.dashLabel {width:100%; text-align:center; border-radius:2px;}
+button:focus, .btn:focus, .btn:active:focus, .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus, input:focus, select:focus {outline:none;}

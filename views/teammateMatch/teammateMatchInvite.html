@@ -1,0 +1,162 @@
+<div class="gp-nav" company-dash-header></div>
+<style>
+</style>
+<div id="teammateMatchInvite" class="gp-mainBodyWidth gp-detailWrapper" ng-init="teammateMatchInit()">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp gp-p20">
+        <div class="blue-heading">
+            <h1>Teammate Match Invite Project Details</h1>
+        </div>
+        <div class="row invite-content">
+           <div class="col-md-3">
+                <div class="invite-avatar">
+                    <div ng-if="settings.oppurtunityBoxDimmed" class="dim-top"></div>
+                    <img ng-src="{{oppurtunity.invite.avatar}}"/>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h2>Department of the army</h2> 
+                <p>content..</p>
+                <div class="row invite-top-fields">
+                    <div class="col-md-2">
+                        <div ng-if="settings.oppurtunityBoxDimmed" class="dim-top"></div>
+                        <h5>Set Aside</h5>
+                        <br/>
+                        <span>{{oppurtunity.invite.setAside}}</span>
+                    </div>
+                    <div class="col-md-2">
+                        <div ng-if="settings.oppurtunityBoxDimmed" class="dim-top"></div>
+                        <h5>Contract Type</h5>
+                        <br/>
+                        <span>{{oppurtunity.invite.contractType}}</span>
+                    </div>
+                    <div class="col-md-2">
+                        <div ng-if="settings.oppurtunityBoxDimmed" class="dim-top"></div>
+                        <h5>NAICS</h5>
+                        <br/>
+                        <span>{{oppurtunity.invite.naics}}</span>
+                    </div>
+                    <div class="col-md-2">
+                        <div ng-if="settings.oppurtunityBoxDimmed" class="dim-top"></div>
+                        <h5>Close Date</h5>
+                        <br/>
+                        <span>{{oppurtunity.invite.closeDate}}</span>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Solicitation #</h5>
+                        <br/>
+                        <span>{{oppurtunity.invite.solicationNum}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="hdg-lg">Teaming oppurtunity with</h1>
+                <img ng-src="{{oppurtunity.avatar}}"/> 
+            </div>
+        </div>
+        <div class="row oppurtunity-content">
+            <div class="dimmed" ng-show="settings.oppurtunityBoxDimmed">
+                <div class="dim-top">
+                    <p>
+                    You have been invited to a teaming oppurtunity if interested <a ng-click="openModal($event)">click here</a> to sign NDA and view more details.
+                    </p>
+                </div>
+            </div>
+            <div ng-show="!settings.oppurtunityBoxDimmed">
+                <div class="col-md-4 card">
+                    <div class="blue-heading"> 
+                        <h3>Organization Profile</h3>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <h5>Address<h5>
+                                <span>{{oppurtunity.company.address1}}</span><br/>
+                                <span>{{oppurtunity.company.address2}}</span>
+                            </li>
+                            <li>
+                                <h5>Website</h5>
+                                <span>{{oppurtunity.company.website}}</span>
+                            </li>
+                            <li>
+                                <h5>DUNS</h5>
+                                <span>{{oppurtunity.company.duns}}</span>
+                            </li>
+                            <li>
+                                <h5>CAGE</h5>
+                                <span>{{oppurtunity.company.cage}}</span>
+                            </li>
+                            <li>
+                                <h5>Primary Contact</h5>
+                                <span>{{oppurtunity.company.pointOfContactEmail}}</span>
+                            </li>
+                            <li>
+                                <h5>Phone</h5>
+                                <span>{{oppurtunity.company.phone}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 card">
+                    <div class="blue-heading"> 
+                        <h3>Additional Information</h3>
+                    </div>
+                    <div class="content">
+                        <ul> 
+                            <li>
+                                <h5>Business Type</h5>
+                                <span>{{oppurtunity.company.businessType}}</span>
+                            </li> 
+                            <li>
+                                <h5>Primary NAICS code</h5>
+                                <span>{{oppurtunity.company.primaryNaicsCode}}</span>
+                            </li> 
+                            <li>
+                                <h5>NAICS codes</h5>
+                                <span>{{oppurtunity.company.naicsCodes}}</span>
+                            </li> 
+                            <li>
+                                <h5>Security Clearance</h5>
+                                <span>{{oppurtunity.company.securityClearance}}</span>
+                            </li>
+                             <li>
+                                <h5>Products And Services Offered</h5>
+                                <span>{{oppurtunity.company.productsAndservicesOffered}}</span>
+                            </li>
+                            <li>
+                                <h5>Contracts</h5>
+                                <span>{{oppurtunity.company.contracts}}</span>
+                            </li>
+                            <li>
+                                <h5>Certifications</h5>
+                                <span>{{oppurtunity.company.certifications}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 card">
+                    <div class="blue-heading">
+                        <h3>Account Users</h3>
+                    </div>
+                    <div class="content">
+                        <table class="table">
+                            <thead>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </thead>
+                            <Tbody>
+                                <tr ng-repeat="account in oppurtunity.company.accounts">
+                                    <td>{{account.name}}</td>
+                                    <td>{{account.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+  </div>
+</div>

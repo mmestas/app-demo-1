@@ -1,0 +1,101 @@
+<div class="gp-nav" company-dash-header></div>
+<!-- <div id="teammateMatch" class="gp-mainBodyWidth gp-detailWrapper" ng-init="teammateMatchInit()"> -->
+<div id="teammateMatch" class="gp-mainBodyWidth gp-detailWrapper">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp gp-p20">
+      <h3>Teammate Match</h3>
+      <div class="row search-top">
+            <div class="col-md-2">
+                <h5>&nbsp;</h5>
+                <select class="form-control" ng-model="savedSearch" ng-change="onChangeSavedSearch(savedSearch)" ng-options="option.title for option in savedSearches track by title">
+                    <option value="">Saved Searches</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <h5>&nbsp;</h5>
+                <button class="btn btn-primary" ng-click="saveSearch()">Save Search</button>
+            </div>
+            <div class="col-md-4">
+                <h5>Select opportunity from favorites from pipeline</h5>
+                {{values.opportunity}}
+                <select ng-model="values.opportunity" class="form-control" ng-options="option.name for option in opportunities">
+                    <option value="">Select</option>
+                </select>
+            </div>
+            <div class="col-md-1 middle-align-or">
+                <div class="text">OR</div>
+            </div>
+            <div class="col-md-2">
+                <h5>Enter RFP number</h5>
+                <input type="text" ng-model="values.rfpNumber" class="form-control"/>
+            </div>
+            <div class="col-md-1">
+                <h5>&nbsp</h5>
+                <button class="btn btn-primary" ng-click="appDemo1ProcessTeamMateSearch(values)">Run</button>
+            </div>
+      </div>
+      <div ng-show="isLoading">
+            <div class="col-md-12">
+                <center>
+                    <h4>Loading..</h4>
+                </center>
+            </div>
+      </div>
+      <div class="row" id="noResults" ng-show="results.length===0 && !isLoading">
+            <div class="col-md-12">
+                <center>
+                    <h4>No results found..</h4>
+                </center>
+            </div>
+      </div>
+      <div class="row results" id="searchResults" ng-show="results.length>0 && !isLoading">
+            <div class="col-md-12">
+                <center>
+                    <ul class="tab-buttons">
+                        <li ng-click="openTab('suggested')" ng-class="{active: tabActive==='suggested'}">Suggested Teammates</li>
+                        <li ng-click="openTab('wantToTeam')" ng-class="{active: tabActive==='wantToTeam'}">Companies who want to Team</li>
+                    </ul>
+                </center>
+                <div ng-show="tabActive==='suggested'">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4>Top 50 Recommendations</h4>
+                            <p>The search was derived from the following data sources: SAM, FBO, FAPIIS</p>
+                        </div>
+                        <div class="col-md-2">
+                            <label># of matches to display</label>
+                            <select class="pull-right" ng-model="numMatches" ng-change="onChangeNumMatches(numMatches)" ng-options="option.title for option in numMatchesList track by title"></select>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th>Business Name</th>
+                            <th>NAICS Code</th>
+                            <th>Point Of Contact</th>
+                            <th>Point Of Contact Email</th>
+                            <th>WebSite</th>
+                            <!-- send message -->
+                            <th>&nbsp;</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="result in results">
+                                <td>{{result.business}}</td>
+                                <td>{{result.naics}}</td>
+                                <td>{{result.pointOfContact}}</td>
+                                <td>{{result.pointOfContactEmail}}</td>
+                                <td>{{result.website}}</td>
+                                <td>
+                                    <button class="btn btn-info" ng-click="sendMessage($event, result)">Send Message</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="tabActive==='wantToTeam'">
+                </div>
+            </div>
+      </div>
+      <button class="btn btn-sm" ng-click="openModal($event)">Open Modal Example</button>
+    </div>
+  </div>
+</div>

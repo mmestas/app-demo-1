@@ -1,0 +1,29 @@
+<md-dialog aria-label="Delete Bank Account Confirm" class="gp-mdModal">
+  <form ng-cloak >
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Confirm</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div>You are about to delete your banking information that app1url uses to pay you for work completed.</div>
+        <div><strong>Are you sure?</strong></div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-hide="nameExists">
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+      <md-button ng-click="deleteStripeBankAcct()">
+       Delete Account
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

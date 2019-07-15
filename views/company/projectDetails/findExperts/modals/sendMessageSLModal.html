@@ -1,0 +1,74 @@
+<md-dialog aria-label="Send Message"  class="gp-565Modal">
+  <div ng-if="!allowSendSLMessage">
+    <form ng-cloak>
+      <md-toolbar class="md-gpBlue-theme">
+        <div class="md-toolbar-tools">
+          <h2>Message</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <section ng-if="slInfoData.name">
+            <div class=" gp-projectInfo gp-mb15">
+              <div>
+                <span class="font-xml" ><img ng-src="{{envURL+slInfoData.imageFilename}}"</span>
+                <span class="font-xml gp-mr15">
+                  <span ng-if="!slInfoData.profileNamePrivate">{{slInfoData.name}}</span>
+                  <span ng-if="slInfoData.profileNamePrivate">{{slInfoData.name | createInitials}}</span>
+                </span>
+                <span class="font-md">{{slInfoData.city}}, {{slInfoData.state.name}}</span>
+              </div>
+            </div>
+          </section>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block gp-width-100">
+              <label>Subject: {{projectInfoData.title}}</label>
+              <textarea ng-model="slMessage" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+          </div>
+          <!-- <md-checkbox ng-model="makeAnonymous" aria-label="" class="md-gpSolidBlue">Make Anonymous</md-checkbox> -->
+          <div>From: {{userInfoData.name}}, {{userInfoData.Title}} - {{userInfoData.Company.name}}</div>
+        </div>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+         Cancel
+        </md-button>
+        <md-button class="gp-SolidBlue" ng-click="sendSLMessage(slMessage, makeAnonymous )">
+         <i class="fa fa-paper-plane"></i> &nbsp; Send Message
+       </md-button>
+      </md-dialog-actions>
+    </form>
+  </div>
+
+  <div ng-if="allowSendSLMessage">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Congratulations</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="gp-thankYouDialogue">Your message has been sent!</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="btn btn-primary" ng-click="backToDashboard()">
+       Back to Dashboard
+      </md-button>
+      <md-button ng-click="cancel()">
+       close
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
+</md-dialog>

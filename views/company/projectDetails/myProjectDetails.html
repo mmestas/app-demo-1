@@ -1,0 +1,95 @@
+<!-- <div class="gp-detailWrapper gp-mainBodyWidth" ng-init="initProjectDetails()"> -->
+<div class="gp-detailWrapper gp-mainBodyWidth">
+  <div class="gp-nav" company-dash-header></div>
+  <div  ng-include="'/views/company/projectDetails/projectDetailsHeader/projectDetailsHeader.html'"></div>
+  <md-tabs id="findExperts" md-dynamic-height md-border-bottom class="arrow-steps" md-selected="selectedProgressTab">
+    <md-tab class="step">
+      <md-tab-label>
+        <span class="tabNumber">1</span>
+        Project Overview
+      </md-tab-label>
+      <md-tab-body>
+        <div class="gp-usabilitySpace">
+          <h3 ng-show="selectedProgressTab == 0">Overview</h3>
+          <div>
+            <button class="btn btn-sm btn-primary" ng-click="editProjectDetails(projectDetails)" ng-hide="showEditProjectFields || showDuplicateProject"
+              ng-if="(projectDetails.owner.gpKey === userInfo.gpKey ) || (userInfo.role.gpKey === '{f87dc87e-d4c4-4e22-b025-f212cd659910}')">
+              Edit Project
+            </button>
+            <button class="btn btn-sm btn-primary" ng-click="saveProjectDetails(projectDetails, documentFiles)" ng-show="showEditProjectFields" ng-disabled="(!projectDetails.keywords.keyword1 && !projectDetails.keywords.keyword2 && !projectDetails.keywords.keyword3 && !projectDetails.keywords.keyword4 && !projectDetails.keywords.keyword5)">Save Changes</button>
+            <button class="btn btn-sm btn-success" ng-click="duplicateProject(projectDetails)" ng-hide="showDuplicateProject || showEditProjectFields">Copy Project</button>
+            <button class="btn btn-sm btn-success" ng-click="saveDuplicatedProject(duplicatedProject, documentFiles)" ng-show="showDuplicateProject" ng-disabled="(!duplicatedProject.keywords.keyword1 && !duplicatedProject.keywords.keyword2 && !duplicatedProject.keywords.keyword3 && !duplicatedProject.keywords.keyword4 && !duplicatedProject.keywords.keyword5)">Save Changes</button>
+            <button class="btn btn-sm btn-default" ng-click="cancelEditProject()" ng-show="showEditProjectFields || showDuplicateProject">Cancel</button>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 gp-innerTab" ng-include="'/views/company/projectDetails/projectOverview/manageProject.html'"></div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab  class="step" ng-class="{'current': true}" md-on-select="appDemo1GetFindExperts()">
+      <md-tab-label>
+        <span class="tabNumber">2</span>
+        Search for Experts
+      </md-tab-label>
+      <md-tab-body>
+        <div class="gp-usabilitySpace">
+          <h3 ng-show="selectedTabIndex == 0" style="min-width:350px;">Search for Experts</h3>
+          <div ng-show="selectedTabIndex == 0" style="flex-grow:1;">
+            <div style="max-width:600px;" class="input-group">
+              <input type="text" class="form-control" name="keywordInput"  ng-model="keywordInput" ng-keypress="addKeyword($event, keywordInput);" placeholder="Enter keywords that describe the expertise you seek...">
+              <span class="input-group-addon btn btn-primary active btn-sm" ng-click="searchKeywords(keywordInput); keywordInput = '';" ng-disabled="!keywordInput"><i class="fa fa-search"></i></span>
+            </div>
+          </div>
+          <h3 ng-show="selectedTabIndex == 1">Your Saved Consultants</h3>
+          <h3 ng-show="selectedTabIndex == 2">Your shortlisted experts can be invited to quote an engagements</h3>
+          <h3 ng-show="selectedTabIndex == 3">Your Organization Bench</h3>
+        </div>
+        <div class="col-sm-12 col-md-12 gp-innerTab ">
+          <md-tabs md-dynamic-height md-border-bottom class="md-gpBlue-theme gp-formSize gp-thickInkBar" md-selected="selectedTabIndex">
+            <md-tab label="Search Results ({{totalResults}})">
+              <div style="position:absolute; top: -37px; left:15px; font-size:21px;">Expert Matching Engine <sup style="font-size:12px;">TM</sup></div>
+              <md-content  ng-include="'/views/company/projectDetails/findExperts/findExperts.html'"></md-content>
+            </md-tab>
+            <md-tab label="Saved ({{(favorites).length}})">
+                <md-content  ng-include="'views/company/projectDetails/findExperts/favorites/favorites.html'"></md-content>
+            </md-tab>
+            <md-tab label="Shortlist ({{(shortlist).length}})">
+                <md-content  ng-include="'views/company/projectDetails/findExperts/shortlist/shortlist.html'"></md-content>
+            </md-tab>
+            <md-tab label="Bench ({{(bench).length}})">
+                <md-content  ng-include="'views/company/projectDetails/findExperts/bench/bench.html'"></md-content>
+            </md-tab>
+          </md-tabs>
+        </div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab class="step" md-on-select="appDemo1GetCompanyUsers()">
+      <md-tab-label>
+        <span class="tabNumber">3</span>
+        Review Quotes & Award
+      </md-tab-label>
+      <md-tab-body>
+        <div class="gp-usabilitySpace">
+          <h3 ng-show="selectedProgressTab == 2">Review and Award Quotes</h3>
+        </div>
+        <div class="col-sm-12 col-md-12 gp-innerTab" ng-include="'/views/company/projectDetails/reviewQuotes/quotesReceived.html'"></div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab class="step">
+      <md-tab-label>
+        <span class="tabNumber">4</span>
+        Manage Engagements
+      </md-tab-label>
+      <md-tab-body>
+        <div class="gp-usabilitySpace">
+          <h3 ng-show="selectedProgressTab == 3">Manage Your Engagements</h3>
+          <div style="overflow: hidden; margin-bottom: 15px;">
+            <button class="btn btn-primary btn-outline btn-sm" style="float:right" ng-click="engagementIsCompleted = !engagementIsCompleted">
+              <span ng-show="engagementIsCompleted">Hide</span><span ng-hide="engagementIsCompleted">Show</span> Completed</button>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 gp-innerTab" ng-include="'views/company/projectDetails/manageEngagements/engagementsToApprove.html'"></div>
+      </md-tab-body>
+    </md-tab>
+  </md-tabs>
+  </div>
+</div>

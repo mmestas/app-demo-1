@@ -1,0 +1,276 @@
+/********************** DASH DETAILS - HEADER *****************/
+  .gp-projectDetailsHeaderSection {
+    display: flex;
+    .gp-projectDetailHeader {
+      display:flex;
+      padding:10px;
+      margin: 10px 5px;
+      font-size: 0.85em;
+      background: transparent;
+      flex-grow: 1;
+      border: 1px solid #c5d4e2;
+      background: #d7e0e9;
+
+      .gp-smallerText {font-size: 18px;}
+      div.btn-primary {
+        font-size: 12px; width:100%;
+        .badge {font-size: 11px; min-width: 2em; padding: 2px 6px 0; }
+      }
+      .gp-projectListItem-badges {
+        padding: 0 15px;border-right: 1px dashed $govMedGrey;border-left: 1px dashed $govMedGrey;margin-right: 20px;
+        span.badge {
+          min-width: 2.5rem;padding: 0px 6px 0px;text-align: center;font-size: 12px;
+        }
+      }
+      .form-control {padding: 7px;height: 33px;font-size: 12px;}
+    }
+  }
+
+/********************** DASH DETAILS - VIEW PROJECT *****************/
+
+/********************** DASH DETAILS - PROJECT OVERVIEW *****************/
+.gp-projectOverview {
+  display:flex; padding:10px; background: transparent;
+  .row {border-bottom:1px dashed #eaeaea; margin-bottom:15px;}
+  .form-group {
+    label {color: $govBlue;}
+    div {border-bottom: 0px solid;padding-bottom: 2px;border-color: #e0e0e0;margin-top: 0;color: $govDkGrey;}
+  }
+  .gp-projectKeywords {
+    width: 100%;
+    padding: 0 3px;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 0px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .keywordBubble {
+      background-color: transparent;
+      color: $govDkGrey;
+      padding: 1px 7px;
+      border-radius: 13px;
+      font-size: 14px;
+      border: 0;
+      text-align: center;
+      height: unset;
+      margin: 11px 2px 11px 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      i.fa {margin-left:6px;}
+      span.addedKeyword {width: max-content;}
+    }
+  }
+  .gp-categoriesList {
+    .gp-categoriesUL {
+      display:flex; flex-wrap:wrap;
+      > li {
+        margin-right:18px; margin-bottom:18px; border-right: 1px dashed #e0e0e0;padding-right: 18px; font-size:14px;
+        ul {
+          li {font-size:13px; margin-left:0px;list-style-type: disc;}
+        }
+      }
+      > li:last-child {border-right: 0;}
+    }
+  }
+}
+
+/********************** DASH DETAILS - EDIT PROJECT *****************/
+.gp-editProject, .gp-duplicateProject {
+  font-size: 14px;
+  .radioColumn {display:flex; flex-direction: column;}
+  md-radio-button {display: inline-block; margin-left: 15px;}
+  md-checkbox {margin:0;}
+  project-file-upload md-input-container .md-input {border: 0; }
+  project-file-upload md-input-container.md-input-focused .md-input {border:0;}
+  md-autocomplete {
+    md-input-container {
+      input {
+        width: 100%;
+        height: 45px;
+        padding: 10px 15px;
+        margin-top:5px;
+        background-color: white;
+        border: 1px solid $govMedGrey;
+        border-radius: 0px;
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      }
+    }
+  }
+   md-autocomplete[md-floating-label] {
+     .md-show-clear-button {
+       button {
+         top:8px;
+       }
+     }
+   }
+  .gp-projectEditCategories {
+    display:flex; flex-wrap:wrap;
+    > li {
+      margin-right:10px;margin-bottom:15px;
+      > div {
+        margin-bottom: 10px;
+        > span {
+          font-weight:600; margin-right:5px;
+        }
+      }
+      ul {
+        li {
+          font-size: 13.5px;
+        }
+        li.list-group-item:hover {background: $govLtBlue;}
+      }
+    }
+  }
+
+}
+
+
+.gp-editProject md-input-container .md-placeholder,
+.gp-editProject md-input-container label:not(.md-no-float):not(.md-container-ignore),
+.gp-duplicateProject md-input-container .md-placeholder,
+.gp-duplicateProject md-input-container label:not(.md-no-float):not(.md-container-ignore) {bottom: 60px;bottom: 68%;left: 15px;}
+.gp-editProject md-input-container.md-input-focused label:not(.md-no-float),
+.gp-editProject md-input-container.md-input-has-placeholder label:not(.md-no-float),
+.gp-editProject md-input-container.md-input-has-value label:not(.md-no-float),
+.gp-duplicateProject md-input-container.md-input-focused label:not(.md-no-float),
+.gp-duplicateProject md-input-container.md-input-has-placeholder label:not(.md-no-float),
+.gp-duplicateProject md-input-container.md-input-has-value label:not(.md-no-float)  {bottom: 75px;left: 0px; display:none;}
+
+
+.gp-editProject md-autocomplete[md-floating-label] md-input-container,
+.gp-duplicateProject md-autocomplete[md-floating-label] md-input-container {margin-top:-7px;}
+
+.gp-projectDetailsSection md-input-container .md-errors-spacer {display:none;}
+
+
+/********************** DASH DETAILS - FIND EXPERTS *****************/
+//This may not be used NOTE: Don't erase until sure
+ // #gp-Experts {
+ //   .gp-sideSectionRow {
+ //     select.input-sm {font-size: 11px;}
+ //     button.btn-sm {width:100%; font-size: 11px;}
+ //   }
+ //   .gp-collapse.gp-in {padding:5px;}
+ // }
+
+ #gp-govProRating {}
+ #gp-KeySearch {padding:5px;}
+ #gp-govProCategory {}
+ #gp-govProRating md-radio-button {display: inline-block;}
+
+ .gp-sideSectionRow {padding:0; margin:0}
+ .gp-filterInputs {padding-left: 3px; padding-right: 3px;}
+   .gp-filterInputs .fa-save {font-size: 37px; color: #545453;margin-top: -3px;}
+   .gp-filterInputs .glyphicon-floppy-disk {font-size: 35px; color: #545453;}
+   .gp-filterInputs .form-group {margin-bottom:10px;}
+   .gp-apply {text-align: right;min-width: 118px;}
+   .gp-total {margin: 0; font-weight: 600;}
+ .gp-expertSearchFilters {background: white;border: 1px solid $govBorderGrey;padding: 10px;
+   .panel {margin-bottom:4px;border-radius: 0;
+     .panel-heading {border-radius: 0;padding: 12px;}
+   }
+ }
+ // .gp-expertSearchFilters .panel {margin-bottom:4px;border-radius: 0;}
+ // .gp-expertSearchFilters .panel .panel-heading {border-radius: 0;padding: 12px;}
+
+ .gp-expertSearchResults {background: transparent;padding:10px;
+   .panel {margin-bottom:4px;border-radius: 0;
+     .panel-heading {border-radius: 0;padding: 12px;}
+   }
+ }
+ .gp-FilterTitle {font-size: 15px;font-weight: 300;}
+ .gp-filterPanel {padding: 8px;}
+ .gp-addedFilters {
+   padding: 0 5px; margin: 0 5px; flex-grow:1;
+    button {margin-bottom:5px;}
+    button.btn-xs {margin-bottom:5px; border:1px solid $govMedLtGrey;}
+    button.btn-xs i.fa{margin-left:3px;}
+ }
+ .filterResultsOn {width:130px;
+   label {font-size:12px; width:130px;}
+   button.dropdown-toggle {width:130px; padding:2px 10px 2px 2px; position:relative; min-height: 24px;
+     .caret {position: absolute;right: 3px;top: 43%;}
+   }
+   ul.gp-sortFilterList {margin-top: -5px; padding: 5px 7px; min-width: 105px; border-top-left-radius: 0; border-top-right-radius: 0;
+   }
+ }
+.resultsFilters {align-items: flex-end;
+  .gp-clearAllBtn {width:145px;}
+  .dwnldResults {width:130px;}
+}
+
+ .gp-clearAllBtn {width:100%;}
+ .gp-extendedBtns {display: none;}
+ .gp-extendedBtns .btn {width: 50%;display: inline-block;font-size: 11px;padding: 6px 2px;}
+ .gp-addToBenchBtn .btn.btn-default {color: $govDkBlue;color: $govBlue;}
+ .gp-addToBenchBtn:hover .gp-extendedBtns {display: flex;width: 100%;}
+ .gp-addToBenchBtn:hover .gp-hoverBtn {display:none;}
+ .gp-addToFavBtn .btn.gp-addedTo,
+ .gp-addToShortListBtn .btn.gp-addedTo,
+ .gp-addToBenchBtn .btn.gp-addedTo
+     {background: #dadada;border-color:#dadada;color: #afafaf;}
+ .gp-addToFavBtn .btn.gp-addedTo:hover ,
+ .gp-addToShortListBtn .btn.gp-addedTo:hover ,
+ .gp-addToBenchBtn .btn.gp-addedTo:hover {background: white;color: $govBlue;border-color: $govBlue;}
+ .showRemove {display:none;}
+
+ .gp-addToFavBtn .btn.gp-addedTo:hover .showRemove,
+ .gp-addToShortListBtn .btn.gp-addedTo:hover .showRemove,
+ .gp-addToBenchBtn .btn.gp-addedTo:hover .showRemove
+ {display:block;}
+ .gp-addToFavBtn .btn.gp-addedTo:hover .hideRemove,
+ .gp-addToShortListBtn .btn.gp-addedTo:hover .hideRemove,
+ .gp-addToBenchBtn .btn.gp-addedTo:hover .hideRemove
+ {display:none;}
+
+
+ .gp-expertsList {padding: 7px;background: white;border: 1px solid $govBorderGrey;border-bottom: 0;display: flex;}
+ .gp-expertsList:last-child {padding: 7px;background: white;border: 1px solid $govBorderGrey;}
+ .gp-expertPicLinks {display: flex;flex-direction:column;justify-content: center;align-items: center;align-content: center;padding: 3px;min-width: 150px;background: transparent;}
+   .gp-expertPic {margin-bottom: 8px;width: 100%;height: 110px;max-width: 110px;position: relative;}
+   .gp-expertPic img {width:100%;border-radius: 100px;height: 100%;}
+   .gp-expertPicLinks button {width:100%;}
+   .gp-addToFavBtn {width:100%;margin-bottom:5px;}
+   .gp-addToShortListBtn {width:100%;margin-bottom:5px;}
+   .gp-addToBenchBtn {width:100%;margin-bottom:5px;}
+   .gp-unlockMsg {font-style: italic;}
+   .gp-addToBenchBtn.gp-doubleBtns {display:flex;}
+   .gp-addToBenchBtn.gp-doubleBtns button {width:50%; font-size:10px;}
+   .gp-addToBenchBtn.gp-doubleBtns button:first-child, .gp-addToBenchBtn.gp-doubleBtns button:nth-child(2) {margin-right:3px;}
+
+   .gp-topFavShortBenchBtns {text-align: right;margin-bottom: 10px;}
+
+ .gp-expertInfo {padding: 3px 12px;background: transparent;}
+   .gp-expertName {}
+ #findExperts .gp-expertName:hover > div:first-child span {text-decoration: underline;cursor: pointer;}
+
+   .gp-expertCo {
+   color: $govGrey;
+}
+   .gp-expertAddress {font-size:14px;}
+   .gp-expertDescription {margin-top:10px; font-size:14px;}
+   .gp-expertDescription span[ng-click] {color:$govBlue;text-decoration:underline;}
+   .gp-expertSkills {margin-bottom:8px;display:flex; align-items:center; margin-top:10px;font-size:13px;}
+     .gp-expertSkillsLabel {margin-right: 5px !important;width: 115px;text-overflow: ellipsis;overflow: hidden;display: inline-block;padding: 2px !important;transition: 0.3s;}
+     .gp-expertSkillsLabel:hover {width:auto;min-width: 115px;padding: 2px 8px !important;cursor: default;}
+     .gp-expertAgencies {margin-right: 5px;}
+   .gp-expertDeptLogos {margin-top:10px; font-size:13px;}
+   .gp-expertDeptLogos img {/* width:50px; */height: 40px;}
+ .gp-expertRating {padding:3px;display: flex;flex-direction:column;align-items: flex-end;background: transparent;font-size: 13px;}
+ #gp-govProCategory md-checkbox.gp-starCheckbox {margin-left: 0px;margin-right: 0;margin-bottom: 5px;min-width: 15px;width: 20px;}
+ #gp-govProCategory md-checkbox.gp-catCheckbox {margin-bottom: 5px;margin-left:0px;}
+ #gp-govProCategory md-checkbox.gp-subCatCheckbox {margin-left: 20px;margin-bottom: 2px;}
+ #gp-govProCategory md-checkbox .md-label {line-height: 1.3; font-size: 12px;}
+ #gp-govProCategory .md-label {line-height: 1.3; font-size: 12px;}
+
+ #gp-govProCost md-checkbox.gp-costCheckbox {margin-top:5px; margin-bottom: 2px;}
+ #gp-govProCost article.gp-slider {}
+
+ #gp-SecurityClearance md-checkbox.gp-catCheckbox {margin-bottom: 5px; margin-left:0px;}
+ #gp-SecurityClearance md-checkbox .md-label {font-size: 13px;}
+
+.md-dialog-content md-tabs.md-dynamic-height md-tabs-content-wrapper {/* padding:7px; */}

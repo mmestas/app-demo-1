@@ -1,0 +1,88 @@
+<div class="gp-nav" admin-consultant-dash-header></div>
+<div id="csaDashboard" class="gp-mainBodyWidth gp-detailWrapper" ng-init="csaInit()">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp">
+      <div class="row">
+        <div class="col col-md-12"><h3 class="gp-centerBtn gp-m20">CSA Dashboard</h3></div>
+      </div>
+      <div class="row impersonateInputRow gp-flex" ng-if="!userInfo.isImpersonateSession">
+        <div class="col col-md-6 gp-flex impersonationBoundingBox">
+          <div class="row">
+            <div class="col col-md-12">
+              <h4 class="gp-centerBtn gp-mb15">Impersonation</h4>
+              <div class="gp-text-danger gp-mb15">
+                <h4 class="gp-centerBtn gp-text-danger">WARNING</h4>
+                This option should only be used by app1url Authorized User's to troubleshoot or assist users of the system.
+              </div>
+              <div class="">
+                Use this option to login as a specific app1url user. To find a specific user, start typing the person's username (email) in the area below.
+              </div>
+            </div>
+          </div>
+          <div class="row" style="flex-grow:1;">
+            <div class="col col-md-12">
+            </div>
+          </div>
+          <div class="row gp-mt15">
+            <div class="col col-md-9">
+              <md-autocomplete flex
+                  md-min-length=3
+                  md-delay=1000
+                  md-no-cache = "false"
+                  md-selected-item="selectedUser"
+                  md-search-text="searchUser.searchText"
+                  md-items="user in getUsersForImpersonation(searchUser.searchText)"
+                  md-item-text="user.email"
+                  md-floating-label="Type the username here"
+                  md-selected-item-change="setPerson(selectedUser)"
+                  md-clear-button="true" ng-if="!isImpersonateSession">
+                <md-item-template>
+                  <span md-highlight-text="searchUser.searchText">{{user.firstName}} {{user.lastName}} </span>
+                  <span md-highlight-text="searchUser.searchText" ng-if="user.type == 1"> (Organization)</span>
+                  <span md-highlight-text="searchUser.searchText" ng-if="user.type == 2"> (Consultant)</span>
+                  <span md-highlight-text="searchUser.searchText"> - {{user.email}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No matches found.
+                </md-not-found>
+              </md-autocomplete>
+            </div>
+            <div class="col col-md-3">
+              <button class="btn btn-danger btn-sm" ng-click="impersonateUser(selectedUser)" ng-disabled="!selectedUser">Impersonate</button>
+           </div>
+          </div>
+        </div>
+
+
+        <div class="col col-md-6 gp-flex impersonationBoundingBox">
+          <div class="row">
+            <div class="col col-md-12">
+              <h4 class="gp-centerBtn gp-mb15">Demo Accounts</h4>
+              <div class="" >
+                To explore using the app1url application, use the "Company User" or "Consultant User" buttons to log into demonstration accounts. These are not real accounts.
+              </div>
+            </div>
+          </div>
+          <div class="row" style="flex-grow:1;">
+            <div class="col col-md-12">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-6 gp-centerBtn">
+              <button class="btn btn-primary btn-sm" ng-click="impersonateDemoCompanyUser()" ng-if="!userInfo.isImpersonateSession">Company User</button>
+            </div>
+            <div class="col col-md-6 gp-centerBtn">
+              <button class="btn btn-primary btn-sm" ng-click="impersonateDemoConsultant()" ng-if="!userInfo.isImpersonateSession">Consultant User</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row  impersonateInputRow" ng-if="userInfo.isImpersonateSession">
+        <div class="col col-md-12">
+          You are currently impersonating {{userInfo.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

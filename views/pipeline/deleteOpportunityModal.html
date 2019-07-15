@@ -1,0 +1,15 @@
+<md-dialog>
+  <md-dialog-content class="gp-p20">
+    <div>You are about to delete <strong>{{pipelineOpportunityDetails.name}}</strong>.</div>
+    <div>Are you sure you wish to continue?</div>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+     Cancel
+    </md-button>
+    <md-button ng-click="appDemo1RemovePipelineOpportunity()" class="btn-danger">
+     Delete
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

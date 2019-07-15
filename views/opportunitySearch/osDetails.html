@@ -1,0 +1,76 @@
+<md-dialog aria-label="Opportunity Details" id="osDetailsDialog">
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>
+        <span>Opportunity Details</span>
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <!-- <div class="gp-flex-wrap row"> -->
+      <div class="row">
+        <!-- ************************* LEFT ************************* -->
+        <!-- <div class="col-md-3 gp-flex-column"> -->
+        <div class="col-md-3">
+          <div class="gp-mb10 oppDetailsAgencyLogo alignCenter" >
+            <img ng-if="opportunityDetails.agency.imageFilename" data-ng-src="{{envURL+opportunityDetails.agency.imageFilename}}">
+            <img ng-if="!opportunityDetails.agency.imageFilename" data-ng-src="{{envURL}}/images/placeholders/default-img.svg">
+          </div>
+          <div class="">
+            <h5>Set Aside</h5>
+            <div>{{opportunityDetails.setAside.name}}</div>
+          </div>
+          <div class="">
+            <h5>Contract Type</h5>
+            <!-- <div>{{opportunityDetails.contractType}}</div> -->
+            <div>{{opportunityDetails.contractType}}</div>
+          </div>
+          <div class="">
+            <h5>NAICS</h5>
+            <div>{{opportunityDetails.naicsCode}}</div>
+          </div>
+          <div class="gp-mb15">
+            <h5>Close Date</h5>
+            <div ng-if="opportunityDetails.closeDate !== '/Date(-2209143600000)/'">{{opportunityDetails.closeDate | dateConverter | date}}</div>
+            <div ng-if="opportunityDetails.closeDate === '/Date(-2209143600000)/'">N/A</div>
+          </div>
+          <div class="gp-mb10">
+            <button class="btn btn-primary btn-sm gp-width-100" ng-click="closeAndOpenAddOpp(opportunityDetails)">Add to Pipeline</button>
+          </div>
+          <!-- <div class="gp-mb10">
+            <button class="btn btn-primary btn-sm gp-width-100" ng-click="runTeammateMatchReport()" style="font-size:10px;">Run Teammate Match Report</button>
+          </div> NOTE: Keep - to be included later -->
+          <div class="gp-mb10">
+            <button class="btn btn-primary btn-sm gp-width-100" ng-click="addOpportunityToFavorites(opportunityDetails)">Add to Favorites</button>
+          </div>
+          <div class="gp-mb10">
+            <button class="btn btn-primary btn-sm gp-width-100" ng-click="createProject(opportunityDetails)" data-ng-if="!userInfo.isConsultant">Create Project</button>
+          </div>
+         <!--  <div class="">
+            <md-checkbox ng-model="addMyCompany" aria-label="Add" class="md-raised gp-catCheckbox" ng-change="addCompanyToLookingForPartnerList(addMyCompany)"> Add My Company to "looking to partner list"</md-checkbox>
+          </div> NOTE:  Keep - to be included later-->
+        </div>
+        <!-- ************************* RIGHT ************************* -->
+        <div class="col-md-9">
+
+          <h3>{{opportunityDetails.name}}</h3>
+          <h4 ng-if="opportunityDetails.agency.name">{{opportunityDetails.agency.name}}</h4>
+          <div data-ng-bind-html="opportunityDetails.description"></div>
+          <div><a target="_blank" ng-href="{{opportunityDetails.opportunityLink}}">View Opportunity on FedBizOps</a></div>
+          <div class="osdPWIN"></div>
+        </div>
+      </div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+     Close
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

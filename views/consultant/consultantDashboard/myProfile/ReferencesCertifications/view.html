@@ -1,0 +1,163 @@
+<div id="consultantReferencesAndCertifications" ng-hide="showConsultantEditReferencesAndCertificationsFields" ng-init="initReferences()">
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">References & Certifications (15%)
+        <span class="customTooltip-panels">Provide the email address for professional references in this section. We will send each of your references a brief survey to verify your expertise. Bronze Verification is 3 completed references, 7 is Silver and 10+ is Gold.</span>
+      </span>
+    </h4>
+    <i class="fa fa-pencil-alt" ng-click="editReferencesAndCertifications()"></i>
+  </div>
+  <div class="profileSectionInner">
+    <div >
+      <h3 class="h3"><span class="small">Current Reference Information</span></h3>
+      <div>
+        <span ng-click="toggleRatingTypes()" ng-class="{'underlineSelection': referenceRatingNumber != 2}">All Ratings</span> &nbsp; &nbsp; <span ng-click="toggleRatingTypes()"  ng-class="{'underlineSelection': referenceRatingNumber == 2}">References Only</span>
+      </div>
+      <div class="row">
+        <div class="col col-md-12"  ng-repeat="reference in consultantRatings | filter: {ratingSource: referenceRatingNumber} | limitTo : limitValue  track by $index">
+          <div class="profileDivider">
+            <div class="gp-profileReference">
+              <div>
+                <div class="showFullRating">
+                  <h4 ng-click="showRatingDetails_$index = !showRatingDetails_$index"> {{reference.Reviewer.name}}, <small>{{reference.Reviewer.Company.name}}</small>
+                    <span class="showRatingDetails" >
+                      &nbsp; Click To &nbsp;<span ng-hide="showRatingDetails_$index">Show</span><span ng-show="showRatingDetails_$index">Hide</span> &nbsp; Details &nbsp;
+                    </span>
+                  </h4>
+                  <h4>
+                    <div class="rating-container rating-xxs rating-animate">
+                      <div class="rating-stars">
+                        <span class="empty-stars">
+                          <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                        </span>
+                        <span class="filled-stars" style="width: {{reference.rating * 20}}%;">
+                          <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                        </span>
+                      </div>
+                      <span class="ratingNumber"> &nbsp;
+                        {{reference.rating | number : 1}}
+                      </span>
+                    </div>
+                  </h4>
+                </div>
+
+                <div class="ratingDetails" ng-show="showRatingDetails_$index">
+                  <div>
+                    <div>
+                      <strong>Quality:</strong>
+                      <div class="rating-container rating-xxs rating-animate">
+                        <div class="rating-stars">
+                          <span class="empty-stars">
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          </span>
+                          <span class="filled-stars" style="width: {{reference.quality * 20}}%;">
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <strong>Timeliness:</strong>
+                      <div class="rating-container rating-xxs rating-animate">
+                        <div class="rating-stars">
+                          <span class="empty-stars">
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          </span>
+                          <span class="filled-stars" style="width: {{reference.timeliness * 20}}%;">
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <strong>Responsiveness:</strong>
+                      <div class="rating-container rating-xxs rating-animate">
+                        <div class="rating-stars">
+                          <span class="empty-stars">
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          </span>
+                          <span class="filled-stars" style="width: {{reference.responsiveness * 20}}%;">
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <strong>Cost:</strong>
+                      <div class="rating-container rating-xxs rating-animate">
+                        <div class="rating-stars">
+                          <span class="empty-stars">
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star-empty"></i></span>
+                          </span>
+                          <span class="filled-stars" style="width: {{reference.cost * 20}}%;">
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                            <span class="star"><i class="glyphicon glyphicon-star"></i></span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div><span ng-show="reference.useForSimilarProjects"><i class="fa fa-check"></i></span><span ng-show="!reference.useForSimilarProjects"><i class="fa fa-times"></i></span> I would <span ng-if="!reference.useForSimilarProjects">not</span> use this consultant for similar projects</div>
+                    <div><span ng-show="reference.wouldRecomendToOthers"><i class="fa fa-check"></i></span><span ng-show="!reference.wouldRecomendToOthers"><i class="fa fa-times"></i></span> I would <span ng-if="!reference.wouldRecomendToOthers">not</span> recommend this consultant to others</div>
+                  </div>
+                </div>
+              <div>{{reference.comments}}</div>
+            </div>
+
+          </div>
+          </div>
+        </div>
+        <div class="col col-md-12 gp-readMoreLink" ng-if="(consultantRatings | filter: {ratingSource: referenceRatingNumber}).length > 3">
+
+          <a ng-click="showAllReviews(consultantRatings.length)">Show <span ng-if="limitValue == 3">More</span><span ng-if="limitValue == consultantRatings.length">Less</span> Ratings</a>
+        </div>
+      </div>
+    </div>
+    <div class="gp-mt15">
+      <h3 class="h3"><span class="small">Current Certification Information</span></h3>
+      <ul class="gp-consultantSkillsList">
+        <li ng-repeat="certification in consultantCertifications"> {{certification.certificationName}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

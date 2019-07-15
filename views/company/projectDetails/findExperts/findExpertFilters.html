@@ -1,0 +1,310 @@
+<div class="col col-md-3 gp-expertSearchFilters">
+  <div style="margin-bottom:15px;">
+    <!--NOTE: Do NOT erase in case they want this back -->
+    <!-- <div class="row gp-sideSectionRow" style="display:flex; align-items: center; justify-content:space-between; margin-bottom:5px;">
+        <div class="col col-md-9 gp-filterInputs">
+          <div class="input-group" style="width:100%;">
+            <input type="text" class="form-control" name="keywordInput" style="padding: 6px 9px;height: 36px;" ng-model="keywordInput" ng-keypress="addKeyword($event, keywordInput);" placeholder="Keyword">
+          </div>
+        </div>
+        <div class="col col-md-3 gp-filterInputs">
+          <button class="btn btn-primary btn-sm" style="width:100%; padding: 8px 9px;" ng-click="searchKeywords(keywordInput); keywordInput = '';" ng-disabled="!keywordInput">Go</button>
+        </div>
+    </div> -->
+    <div class="row gp-sideSectionRow" style="display:flex; align-items: center; justify-content:space-between;">
+      <div class="col col-md-7 gp-filterInputs">
+        <div class="form-group">
+          <select class="form-control input-sm" data-ng-model="$parent.mySavedSearches" data-ng-options="sf as sf.name for sf in savedSearches" data-ng-change="ApplySavedFilters(mySavedSearches)">
+            <option value="" style="display: none;">Saved Searches</option>
+          </select>
+        </div>
+      </div>
+      <div class="col col-md-5 gp-filterInputs gp-apply">
+        <div class="gp-total gp-fa-o text-default" style="margin-bottom:15px;" ng-click="showFiltersModal($event)"><i class="far fa-heart gp-fa-o-rollover"></i><i class="fa fa-heart gp-fa-rollover"></i> Save Search</div>
+      </div>
+    </div>
+    <div class="row  gp-sideSectionRow">
+      <div class="col col-md-12 gp-filterInputs gp-apply">
+        <button class="btn btn-primary btn-outline btn-sm" style="width:100%; padding: 8px 9px;" ng-click="ApplyFilters()">Apply Filters</button>
+      </div>
+    </div>
+    </div>
+  <!-- OPEN/CLOSE Rating-->
+  <div class="panel panel-primary ">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Consultant performance is rated by customers on a scale of 1 (not so good) to 5 (rock-star).</span>
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPRating" ng-click="openGovProRating()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPRating" ng-click="closeGovProRating()"></i>
+        &nbsp; Performance Rating
+      </h4>
+    </div>
+    <div id="gp-govProRating" class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openGPRating}">
+        <div ng-repeat="rating in filter.RatingFilter">
+          <md-checkbox ng-model="rating.selected" aria-label="subcategory" class="md-raised gp-subCatCheckbox">
+            <input id="{{rating.id}}" value="{{rating.ratingValue}}" type="number" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="xxs" title=""></md-checkbox>
+        </div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Category -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Select a category of Consultant expertise</span>
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPCategory" ng-click="openGovProCategory()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPCategory" ng-click="closeGovProCategory()"></i>
+        &nbsp; Category of Expertise
+      </h4>
+    </div>
+
+    <div id="gp-govProCategory" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPCategory}">
+      <div ng-repeat="category in filter.CategoryFilter">
+        <md-checkbox ng-model="category.selected" aria-label="rememberMe" class="md-raised gp-catCheckbox" ng-class="(botharetrue && category.selected) ? 'md-indeterminate' : '' " ng-change="topCatSelected(category)"><b>{{category.name}}</b></md-checkbox>
+          <div ng-repeat="subcategory in category.subCategories">
+            <md-checkbox ng-model="subcategory.selected" aria-label="subcategory" class="md-raised gp-subCatCheckbox" ng-class="category.selected ? 'gp-catTrue' : 'gp-catFalse'" ng-change="subCatSelect(category, subcategory.selected)">{{subcategory.name}}</md-checkbox>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE appDemo1 Cost -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Our marketplace contains talented people that may be interested in working as independent consultants (1099's), employees (W2's), or Advisors. Use this field to select.</span>
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPCost" ng-click="openGovProCost()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPCost" ng-click="closeGovProCost()"></i>
+        &nbsp; Expert Type/Cost
+      </h4>
+    </div>
+    <div id="gp-govProCost" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPCost}">
+      <article class="gp-slider">
+        <md-checkbox ng-model="filter.TypeFilter.checkFreelanceConsultant" aria-label="freelanceConsultant" class="md-raised gp-costCheckbox"><b>Freelance Consultant (1099)</b></md-checkbox>
+        <h5 ng-if="filter.TypeFilter.checkFreelanceConsultant">Hourly Rate</h5>
+        <input ng-model="filter.TypeFilter.freelanceHourlyRateMin" ng-value="rangeSlider.minValue" type="number" style="display:none;">
+        <input ng-model="filter.TypeFilter.freelanceHourlyRateMax" ng-value="rangeSlider.maxValue" type="number" style="display:none;">
+        <rzslider
+          data-rz-slider-model="rangeSlider.minValue"
+          data-rz-slider-high="rangeSlider.maxValue"
+          data-rz-slider-options="rangeSlider.options"
+          ng-if="filter.TypeFilter.checkFreelanceConsultant"
+        ></rzslider>
+      </article>
+      <article class="gp-slider">
+        <md-checkbox ng-model="filter.TypeFilter.checkFullTimeEmployee" aria-label="freelanceConsultant" class="md-raised gp-costCheckbox">
+          <b>Full-time Employee (W2)</b>
+        </md-checkbox>
+        <h5 ng-if="filter.TypeFilter.checkFullTimeEmployee">Annual Salary</h5>
+        <input ng-model="filter.TypeFilter.fullTimeAnnualSalaryMin" ng-value="rangeSlider2.minValue" type="number" style="display:none;">
+        <input ng-model="filter.TypeFilter.fullTimeAnnualSalaryMax" ng-value="rangeSlider2.maxValue" type="number" style="display:none;">
+        <rzslider
+          data-rz-slider-model="rangeSlider2.minValue"
+          data-rz-slider-high="rangeSlider2.maxValue"
+          data-rz-slider-options="rangeSlider2.options"
+          ng-if="filter.TypeFilter.checkFullTimeEmployee"
+        ></rzslider>
+      </article>
+
+      <md-checkbox ng-model="filter.TypeFilter.advisoryBoardCandidate" aria-label="advisoryBoardCandidate" class="md-raised gp-costCheckbox"><b>Advisory Board Candidate</b></md-checkbox>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Availability-->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">You can reduce the results based on the availability of expertise</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPAvailability" ng-click="openAvailability()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPAvailability" ng-click="closeAvailability()"></i>
+        &nbsp; Availability
+      </h4>
+    </div>
+    <div id="gp-Availability" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPAvailability}">
+      <select class="form-control input-sm" ng-model="filter.AvailabilityFilter.Availability" ng-options="af as af.name for af in availabilities">
+        <option value="" style="display:none;">Select One</option>
+      </select>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Location-->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">You can limit your results based on the location of expertise</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPLocation" ng-click="openLocation()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPLocation" ng-click="closeLocation()"></i>
+        &nbsp; Location
+      </h4>
+    </div>
+    <div id="gp-Location" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPLocation}">
+        <md-autocomplete flex
+            md-delay=1000
+            md-selected-item="selectedItem"
+            md-search-text="searchText"
+            md-items="item in appDemo1GetLocationAutoCompleteResults(searchText)"
+            md-item-text="item.state"
+            md-floating-label="State"
+            md-selected-item-change="addCity(item)"
+            md-clear-button="true">
+          <md-item-template>
+            <span md-highlight-text="searchText">{{item.state}}</span>
+          </md-item-template>
+          <md-not-found>
+            No matches found.
+          </md-not-found>
+        </md-autocomplete>
+        <div ng-repeat="city in citiesFilterArray track by $index ">{{city.state}} <i class="fa fa-times" ng-click="removeCity($index)"></i></div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Security Clearance -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Use this filter to reduce the results by level of security clearance</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openSecClear" ng-click="openSecurityClearance()"></i>
+        <i class="fa fa-minus-circle" ng-show="openSecClear" ng-click="closeSecurityClearance()"></i>
+        &nbsp; Security Clearance
+      </h4>
+    </div>
+    <div id="gp-SecurityClearance" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openSecClear}">
+      <div ng-repeat="level in filter.SecurityFilter">
+        <md-checkbox ng-model="level.selected"  aria-label="Security Clearance" class="md-raised gp-catCheckbox"><b>{{level.name}}</b></md-checkbox>
+      </div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Certifications -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Use this filter to indicate specific certifications you desire</span>
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openCert" ng-click="openCertifications()"></i>
+        <i class="fa fa-minus-circle" ng-show="openCert" ng-click="closeCertifications()"></i>
+        &nbsp; Certifications
+      </h4>
+    </div>
+    <div id="gp-Certifications" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openCert}">
+
+      <md-autocomplete flex
+          md-delay=2000
+          md-no-cache = "true"
+          md-selected-item="selectedCertItem"
+          md-search-text="searchCertificationText.searchText"
+          md-items="certificationItem in getCertificationsForAutoComplete(searchCertificationText.searchText)"
+          md-item-text="certificationItem.name"
+          md-floating-label="Certifications"
+          md-selected-item-change="addCertification(certificationItem)"
+          md-clear-button="true">
+        <md-item-template>
+          <span md-highlight-text="searchCertificationText">{{certificationItem.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No matches found.
+        </md-not-found>
+      </md-autocomplete>
+      <div ng-repeat="certification in filter.CertificationsFilter">
+        <span ng-if="certification.selected">{{certification.name}} <i class="fa fa-times" ng-click="clearCertification(certification)"></i></span>
+      </div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Verification -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Verfication levels are defined by the number of people who have referred a consultant. 3 references = Silver, 7=gold, 10=platinum level.</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openVer" ng-click="openRecommendations()"></i>
+        <i class="fa fa-minus-circle" ng-show="openVer" ng-click="closeRecommendations()"></i>
+        &nbsp; References
+      </h4>
+    </div>
+    <div id="gp-Recommendations" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openVer}">
+      <div ng-repeat="verification in filter.VerificationFilter">
+        <md-checkbox ng-model="verification.selected" class="md-raised gp-catCheckbox">
+          <i class="fa fa-certificate gp-silver" ng-if="verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"></i>
+          <i class="fa fa-certificate gp-gold" ng-if="verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"></i>
+          <i class="fa fa-certificate gp-platinum" ng-if="verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"></i>
+          {{verification.name}} ({{verification.minRangeValue}}<span ng-if="!verification.maxRangeValue">+</span> <span ng-if="verification.maxRangeValue">- {{verification.maxRangeValue}}</span>)
+        </md-checkbox>
+      </div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Agency -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Use this filter to identify consultants with specific agency experience</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openAgencyFilter" ng-click="openAgency()"></i>
+        <i class="fa fa-minus-circle" ng-show="openAgencyFilter" ng-click="closeAgency()"></i>
+        &nbsp; Agency
+      </h4>
+    </div>
+    <div id="gp-Agency" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openAgencyFilter}">
+      <md-autocomplete flex
+          md-delay=2000
+          md-no-cache = "true"
+          md-selected-item="selectedAgencyItem"
+          md-search-text="searchAgencyText.searchText"
+          md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText.searchText)"
+          md-item-text="agencyItem.name"
+          md-floating-label="Agencies"
+          md-selected-item-change="addAgency(selectedAgencyItem)"
+          md-clear-button="true">
+        <md-item-template>
+          <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+          <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+        </md-item-template>
+        <md-not-found>
+          No matches found.
+        </md-not-found>
+      </md-autocomplete>
+      <div ng-repeat="agency in agencies track by $index" ng-if="agency.selected">{{agency.name}} &nbsp;<i class="fa fa-times" ng-click="removeAgency($index, agency)"></i></div>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Profile Completion -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">The system uses the information in Consultant profiles to match. Use this filter to reduce the results based on the degree of profile completion.</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openProfComplete" ng-click="openProfileCompletion()"></i>
+        <i class="fa fa-minus-circle" ng-show="openProfComplete" ng-click="closeProfileCompletion()"></i>
+        &nbsp; Profile Completion
+      </h4>
+    </div>
+    <div id="gp-ProfComplete" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openProfComplete}">
+      <select class="form-control input-sm" ng-model="filter.ProfileFilter.profileCompletion" ng-options="pf.value as pf.name for pf in profileFilter">
+      </select>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE Resume -->
+  <div class="panel panel-primary">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Some consultants have attached a resume to their profile. This filter allows you to select Consultant profiles that include a resume.</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPResume" ng-click="openResume()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPResume" ng-click="closeResume()"></i>
+        &nbsp; Resume
+      </h4>
+    </div>
+    <div id="gp-Resume" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPResume}">
+      <md-checkbox ng-model="filter.ResumeFilter.onlyWithResume" aria-label="freelanceConsultant" class="md-raised gp-costCheckbox"><b>Resume is in profile</b></md-checkbox>
+    </div>
+  </div>
+  <!-- OPEN/CLOSE VipFilter -->
+  <div class="panel panel-primary" data-ng-if="userInfo.accessSeniorExecutives">
+    <div class="panel-heading customTooltip">
+      <span class="customTooltiptext">Some consultants have attached a resume to their profile. This filter allows you to select Consultant profiles that include a resume.</span>
+
+      <h4 class="panel-title gp-FilterTitle">
+        <i class="fa fa-plus-circle" ng-hide="openGPVIPFilter" ng-click="openVIPFilter()"></i>
+        <i class="fa fa-minus-circle" ng-show="openGPVIPFilter" ng-click="closeVIPFilter()"></i>
+        &nbsp; VIP/Senior Executives
+      </h4>
+    </div>
+    <div id="gp-VIPFilter" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openGPVIPFilter}">
+      <md-checkbox ng-model="filter.vipFilter.isVIP" aria-label="isVIP" class="md-raised gp-costCheckbox"><b>Senior Executives Association</b></md-checkbox>
+    </div>
+  </div>
+</div>

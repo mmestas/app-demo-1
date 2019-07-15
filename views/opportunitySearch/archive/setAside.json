@@ -1,0 +1,20 @@
+{
+  "data": [
+      {"name": "NONE ", "id": "1"},
+      {"name": "SBA Small Business Set-Aside", "id": "2"},
+      {"name": "8A 8a", "id": "3"},
+      {"name": "HMT HBCU or MI Set-Aside", "id": "3"},
+      {"name": "VSB Very Small Business Set Aside", "id": "4"},
+      {"name": "ESB Emerging Small Business Set-Aside", "id": "5"},
+      {"name": "HUBZone Set-Aside", "id": "6"},
+      {"name": "SDVOSBC Service Disabled Veteran Owned Small Business ", "id": "7"},
+      {"name": "HUBZone Sole Source", "id": "8"},
+      {"name": "8AN 8(a) Sole Source", "id": "9"},
+      {"name": "8AC(Civ) SDB Set-Aside 8(a)", "id": "10"},
+      {"name": "VSA Veteran Set Aside", "id": "11"},
+      {"name": "VSS Veteran Sole Source", "id": "12"},
+      {"name": "WOSB Women Owned Small Business", "id": "13"},
+      {"name": "EDWOSB Economically Disadvantaged Women Owned Small Business", "14": "1234"}
+    ],
+  "errors": []
+}

@@ -1,0 +1,23 @@
+<div id="consultantEditClearances" ng-show="showConsultantEditClearancesFields">
+  <div class="gp-consultantEditSectionWithBtn"><h4>Edit Clearance Level (5%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-click="saveClearanceLevel(consultantInfoEditField.securityClearance, consultantInfoEditField.gpKey, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-click="saveClearanceLevel(consultantInfoEditField.securityClearance, consultantInfoEditField.gpKey, false)">Save & Close</button>
+      &nbsp;
+      <!-- <button class="btn btn-sm btn-primary btn-outline btn-white" ng-click="cancelEditClearanceLevel()">Close</button> -->
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditClearanceLevel()"></i>
+    </div>
+  </div>
+  <div style="margin-top: 10px;">
+    <md-input-container class="md-gpBlue-theme">
+      <label>Level of Active Clearance</label>
+      <md-select class="md-block md-gpBlue-theme" ng-model="consultantInfoEditField.securityClearance" ng-model-options="{trackBy: '$value.name'}">
+        <md-option ng-repeat="level in securityClearances" ng-value="level">
+          {{level.name}}
+        </md-option>
+      </md-select>
+      <div class="md-errors-spacer"></div>
+    </md-input-container>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div id="gp-consultantDashInner">
+  <div class="gp-dashboardBoxesWrapper">
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.invites">
+      <div><i class="fa fa-exclamation-circle"></i></div>
+      <div class="gp-dashBoxNumber">{{quoteInvites}}</div>
+      <div class="gp-dashBoxTitle">RFQ Invites</div>
+    </div>
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.notifications">
+      <div><i class="fa fa-envelope"></i></div>
+      <div class="gp-dashBoxNumber">{{newNotifications}}</div>
+      <div class="gp-dashBoxTitle">Notifications</div>
+    </div>
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.engagements">
+      <div><i class="fa fa-tasks"></i></div>
+      <div class="gp-dashBoxNumber">{{incompleteEngagements.length}}</div>
+      <div class="gp-dashBoxTitle">Engagements</div>
+    </div>
+
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.opportunities">
+      <div><i class="fa fa-lightbulb"></i></div>
+      <div class="gp-dashBoxNumber">{{ppNumber}}</div>
+      <div class="gp-dashBoxTitle">Opportunities</div>
+    </div>
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.myProfile">
+      <div><i class="fa fa-user"></i></div>
+      <div class="gp-dashBoxNumber">{{consultantInfo.profileCompletion}}%</div>
+      <div class="gp-dashBoxTitle">Profile</div>
+    </div>
+    <div class="gp-dashboardBox gp-dashboardBoxMd" ui-sref="consultant.paymentInfo" data-ng-class="{'gp-text-danger': !paymentInfo.LegalEntityVerificationStatus}">
+      <div><i class="fa fa-credit-card"></i></div>
+      <div class="gp-dashBoxNumber">$</div>
+      <div class="gp-dashBoxTitle">Payment</div>
+    </div>
+    <div style="width:100%;"><hr style="border-top: 4px solid #2e7392;"></div>
+
+    <div style="display:flex; width:100%;">
+      <div style="width:50%; display:flex;flex-wrap: wrap;">
+        <a class="gp-dashboardBox gp-dashboardBoxLg" href="https://www.app1url.com/blog/" target="_blank">
+          <div><i class="fa fa-newspaper"></i></div>
+          <div class="gp-dashBoxTitle">Blog</div>
+        </a>
+
+        <a class="gp-dashboardBox gp-dashboardBoxLg" href="http://helpcenter.app1urlapp.com/independent-experts-using-the-app1url-platform" target="_blank">
+          <div><i class="fa fa-question"></i></div>
+          <div class="gp-dashBoxTitle">Support</div>
+        </a>
+        <a class="gp-dashboardBox gp-dashboardBoxLg" href="https://app1url.coglide.com/pwin" target="_blank">
+          <div><i class="fa fa-calculator"></i></div>
+          <div class="gp-dashBoxTitle">PWIN Calculator</div>
+        </a>
+      </div>
+      <div style="width:50%;">
+        <ul class="list-group">
+          <li>
+              <p><i class="fa fa-user"></i> <strong>Profile Completion</strong> <span class="pull-right small muted">{{consultantInfo.profileCompletion}}%</span></p>
+              <div class="progress tight">
+                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{consultantInfo.profileCompletion}}" aria-valuemin="0" aria-valuemax="100" style="width:{{consultantInfo.profileCompletion}}%">
+                  <span class="sr-only">{{consultantInfo.profileCompletion}}"% complete</span>
+                </div>
+              </div>
+          </li>
+          <li class="list-group-item"><span><i class="fa fa-eye"></i> &nbsp;  Profile Views</span> <span class="badge">{{consultantInfo.totalProfileViews}}</span>  </li>
+          <li class="list-group-item"><span><i class="fa fa-clipboard-list"></i> &nbsp;  Shortlisted</span> <span class="badge">{{consultantInfo.shortlistedCount}}</span>  </li>
+          <li class="list-group-item"><span><i class="fa fa-bookmark"></i> &nbsp;  Number of Engagements to Date</span> <span class="badge">{{approvedProjectsList.length + consultantInfo.legacyNumberProjects}}</span></li>
+          <li class="list-group-item"><span><i class="fa fa-donate"></i> &nbsp;  Income to Date</span> <span class="badge">{{consultantInfo.incomeToDate + consultantInfo.legacyIncomeToDate | currency}}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

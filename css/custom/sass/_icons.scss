@@ -1,0 +1,23 @@
+.greyIcon {
+  color: $govDkGrey;
+   &:hover {
+     color: $govLtBlue;
+   }
+}
+.govBlueIcon {
+  color: $govBlue;
+   &:hover {
+     color: $govDkBlue;
+   }
+}
+
+
+.gp-fa-o:hover {}
+.gp-fa-rollover {display:none;}
+.gp-fa-o:hover .gp-fa-o-rollover {display:none;}
+.gp-fa-o:hover .gp-fa-rollover {display:inline-block;}
+i[ui-sref] {cursor: pointer; transition: 0.5s;}
+i[ui-sref]:hover {transform:scale(1.2)}
+.fa-asterisk {font-size: 7px;vertical-align: top;}
+.fa-times-circle-o, .fa-times-circle {font-size: 20px;color: $govBlue;}
+.impersonateIcon i {font-size: 18px;}

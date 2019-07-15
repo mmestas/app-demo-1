@@ -1,0 +1,118 @@
+<div class="gp-nav" company-dash-header></div>
+<div id="expertDetails" class="gp-dashWrapper gp-mainBodyWidth">
+  <div class="gp-dashInner">
+      <div class="row md-whiteframe-2dp" ng-init="init()">
+          <div class="col col-md-3 expertDetailsModal-leftColumn">
+            <div class="expertDetailsModal-profileImg-wrapper">
+              <img ng-src="{{envURL+expertDetails.imageFilename}}">
+              <div ng-if="expertDetails.verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"><i class="fa fa-certificate gp-silver"></i> Silver Verified</div>
+              <div ng-if="expertDetails.verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"><i class="fa fa-certificate gp-gold"></i> Gold Verified</div>
+              <div ng-if="expertDetails.verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"><i class="fa fa-certificate gp-platinum"></i> Platinum Verified</div>
+            </div>
+            <div class="gp-expertPicLinks"><button class="btn btn-primary btn-sm" ng-click="showEngagementInviteModal($event, expertDetails)">Invite to Quote</button></div>
+            <div class="gp-expertPicLinks"><button class="btn btn-primary btn-outline btn-sm"ng-click="showSendMsgSLModal($event, expertDetails)">Send Message</button></div>
+            <div><strong>Member Since: </strong> {{joinDate | date}}</div>
+            <div ng-if="expertDetails.securityClearance">
+              <div><strong>Security Clearance:</strong> </div>
+              <div style="font-size:13px">{{expertDetails.securityClearance.name}}</div></div>
+            <div ng-if="expertDetails.freelanceHourlyRate">
+              <div><strong>Freelance Availability:</strong></div>
+              <div style="font-size:13px">{{expertDetails.availability.name}}</div>
+            </div>
+            <div ng-if="expertDetails.freelanceHourlyRate">
+              <div><strong>Hourly Rate:</strong></div>
+              <div style="font-size:13px"> {{expertDetails.freelanceHourlyRate | currency}}</div>
+            </div>
+            <div ng-if="expertDetails.availableAsFullTime">
+              <div><strong>Available as full time:</strong> <span style="font-size:13px">Yes</span></div>
+            </div>
+            <div ng-if="!expertDetails.availableAsFullTime">
+              <div><strong>Available as full time:</strong> <span style="font-size:13px">No</span></div>
+            </div>
+            <div ng-if="expertDetails.fullTimeAnnualSalary">
+              <div><strong>Annual Salary:</strong></div>
+              <div style="font-size:13px"> {{expertDetails.fullTimeAnnualSalary | currency}}</div>
+            </div>
+            <div><strong>Willing to Travel:</strong></div>
+            <div style="font-size:13px"> {{expertDetails.willingToTravel.name}}</div>
+            <div ng-if="expertDetails.willingToTravel.gpKey === '{0b8ad569-1fdb-4eed-abeb-cbc6462a25e0}'">
+              <div><strong>Travel Exceptions:</strong></div>
+              <div style="font-size:13px"> {{expertDetails.willingToTravelException}}</div>
+            </div>
+            <div>
+              <div><strong>Total Engagements:</strong></div>
+              <div style="font-size:13px"> {{expertDetails.totalEngagements}}</div>
+            </div>
+          </div>
+          <div class="col col-md-9">
+            <div style="display: flex;justify-content: space-between;align-items: center;">
+              <h3 style="padding-top: 0;">
+                <span ng-if="!expertDetails.profileNamePrivate">{{expertDetails.name}}</span>
+                <span ng-if="expertDetails.profileNamePrivate">{{expertDetails.name | createInitials}}</span>
+                <small><i class="fa fa-map-marker-alt"></i> {{expertDetails.city}}, {{expertDetails.state.Abbreviation}}</small>
+              </h3>
+              <div class="gp-bubbleLI" ng-if="expertDetails.consultantResumeUrl"><a ng-href="{{expertDetails.consultantResumeUrl}}" target="_blank">Resume <i class="fa fa-arrow-circle-down"></i></a></div>
+              <!-- NOTE: Leave the above... the story was to make the resume not available for download -->
+            </div>
+            <h5>{{expertDetails.title}}</h5>
+            <input id="" ng-model="expertDetails.numValU" value="{{expertDetails.averageReview}}" type="number" class="consultantRating" data-min=0 data-max=5 data-step=0.5 data-size="xs" title="">
+            <!-- <div>{{expertDetails.consultantDescription}}</div> -->
+            <div data-ng-bind-html="expertDetails.consultantDescription"></div>
+
+            <md-tabs md-dynamic-height md-border-bottom >
+              <md-tab  label="Agencies" style="padding:7px;">
+                <span ng-if="expertDetails.agencies.length < 1">This consultant has not added any agencies</span>
+                <div  style="padding:7px;">
+                  <ul class="gp-bubbleLI" >
+                    <li ng-repeat="agency in expertDetails.agencies">
+                      <img style="height:35px; max-width:35px;" ng-src="{{envURL+agency.imageFilename}}"> &nbsp; {{agency.name}}
+                    </li>
+                  </ul>
+                </div>
+              </md-tab>
+              <md-tab  label="Certifications">
+                <span ng-if="expertDetails.certifications.length < 1">This consultant has not added any certifications</span>
+                <div  style="padding:7px;">
+                  <ul class="gp-bubbleLI" >
+                    <li ng-repeat="certification in expertDetails.certifications">{{certification.certificationName}}</li>
+                  </ul>
+                </div>
+              </md-tab>
+              <md-tab  label="Skills">
+                <span ng-if="expertDetails.skills.length < 1">This consultant has not added any skills</span>
+                <div  style="padding:7px;">
+                  <ul class="gp-bubbleLI" >
+                    <li ng-repeat="skill in expertDetails.skills">{{skill.skillName}}</li>
+                  </ul>
+                </div>
+              </md-tab>
+              <md-tab  label="Categories">
+                <span ng-if="expertDetails.categories.length < 1">This consultant has not added any categories</span>
+                <div  style="padding:7px;">
+                  <ul class="gp-bubbleLI" >
+                    <li ng-repeat="category in expertDetails.categories">{{category.name}}</li>
+                  </ul>
+                </div>
+              </md-tab>
+              <md-tab  label="References" ng-click="callLastRating()">
+                <span ng-if="expertDetails.references.length < 1">This consultant does not have any references</span>
+                <div class="col col-md-12"  ng-repeat="reference in expertDetails.references track by $index">
+                  <h4 style="font-size:16px;">
+                    <img class="gp-reviewPic" ng-if="reference.referenceInformation.ImageFilename" ng-src="{{reference.referenceInformation.ImageFilename}}">
+                    <img class="gp-reviewPic" ng-if="!reference.referenceInformation.ImageFilename" src="/images/placeholders/avatar.png">
+                    &nbsp; {{reference.name}}, <small>{{reference.company}}</small>
+                  </h4>
+                  <div  style="margin-left:65px; margin-top:-25px;">
+                    <div>
+                      <span style="font-size:16px; color:#555;"><strong>{{reference.reviewHeadline}}</strong></span> &nbsp;
+                      <input value="{{reference.reviewRating}}" ng-value="reference.reviewRating" type="number" class="referenceRating" data-min=0 data-max=5 data-step=0.5 data-size="xxs" title="">
+                    </div>
+                    <div style="font-size:15px;">{{reference.reviewDescription}}</div>
+                  </div>
+                </div>
+              </md-tab>
+            </md-tabs>
+          </div>
+        </div>
+      </div>
+    </div>

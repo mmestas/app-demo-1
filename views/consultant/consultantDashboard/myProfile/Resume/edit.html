@@ -1,0 +1,27 @@
+<div id="consultantResumeFields" ng-show="showConsultantResumeEditFields">
+  <div class="gp-consultantEditSectionWithBtn"><h4>Edit Resume (20%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantResume(consultantInfoEditField, resumeFile, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantResume(consultantInfoEditField, resumeFile, false)">Save & Close</button>
+      &nbsp;
+      <!-- <button class="btn btn-sm btn-primary btn-outline btn-white" ng-click="cancelEditConsultantResume()">Close</button> -->
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditConsultantResume()"></i>
+    </div>
+  </div>
+  <form name="consultantEditResumeForm">
+    <div class="row">
+      <div class="col col-md-12">
+        <h3 class="h3"><span class="small">Resume</span></h3>
+        <input class="hidden" id="resume" name="resume" type="file" ngf-select ng-model="resumeFile" value=""><br>
+        <label class="gp-resumeUploadBtn" for="resume">Upload Resume</label>
+        <button class="green resume_file hidden">Upload</button>
+        <span class="chosen_resume_file reportName" ng-bind="consultantInfoEditField.consultantResumeFilename" ng-hide="resumeFile.name">{{consultantInfoEditField.consultantResumeFilename}}</span>
+        <span class="chosen_resume_file reportName">{{resumeFile.name}}</span>
+        <div id="" class="dragFile" ngf-select ngf-drop ng-model="resumeFile" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

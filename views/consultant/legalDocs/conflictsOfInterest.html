@@ -1,0 +1,7 @@
+<div>
+  <ul class="list-group">
+    <li class="list-group-item"  ng-if="engagement.consultantOCIAccepted && engagement.OCIPdfFile"  ng-repeat="engagement in projectsWithSignatures">
+      <a ng-href="{{engagement.OCIPdfFile}}" target="_blank">{{engagement.project.title}} - {{engagement.consultant.name}} | signed: {{engagement.consultantOCIAcceptedDate  | dateConverter | date: 'MM-dd-yyyy'}}</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,20 @@
+<div id="dashboardProjects">
+  <div style="display:flex; justify-content:space-between;">
+    <div class="gp-dashProjectLinks">
+      <span ng-click="appDemo1GetDashboardCompanyUserProjects()" ng-class="{active: poProjects}">My Projects</span>
+      <span ng-click="appDemo1GetCompanyProjectsForDash()"  ng-class="{active: allProjects}">All Organization Projects</span>
+    </div>
+    <!-- <button id="postModal" class="btn btn-sm btn-warning" ng-click="showPostProjectModal($event)">Start A Project</button> -->
+    <button id="postModal" class="btn btn-sm btn-warning" ui-sref="postProject">Post A Project</button>
+  </div>
+  <md-tabs md-dynamic-height md-border-bottom >
+    <md-tab label="Active ({{numActProj}})" style="padding:7px;">
+      <div ng-include="'/views/company/dashboard/projects/myProjects.html'" ng-show="showMyProjects"></div>
+      <div ng-include="'/views/company/dashboard/projects/companyProjects.html'" ng-hide="showMyProjects"></div>
+    </md-tab>
+    <md-tab  label="Closed ({{numClosedProj}})" style="padding:7px;">
+      <div ng-include="'/views/company/dashboard/projects/myProjects-closed.html'" ng-show="showMyProjects"></div>
+      <div ng-include="'/views/company/dashboard/projects/companyProjects-closed.html'" ng-hide="showMyProjects"></div>
+    </md-tab>
+  </md-tabs>
+</div>

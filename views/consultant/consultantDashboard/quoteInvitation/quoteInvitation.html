@@ -1,0 +1,222 @@
+<div id="constultantQuoteInvitation" class="gp-dashWrapper" ng-init="quoteInvitationInit()">
+  <div class="gp-nav" consultant-dash-header></div>
+  <div class="gp-quoteInviteWrapper md-whiteframe-2dp">
+    <md-toolbar class="md-hue-custom md-gpBlue-theme gp-dashToolbar" >
+      <div class="md-toolbar-tools" layout="row" layout-align="start center">
+          <div class="gp-flex gp-alignFlexCenter">
+            <div class="gp-backToNotifications">
+              <div class="gp-circleReturnBtn">
+                <i class="fa fa-reply" ng-click="goToConsultantDash()"></i>
+              </div>
+            </div>
+            <div class="gp-toolbarTitle"><h1>Quote Invitation</h1></div>
+
+          </div>
+          <span flex></span>
+          <div>
+            <h1>Quote Deadline {{engagementData.quoteDeadline | dateConverter | date: 'MM-dd-yyyy'}}</h1>
+          </div>
+      </div>
+    </md-toolbar>
+
+    <div class="quoteInviteBody">
+      <div class="row" data-ng-if="!stripeAccountVerified">
+        <div class="col-md-12" role="alert" >
+          <div class="alert alert-danger text-center" role="alert" data-ng-if="!stripeAccountVerified">
+            You must enter your payment information before submitting a quote. Please click <a ui-sref="consultant.paymentInfo" class="gp-text-danger-lt"><strong>here</strong></a> to update your payment information.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 qiInfo">
+          <div class="qiInfoInner">
+            <h4>{{engagementData.project.title}} - <small><em>{{engagementData.project.owner.name}}</em></small></h4>
+            <div>
+            </div>
+            <h5 class="gp-flex gp-justifyFlexSpaceBetween">
+              <span>Start Date:  {{engagementData.startDate | dateConverter | date: 'MM-dd-yyyy'}}</span>
+              <span>End Date:  {{engagementData.endDate | dateConverter | date: 'MM-dd-yyyy'}}</span>
+            </h5>
+            <h5>RFP/Solicitation Reference : <small><em>{{engagementData.project.solicitationNumber}}</em></small></h5>
+
+            <h5>Task Description<span ng-if="engagementData.tasks.length > 1">s</span>:</h5> <!--NOTE: could have multiple tasks i.e. repeat task in quoteInvitation.tasks -->
+            <div class="gp-mb10" data-ng-repeat="task in engagementData.tasks">
+              {{$index + 1}}. {{task.workDescription}}
+            </div>
+            <h5> Work Description Reference File/s</h5>
+            <div ng-repeat="rf in engagementData.referenceFiles">
+              <a target="_blank" ng-href="{{rf.url}}">
+                <md-button class="md-fab md-mini gp-SolidBlue">
+                  <md-icon class="material-icons">attach_file</md-icon>
+                </md-button>
+                {{rf.name}}</a>
+            </div>
+
+          </div>
+          <div class="qiRequestInfo" data-ng-if="!hideSubmit">
+            <h5>Request more information or ask a question before submitting quote</h5>
+            <div class="gp-flex gp-alignFlexCenter">
+              <textarea class="customTextareaWithBtn form-control" ng-model="qiMessage" rows="5" md-select-on-focus></textarea>
+              <button class="btn customRoundBtn" ng-click="consultantSendEngagementMessage(engagementData, qiMessage)">Submit your question</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 qiForms">
+          <div class="qiFormsInner">
+            <div class="quoteTypeSelection">
+              <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                <label class="quoteTypeLabel gp-mr15" for="quoteType">Choose quote type</label>
+                <select class="form-control quoteTypeSelect" name="quoteType" ng-model="quoteType" ng-options="qt as qt.name for qt in quoteTypeOptions" ng-change="changeQuoteType(quoteType)" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></select>
+              </div>
+            </div>
+            <div class="quoteTypes">
+
+              <!-- START FIXED -->
+              <div id="quoteType-fixed" ng-if="qtFixed">
+                <div class="qtFixed-milestone" ng-repeat="qtFix in qtFix track by $index"> <!--NOTE:what gets repeated when Add Milestone is clicked-->
+                  <div class="row gp-flex gp-alignFlexCenter">
+                    <div class="col-md-1" ng-click="removeqtFix($index)" ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)">
+                      <i class="far fa-times-circle gp-mb15"></i>
+                    </div>
+                    <div class="col-md-11">
+                      <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                       <label class="gp-mr15" for="">Milestone Price</label>
+                        <input class="form-control qiPriceField" ng-model="qtFix.milestonePrice" type="number" ng-change="validateChange()" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <textarea class="form-control" ng-model="qtFix.supportingNarrative" rows="4"  ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" data-ng-if="stripeAccountVerified">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary floatRight" ng-click="addqtFix()" ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)">Add Milestone</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 gp-flex gp-justifyFlexSpaceBetween">
+                    <div><h5>Milestones (#): {{arrayLenght}}</h5></div> <!--Length/total of milestones -->
+                    <div><h5>Quote Total:    {{QuoteTotalFixed() | currency}}</h5></div><!-- total of milestone prices -->
+                  </div>
+                </div>
+              </div>
+              <!-- END FIXED -->
+
+              <!-- START HOURLY -->
+              <div id="quoteType-hourly" ng-if="qtHourly">
+                <div class="qtHourly-milestone" ng-repeat="qtHour in qtHour track by $index"> <!--NOTE:what gets repeated when Add Milestone is clicked-->
+                  <div class="row gp-flex gp-alignFlexCenter">
+                    <div class="col-md-1">
+                      <i class="far fa-times-circle gp-mb15" ng-click="removeqtHours($index)" ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)"></i>
+                    </div>
+                    <div class="col-md-11">
+                      <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                          <label class="gp-mr15" for="">Rate</label>
+                          <input class="form-control qiPriceField" ng-model="qtHour.freelanceHourlyRate" type="number" ng-change="validateChange()" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                      </div>
+                      <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                        <label class="gp-mr15" for="">Hours Quoted</label>
+                        <input class="form-control qiPriceField" ng-model="qtHour.hoursQuoted" type="number" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <textarea class="form-control" ng-model="qtHour.supportingNarrative" rows="4"  ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" data-ng-if="stripeAccountVerified">
+                  <div class="col-md-12">
+                    <button ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)" class="btn btn-primary floatRight" ng-click="addqtHours()">Add Milestone</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 gp-flex gp-justifyFlexSpaceBetween">
+                    <div><h5>Milestones (#) {{arrayLenght}}</h5></div> <!--Length/total of milestones -->
+                    <div>
+                      <h5>Hours Total:  {{QuoteTotalHours()}}</h5>
+                      <h5>Quote Total:  {{PriceTotalHours() | currency}}</h5>
+                    </div><!-- total of milestone prices -->
+                  </div>
+                </div>
+              </div>
+              <!-- END HOURLY -->
+
+              <!-- START RECURRING -->
+              <div id="quoteType-recurring" ng-if="qtRecurring">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                      <label class="gp-mr15" for="">Recurring Period  <i class="glyphicon glyphicon-info-sign" ng-click="infoRecurringPeriod($event)"></i></label>
+                      <select class="form-control qiPriceField" ng-model="qRecurring.periodselection" ng-options="rp as rp.name for rp in recurringPeriods" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                      <label class="gp-mr15" for="">Rate <i class="glyphicon glyphicon-info-sign" ng-click="infoRecurringPeriodAmount($event)"></i></label>
+                      <input class="form-control qiPriceField" type="number" ng-model="qRecurring.periodAmount" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                      <label class="gp-mr15" for="">Auto Bill Start Date <i class="glyphicon glyphicon-info-sign" ng-click="infoAutoBill($event)"></i></label>
+                      <md-datepicker class="custom-mdDatepicker" ng-model="qRecurring.autoBillStartDate" md-placeholder="Start Date" ng-change="getStartDate(qRecurring.autoBillStartDate)" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></md-datepicker>
+                      <!-- <md-datepicker ng-if="!hideEngagementRecurringDate" class="custom-mdDatepicker" ng-model="qRecurring.autoBillStartDate" md-placeholder="Start Date" ng-change="getStartDate(qRecurring.autoBillStartDate)" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></md-datepicker> -->
+                      <!-- <input ng-if="hideEngagementRecurringDate" class="form-control qiPriceField" type="text" value="{{qRecurring.autoBillStartDate | dateConverter | date: 'MM/dd/yyyy'}}" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                      <label class="gp-mr15" for="">Number of Periods <i class="glyphicon glyphicon-info-sign" ng-click="infoNumberOfPeriods($event)"></i></label>
+                      <input class="form-control qiPriceField" type="number" ng-model="qRecurring.numberPeriods" ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="gp-mr15" for="">Deliverable</label>
+                      <textarea class="form-control" ng-model="qRecurring.deliverableDescription" rows="5" md-select-on-focus ng-disabled="hideSubmit || (!editingQuote && inviteSubmitted)"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group gp-flex gp-justifyFlexEnd gp-alignFlexCenter">
+                        <h5>Quote Total:  {{RecurringTotal() | currency}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END RECURRING -->
+
+            </div>
+            <div id="quoteInvitationSubmitSection" class="gp-flex gp-justifyFlexEnd gp-mt20">
+              <button class="btn btn-default gp-mr10" ng-click="goToConsultantDash()">Return to Dashboard</button>
+              <button class="btn btn-default gp-mr10" ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)" ng-click="declineQuote()" data-ng-if="!engagementData.consultantSubmitted">Decline Quote</button>
+              <button class="btn btn-primary gp-mr10" ng-hide="hideSubmit || (!editingQuote && inviteSubmitted)" ng-click="SubmitQuote()" data-ng-if="!engagementData.consultantSubmitted && stripeAccountVerified">Submit Quote</button>
+              <button class="btn btn-primary  gp-mr10" ng-click="SubmitQuote()" data-ng-hide="!editingQuote" data-ng-if="engagementData.consultantSubmitted">Resubmit Quote</button>
+              <button class="btn" data-ng-if="engagementData.consultantSubmitted && !hideSubmit" ng-click="EditQuote()" data-ng-class="editingQuote ? 'btn-warning' : 'btn-info'" style="width: 125.72px;">
+                <span data-ng-show="editingQuote">Cancel Editing</span>
+                <span data-ng-hide="editingQuote">Edit Quote</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

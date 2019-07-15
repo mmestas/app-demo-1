@@ -1,0 +1,29 @@
+<!-- HEADER -->
+<div class="login-container-header">
+  <div class="container contrast-blue">
+    <div class="row">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top ">
+          <a class=" navbar-brand " href="/">
+            app1url
+          </a>
+          <ul class="nav navbar-nav pull-right">
+            <li ng-hide="isCompany && authenticated && !allowedAccess">
+              <a class="gp-signInLink" ui-sref="signIn" ng-hide="isCompany && authenticated && !allowedAccess">Already have an account? <span>Log In</span></a>
+              <!-- <a class="gp-signInLink" ng-if="authenticated && !allowedAccess" ng-click="nonAccessLogout()">Already have an account? <span>Log In</span></a> -->
+            </li>
+            <li ng-if="authenticated && !allowedAccess" class="signUpAllowedAccessHeaderLI">
+              <span data-toggle="dropdown" aria-expanded="false">
+                <span>Hi {{userInfo.firstname}}! </span>
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <ul class="dropdown-menu">
+                <li><a href="#" data-ng-click="nonAccessLogout()"><i class="fa fa-sign-out-alt"></i> &nbsp; Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  </div>
+</div>

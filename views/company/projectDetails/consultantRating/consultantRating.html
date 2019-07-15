@@ -1,0 +1,70 @@
+<md-toolbar class="md-gpBlue-theme">
+  <div class="md-toolbar-tools">
+    <h2>Please Rate Your Experience</h2>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="cancel()">
+      <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-dialog-content>
+  <div style="padding:15px;">
+    <div style="display:flex;padding:10px;">
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin-right:15px;">
+        <img style="width:95px; border-radius:50%;" ng-src="{{envURL+engagementDetails.consultant.imageFilename}}">
+        <h4 style="text-align:center;">{{engagementDetails.consultant.name}}</h4>
+      </div>
+      <div>
+        <p>An invoice has been sent to the billing contact <strong>{{currentUserInfo.intercomCompany.email}}</strong> on record for your company.  app1url will pay <strong>{{engagementDetails.consultant.name}}</strong> for this engagement within a few days after receipt of payment.</p>
+        <hr>
+        <p>{{currentUserInfo.firstname}}, please take a few moments to tell us about your experience with {{engagementDetails.consultant.firstName}} on this engagement.</p>
+      </div>
+    </div>
+
+    <div>
+      <div style="text-align:center;">
+        <h5>On a scale of 1-5, with 1 being lowest and 5 being highest, how do you rate {{engagementDetails.consultant.name}} on:</h5>
+      </div>
+      <div style="max-width:600px; margin:auto;">
+        <ul class="list-group gp-rateExpertInputs">
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Quality</strong>
+            <input id="" ng-model="rating.quality" value="" type="number" class="rateMyExpert" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Timeliness</strong>
+            <input id="" ng-model="rating.timeliness" value="" type="number" class="rateMyExpert" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Responsiveness</strong>
+            <input id="" ng-model="rating.responsiveness" value="" type="number" class="rateMyExpert" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Cost</strong>
+            <input id="" ng-model="rating.cost" value="" type="number" class="rateMyExpert" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li >
+            <span class="gp-ratingLabel"><md-checkbox ng-model="rating.useForSimilarProjects" aria-label="use again" class="md-gpSolidBlue"></md-checkbox></span>
+            <strong class="gp-checkboxRatingLabel">Yes, I would use this consultant again for similar projects</strong>
+          </li>
+          <li >
+            <span class="gp-ratingLabel"><md-checkbox ng-model="rating.wouldRecomendToOthers" aria-label="recommend" class="md-gpSolidBlue"></md-checkbox></span>
+            <strong class="gp-checkboxRatingLabel">Yes, I would recommend this consultant to others</strong>
+          </li>
+          <li >
+            <textarea ng-model="rating.comments" aria-label="comments"  placeholder="Additional Comments" rows="4"></textarea>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</md-dialog-content>
+<md-dialog-actions layout="row">
+  <!--Note: this is only if it's not required -->
+  <button class="btn btn-sm btn-primary btn-outline" ng-click="hideRatingForm()">
+   Hide Rating
+  </button>
+  <button class="btn btn-sm btn-primary" ng-click="submitRating(rating)">
+   Submit
+  </button>
+</md-dialog-actions>

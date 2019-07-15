@@ -1,0 +1,42 @@
+<ul class="collapsible popout" data-collapsible="accordion" id="dashboardNotifications">
+  <li ng-repeat="msg in notificationList" ng-init="initializeCollapse()" ng-if="!msg.isDeleted && (msg.notificationType !== 4)" ng-hide="msg.markAsRead && !readMsgsVisible">
+      <div class="collapsible-header" ng-class="{'gp-readMsg': msg.markAsRead}">
+        <div>
+          <i class="fa fa-address-card" ng-if="msg.notificationType === 5"></i>
+          <i class="fa fa-envelope" ng-if="msg.notificationType === 2"></i>
+          <i class="fa fa-envelope" ng-if="msg.notificationType === 3"></i>
+          <i class="fa fa-envelope" ng-if="msg.notificationType === 6"></i>
+          <i class="glyphicon glyphicon-comment" ng-if="msg.notificationType === 1"></i>
+          <span>
+              <div class="notificationHeader" style="">
+                <div class="notificationDate" style="">{{msg.notificationDate | dateConverter | date: 'MM/dd/yyyy'}}</div>
+                <div class="notificationSender"  style="" data-ng-if="msg.fromUser.name">{{msg.fromUser.name | limitTo: 25}}</div>
+                <div class="notificationSender" data-ng-if="!msg.fromUser.name">{{msg.fromAddress | limitTo: 25}}</div>
+                <div data-ng-if="msg.notificationType === 1">{{msg.subTitle | limitTo: 50}}<span data-ng-if="msg.subTitle.length > 50">...</span></div>
+                <div  data-ng-if="msg.notificationType !== 1">{{msg.subject | limitTo: 50}}<span data-ng-if="msg.subject.length > 50">...</span></div>
+              </div>
+          </span>
+          <div class="gp-msgSubTitle" ng-bind-html="msg.message | limitTo: 120" data-ng-if="msg.notificationType === 1"></div>
+          <div class="gp-msgSubTitle" ng-bind-html="msg.subTitle | limitTo: 120" data-ng-if="msg.notificationType !== 1"></div>
+        </div>
+      </div>
+      <div class="collapsible-body">
+        <div><strong>Subject: {{msg.subject}}</strong></div>
+        <div>From: {{msg.fromAddress}}</div>
+        <div>{{msg.notificationDate | dateConverter | date: 'MM-dd-yyyy HH:mm'}}</div>
+        <div class="gp-msgText" ng-bind-html="msg.message"></div>
+        <div ng-if="msg.notificationType == 3" style="margin-top: -20px;padding-left: 20px;margin-bottom: 30px;">Click
+          <span ng-click="openEngagmentModalFromNotification($event, msg.engagementGpKey, userInfo)" style="font-weight:600; color:#2e7292;">HERE</span> to view this engagement
+          OR Click
+          <span ng-click="goToProjectFromNotification($event, msg.projectGpKey, userInfo)" style="font-weight:600; color:#2e7292;">HERE</span> to go to the project</div>
+        <div class="gp-collapsable-footer">
+          <div ng-hide="msg.markAsRead"><i class="fa fa-envelope gp-msgIcon" ng-click="markAsRead(msg)"></i> Archive </div>
+          <div ng-show="msg.markAsRead"><i class="fa fa-envelope-open gp-msgIcon" ng-click="markAsUnread(msg)"></i> Unarchive </div>
+          <div>
+            <span><i class="fa fa-paper-plane gp-msgIcon" ng-click="openReplyModal(msg)"></i> Reply</span>
+            <span><i class="fa fa-trash gp-msgIcon" ng-click="deleteMsg(msg)"></i> Delete</span>
+          </div>
+        </div>
+      </div>
+    </li>
+</ul>

@@ -1,0 +1,147 @@
+<div id="companyProfileSections" class="container-fluid">
+	<div >
+		<div class="col col-md-12">
+      <div class="gp-companyInfo">
+        <div class="gp-companyLogo">
+          <img class="gp-companyDashLogo" ngf-src="companyProfileImage">
+          <img class="gp-companyDashLogo" ngf-src="envURL+companyInfo.imageFilename" ng-if="companyInfo.imageFilename && !companyProfileImage">
+        </div>
+        <div class="gp-companyAddress">
+          <h2>{{companyInfo.companyName}}</h2>
+          <h5>{{companyInfo.city}}, {{companyInfo.state.Abbreviation}} {{companyInfo.zip}}</h5>
+        </div>
+      </div>
+		</div>
+	</div>
+	<div>
+		<div class="col col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span>Organization Profile</span>
+          </h3>
+          <i class="fa fa-pencil-alt" ng-click="editProfile(0)"></i>
+        </div>
+        <div class="panel-body">
+          <div class="gp-companyHeaderData">
+            <ul>
+              <li class="gp-addtlInfoTitle">Address</li>
+              <li>{{companyInfo.address}}<span ng-if="companyInfo.address2">, {{companyInfo.address2}}</li>
+              <li>{{companyInfo.city}}, {{companyInfo.state.Abbreviation}} {{companyInfo.zip}}</li>
+            </ul>
+            <ul>
+              <li class="gp-addtlInfoTitle">Website</li>
+              <li>{{companyInfo.website}}</li>
+            </ul>
+            <ul>
+              <li class="gp-addtlInfoTitle">DUNS</li>
+              <li>{{companyInfo.duns}}</li>
+            </ul>
+            <ul>
+              <li class="gp-addtlInfoTitle">CAGE</li>
+              <li>{{companyInfo.cage}}</li>
+            </ul>
+            <ul>
+              <li class="gp-addtlInfoTitle">Primary Contact</li>
+              <li>{{companyInfo.poc.name}}</li>
+            </ul>
+            <ul>
+              <li class="gp-addtlInfoTitle">Phone</li>
+              <li>{{companyInfo.phone | tel}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+			<div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span>app1url Plan Information</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <div class="gp-planInformation">
+						<ul>
+							<li><span class="gp-addtlInfoTitle">Support Plan:</span> <span>{{planInformation.SupportPackageName}}</span></li>
+							<li><span class="gp-addtlInfoTitle">Purchase Date:</span> <span>{{planInformation.PurchaseDate | dateConverter | date}}</span></li>
+							<li><span class="gp-addtlInfoTitle">Expiration:</span> <span>{{planInformation.ExpirationDate | dateConverter | date}}</span></li>
+							<li><span class="gp-addtlInfoTitle">Support Hours:</span> <span>{{planInformation.SupportHrs}}</span></li>
+              <li><span class="gp-addtlInfoTitle">Project Limit:</span>
+								<span ng-if="planInformation.ProjectLimit != 999999">{{planInformation.ProjectLimit}}</span>
+								<span ng-if="planInformation.ProjectLimit == 999999">Unlimited</span>
+							</li>
+            </ul>
+					</div>
+					<div style="display:flex; align-items:center; justify-content:center;"><button class="btn btn-warning btn-sm" ui-sref="upgradePlan">Upgrade Plan</button></div>
+				</div>
+			</div>
+  	</div>
+    <div class="col col-md-3">
+      <div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span>Additional Information</span>
+					</h3>
+          <i class="fa fa-pencil-alt" ng-click="editProfile(1)"></i>
+				</div>
+        <div class="panel-body">
+					<div class="gp-companyHeaderData">
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Business Type</li>
+	            <li ng-repeat="businessType in businessTypeList">{{businessType.name}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Primary NAICS Code</li>
+	            <li>{{companyInfo.primaryNaicsCode.code}} - {{companyInfo.primaryNaicsCode.name}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">NAICS Codes</li>
+	            <li ng-repeat="naics in additionalNaicsCodes">{{naics.code}} - {{naics.name}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Security Clearance</li>
+	            <li>{{companyInfo.securityClearance.name}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Products and Services Offered</li>
+	            <li>{{companyInfo.productsServicesOffered}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Contracts</li>
+	            <li ng-repeat="contract in companyInfo.contracts">{{contract}}</li>
+	          </ul>
+	          <ul>
+	            <li class="gp-addtlInfoTitle">Certifications</li>
+	            <li ng-repeat="certification in certificationList">{{certification.name}}</li>
+	          </ul>
+					</div>
+        </div>
+      </div>
+		</div>
+
+    <div class="col col-md-5">
+      <div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span>Account Users</span>
+					</h3>
+          <i class="fa fa-pencil-alt" ng-click="editUsers()"></i>
+				</div>
+				<div class="panel-body">
+          <div class="gp-companyProfile-accoutUsers" >
+            <ul class="list-group">
+              <li class="list-group-item gp-addtlInfoTitle">
+                <div class="gp-listItemTable col-md-6">Name</div>
+                <div class="gp-listItemTable col-md-6">Email</div>
+              </li>
+              <li ng-repeat="poc in companyPointOfContacts" class="list-group-item" >
+                <div class="gp-listItemTable col-md-6">{{poc.name}}</div>
+                <div class="gp-listItemTable col-md-6">{{poc.email}}</div>
+              </li>
+            </ul>
+          </div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+</div>

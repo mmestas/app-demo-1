@@ -1,0 +1,453 @@
+/**********************************************************/
+/*********************** APP ITEMS ************************/
+/**********************************************************/
+.gp-image-lg {width:55%;
+   // height:55%;
+ } //On 4.29.19 suddenly started acting strange - this class is used on the sign up landing page only for the two images
+.gp-flex-grow {flex-grow:1;}
+// .abHideShowInfo {display:inline-block !important;}
+/***************************************************************************/
+/********************************** NAV ************************************/
+/***************************************************************************/
+.navbar-default .navbar-nav>li>a.gp-signInLink {color:$govDkGrey;}
+.gp-signInLink span {color:$govBlue;}
+
+
+/**********************************************************/
+/************************* VIEWS **************************/
+/**********************************************************/
+/* Check to see if it's 70 or 80px - signup vs dash */
+
+.gp-signUpView {padding-top:80px; overflow: hidden; padding-bottom:80px;
+}
+  /************************* views/signIn.html **************************/
+  .gp-signInContainer {width:100%;padding: 0 20px;max-width: 640px;margin:auto;background: $govWhite;}
+  .gp-signIn {padding:25px;max-width: 600px;margin:20px auto;}
+  .signUpBtn {width:100%;}
+  .gp-forgotPassContainer {width:100%; padding: 0 20px; max-width:1100px; margin:auto;}
+  .gp-forgotPass {width:150px; float:right;cursor: pointer;}
+  .gp-forgotPass:hover {color: $govMedOrange;}
+  .gp-requestPassInfo {padding: 10px;background: $govWhite; margin-bottom: 15px;border: 1px solid darken($govBorderGrey, 4%);
+    p {line-height: 14px;text-align: left;}
+
+  }
+  // .gp-requestPassInfo p {line-height: 14px;text-align: center;}
+  .gp-returnToSignIn {padding: 10px 0;cursor: pointer; width:110px; margin:auto;}
+  .gp-returnToSignIn:hover {color: $govMedOrange;}
+  .gp-hr {width: 100%; height: 20px; border-bottom: 2px solid $govBorderGrey; text-align: center; margin-bottom:20px;}
+  .gp-hrText {font-size: 25px; padding: 0 10px; background: $govWhite;line-height: 35px;color: $govMdDkGrey;}
+  /************************* SIGNUP BARS **************************/
+  .gp-signUpStatusBar, #signUpLanding .gp-signUpBar {text-align:center;}
+  .gp-signUpStatusBar {background: $govBlue;}
+  .gp-signUpStatusBar h1 {font-size:37px;}
+  #signUpLanding .gp-signUpStatusBar h1, #signUpLanding .gp-signUpStatusBar h2,
+  .gp-signUpStatusBar h1, .gp-signUpStatusBar h2 {color:$govWhite;padding: 20px 0 20px;margin: 0;}
+  .gp-signUpStatusBar h2 {margin: 0;}
+  .gp-signUpStatusBar .progress {margin: 5px auto 5px;max-width: 1100px;width: 90%;}
+  .view md-toolbar h1, .view md-toolbar h2, .view md-toolbar h3, .view md-toolbar h4, .view md-toolbar h5 {margin:0;}
+  .view md-toolbar h1 {font-size: 30px;padding-top: 5px;}
+  .view md-toolbar h2 {font-size: 24px;}
+  .view.gp-consultantSignUp  md-toolbar h2 {font-size: 22px; padding:0;}
+  /************************* SIGNUPLANDING.html **************************/
+  #signUpLanding h1, #signUpLanding h2, #signUpLanding h3, #signUpLanding h4, #signUpLanding h5,
+  #signUpComplete h1, #signUpComplete h2, #signUpComplete h3, #signUpComplete h4, #signUpComplete h5
+    {padding:0;margin: 5px 0;text-align: center;}
+  #signUpLanding md-toolbar h1 {font-weight: bold;}
+  #signUpLanding .container {max-width: 1200px; margin:auto;}
+  #signUpLanding .container h4 {color: #999;}
+  #signUpLanding .container h3 {color: $govBlue;font-weight: bold;}
+  #signUpLanding .container .col-md-6 {width:calc(50% - 20px);}
+  .hr-text {
+    -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: .5;
+  overflow: visible;
+}
+    .hr-text:before {
+      content: '';
+      background: linear-gradient(to right, transparent, #818078, transparent);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      // width: 100%;
+      width: 450px;
+      height: 3px;
+    }
+    .hr-text:after {
+      content: attr(data-content);
+      position: relative;
+      display: inline-block;
+      color: black;
+      padding: 0 .5em;
+      line-height: 26px;
+      color: #818078;
+      background-color: #fcfcfa;
+      -ms-transform: rotate(270deg);
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+      left:270%;
+      left:190px;
+      top: 0%;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+  #signUpLanding .gp-signUpBox {margin: 30px 0;padding: 20px;}
+  #signUpLanding .gp-signUpBox button {margin-top:20px;}
+  #signUpLanding .gp-signUpBar {background: $govBorderGrey;}
+
+
+  /************************* views/company/signupPro/step1.html  Design #2 **************************/
+#signUpStep1 md-checkbox {margin-bottom:0;margin-left: 10px;}
+#signUpStep1 .gp-categoryCheckboxes {cursor: pointer;}
+#signUpStep1 .gp-subCategoryCheckboxes {display:none;position: absolute;left:40%;top: 0;background: white;padding: 3px 7px;width:60%;left: 40%;padding: 15px;font-size: 20px;font-weight: 600;background: transparent;background: #0000007d;height: 100%;z-index: 1000;color: $govWhite;}
+#signUpStep1 .gp-categoryCheckboxes:hover .gp-subCategoryCheckboxes {display: block;}
+
+.gp-signUpStep1-body {position:relative;flex-wrap: wrap;}
+.gp-StepContainer .gp-signUpStep1-left {width:40%;}
+.gp-signUpStep1-left {border:1px solid transparent;padding:15px;}
+.gp-signUpStep1-left > ul > li {position:unset;}
+.gp-signUpStep1-left > ul > li > div {display:flex; justify-content: space-between;font-weight:600;}
+.gp-signUpStep1-right {width:60%; position:relative;}
+.gp-signUpStep1-right img {width:100%;}
+.gp-signUpOverlay {display:none;position: absolute;background: #777;opacity: 0.5;height: 100%;width: 100%;top: 0;}
+.gp-categoryCheckboxes:hover .gp-signUpOverlay {display:block;}
+
+  /************************* views/company/signupPro/step1.html **************************/
+  .gp-StepContainer {padding: 20px 20px;}
+  .gp-StepContainer h1, .gp-StepContainer h2, .gp-StepContainer h3, .gp-StepContainer h4 {text-align: center;}
+  .gp-StepContainer .gp-categoryCheckbox {width: 33%; min-width: 300px;border: 2px solid$govMedLtGrey;margin-bottom: 8px;border-radius: 9px;}
+  /****************  NEED TO MAKE THESE STANDARD! **************/
+  .gp-StepContainer md-input-container .md-input {padding: 13px;line-height: 45px;height: 45px;background: $govWhite;border-width: 1px;-ms-flex-preferred-size: 26px;border-color: $govBorderMdGrey;}
+  .gp-StepContainer md-input-container.md-input-focused .md-input,
+  .gp-StepContainer md-input-container.md-input-resized .md-input,
+  .gp-StepContainer md-input-container .md-input.ng-invalid.ng-dirty {border-width: 1px;}
+  .gp-StepContainer md-input-container label:not(.md-container-ignore){position: absolute;bottom: 84%;left: 15px;right: auto;right: 15px;color: $govLtGreyBlue;font-weight: 300;margin: 0;margin-bottom: 2px;transform: translate3d(0,0px,0) scale(.75);width: calc(100% - 30px);}
+  .gp-StepContainer md-input-container.md-input-focused label:not(.md-no-float),
+  .gp-StepContainer md-input-container.md-input-has-placeholder label:not(.md-no-float),
+  .gp-StepContainer md-input-container.md-input-has-value label:not(.md-no-float) {-webkit-transform: translate3d(0,-7px,0) scale(1);transform: translate3d(0px,-7px,0) scale(1);color: $govBlue;}
+  .gp-StepContainer md-autocomplete[md-floating-label] .md-show-clear-button button {top: 8px;}
+
+
+  .gp-Step {max-width:800px; margin:auto;}
+  .gp-Step md-radio-button {display: inline-block; margin-left: 15px;}
+  .gp-Step md-radio-button .md-label {margin-left: 25px;}
+  .gp-Step-Title {margin: 20px 0;}
+  .gp-Step md-autocomplete md-input-container {padding:0; margin-bottom:15px; margin-top:0;}
+  .gp-Step md-input-container .md-errors-spacer {display:none;}
+  .gp-Step div[ng-form] {overflow:hidden;padding-top: 20px;}
+  .gp-categoryTiles {
+    flex-wrap: wrap;
+    margin: 40px auto 0;
+  }
+   .gp-categoryTile {
+      height: 175px;
+      width: calc(25% - 20px);
+      margin: 10px 10px;
+      border: 2px solid;
+      border-radius: 5px;
+   }
+   .gp-categoryTileInnerWrapper {padding: 10px;}
+   .gp-categoryCheckboxWrapper {padding: 10px;background: $govBlue;color:$govWhite;font-size: 18px;}
+   .gp-categoryTitle {text-align: center;}
+
+.gp-flexCheckboxes md-checkbox {height: 35px;width:35px;margin-bottom: 11px;/* float: right; */}
+.gp-flexCheckboxes  md-checkbox .md-container {width:35px; height:35px;}
+   .gp-flexCheckboxes md-checkbox.md-gpBlue.md-checked .md-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border-color: $govBlue;
+      background-color: $govBlue;
+  }
+  .gp-flexCheckboxes md-checkbox.md-gpBlue:not(.md-checked) .md-icon {
+    border-color: rgba(255, 255, 255, 0.75);
+}
+.gp-flexCheckboxes md-checkbox.md-gpBlue:not(.md-checked) .md-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border-color: $govBlue;
+  background-color: $govWhite;
+}
+  .gp-flexCheckboxes md-checkbox:not([disabled]).md-gpBlue.md-checked .md-icon {}
+   .gp-flexCheckboxes md-checkbox.md-gpBlue.md-checked .md-icon:after {
+       border-color: $govBlue;
+       border-color: $govWhite;
+       height: 22px;
+       width: 12px;
+       border-width: 3px;
+       left: 10px;
+       top: 3px;
+   }
+.gp-flexCheckboxes md-checkbox .md-container {width: 35px;
+    height: 35px;
+    width:35px;
+    right: 0;
+    left: initial;}
+.gp-flexCheckboxes {display: flex;flex-wrap: wrap;justify-content: space-between;}
+
+.gp-postAProject .gp-categoryCheckbox {
+    width: calc(33% - 10px);
+    min-width: 300px;
+    border: 2px solid$govMedLtGrey;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    border-radius: 0;
+}
+.gp-smallSubcategories {font-size: 12px;}
+@media only screen and (max-width: 963px) {
+  .gp-categoryCheckbox {width: 49%;min-width: 300px;}
+}
+@media only screen and (max-width: 664px) {
+  .gp-categoryCheckbox {width: 100%;min-width: 100%;}
+  .gp-StepContainer .gp-signUpStep1-left, .gp-StepContainer .gp-signUpStep1-right {width:100%;padding: 0px;}
+  .gp-signUpStep1-right {display:none;}
+}
+/* @media only screen and (max-width: 963px) { }
+  @media only screen and (max-width: 963px) { } */
+   /* Added 12.18.17 */
+#f1_container {
+  position: relative;
+  margin: 0px auto;
+  /* width: 450px;
+  height: 281px; */
+  width: 100%;
+  height: 190px;
+  z-index: 1;
+}
+#f1_container {
+  perspective: 1000;
+}
+#f1_card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 1.0s linear;
+}
+#f1_container:hover #f1_card {
+  transform: rotateY(180deg);
+  /* box-shadow: -5px 5px 5px #aaa; */
+}
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.face.back {
+  display: block;
+  transform: rotateY(180deg);
+  box-sizing: border-box;
+  padding: 10px;
+  color: $govBlue;
+  text-align: left;
+  background-color: $govBorderGrey;
+}
+
+
+  /************************* views/company/signupPro/step2.html **************************/
+
+  .gp-selectedCategories {}
+  .gp-selectedCategories .form-group .form-control {width:calc(100% - 50px); display:inline-block;}
+  .gp-selectedCategories .form-group button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    box-shadow: none;
+    background: #F44336;
+    display: inline-block;
+    border-style: none;
+    color: $govWhite;
+    margin-left: 8px;}
+  .gp-selectedCategories .fa {font-size: 32px; margin-left: 4px; color: #F44336; vertical-align: middle;}
+
+/************************* views/company/signupPro/GetSAM.html **************************/
+
+  .md-autocomplete-suggestions li {line-height: unset;height: auto;padding: 3px 6px;font-size: 12px;}
+  .md-autocomplete-suggestions li:hover .gp-SAMSAddress {background:$govMdDkGrey;color:$govWhite;position: absolute;height: auto;right: 0;}
+  .gp-SAMSResult {display: flex; }
+    .gp-SAMSName {width:50%;border: 1px solid $govMedLtGrey;padding: 10px 10px;overflow: hidden;text-overflow: ellipsis;display: flex;justify-content: space-between;}
+   .gp-SAMSName > div {overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 30px);}
+    .gp-SAMSAddress {width: 50%; display:none;border-left: 1px solid $govMedLtGrey;padding: 10px;}
+    .gp-SAMSResult:hover .gp-SAMSAddress {display: block;}
+    .gp-SAMSName i {display: none;float:right;color:$govMdDkGrey;margin-top: 3px;}
+    .gp-SAMSResult:hover .gp-SAMSName i {display: block;float:right;}
+// /************************* views/company/signupPro/step4.html PAYMENT**************************/
+//   /* .gp-Step4 {max-width:800px; margin:auto;} */
+//   .gp-ecommerceWrapper {margin: 0 0 15px;}
+//   .gp-price {text-align: right;font-weight: bold;}
+//   .gp-info {}
+//   .gp-info select {width: calc(100% - 46px); display: inline-block;}
+//   .gp-info .glyphicon {margin-left: 8px; font-size: 16px;vertical-align: middle;cursor: pointer;}
+//   .gp-info .glyphicon:hover {color: $govMedOrange;}
+//   // .gp-selectLicenses {}
+//   .gp-paymentAgreement {padding:20px; border: 2px solid $govMedLtGrey;}
+//   .gp-errorMsg {padding:20px;}
+//   .abInfo input {width: calc(100% - 30px); display: inline-block;}
+//   .abInfo .glyphicon {margin-left: 8px; font-size: 16px;vertical-align: middle;cursor: pointer;}
+//   .abInfo .glyphicon:hover {color: $govMedOrange;}
+
+  /************************* Step 4 table **************************/
+  .gp-businessModelTable {display:flex;padding:5px;/* transform: scale(0.8); */}
+  .gp-businessModelTable h4, .gp-businessModelTable h3 {margin:0; padding:0;text-align: left;}
+  .gp-tableRow {height:85px;display: flex;align-items: center;justify-content: center;}
+  .gp-tableRow .gp-tableAmmt {height:102px;}
+  .gp-tableRowLast {height: 188px;display: flex;align-items: center;/* justify-content: center; */margin-top: 28px;}
+  .gp-tableLeft {width:33.33%; padding:5px;}
+    .gp-leftTableColumn {width:100%;}
+    .gp-leftTableColumn .gp-tableRow {justify-content: left;}
+  .gp-tableRight {width:66.66%; padding:5px; }
+    .divTableBody {width:100%; display:flex;}
+      .divTableColumn {width: 25%;margin: 0 3px;text-align: center;padding: 0px;transition:1s;}
+      .divTableColumn:hover, .divTableColumn.gp-selectedPlan {background:$govBlue;color:$govWhite;transform: scale(1.02);}
+      .divTableColumn.gp-selectedPlan {cursor:default;}
+      .divTableColumn.gp-disablePlan {background: $govMedLtGrey; color:$govBorderGrey;}
+      .divTableColumn.gp-disablePlan .gp-tableAmmt, .divTableColumn.gp-disablePlan .gp-tableManager {background-color:$govBorderGrey!important;}
+      .divTableColumn fieldset {border: 2px solid transparent;padding: 4px;}
+        .divTableColumn legend {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    font-size: 19.5px;
+    line-height: inherit;
+}
+      .divTableColumn.gp-BestValue fieldset {
+        margin: 0;
+        min-width: 0;
+        border: 1px solid $govBlue;
+        padding: 4px;
+      }
+      .divTableColumn.gp-BestValue legend {
+        display: block;
+        width: 100%;
+        margin-bottom: 6px;
+        background: #fbfb68;
+        font-size: 19.5px;
+        line-height: inherit;
+        color: $govBlue;
+        border: 1px solid;
+      }
+      .divTableColumn.gp-BestValue.gp-selectedPlan legend {background:transparent;color:$govWhite;border: 0;}
+      .divTableColumn.gp-BestValue.gp-selectedPlan .gp-tableAmmt.bg-primary,
+      .divTableColumn.gp-BestValue.gp-selectedPlan .gp-tableManager.bg-primary {border: 0px solid $govMedLtGrey; background:rgba(255, 255, 255, 0.28);}
+
+
+        .gp-tableTitle {font-size: 12px;}
+        .tablePlansFeatures {height:85px;margin-top: 38px;}
+        .gp-tableAmmt {height:85px;border-radius:15px;display: flex;align-items: center;justify-content: center;}
+          .gp-tableAmmtInner {border: 3px solid $govWhite;border-radius: 50px;height: 72px;width: 72px;color:$govWhite;font-weight: bold;display: flex;justify-content: center;align-items: center;}
+        .gp-tableProjectLimit, .gp-tableLimit {border-radius: 8px; padding: 15px 0px; border:1px solid $govMedLtGrey; font-size: 15px; width:100%; margin: 0 2px}
+        .gp-tableCheck {font-size: 28px; color:$govGreen;}
+        .divTableColumn .fa-times {color: #c50a0a;}
+        .gp-tableManager {border-radius: 11px;font-size: 15px;width: 100%;padding: 14.5px 0;color: $govWhite;}
+#gp-ecommerceWrapper input[type=checkbox], input[type=radio] {margin-right:7px;}
+/************************* views/company/signupPro/thankyou.html **************************/
+  .gp-thankYou {padding:25px;max-width:800px;margin:20px auto; text-align: justify;}
+
+  /**********************************************************/
+  /********************* MEDIA QUERIES **********************/
+  /**********************************************************/
+  @media only screen and (max-width: 1280px) { }
+  @media only screen and (max-width: 1024px) {
+    .gp-categoryTile {width: calc(33.33% - 20px);}
+   }
+  @media only screen and (max-width: 600px) {
+    .gp-categoryTile {width: calc(50% - 20px);}
+   }
+  @media only screen and (max-width: 768px) {
+    .gp-backBtn, .gp-nextBtn {text-align:center;}
+    .gp-backBtn button, .gp-nextBtn button {width:100%;margin-bottom: 15px;max-width: 320px;text-align: center;}
+    #signUpStep1 .gp-categoryCheckboxes:hover .gp-subCategoryCheckboxes {display:none;}
+   }
+  @media only screen and (max-width: 480px) {
+    .gp-categoryTile {width: 100%;}
+    .gp-signUpView {padding:0;}
+    #signUpLanding .container {box-shadow: none;}
+    #signUpComplete .gp-signInContainer {padding:0; box-shadow:none;}
+    .gp-signIn {margin: auto;height: 100vh;position: relative;padding: 0;}
+    .gp-selectedCategories .form-group .form-control {width: calc(100% - 35px);}
+
+div[ng-form="applicatonStep2"] md-radio-group {
+    width: 100%;
+    display: flex;
+    margin-top: 5px;}
+   }
+  @media only screen and (max-width: 320px) { }
+
+
+  @media only screen and (max-width: 959px) {
+    #signUpLanding .gp-signUpBox {margin-bottom:50px;}
+    #signUpLanding .container .col-md-6 {width:100%;}
+    .hr-text {display: none;}
+  }
+
+
+  /*********************** RESPONSIVE Media Sizes ***********************/
+  /************* BOOTSTRAP SIZES ********************/
+  /****** Medium Devices *****/
+  @media screen and (max-width:1200px) {
+
+  }
+  /****** Small Devices *****/
+  @media screen and (max-width: 992px) {
+
+  }
+  /****** Extra Small Devices/ iPad *****/
+  @media screen and (max-width: 768px) {
+
+  }
+
+  /************* OTHER SIZES ********************/
+  /****** Medium Devices *****/
+  @media screen and (max-width: 1100px) {
+
+  }
+  /****** iPhone 5 *****/
+  @media screen and (max-width: 568px) {
+
+  }
+  /****** iPhone 4 *****/
+  @media screen and (max-width: 480px) {
+  .gp-min480 {display:none;}
+  form[name="gpSignInForm"] {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  }
+  @media screen and (max-width: 320px) {
+
+  }
+
+  /*****************************************************************************************************************/
+  /********************************************* CONSULTANT SignUp *************************************************/
+  /*****************************************************************************************************************/
+
+/*************************** NEW 1.19.18 *****************/
+
+#signUpLanding .gp-statusBarCompany {display: none;}
+#signUpLanding .gp-statusBarCompany.showCompanyStatusBar {display: block;}
+#signUpLanding .gp-statusBarConsultant {display: none;}
+#signUpLanding .gp-statusBarConsultant.showConsultantStatusBar {display: block;}
+
+.gp-bulletedStatusBar {display:flex;justify-content:center;padding-bottom: 15px;padding-top: 6px;}
+ .gp-bullets {height: 30px; width:30px; border-radius:50%;display: flex;flex-direction: column; justify-content: center; background-color:$govWhite; color:$govBlue;}
+ .gp-bullets.completed {height: 30px; width:30px; border-radius:50%; display: flex;flex-direction: column; justify-content: center; background-color:#fd7b20;color:$govWhite;}
+ .gp-statusBarLinks {height:30px; width:150px;display: flex;flex-direction: column; justify-content: center;}
+ .gp-statusBarLinks > div {height:5px; background-color:#7a7a7a;}
+
+  @media screen and (min-width: 768px) {
+      .signUpAllowedAccessHeaderLI {padding:29px;}
+  }

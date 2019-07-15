@@ -1,0 +1,236 @@
+/***************************** MODAL SIZES **********************/
+.gp-smModal {width:100%; max-width: 320px;}
+.gp-mdModal {width:100%; max-width: 500px;}
+.gp-lgModal {width:100%; max-width: 800px;}
+.gp-xlModal {width:100%; max-width: 1000px;}
+
+/*Custon size modals*/
+.gp-565Modal {width:100%; max-width: 565px;}
+.gp-900Modal {width:100%; max-width: 900px;}
+
+/***************************** modal HEADERS **********************/
+.gp-modalHeaderWrapper {
+    display:flex; justify-content:space-between; padding: 10px 20px;
+    >div {
+      display:flex;
+        >img {
+          margin-right:15px;
+        }
+    }
+}
+.gp-quickData {
+    >div {
+      border-right: 1px solid #a7a7a7;padding: 0 16px;
+    }
+    >div:last-child {
+      border: 0;
+    }
+}
+.gp-toolbarWithImageandName {
+    h2 {padding: 0;}
+    .md-toolbar-tools {height: 75px;max-height: 85px;}
+    .gp-toolbarImageWrapper {
+          height:50px; width:50px; margin-right:15px;
+          img {
+            height:100%; width:100%; border-radius:50%;
+          }
+      }
+}
+
+/************ Accordion Panels *************/
+md-dialog md-toolbar .fa.fa-plus-circle,
+md-dialog md-toolbar .fa.fa-minus-circle {color:$govBlue;}
+
+/************ Simple Dialogues *************/
+.gp-simpleDialogue {padding: 0px;max-width: 600px;}
+.gp-simpleDialogue md-dialog-content {width:100%;padding: 15px;}
+.gp-simpleDialogue md-input-container {width: 100%;}
+.gp-thankYouDialogue {padding: 15px; min-height: 130px;}
+
+/************** Star Rating for Modals ***************/
+.gp-expertRatingForModal {}
+
+/********** Modal Scrollbar ***********/
+  /* width */
+  .md-dialog-content::-webkit-scrollbar {
+      width: 5px;
+  }
+  /* Track */
+  .md-dialog-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
+  /* Handle */
+  .md-dialog-content::-webkit-scrollbar-thumb {
+      background: #888;
+  }
+  /* Handle on hover */
+  .md-dialog-content::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+/************ Group Invite to Quote *************/
+  #inviteToQuoteModal.groupInviteToQuoteModal .gp-toolbarWithImageandName .md-toolbar-tools {
+      height: auto;
+      max-height: fit-content;
+      margin: 5px 0;
+  }
+  .gp-groupInviteeWrapper {
+    font-size: 20px;
+    letter-spacing: .005em;
+    box-sizing: border-box;
+    font-weight: 400;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 16px;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .gp-groupInviteeWrapper > div {height: 45px;max-height: 45px;display: flex;/* width: 25%; */margin-right: 5px;}
+  .gp-groupInviteeWrapper .gp-toolbarImageWrapper {
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+  }
+  /************ Invite to Quote *************/
+  #inviteToQuoteModal {
+     width:700px;background: #fff;
+      .md-dialog-content {padding: 20px;padding-top: 0;max-height: 600px;overflow: auto;}
+      .gp-projectInfo {display: flex; justify-content: space-between; vertical-align: middle; align-items: baseline; margin-bottom: 10px;}
+      .engageRequirements {display: flex;flex-direction: column;margin-left: 5px;}
+      md-toolbar.md-gpBlue-theme {justify-content: center;}
+      section {border-bottom: 1px dashed #7a7a7a;padding-bottom: 12px;padding-top: 15px;}
+      label {line-height: 15px;}
+      md-input-container {
+        label:not(.md-no-float):not(.md-container-ignore) {margin-left: 10px;}
+      }
+
+      // md-dialog-actions { background: #fff;
+      //   md-button {padding: 6px 12px;font-weight: 400;border-radius:0; padding: 6px 12px;font-weight: 400;border-radius:0;}
+      //   .md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused,
+      //   .md-button.md-default-theme:not([disabled]):hover,
+      //   .md-button:not([disabled]):hover {background-color: rgba(236, 236, 236, .33);background-color: rgba(236, 236, 236, 0);}
+      //
+      // }
+      md-datepicker {
+        button.md-datepicker-button.md-button.md-icon-button {margin: 0 0;height: 30px;min-width: 0;line-height: 24px;padding: 8px 0;width: 30px;border-radius: 50%;
+          md-icon.md-datepicker-calendar-icon {height: 20px;width: 20px;min-height: 20px;min-width: 20px;
+          }
+        }
+      }
+      .md-icon-button+.md-datepicker-input-container {margin-left: 0px;border-bottom-color: rgba(167, 167, 167, 0.8);
+      }
+
+  }
+
+
+.inviteSignatureField {margin-left: 20px;}
+.inviteSignatureField input {margin-left:10px;}
+.inviteSignatureField div[ng-messages] {margin-left:10px;}
+
+//Need to make this standard!!! to fix later
+#id-inviteCongratulations {}
+#id-inviteCongratulations md-dialog-actions {background: #316c89; color: #fff;}
+#id-inviteCongratulations md-dialog-actions .md-button {}
+#id-inviteCongratulations md-dialog-actions .md-button:not([disabled]):hover {background-color: #fff;}
+
+
+
+
+/************* QUOTE REVIEW MODAL *************/
+#quoteReviewModal {
+  section {padding: 10px 15px;}
+  md-toolbar {min-height: 40px; max-height: 40px;}
+  h5 .small, h5 small {font-size: 85%;}
+  #milestones {
+    .milestone {
+      margin-bottom: 10px;
+      border-bottom: 2px dashed #ccc;
+      padding-bottom: 15px;
+    }
+    .recurringMilestone {
+      .recurringMilestoneStats {
+        min-width:275px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
+// #quoteReviewModal .gp-dialogueInnerContent section {
+//   padding: 15px;
+// }
+// #quoteReviewModal md-dialog-content md-toolbar {height: 35px;min-height: 35px;margin-top: 5px;}
+// #quoteReviewModal .gp-text-danger {font-size: 12px;margin-left: 5px;}
+// .gp-modal-consultantInfo {display: flex; margin-bottom: 15px;}
+// .gp-modal-consultantInfoRightSide {display: flex; flex-direction: column; }
+// .gp-modal-consultantInfoLeftSide {display: flex; flex-direction: column;flex-grow:1; margin-left:15px;}
+// .gp-hoursAmmt {display: flex;justify-content: center;align-items: flex-start;}
+// .gp-hoursAmmtDetail {padding:10px;}
+// .gp-notToExceed {padding:10px;}
+// .gp-engagementFeesSection {max-width: 300px;margin:auto;margin-top:15px;}
+// .gp-engagementFees {margin-top: 7px;}
+// .gp-engagementFees div{text-align: right;}
+// .gp-currencyLabel {width: calc(100% - 110px);display: inline-block;margin-right: 5px;}
+// .gp-currency {width:100px;display: inline-block;}
+// .gp-lastBeforeTotal {border-bottom: 2px solid;}
+// .gp-notToExceed .md-errors-spacer {display: none;}
+// .gp-notToExceed md-input-container label {margin: 0;}
+// .gp-engagementFeesSection select {margin-bottom: 0px;}
+// .gp-dialogueInnerContent md-checkbox {margin-top:15px;}
+// .gp-dialogueInnerContent md-checkbox .md-container {top:13px;}
+// #quoteReviewModal md-toast {align-self: center;width: 100%;max-width: 100%;min-width: 100%;left:0;}
+// #quoteReviewModal md-toast .md-toast-content {max-width:none;}
+//
+// @media screen and (max-width:768px) {
+//  #quoteReviewModal md-toast .md-toast-content {max-width:none;display:block; height:100%;max-height:none;}
+//
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+/* SEND MESSAGE SHORT LIST (SL) MODAL */
+/************** Consultant Modals ******************/
+/* NDA REQUIRED MODAL */
+/* QUOTES SUBMITTED MODAL */
+#js-ecommercePayments2 .abOnlinePaymentFields > fieldset {margin-bottom: 20px;border: 1px solid silver;padding: 10px;}
+ #js-ecommercePayments2 legend {width: initial;}
+/* REQUEST INFO MODAL */
+
+/* MODALS - DETAILS SHORTLIST */
+md-dialog .gp-projectInfo img {width: 60px;height: 60px;border-radius: 30px;}
+rf-upload-file md-input-container {margin:0 0;}
+rf-upload-file md-input-container .md-input {position: absolute;top: -3px;border-width: 0px;}
+rf-upload-file md-input-container:not(.md-input-invalid).md-input-focused .md-input {border:0;}
+
+/***************** MODALS *****************/
+md-dialog {max-height: 90%;}
+md-dialog.gp-ConsultantRequestInfoModal md-dialog-content .gp-subjectForMsg {padding-top: 15px; padding-bottom: 15px; background-color: transparent;}
+md-dialog.gp-ConsultantRequestInfoModal md-dialog-content {padding:10px;}
+md-dialog.gp-ConsultantRequestInfoModal {min-width: 550px;}
+#ioModal .gp-projectInfo > div,
+#replyModal .gp-projectInfo > div,
+#riModal .gp-projectInfo > div
+{display: flex; align-items: center;}
+.gp-dialogueInnerContent {padding:10px;margin: auto;max-width: 820px;}
+/****************************** MODALS ***********************************/
+.gp-dialogInnerMsg {min-height:50px; padding:10px;max-width:85%; margin:auto; font-size: 18px; text-align: center;color: #316c89;}

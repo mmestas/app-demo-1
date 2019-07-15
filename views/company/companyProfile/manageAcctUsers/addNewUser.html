@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" ng-model="newUserInfo.firstName">
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" ng-model="newUserInfo.lastName">
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" ng-if="(userInfo.role.gpKey === '{f87dc87e-d4c4-4e22-b025-f212cd659910}')">
+          <label>System Role</label>
+          <md-select class="md-gpBlue-theme" ng-model="newUserInfo.role">
+            <md-option ng-repeat="role in roles" ng-value="role" >
+              {{role.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme" ng-if="(userInfo.role.gpKey === '{d9a2b6db-92e1-45f2-a9fa-db8240a7145b}')">
+          <label>System Role</label>
+          <md-select class="md-gpBlue-theme" ng-model="newUserInfo.role">
+            <md-option ng-repeat="role in roles | filter: {'gpKey' : '!{f87dc87e-d4c4-4e22-b025-f212cd659910}'}" ng-value="role">
+              {{role.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="email">Email (username)</label>
+          <input type="email" class="form-control" name="email" ng-model="newUserInfo.email">
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" ng-model="newUserInfo.password">
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" name="phone" ng-model="newUserInfo.phone" phone-input>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="mobile">Mobile Phone</label>
+          <input type="text" class="form-control" name="mobile" ng-model="newUserInfo.mobilePhone" phone-input>
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label>Mobile Carrier</label>
+          <md-select class="md-gpBlue-theme" ng-model="newUserInfo.mobileCarrier">
+            <md-option ng-value=""><em>None</em></md-option>
+            <md-option ng-repeat="carrier in mobileCarriers" ng-value="carrier" >
+              {{carrier.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <div class="gp-allowTexts" >
+          <label for="lastname" >Allow Text Notifications</label>
+          <md-checkbox ng-model="newUserInfo.allowTextNotifications" aria-label="textNotifications" class="md-gpSolidBlue"  ng-disabled="!newUserInfo.mobileCarrier.name || !newUserInfo.mobilePhone" ng-checked="!(!newUserInfo.mobileCarrier.name || !newUserInfo.mobilePhone)"></md-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" data-ng-if="showErrorMsg">
+        <div class="col gp-error gp-text-right">
+            {{errorMsg}}
+        </div>
+    </div>
+    <div class="gp-ProfileButtons-add">
+      <md-button class="btn btn-default btn-outline" ng-click="closeEditUsers()">Close</md-button>
+      <md-button class="btn btn-primary" ng-click="inviteNewUser(newUserInfo)"><i class="fa fa-paper-plane"></i> Send Invite</md-button>
+    </div>
+
+  </div>

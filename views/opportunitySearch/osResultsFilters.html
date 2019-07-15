@@ -1,0 +1,70 @@
+<div class="gp-flex gp-mb5 resultsFilters">
+  <div>
+    <!-- Filter Results -->
+    <div class="filterResultsOn gp-mb5">
+      <label>Filter Results On:</label>
+      <div class="dropdown">
+        <button class="btn btn-primary btn-outline btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+          <span>{{filterResultsOn}}</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu gp-sortFilterList">
+          <li ng-click="filterKeywordsBy(true, 'Any Keyword')">Any Keyword</li>
+          <li ng-click="filterKeywordsBy(false, 'All Keywords')">All Keywords</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dwnldResults">
+      <div><i class="fas fa-cloud-download-alt greyIcon" data-ng-click="downloadOpportunitiesList(opportunities)"></i> Download List</div>
+    </div>
+
+  </div>
+  <!-- Filters -->
+  <div class="gp-addedFilters">
+    <!-- Keywords -->
+    <span ng-repeat="keyword in keywordFilterArray track by $index">
+      <button class="btn btn-primary btn-xs" type="button" ng-click="clearKeyword($index, keyword)">{{keyword}}<i class="fa fa-times"></i></button>
+    </span>
+    <!-- Date Range (Date Filter) -->
+    <button class="btn btn-default btn-xs" type="button" ng-click="clearDateFilter()" ng-if="filter.DateFilter.endDate">
+       {{filter.DateFilter.startDate | date : "M/d/yy"}} - {{filter.DateFilter.endDate | date : "M/d/yy"}}
+      <i class="fa fa-times"></i></button>
+    <!-- Agencies -->
+    <span ng-repeat="agency in filter.AgencyFilter">
+      <button class="btn btn-default btn-xs" type="button" ng-if="agency.selected" ng-click="clearAgency($index, agency)">{{agency.name}} <i class="fa fa-times"></i></button>
+    </span>
+    <!-- naicsCodes -->
+    <span ng-repeat="code in filter.NaicsFilter">
+      <button class="btn btn-default btn-xs" type="button" ng-click="clearNaicsCode(code)">{{code.code}} <i class="fa fa-times"></i></button>
+    </span>
+    <!-- Set Aside Type -->
+    <button class="btn btn-default btn-xs" type="button" ng-if="filter.BusinessTypeFilter.name" ng-click="clearSetAside()">{{filter.BusinessTypeFilter.name}} <i class="fa fa-times"></i></button>
+    <!-- Ceiling -->
+    <button class="btn btn-default btn-xs" type="button" ng-if="addCeilingBtn" ng-click="clearCeiling(filter.ceiling)">{{filter.ceiling | currency}} <i class="fa fa-times"></i></button>
+    <!-- Contract (Set Aside) Type -->
+    <button class="btn btn-default btn-xs" type="button" ng-if="filter.OpportunityTypeFilter.name" ng-click="clearContractType()">{{filter.OpportunityTypeFilter.name}} <i class="fa fa-times"></i></button>
+    <!-- Opportunity Relevance -->
+    <button class="btn btn-default btn-xs" type="button" ng-if="filter.opportunityRelevance.name" ng-click="clearOpportunityRelevance(filter.opportunityRelevance)">{{filter.opportunityRelevance.name}} <i class="fa fa-times"></i></button>
+
+  </div>
+
+  <div>
+    <!-- Clear Filter -->
+    <button class="btn btn-default btn-outline btn-sm gp-clearAllBtn gp-mb5" data-ng-click="clearAllFilter(filter)">Clear All</button>
+
+    <!-- Sort By Filter -->
+    <!-- NOTE: Don't think this is necessary for Op Search -->
+    <!-- <div>
+      <div class="dropdown">
+        <button class="btn btn-default btn-outline btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="width:145px;">
+          <span>{{sortByName}}</span>
+        <span class="caret" style="position: absolute;right: 8px;top: 45%;"></span></button>
+        <ul class="dropdown-menu gp-sortFilterList" style="margin-top:1px; padding: 5px 7px; min-width:140px;">
+          <li ng-repeat="sortFilter in findOpportunitiesSortBy" ng-click="sortOrderChange(sortFilter)" ng-class="{'gp-selectedFilter': sortFilter.id == selectedFilterId }">{{sortFilter.name}}</option>
+        </ul>
+      </div>
+    </div> -->
+
+  </div>
+</div>

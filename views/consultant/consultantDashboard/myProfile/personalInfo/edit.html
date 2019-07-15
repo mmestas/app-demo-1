@@ -1,0 +1,207 @@
+<div id="consultantContactInfoFields" ng-show="showConsultantContactInfoEditFields">
+  <form name="consultantContactInfoForm">
+  <div class="gp-consultantEditSectionWithBtn" ng-show="showConsultantContactInfoEditFields">
+    <h4>Edit Personal/Contact Info (20%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-disabled="consultantContactInfoForm.$invalid" ng-click="saveConsultantContactInfo(consultantInfoEditField, consultantInfoEditField.imageFilename, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-disabled="consultantContactInfoForm.$invalid" ng-click="saveConsultantContactInfo(consultantInfoEditField, consultantInfoEditField.imageFilename, false)">Save & Close</button>
+      &nbsp;
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditConsultantContactInfo()"></i>
+    </div>
+  </div>
+  <!-- <form name="consultantContactInfoForm"> -->
+    <div class="col col-md-3 gp-consultantEditPic">
+      <div class="gp-consultantPic">
+        <label class="upload" for="consultantProfilePic">
+          <img ngf-src="consultantInfoEditField.imageFilename" >
+        </label>
+        <div class="uploadImgHover">
+          <div class="uploadImgInstructionConsultant"><i class="fa fa-camera"></i><div>change photo</div></div>
+          <div id="consultantProfilePic" class="dragNDrop" ngf-select ngf-drop ng-model="consultantInfoEditField.imageFilename" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+            &nbsp;
+          </div>
+        </div>
+
+      </div>
+      <div class="gp-expertRating">
+        <input id="gp-consultantStar" ng-value="consultantInfo.averageReview" type="number" class="consultantRating" data-min=0 data-max=5 data-step=0.5 data-size="xs" title=""  >
+        <div ng-if="consultantInfo.verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"><i class="fa fa-certificate gp-silver"></i> Silver Verified</div>
+        <div ng-if="consultantInfo.verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"><i class="fa fa-certificate gp-gold"></i> Gold Verified</div>
+        <div ng-if="consultantInfo.verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"><i class="fa fa-certificate gp-platinum"></i> Platinum Verified</div>
+        <div>Member since {{myConvertDate(consultantInfo.joinDate) | date}}</div>
+      </div>
+    </div>
+    <div class="col col-md-9 gp-expertInfo">
+      <div class="row">
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" ng-model="consultantInfoEditField.firstName" required="">
+            <div ng-messages="consultantContactInfoForm.firstName.$error">
+             <div ng-message="required">
+               This field is required
+             </div>
+           </div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" ng-model="consultantInfoEditField.lastName" required="">
+            <div ng-messages="consultantContactInfoForm.lastName.$error">
+             <div ng-message="required">
+               This field is required
+             </div>
+           </div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" ng-model="consultantInfoEditField.title">
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 15px;">
+        <div class="col col-md-12">
+          <div>
+            <label for="lastname">Make My Name Private</label>
+            <md-checkbox ng-model="consultantInfoEditField.profileNamePrivate" aria-label="private" class="md-gpSolidBlue"></md-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="address" ng-model="consultantInfoEditField.address">
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="address">Address 2</label>
+            <input type="text" class="form-control" name="address" ng-model="consultantInfoEditField.address2">
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="city">City</label>
+            <input type="text" class="form-control" name="city" ng-model="consultantInfoEditField.city">
+          </md-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label><span>State</span></label>
+            <md-select class="md-block md-gpBlue-theme" ng-model="consultantInfoEditField.state" ng-model-options="{trackBy: '$value.id'}" ng-disabled="!displayUSStates">
+              <md-option ng-repeat="state in statesList" ng-value="state">
+                {{state.name}}
+              </md-option>
+            </md-select>
+            <div class="md-errors-spacer"></div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" name="zip" ng-model="consultantInfoEditField.zip">
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-block md-gpBlue-theme">
+            <label>Country</label>
+            <md-select class="md-gpBlue-theme" ng-model="consultantInfoEditField.country" ng-model-options="{trackBy: '$value.name'}" ng-change="getStatesByCountry(consultantInfoEditField.country)">
+              <md-option ng-repeat="country in countryList" ng-value="country">
+                {{country.name}}
+              </md-option>
+            </md-select>
+            <div class="md-errors-spacer"></div>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="email">Email/Username</label>
+            <input type="email" class="form-control" name="email" ng-model="consultantInfoEditField.email" required="">
+            <div ng-messages="consultantContactInfoForm.email.$error">
+             <div ng-message="required">
+               This field is required
+             </div>
+             <div ng-message="email">
+               Please enter a valid email address
+             </div>
+           </div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label>Years of Professional Experience</label>
+            <md-select class="md-block md-gpBlue-theme" ng-model="consultantInfoEditField.yearsProfessionalExperience" ng-model-options="{trackBy: '$value.name'}">
+              <md-option ng-repeat="experience in yearsOfExperience" ng-value="experience">
+                {{experience.name}}
+              </md-option>
+            </md-select>
+            <div class="md-errors-spacer"></div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="company">Company</label>
+            <input type="text" class="form-control" name="company" ng-model="consultantInfoEditField.company">
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" name="phone" ng-model="consultantInfoEditField.phone" phone-input>
+            <div ng-messages="consultantContactInfoForm.phone.$error">
+             <div ng-message="required">
+               This field is required
+             </div>
+           </div>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-gpBlue-theme">
+            <label for="mobilePhone">Mobile Phone</label>
+            <input type="text" class="form-control" name="mobilePhone" ng-model="consultantInfoEditField.mobilePhone" phone-input>
+          </md-input-container>
+        </div>
+        <div class="col col-md-4">
+          <md-input-container class="md-block md-gpBlue-theme">
+            <label>Mobile Carrier</label>
+            <md-select class="md-gpBlue-theme" ng-model="consultantInfoEditField.mobileCarrier" ng-model-options="{trackBy: '$value.name'}" ng-disabled="!consultantInfoEditField.mobilePhone">
+              <md-option ng-repeat="carrier in mobileCarriers" ng-value="carrier" >
+                {{carrier.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-5  col-md-offset-7">
+          <div>
+            <label for="lastname">Allow Text Notifications</label>
+            <md-checkbox ng-model="consultantInfoEditField.allowTextNotifications" aria-label="textNotifications" class="md-gpSolidBlue"  ng-disabled="!consultantInfoEditField.mobileCarrier.name || !consultantInfoEditField.mobilePhone" ng-checked="!(!consultantInfoEditField.mobileCarrier.name || !consultantInfoEditField.mobilePhone)"></md-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- <md-input-container class="md-block md-gpBlue-theme" id="consultantDescription">
+          <label for="description">Overview (Max 500 Characters)</label>
+          <textarea type="text" class="form-control" style="min-height: 210px;font-size: 15px;" name="description" ng-model="consultantInfoEditField.consultantDescription" md-maxlength="500" ng-keypress="maxCharacters($event, consultantInfoEditField.consultantDescription)"></textarea>
+        </md-input-container> -->
+        <md-input-container class="md-block md-gpBlue-theme" id="consultantDescription">
+          <label for="description">Overview</label>
+          <textarea type="text" class="form-control" style="min-height: 210px;font-size: 15px;" name="description" ng-model="consultantInfoEditField.consultantDescription"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </form>
+</div>

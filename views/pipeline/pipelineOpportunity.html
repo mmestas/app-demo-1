@@ -1,0 +1,339 @@
+<div class="gp-nav" company-dash-header></div>
+<div id="pipelineDetails" class="gp-mainBodyWidth gp-detailWrapper" ng-init="pipelineOpportunityInit()">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp gp-p20">
+      <div class="gp-flex gp-mb20 pipelineOpportunityDetailsHeader">
+        <div>
+          <h4 class="gp-expertName">
+            {{pipelineOpportunityDetails.name}} &nbsp;
+            <button class="btn btn-xs btn-primary" ng-click="openEditOppModal(event, pipelineOpportunityDetails)">Edit</button>
+            <button class="btn btn-xs btn-danger" ng-click="openDeleteOppModal(event)">Delete Opportunity</button>
+          </h4>
+          <div class="gp-flex gp-alignFlexCenter">
+            <img data-ng-if="pipelineOpportunityDetails.agency.imageUrl" data-ng-src="{{envURL+pipelineOpportunityDetails.agency.imageUrl}}">
+            <div>
+              <div data-ng-if="pipelineOpportunityDetails.solicitation.solicitationNumber"><h6>Solicitation #: {{pipelineOpportunityDetails.solicitation.solicitationNumber}}</h6></div>
+              <div data-ng-if="pipelineOpportunityDetails.agency.name"><h6>Agency: {{pipelineOpportunityDetails.agency.name}}</h6></div>
+              <div data-ng-if="pipelineOpportunityDetails.solicitation.location"><h6>Location: {{pipelineOpportunityDetails.solicitation.location}}</h6></div>
+            </div>
+          </div>
+        </div>
+        <span flex></span>
+        <div class="gp-flex gp-flex-column gp-alignFlexEnd">
+          <md-button class="md-icon-button" ng-click="closeDetails()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close"></md-icon>
+          </md-button>
+          <div class="gp-flex-grow-1">&nbsp;</div>
+          <div class="dropdown stageSelect" ng-if="userInfo.pipelineAdmin">
+            <button class="btn btn-primary btn-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="appDemo1GetPipelineStages()">
+              <span>{{pipelineOpportunityDetails.stage.name}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li data-ng-repeat="stage in pipelineStages" ng-if="!stage.hideColumn" ng-click="appDemo1SetPipelineOpportunityStage(stage)">{{stage.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-primary importantTasks">
+            <div class="panel-heading gp-flex gp-justifyFlexSpaceBetween">
+              <h3 class="panel-title">
+                <span>Important Tasks</span>
+              </h3>
+              <i class="fa fa-plus-circle" ng-click="addTask()" role="button"  ng-if="userInfo.pipelineAdmin"></i>
+            </div>
+            <div class="panel-body">
+              <div data-ng-repeat="task in pipelineOpportunityTasks track by $index" class="gp-flex gp-pb10">
+                <div class="gp-pr10">{{$index + 1}}.</div>
+                <div class="gp-flex-grow-1" ng-hide="(existingTaskIndex == $index) && showEditExistingTask">{{task.description}}</div>
+                <div class="gp-flex-grow-1" ng-if="(existingTaskIndex == $index) && showEditExistingTask">
+                  <textarea class="form-control gp-p5" data-ng-model="editableExistingTask.description"></textarea>
+                </div>
+                <div class="gp-pl10">
+                  <i class="fa fa-pencil-alt" ng-click="editExistingTask(task, $index)"  ng-hide="(existingTaskIndex == $index) && showEditExistingTask"  ng-if="userInfo.pipelineAdmin"></i>
+                  <i class="fa fa-times" ng-click="cancelEditExistingTask()" ng-if="(existingTaskIndex == $index) && showEditExistingTask"></i>
+                  <i class="fa fa-check" ng-click="appDemo1SetPipelineOpportunityTask(editableExistingTask)" ng-if="(existingTaskIndex == $index) && showEditExistingTask"></i>
+                </div>
+              </div>
+              <div ng-if="showAddTaskField" class="gp-mt15">
+                <textarea data-ng-model="newTask"></textarea>
+                <div class="gp-flex gp-justifyFlexSpaceAround innerPanelContent cancelSaveBtns gp-mt15">
+                  <button class="btn btn-sm" ng-click="cancelAddTask()">Cancel</button>
+                  <button class="btn btn-sm btn-primary" ng-click="appDemo1SetPipelineOpportunityTask(newTask)">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-primary importantDates">
+            <div class="panel-heading gp-flex gp-justifyFlexSpaceBetween">
+              <h3 class="panel-title">
+                <span>Important Dates</span>
+              </h3>
+              <i class="fa fa-pencil-alt" ng-click="editDates()" role="button"  ng-if="userInfo.pipelineAdmin"></i>
+            </div>
+            <div class="panel-body" ng-hide="showDateEditFields">
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">RFP Date:</label><div class="detailInfo">{{pipelineOpportunityDetails.importantDates.rfpDate | dateConverter | date}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Draft RFP Date:</label><div class="detailInfo">{{pipelineOpportunityDetails.importantDates.draftRfpDate | dateConverter | date}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Proposal Due Date:</label><div class="detailInfo">{{pipelineOpportunityDetails.importantDates.proposalDueDate | dateConverter | date}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Close Date:</label><div class="detailInfo">{{pipelineOpportunityDetails.importantDates.closeDate | dateConverter | date}}</div></div>
+            </div>
+            <div class="panel-body" ng-if="showDateEditFields">
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">RFP Date:</label>
+                <div class="detailInfo">
+                  <md-datepicker ng-model="dateFields.rfpDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+              </div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Draft RFP Date:</label><div class="detailInfo"><md-datepicker ng-model="dateFields.draftRfpDate" md-placeholder="Enter date"></md-datepicker></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Proposal Due Date:</label><div class="detailInfo"><md-datepicker ng-model="dateFields.proposalDueDate" md-placeholder="Enter date"></md-datepicker></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent"><label class="gp-mr10">Close Date:</label><div class="detailInfo"><md-datepicker ng-model="dateFields.closeDate" md-placeholder="Enter date"></md-datepicker></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceAround innerPanelContent cancelSaveBtns gp-mt15"><button class="btn btn-sm" ng-click="cancelEditDates()">Cancel</button><button class="btn btn-sm btn-primary" ng-click="appDemo1SetPipelineOpportunityImportantDates(dateFields)">Save</button></div>
+            </div>
+          </div>
+          <div class="panel panel-primary solicitation">
+            <div class="panel-heading gp-flex gp-justifyFlexSpaceBetween">
+              <h3 class="panel-title">
+                <span>Solicitation</span>
+              </h3>
+              <i class="fa fa-pencil-alt" ng-click="editSolicitation()" role="button" ng-hide="showSolicitationEditFields"  ng-if="userInfo.pipelineAdmin"></i>
+            </div>
+            <div class="panel-body" ng-hide="showSolicitationEditFields">
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Solicitation #:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.solicitationNumber}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Role:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.role}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">CRM ID:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.crmId}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Acquisition Type:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.adquisitionType}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Competition Type:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.competitionType}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Set Aside Type:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.businessType.name}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Opportunity Type:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.opportunityType.name}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Contract Type:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.contractType.name}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">NAICS:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.naicsCode}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Location:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.location}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Sales Quandrant:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.salesQuadrant}}</div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">B&P Budget:</label><div class="detailInfo">{{pipelineOpportunityDetails.solicitation.bpBudget}}</div></div>
+            </div>
+            <!-- EDIT FIELDS -->
+            <div class="panel-body" ng-if="showSolicitationEditFields">
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Solicitation #:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.solicitationNumber"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Role:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.role"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">CRM ID:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.crmId"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Acquisition Type:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.adquisitionType"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Competition Type:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.competitionType"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Set Aside Type:</label>
+                <div class="detailInfo">
+                  <md-select class="md-gpBlue-theme" ng-model="solicitationFields.businessType" placeholder="{{solicitationFields.businessType.name}}">
+                    <md-option ng-repeat="sat in pipelineSetAsideTypes track by $index" ng-value="sat" >
+                      {{sat.name}}
+                    </md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Opportunity Type:</label>
+                <div class="detailInfo">
+                  <md-select class="md-gpBlue-theme" ng-model="solicitationFields.opportunityType" placeholder="{{solicitationFields.opportunityType.name}}">
+                    <md-option ng-repeat="ot in pipelineOpportunityTypes track by $index" ng-value="ot" >
+                      {{ot.name}}
+                    </md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5">
+                <label class="gp-mr10">Contract Type:</label>
+                <div class="detailInfo">
+                  <md-select class="md-gpBlue-theme" ng-model="solicitationFields.contractType" placeholder="{{solicitationFields.contractType.name}}">
+                    <md-option ng-repeat="ct in contractTypes track by $index" ng-value="ct" >
+                      {{ct.name}}
+                    </md-option>
+                  </md-select>
+                </div>
+              </div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">NAICS:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.naicsCode"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Location:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.location"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">Sales Quandrant:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.salesQuadrant"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceBetween innerPanelContent gp-mb5"><label class="gp-mr10">B&P Budget:</label><div class="detailInfo"><input class="form-control" ng-model="solicitationFields.bpBudget"></div></div>
+              <div class="gp-flex gp-justifyFlexSpaceAround innerPanelContent cancelSaveBtns gp-mt15"><button class="btn btn-sm" ng-click="cancelEditSolicitation()">Cancel</button><button class="btn btn-sm btn-primary" ng-click="appDemo1SetPipelineOpportunitySolicitation(solicitationFields)">Save</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab data-ng-if="!userInfo.isConsultant">
+              <md-tab-label>
+                Team
+              </md-tab-label>
+              <md-tab-body>
+                <div class="row gp-mb10">
+                  <div class="col-md-3"><label>Team Member</label></div>
+                  <div class="col-md-3"><label>Email</label></div>
+                  <div class="col-md-3"><label>Role</label></div>
+                  <div class="col-md-3"><label>Phone</label></div>
+                </div>
+                <div class="row gp-mb10" data-ng-repeat="teamMember in pipelineOpportunityTeamMembers">
+                  <div ng-hide="showEditTeamMemberFields && (teamMember.memberKey === memberKey)">
+                    <div class="col-md-3">{{teamMember.name}}</div>
+                    <div class="col-md-3">{{teamMember.email}}</div>
+                    <div class="col-md-3">{{teamMember.teamRole}}</div>
+                    <div class="col-md-3">{{teamMember.phone}}
+                      <span class="gp-ml10 floatRight">
+                        <i class="fa fa-pencil-alt" ng-click="editTeamMember(teamMember)" ng-if="userInfo.pipelineAdmin"></i>
+                        <i class="fas fa-times gp-ml10 gp-text-danger" ng-click="deleteTeamMember(teamMember, $index)"  ng-if="userInfo.pipelineAdmin"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div ng-if="showEditTeamMemberFields && (teamMember.memberKey === memberKey)">
+                      <div class="col-md-3"><input class="form-control" data-ng-model="teamMember.name" placeholder="email" readonly></div>
+                      <div class="col-md-3"><input class="form-control" data-ng-model="teamMember.email" placeholder="email" readonly></div>
+                      <div class="col-md-3"><input class="form-control" data-ng-model="teamMember.teamRole" placeholder="role"></div>
+                      <div class="col-md-3  gp-flex gp-alignFlexCenter gp-justifyFlexSpaceBetween">
+                        <input class="form-control phoneInput" data-ng-model="teamMember.phone" placeholder="phone" phone-input readonly>
+                        <span class="gp-ml10 gp-flex gp-flex-column">
+                          <i class="fas fa-save" data-ng-click="appDemo1SetPipelineOpportunityTeamMember(teamMember)"  ng-if="userInfo.pipelineAdmin"></i>
+                        </span>
+                      </div>
+                      <div class="col-md-12 gp-mt5">
+                        <md-checkbox ng-model="teamMember.allowEdit" aria-label="" class="md-gpSolidBlue md-raised gp-costCheckbox">
+                          Allow this user to edit the pipeline
+                        </md-checkbox>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="row gp-mb10 gp-text-danger" ng-if="showErrorMsg">
+                  <div class="col-md-12">{{errorMsg}}</div>
+                </div>
+                <div class="row gp-mb10" ng-if="showAddNewTeamMemberFields">
+                  <form name="addTeamMemberForm">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select class="form-control input-sm gp-selectLimitSize" name="" ng-model="selected.teamMember" ng-options="user as user.name for user in companyUsers" ng-change="selectCompanyForTeam(selected)">
+                          <option value="" style="display:none;">Choose</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3"><input class="form-control" data-ng-model="newTeamMember.email" placeholder="email" readonly></div>
+                    <div class="col-md-3"><input class="form-control" data-ng-model="newTeamMember.teamRole" placeholder="role"></div>
+                    <div class="col-md-3  gp-flex gp-alignFlexCenter gp-justifyFlexSpaceBetween">
+                      <input class="form-control phoneInput" data-ng-model="newTeamMember.phone" placeholder="phone" phone-input readonly>
+                      <span class="gp-ml10  gp-flex gp-flex-column">
+                        <i class="fas fa-save" data-ng-click="appDemo1SetPipelineOpportunityTeamMember(newTeamMember)" role="button" ng-if="newTeamMember"></i>
+                        <i class="far fa-times-circle" data-ng-click="cancelEditTeamMember()" ng-if="!newTeamMember"></i>
+                      </span>
+                    </div>
+                    <div class="col-md-12">
+                      <md-checkbox ng-model="newTeamMember.allowEdit" aria-label="" class="md-gpSolidBlue md-raised gp-costCheckbox">
+                        Allow this user to edit the pipeline
+                      </md-checkbox>
+                    </div>
+                  </form>
+                </div>
+                <div class="row gp-mb10 gp-mt20"  ng-if="userInfo.pipelineAdmin">
+                  <div class="col-md-12">
+                    <button class="btn btn-sm btn-primary" ng-click="addNewTeamMemberFields()" ng-hide="showAddNewTeamMemberFields"><i class="fa fa-plus"></i> &nbsp; Add Team Member</button>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab  md-on-select="appDemo1GetPipelineOpportunityFiles()">
+              <md-tab-label>
+                Files
+              </md-tab-label>
+              <md-tab-body>
+                <div class="row">
+                  <div class="col-md-5"><label>File</label></div>
+                  <div class="col-md-7"><label>Description</label></div>
+                </div>
+                <div class="row gp-mb5" data-ng-repeat="file in pipelineOpportunityFiles">
+                  <div class="col-md-5 no-overflow gp-flex"><span class="gp-mr5">{{$index + 1}}.</span> <a class="no-overflow" data-ng-href="{{file.fileURL}}" target="_blank">{{file.filename}}</a></div>
+                  <div class="col-md-5 no-overflow" ng-hide="(fileIndex == $index) && showEditFile">{{file.description}}</div>
+                  <div class="col-md-5 no-overflow" ng-if="(fileIndex == $index) && showEditFile">
+                    <md-input-container  md-no-float style="width:100%;">
+                      <input ng-model="file.description" type="text" placeholder="description">
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-2 no-overflow">
+                    <i class="fa fa-pencil-alt" ng-click="editFile(file, $index)" ng-hide="(fileIndex == $index) && showEditFile"></i>
+                    <i class="fa fa-pencil-times" ng-click="cancelEditFile()" ng-if="(fileIndex == $index) && showEditFile"></i>
+                    <i class="fas fa-save" ng-click="appDemo1SetPipelineOpportunityFile(file)" ng-if="(fileIndex == $index) && showEditFile"></i>
+                  </div>
+                </div>
+                <div class="row gp-mb5 gp-mt20 gp-flex gp-alignFlexCenter"  ng-if="userInfo.pipelineAdmin" ng-hide="showEditFile">
+                  <div class="col-md-5">
+                    <input id="fileInput" class="ng-hide" type="file" ng-model="selectedNewFile" onchange="angular.element(this).scope().fileNameChanged(event)">
+                    <label for="fileInput" id="uploadButton" class="btn md-fab md-mini gp-SolidBlue" aria-label="attach_file">
+                      <md-icon class="material-icons">attach_file</md-icon>
+                    </label>
+                    <md-input-container  md-no-float style="width: calc(100% - 40px);">
+                      <input id="textInput" ng-model="newFile.fileName" type="text" placeholder="No file chosen" ng-readonly="true">
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-5">
+                    <md-input-container  md-no-float style="width:100%;">
+                      <input id="input-file-id" ng-model="newFile.description" type="text" placeholder="description">
+                    </md-input-container>
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn btn-sm btn-primary" ng-click="appDemo1SetPipelineOpportunityFile(newFile)">Save</button>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="appDemo1GetPipelineOpportunityNotes()">
+              <md-tab-label>
+                Notes
+              </md-tab-label>
+              <md-tab-body>
+                <div class="row">
+                  <div class="col-md-2"><label>Date/Time</label></div>
+                  <div class="col-md-8"><label>Note</label></div>
+                  <div class="col-md-1">&nbsp;</div>
+                </div>
+                <div class="row gp-mb5" data-ng-repeat="note in pipelineOpportunityNotes track by $index">
+                  <div class="col-md-2">{{note.creationDate  | dateConverter | date}}</div>
+                  <div class="col-md-8 no-overflow" ng-hide="(noteIndex == $index) && showEditNoteField">{{note.description}}</div>
+                  <div class="col-md-8 no-overflow" ng-if="(noteIndex == $index) && showEditNoteField"><textarea ng-model="editableNote.description"></textarea></div>
+                  <div class="col-md-1">
+                    <i class="fa fa-pencil-alt" ng-click="editNote(note, $index)" role="button" ng-hide="(noteIndex == $index) && showEditNoteField" ng-if="userInfo.pipelineAdmin"></i>
+                    <i class="fas fa-save" ng-click="appDemo1SetPipelineOpportunityNote(editableNote)" role="button" ng-if="(noteIndex == $index) && showEditNoteField"></i>
+                  </div>
+                </div>
+                <div class="row gp-mb15 gp-mt15" ng-if="showNoteField">
+                  <div class="col-md-12">
+                    <textarea ng-model="newPropspectiveNote.description"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <button class="btn btn-sm btn-default" ng-click="cancelAddNoteField()" ng-if="showNoteField">Cancel</button>
+                  </div>
+                  <div class="col-md-9">
+                    <button class="btn btn-sm btn-primary" ng-click="showAddNoteField()" ng-hide="showNoteField" ng-if="userInfo.pipelineAdmin">Add Prospect Note</button>
+                    <button class="btn btn-sm btn-primary" ng-click="appDemo1SetPipelineOpportunityNote(newPropspectiveNote)" ng-if="showNoteField">Save Note</button>
+                  </div>
+                </div>
+              </md-tab-body>
+            </md-tab>
+          </md-tabs>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="col-md-3">
+  <div class="panel panel-primary">
+    <div class="panel-heading gp-flex gp-justifyFlexSpaceBetween">
+      <h3 class="panel-title">
+        <span>PWIN Tool</span>
+      </h3>
+      <i class="fa fa-pencil-alt" ng-click="edit()" role="button"></i>
+    </div>
+    <div class="panel-body">
+      <div>
+        <label>RFP Date:</label>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,33 @@
+<div class="gp-quotesReceivedWrapper">
+  <div ng-show="quotesReceived.length < 1">You have no quotes to review at this time</div>
+  <div>
+    <ul class="gp-quotesReceivedList">
+        <li ng-repeat="quote in engagements" ng-click="showQuoteReviewModal($event, quote, userInfo)" ng-if="!quote.companyApproved">
+            <div>
+              <img ng-src="{{envURL+quote.consultant.imageFilename}}">
+              <div class="gp-engagementTitle">
+                <h4>{{quote.consultant.name}}</h4>
+                <h4 ng-hide="!quote.consultantSubmitted"><small>Replied: {{quote.consultantSubmittedDate | dateConverter | date: 'medium'}}</small></h4>
+              </div>
+            </div>
+            <div>
+              <div class="gp-labelWrapper">
+                <span ng-if="quote.companyRejected" ><label class="label-danger">Rejected</label></span>
+                <span ng-if="(!quote.companyApproved && !quote.companyRejected && !quote.consultantOCINDARejected) && (quote.RequestAuthorizationEmails.length == 0)  && (quote.consultantSubmitted)" ><label class="label-primary">Submitted</label></span>
+                <span ng-if="(quote.RequestAuthorizationEmails.length > 0) && (!quote.companyApproved && !quote.companyRejected)" ><label class="label-default">Pending</label></span>
+                <span ng-if="quote.consultantOCINDARejected">
+                  <label class="label-danger">
+                    <span ng-if="quote.nda">NDA</span>
+                    <span ng-if="quote.oci && quote.nda"> & </span>
+                    <span ng-if="quote.oci">OCI</span> Rejected
+                  </label>
+                </span>
+                <span ng-if="!quote.consultantSubmitted && !quote.consultantOCINDARejected && !quote.companyRejected">
+                  <label class="label-default">Waiting</label>
+                </span>
+              </div>
+            </div>
+          </li>
+    </ul>
+  </div>
+</div>

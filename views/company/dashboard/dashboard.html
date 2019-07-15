@@ -1,0 +1,105 @@
+<div class="gp-nav" company-dash-header></div>
+<div id="companyDashboard" class="gp-dashWrapper" ng-init="dashInit()">
+  <div class="gp-dashInner">
+    <div>
+      <div class="row row-offcanvas row-offcanvas-left gp-mainBodyWidth">
+
+          <!-- Right Body -->
+          <div class="col-md-9 col-md-push-3">
+            <div class="visible-sm visible-xs" style="height:45px;">
+              <div class="pull-left">
+                <button type="button" class="btn btn-primary btn-xs gp-hamburgerMenu" data-toggle="offcanvas" title="Toggle sidebar"><i class="fa fa-bars"></i></button>
+                 <a class=" navbar-brand " href="/" style="height:45px; float:right;">
+                   app1url
+                 </a>
+               </div>
+            </div>
+            <div class="panel-group" ng-init="dashMyProjectsInit()">
+              <div class="panel panel-primary panel-outline">
+                <div class="panel-heading">
+                  <h4 class="panel-title gp-FilterTitle">
+                    <i class="fa fa-plus-circle" ng-hide="openCDP" ng-click="openCompanyDashProjects()"></i>
+                    <i class="fa fa-minus-circle" ng-show="openCDP" ng-click="closeCompanyDashProjects()"></i>
+                    &nbsp; Projects
+                  </h4>
+                </div>
+                <div id="" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openCDP}">
+                  <div class="gp-systemNotificationsWrapper">
+                    <div ng-include="'/views/company/dashboard/projectsAccordion.html'"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-primary panel-outline gp-companyDashboardSystemNotifications">
+                <div class="panel-heading">
+                  <div>
+                    <h4 class="panel-title gp-FilterTitle">
+                      <i class="fa fa-plus-circle" ng-hide="openCDE" ng-click="openCompanyDashEngagements()"></i>
+                      <i class="fa fa-minus-circle" ng-show="openCDE" ng-click="closeCompanyDashEngagements()"></i>
+                      &nbsp; System Notifications <span class="badge badge-outline"  ng-if="newNotifications > 0">{{newNotifications}}</span>
+                    </h4>
+                    <span ng-show="openCDE">
+                      <div ><span ng-hide="readMsgsVisible" ng-click="loadReadMsgs()">Load Archived Notifications</span></div>
+                      <div ><span ng-show="readMsgsVisible" ng-click="hideReadMsgs()">Hide Archived Notifications</span></div>
+                    </span>
+                  </div>
+                </div>
+                <div id="" class="panel-collapse gp-collapse" ng-class="{'gp-in' : openCDE}">
+                  <div class="gp-systemNotificationsWrapper">
+                    <div ng-include="'/views/company/dashboard/systemNotifications/systemNotifications.html'"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-xs-6 col-md-3 col-md-pull-9 sidebar-offcanvas gp-sideMenu" id="sidebar">
+            <div class="dash-companyOverview md-whiteframe-2dp">
+              <div class="md-whiteframe-2dp sidePadding">
+                <div class="gp-companyLogo">
+                  <img data-ng-src="{{envURL+userInfo.Company.imageFilename}}">
+                </div>
+              </div>
+              <div>
+                <h5>Organization &nbsp; <i class="fa fa-pencil-alt" ui-sref="companyProfile"></i></h5>
+                <span>{{userInfo.Company.name}}</span>
+              </div>
+              <div >
+                <h5>Business Type<span ng-if="companyInfo.businessTypes.length != 1">s</span></h5>
+                <div ng-repeat="type in companyInfo.businessTypes">{{type.name}}</div>
+              </div>
+              <div >
+                <h5>Cage Code</h5>
+                <span>{{companyInfo.cage}}</span>
+              </div>
+              <div >
+                <h5>Duns</h5>
+                <span>{{companyInfo.duns}}</span>
+              </div>
+              <div >
+                <h5>Primary NAICS</h5>
+                <span>{{companyInfo.primaryNaicsCode.code}}</span>
+              </div>
+              <div >
+                <h5>Authorized Payer<span ng-if="companyInfo.authorizedPayers.length != 1">s</span></h5>
+                <span ng-if="companyInfo.authorizedPayers.length == 0">You have no authorized payers</span>
+                <ul>
+                  <li ng-repeat="ap in companyInfo.authorizedPayers">{{ap.email}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+$(document).ready(function () {
+  $('[data-toggle="offcanvas"]').click(function () {
+    $('.row-offcanvas').toggleClass('active')
+  });
+});
+</script>

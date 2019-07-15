@@ -1,0 +1,114 @@
+<div class="gp-nav" company-dash-header></div>
+<div class="gp-dashWrapper gp-mainBodyWidth" ng-init="myProfileInit()">
+
+  <div class="gp-dashInner" id="editMyProfile">
+    <div  style=" margin:auto;">
+      <div><h1>Personal Settings</h1></div>
+      <md-content class="myProfileForm md-whiteframe-2dp" >
+        <form name="userProfile">
+          <div class="row">
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" ng-model="profileInfo.firstName">
+              </md-input-container>
+            </div>
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" ng-model="profileInfo.lastName">
+              </md-input-container>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="email">Email (username)</label>
+                <input type="email" class="form-control" name="email" ng-model="profileInfo.email">
+              </md-input-container>
+            </div>
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" ng-model="profileInfo.password">
+              </md-input-container>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" name="phone" ng-model="profileInfo.phone" phone-input>
+              </md-input-container>
+            </div>
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme">
+                <label for="mobile">Mobile Phone</label>
+                <input type="text" class="form-control" name="mobile" ng-model="profileInfo.mobilePhone" phone-input>
+              </md-input-container>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-6">
+              <md-input-container class="md-block md-gpBlue-theme" ng-init="appDemo1GetMobileCarriers()">
+                <label>Mobile Carrier</label>
+                <md-select class="md-gpBlue-theme" ng-model="profileInfo.mobileCarrier" placeholder="{{profileInfo.mobileCarrier.name}}">
+                  <md-option ng-value=""><em>None</em></md-option>
+                  <md-option ng-repeat="carrier in mobileCarriers" ng-value="carrier">
+                    {{carrier.name}}
+                  </md-option>
+                </md-select>
+                </md-input-container>
+              </div>
+              <div class="col col-md-6">
+              <div>
+                <md-checkbox ng-model="profileInfo.allowTextNotifications" aria-label="textNotifications" class="md-gpSolidBlue"  ng-disabled="!profileInfo.mobileCarrier.name || !profileInfo.mobilePhone" ng-checked="!(!profileInfo.mobileCarrier.name || !profileInfo.mobilePhone)"></md-checkbox>
+                <label for="lastname">Allow Text Notifications</label>
+                <div><h4 class="gp-noMargin"><small><span ng-if="!profileInfo.mobileCarrier.name || !profileInfo.mobilePhone">(*In order to select, Mobile Phone and Carrier are required)</span></small></h4></div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-include src="cropperHtml"></div>
+          <div class="col col-md-12">
+            <label class="gp-greyLogo">Upload Profile Photo</label>
+          </div>
+          <div class="col col-md-12">
+            <label class="gp-upload">
+              <img ngf-src="userProfileImage">
+              <img ng-src="{{envURL+profileInfo.imageFilename}}" ng-if="profileInfo.imageFilename && !userProfileImage">
+            </label>
+            <div class="uploadImgHover">
+              <div class="uploadImgInstruction"><i class="fa fa-camera"></i><div>change photo</div></div>
+              <div id="profilePhoto"  ngf-select="userProfileImage" ngf-drop="userProfileImage" ng-model="userProfileImage" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"  ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="orientation" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                &nbsp;
+              </div>
+            </div>
+          </div>
+          <div class="gp-ProfileButtons">
+            <button class="btn btn-warning" ng-click="goToDashboard()">Cancel</button>
+            <button class="btn btn-primary" ng-click="updateProfile(profileInfo, userProfileImage)">Save & Update</button>
+          </div>
+        </form>
+      </md-content>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="ImageCropper.html">
+  <div ng-show="showImageCropper" class="gp-cropperInstructions">Use the buttons below the photo to adjust.  Then click the download icon to save the photo.</div>
+    <div style="width:300px; margin:auto;" ng-show="showImageCropper">
+      <image-cropper
+         image-url="{{imageUrl}}"
+         show-controls="{{showControls}}"
+         fit-on-init="true"
+         center-on-init="false"
+         api="cropperApi"
+         crop-callback="updateProfileImage"
+         action-labels="myButtonLabels">
+      </image-cropper>
+      <div ng-show="showImageCropper" class="gp-mt10"><button class="gp-width-100 btn-sm" ng-click="cancelEditPhoto()">Cancel Edit Photo</button></div>
+    </div>
+  </script>
+
+</div>

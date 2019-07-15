@@ -1,0 +1,73 @@
+<md-dialog aria-label="Send Message"  style="width:565px;">
+  <div>
+    <form ng-cloak>
+      <md-toolbar class="md-gpBlue-theme">
+        <div class="md-toolbar-tools">
+          <h2>Message <small>Subtitle and subsequent message</small></h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <section>
+            <div class=" gp-projectInfo gp-mb15">
+              <div>
+                <span class="font-xml" ><img src="/images/placeholders/businesswoman.png"></span>
+                <span class="font-xml gp-mr15">
+                  <span>Firstname Lastname</span>
+                  <span>FL</span>
+                </span>
+                <span class="font-md">City, SI</span>
+              </div>
+            </div>
+          </section>
+
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block gp-width-100">
+              <label>Subject: Project Title</label>
+              <textarea ng-model="slMessage" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+          </div>
+          <!-- <md-checkbox ng-model="makeAnonymous" aria-label="" class="md-gpSolidBlue">Make Anonymous</md-checkbox> -->
+          <div>From: Project Owner Name, Lead Director - Organization Name</div>
+        </div>
+
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+         Cancel
+        </md-button>
+        <button class="btn btn-primary">
+         <i class="fa fa-paper-plane"></i> Send Message
+       </button>
+
+      </md-dialog-actions>
+    </form>
+  </div>
+
+  <div ng-if="allowSendSLMessage">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Congratulations</h2>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="gp-thankYouDialogue">Your message has been sent!</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" style="background: #316c89; color: #fff;">
+      <md-button ng-click="backToDashboard()">
+       Back to Dashboard
+      </md-button>
+      <md-button ng-click="cancel()">
+       close
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
+</md-dialog>

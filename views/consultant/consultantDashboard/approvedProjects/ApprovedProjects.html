@@ -1,0 +1,390 @@
+
+          <ul class="collapsible popout" data-collapsible="accordion" >
+            <li ng-repeat="project in incompleteEngagements" ng-init="initializeCollapse()" ng-if="!project.isDeleted">
+                <div class="collapsible-header">
+                  <div class="gp-flex gp-justifyFlexSpaceBetween" style="height:100%;">
+                    <div style="width:500px;" class="gp-mr15">
+                      <img class="gp-msgImg" ng-src="{{envURL+project.companyUser.ImageFilename}}">
+                      <div>
+                        <h4 data-ng-if="project.project.title">{{project.project.title | limitTo : 40}}<span ng-show="project.project.title.length > 40">...</span></h4>
+                        <h4 data-ng-if="project.project.owner.name"><small>Project Owner: {{project.project.owner.name}}</small></h4>
+                      </div>
+                    </div>
+                    <div class="gp-mr15" style="width:140px;">
+                      <div class="gp-width-100 gp-text-center" data-ng-class="{'label-warning': project.statNo === 3, 'label-default': project.statNo === 2, 'label-success': project.statNo === 1}">{{project.status}}</div>
+                    </div>
+                    <div style="font-size:12px;" class="gp-flex-grow-1">
+                      {{project.startDate | dateConverter | date: 'MM/dd/yyyy'}} -
+                      {{project.endDate | dateConverter | date: 'MM/dd/yyyy'}}
+                    </div>
+                  </div>
+                </div>
+                <div class="collapsible-body">
+                    <!--/////////////////////////// DETAILS ///////////////////////// -->
+                  <div>
+                    <div class="gp-taSection gp-flex">
+                        <div class="col col-md-6">
+                          <h4> Project Details </h4>
+                          <div >
+                            <h5><strong>Start Date:</strong> {{project.startDate | dateConverter | date: 'MM-dd-yyyy'}}</h5>
+                            <h5><strong>End Date:</strong> {{project.endDate | dateConverter | date: 'MM-dd-yyyy'}}</h5>
+                            <h5 ng-if="project.project.solicitationNumber"><strong>RFP Solicitation #:</strong> {{project.project.solicitationNumber}}</h5>
+                            <h5 ng-if="project.project.solicitationTitle"><strong>RFP Solicitation Title:</strong> {{project.project.solicitationTitle}}</h5>
+                          </div>
+                        </div>
+                        <div class="col col-md-6 gp-apCompanyImg">
+                          <img ng-src="{{envURL+project.companyUser.Company.imageFilename}}">
+                        </div>
+                    </div>
+
+                    <!-- Start Work Description -->
+                    <!-- ******************* -->
+
+                    <!-- ******************* -->
+                    <!-- Start Original Html -->
+                    <div id="taskApproveWorkDescription" class="gp-taSection" ng-if="project.quoteInvitationInfo.quoteType==0">
+                      <div id="taskToastContainer_{{$index}}">
+                      <h4> Submit for Approval </h4>
+                      <div ng-repeat="task in project.tasks track by $index">
+                        <div id="task_{{$index}}">
+                          <div class="row">
+                            <div class="gp-apWD">
+                              <h5>Task Description</h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.workDescription}}</span>
+                            </div>
+                            <div class="gp-apHQ">
+                              <h5> Hours Quoted </h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.hoursQuoted}}</span>
+                            </div>
+                            <div class="gp-apHC">
+                              <h5> Hours Completed</h5>
+                              <input ng-model="task.hoursCompleted" type="number" class="form-control" placeholder="0" ng-if="!task.completed">
+                              <span ng-if="task.completed" ng-class="{'gp-primary-disabled' : task.completed}">{{task.hoursCompleted}}</span>
+                            </div>
+                            <div class="gp-apAc">
+                              <h5>Action</h5>
+                              <button class="btn btn-warning" ng-click="appDemo1SetConsultantEngagementTask(task, $parent.$parent.$index, $parent.$index, $index)" ng-if="!task.completed">Submit</button>
+                              <button class="btn btn-default btn-outline" ng-if="task.completed" ng-disabled="task.completed">Submitted!</button>
+                            </div>
+                          </div>
+                          <div ng-if="!task.completed">
+                            <div class="row"  ng-show="task.itemizedExpenses.length > 0">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+
+                            <div class="gp-itemizedExpenses row" ng-repeat="expense in task.itemizedExpenses">
+                              <div class="gp-ieIndex"><span>{{$index+1}}.</span></div>
+                              <div class="gp-ieDes">
+                                <!-- <textarea ng-model="expense.description"></textarea> -->
+                                <input ng-model="expense.description" type="text" class="form-control">
+                              </div>
+                              <div class="gp-ieAmt">
+                                <input ng-model="expense.amount" type="text" class="form-control" ng-input-currency>
+                                <i class="fa fa-times" ng-click="removeItemExpense(task, $index)"></i>
+                              </div>
+                            </div>
+                            <div id="addExpense_{{$index}}">
+                              <button class="btn btn-sm btn-default gp-mt10" ng-click="addItemExpense(task, $parent.$parent.$index, $parent.$index, $index)"><i class="fa fa-plus"></i> &nbsp; Add Expenses </button>
+                            </div>
+                          </div>
+                          <div ng-if="task.completed && task.itemizedExpenses.length > 0">
+
+                            <div class="row">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+                            <div class="gp-itemizedExpenses row gp-primary-disabled" ng-repeat="expense in task.itemizedExpenses">
+                              <div class="gp-ieIndex">{{$index+1}}.</div>
+                              <div class="gp-ieDes">
+                                {{expense.description}}
+                              </div>
+                              <div class="gp-ieAmt">
+                                {{expense.amount | currency}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <!-- End Original Html -->
+                    <!-- ***************** -->
+
+                    <!-- **************** -->
+                    <!-- Start Fixed Html -->
+                    <div id="taskApproveWorkDescription" class="gp-taSection" ng-if="project.quoteInvitationInfo.quoteType==1">
+                      <div id="taskToastContainerFixed_{{$index}}">
+                      <h4> Submit for Approval </h4>
+                      <div ng-repeat="task in project.quoteInvitationInfo.qFix track by $index">
+                        <div id="taskFixed_{{$index}}">
+                          <div class="row">
+                            <div class="gp-apWD">
+                              <h5>Supporting Narrative</h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.supportingNarrative}}</span>
+                            </div>
+                            <div class="gp-apHQ">
+                              <h5> Milestone Price </h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.milestonePrice}}</span>
+                            </div>
+                            <div class="gp-apAc">
+                              <h5>Action</h5>
+                              <button class="btn btn-warning" ng-click="appDemo1SetConsultantEngagementFixedTask(task, $parent.$parent.$index, $parent.$index, $index)" ng-if="!task.completed">Submit</button>
+                              <button class="btn btn-default btn-outline" ng-if="task.completed" ng-disabled="task.completed">Submitted!</button>
+                            </div>
+                          </div>
+                          <div ng-if="!task.completed">
+                            <div class="row"  ng-show="task.itemizedExpenses.length > 0">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+
+                            <div class="gp-itemizedExpenses row" ng-repeat="expense in task.itemizedExpenses">
+                              <div class="gp-ieIndex"><span>{{$index+1}}.</span></div>
+                              <div class="gp-ieDes">
+                                <!-- <textarea ng-model="expense.description"></textarea> -->
+                                <input ng-model="expense.description" type="text" class="form-control">
+                              </div>
+                              <div class="gp-ieAmt">
+                                <input ng-model="expense.amount" type="text" class="form-control" ng-input-currency>
+                                <i class="fa fa-times" ng-click="removeItemExpense(task, $index)"></i>
+                              </div>
+                            </div>
+
+                            <div id="addExpense_{{$index}}">
+                              <button class="btn btn-sm btn-default gp-mt10" ng-click="addItemExpenseFixed(task, $parent.$parent.$index, $parent.$index, $index)"><i class="fa fa-plus"></i> &nbsp; Add Expenses </button>
+                            </div>
+                          </div>
+                          <div ng-if="task.completed && task.itemizedExpenses.length > 0">
+
+                            <div class="row">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+                            <div class="gp-itemizedExpenses row gp-primary-disabled" ng-repeat="expense in task.itemizedExpenses">
+                              <div class="gp-ieIndex">{{$index+1}}.</div>
+                              <div class="gp-ieDes">
+                                {{expense.description}}
+                              </div>
+                              <div class="gp-ieAmt">
+                                {{expense.amount | currency}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <!-- End Fixed Html -->
+                    <!-- ************** -->
+
+                    <!-- ***************** -->
+                    <!-- Start Hourly Html -->
+                    <div id="taskApproveWorkDescription" class="gp-taSection" ng-if="project.quoteInvitationInfo.quoteType==2">
+                      <div id="taskToastContainerHourly_{{$index}}">
+                      <h4> Submit for Approval </h4>
+                      <div ng-repeat="task in project.quoteInvitationInfo.qHours track by $index">
+                        <div id="taskHourly_{{$index}}">
+                          <div class="row">
+                            <div class="gp-apWD">
+                              <h5>Supporting Narrative</h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.supportingNarrative}}</span>
+                            </div>
+                            <div class="gp-apHQ">
+                              <h5> Hours Quoted </h5>
+                              <span ng-class="{'gp-primary-disabled' : task.completed}">{{task.hoursQuoted}}</span>
+                            </div>
+                            <div class="gp-apHC">
+                              <h5> Hours Completed</h5>
+                              <input ng-model="task.hoursCompleted" type="number" class="form-control" placeholder="0" ng-if="!task.completed">
+                              <span ng-if="task.completed" ng-class="{'gp-primary-disabled' : task.completed}">{{task.hoursCompleted}}</span>
+                            </div>
+                            <div class="gp-apAc">
+                              <h5>Action</h5>
+                              <button class="btn btn-warning" ng-click="appDemo1SetConsultantEngagementHourlyTask(task, $parent.$parent.$index, $parent.$index, $index)" ng-if="!task.completed">Submit</button>
+                              <button class="btn btn-default btn-outline" ng-if="task.completed" ng-disabled="task.completed">Submitted!</button>
+                            </div>
+                          </div>
+                          <div ng-if="!task.completed">
+                            <div class="row"  ng-show="task.itemizedExpenses.length > 0">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+
+                            <div class="gp-itemizedExpenses row" ng-repeat="expense in task.itemizedExpenses track by $index">
+                              <div class="gp-ieIndex"><span>{{$index+1}}.</span></div>
+                              <div class="gp-ieDes">
+                                <!-- <textarea ng-model="expense.description"></textarea> -->
+                                <input ng-model="expense.description" type="text" class="form-control">
+                              </div>
+                              <div class="gp-ieAmt">
+                                <input ng-model="expense.amount" type="text" class="form-control" ng-input-currency>
+                                <i class="fa fa-times" ng-click="removeItemExpense(task, $index)"></i>
+                              </div>
+                            </div>
+
+                            <div id="addExpense_{{$index}}">
+                              <button class="btn btn-sm btn-default gp-mt10" ng-click="addItemExpenseHourly(task, $parent.$parent.$index, $parent.$index, $index)"><i class="fa fa-plus"></i> &nbsp; Add Expenses </button>
+                            </div>
+                          </div>
+                          <div ng-if="task.completed && task.itemizedExpenses.length > 0">
+
+                            <div class="row">
+                              <div class="gp-ieIndex">
+                                <h5>#</h5>
+                              </div>
+                              <div class="gp-ieDes">
+                                <h5>Expense Description</h5>
+                              </div>
+                              <div class="gp-ieAmt">
+                                <h5>Amount</h5>
+                              </div>
+                            </div>
+                            <div class="gp-itemizedExpenses row gp-primary-disabled" ng-repeat="expense in task.itemizedExpenses">
+                              <div class="gp-ieIndex">{{$index+1}}.</div>
+                              <div class="gp-ieDes">
+                                {{expense.description}}
+                              </div>
+                              <div class="gp-ieAmt">
+                                {{expense.amount | currency}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <!-- End Hourly Html -->
+                    <!-- *************** -->
+
+                    <!-- ******************** -->
+                    <!-- Start Recurring Html -->
+                    <div id="taskApproveWorkDescription" class="gp-taSection" ng-if="project.quoteInvitationInfo.quoteType==3">
+                      <div id="taskToastContainerRecurring_{{$index}}">
+                        <h4> Submit for Approval </h4>
+                        <!-- ****************** -->
+                        <div id="taskRecurring_{{$index}}">
+                          <!-- project.quoteInvitationInfo. -->
+                            <div class="row">
+                              <div class="gp-apWD">
+                                <h5>Recurring Period</h5>
+                                <span ng-class="gp-primary-disabled">{{project.quoteInvitationInfo.qRecurring.periodAmount.recurringPeriod == 1 ? 'Weekly' : (project.quoteInvitationInfo.qRecurring.periodAmount.recurringPeriod == 2 ? 'Bi-Weekly' : 'Monthly' ) }}</span>
+                              </div>
+                              <div class="gp-apHQ">
+                                <h5>Period Amount</h5>
+                                <span ng-class="gp-primary-disabled">{{project.quoteInvitationInfo.qRecurring.periodAmount | currency}}</span>
+                              </div>
+                              <div class="gp-apHQ">
+                                  <h5>Auto Bill Start Date</h5>
+                                  <span ng-class="gp-primary-disabled">{{project.quoteInvitationInfo.qRecurring.autoBillStartDate | dateConverter | date: 'MM/dd/yyyy'}}</span>
+                              </div>
+                              <div class="gp-apHQ">
+                                  <h5>Number of Periods</h5>
+                                  <span ng-class="gp-primary-disabled">{{project.quoteInvitationInfo.qRecurring.numberPeriods}}</span>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="gp-apWD">
+                                  <h5>Deliverable</h5>
+                                  <span ng-class="gp-primary-disabled">{{project.quoteInvitationInfo.qRecurring.deliverableDescription}}</span>
+                              </div>
+
+                              <!-- <div class="gp-apHQ">
+                                <h5>Action</h5>
+                                <button class="btn btn-warning" ng-click="appDemo1SetConsultantEngagementRecurringTask(project.quoteInvitationInfo.qRecurring, $parent.$parent.$index, $parent.$index, $index)" ng-if="!project.quoteInvitationInfo.qRecurring.completed">Request Rating</button>
+                                <button class="btn btn-default btn-outline" ng-if="project.quoteInvitationInfo.qRecurring.completed" ng-disabled="project.quoteInvitationInfo.qRecurring.completed">Request Rating Submitted!</button>
+                              </div> -->
+                            </div>
+
+                            <div ng-if="!project.quoteInvitationInfo.qRecurring.completed">
+                              <div class="row"  ng-show="project.quoteInvitationInfo.qRecurring.itemizedExpenses.length > 0">
+                                <div class="gp-ieIndex">
+                                  <h5>#</h5>
+                                </div>
+                                <div class="gp-ieDes">
+                                  <h5>Expense Description</h5>
+                                </div>
+                                <div class="gp-ieAmt">
+                                  <h5>Amount</h5>
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                        <!-- ****************** -->
+                      </div>
+                    </div>
+                    <!-- End Recurring Html -->
+                    <!-- ****************** -->
+
+
+                    <!-- End Work Description -->
+
+                    <!-- Work Description Reference File -->
+                    <div class="gp-taSection">
+                      <h4>Reference File/s </h4>
+                      <div ng-repeat="rf in project.referenceFiles">
+                        <a target="_blank" ng-href="{{rf.url}}"><i class="fa fa-download"></i> {{rf.name}}</a>
+                      </div>
+                    </div>
+                    <!-- Rate -->
+                    <div class="gp-taSection" ng-if="project.quoteInvitationInfo.quoteType==0">
+                      <div class="row">
+                        <div class="col col-md-6">
+                          <h4> Rate </h4>
+                          <!-- <div >${{project.consultant.freelanceHourlyRate}}/hr </div> -->
+                          <div>{{project.tasks[0].hourlyRate | currency}}/hr</div>
+                        </div>
+                        <div class="col col-md-6">
+                          <h4> Total Hours Quoted </h4>
+                          {{project.hoursQuoted}}
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- WYSIWYG Supporting Narrative for Quote -->
+                    <div class="gp-wysiwyg  gp-taSection gp-taSection-last" ng-if="project.quoteInvitationInfo.quoteType==0">
+                        <h4>Supporting Narrative for Quote</h4>
+                        <div ng-bind-html="project.supportingNarrative"></div>
+                    </div>
+                  </div>
+
+                </div>
+              </li>
+          </ul>

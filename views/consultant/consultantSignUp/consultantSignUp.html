@@ -1,0 +1,159 @@
+<div login-header></div>
+<div class="view gp-signUpView gp-consultantSignUp" ng-init="consultantSignUpInit()">
+  <div class="gp-signUpStatusBar" layout="row" layout-align="center center">
+    <div layout="column" layout-align="center center">
+      <h1 class="md-flex" ng-show="!linkedInProfileData || !showLinkedInStep">Create Consultant Account</h1>
+      <h1 class="md-flex" ng-show="linkedInProfileData && showLinkedInStep">You're All Set!</h1>
+      <div class="gp-statusBarConsultant" ng-show="!linkedInProfileData || !showLinkedInStep">
+        <div class=" gp-bulletedStatusBar">
+          <div class="gp-bullets step1 completed">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="gp-statusBarLinks">
+            <div>&nbsp;</div>
+          </div>
+          <div class="gp-bullets step2 completed"><i class="fa fa-check"></i></div>
+          <div class="gp-statusBarLinks">
+            <div>&nbsp;</div>
+          </div>
+          <div class="gp-bullets step3">3</div>
+        </div>
+      </div>
+      <div class="gp-statusBarConsultant" ng-show="linkedInProfileData && showLinkedInStep">
+        <div class=" gp-bulletedStatusBar">
+          <div class="gp-bullets step1 completed">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="gp-statusBarLinks">
+            <div>&nbsp;</div>
+          </div>
+          <div class="gp-bullets step2 completed"><i class="fa fa-check"></i></div>
+          <div class="gp-statusBarLinks">
+            <div>&nbsp;</div>
+          </div>
+          <div class="gp-bullets step3 completed"><i class="fa fa-check"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <md-toolbar class="md-hue-custom" >
+    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+      <div layout="column" layout-align="center center">
+        <h2 class="md-flex" ng-show="!linkedInProfileData || !showLinkedInStep">Expand your reach to Government Contractors that need your skills and expertise</h2>
+        <h2 class="md-flex" ng-show="linkedInProfileData && showLinkedInStep">Your LinkedIn Profile has been added and you are ready to go!</h2>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <!-- ///////////////////// SIGN Up - First Step //////////////////////// -->
+  <div class="gp-StepContainer  gp-mainBodyWidth md-whiteframe-2dp" ng-hide="showLinkedInStep">
+    <div class="gp-StepContainer  gp-mainBodyWidth md-whiteframe-2dp">
+      <div class="gp-Step3">
+        <div class="gp-Step3-Title"><h1>Your Account Info</h1></div>
+        <div>
+          <form name="consultantSignUpStep1" ng-submit="submit()">
+            <div ng-form="consultantSignUpStep1" novalidate>
+                <div class="row">
+                  <div class="col col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="firstName" class="form-control" id="gp-firstName" placeholder="*Your First Name" ng-model="$storage.consultantInfo.accountInfo.firstName" required>
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="lastName" class="form-control" id="gp-lastName" placeholder="*Your Last Name" ng-model="$storage.consultantInfo.accountInfo.lastName" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col col-md-4">
+                  <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="gp-email" placeholder="*Your Email Address" ng-model="$storage.consultantInfo.accountInfo.email" required>
+                    <span ng-show="consultantSignUpStep1.email.$touched && consultantSignUpStep1.email.$invalid" class="gp-error">Please enter a valid email address</span>
+                  </div>
+                </div>
+                <div class="col col-md-4">
+                  <div class="form-group">
+                    <input type="password" name="password" class="form-control" id="gp-password" placeholder="*Password" ng-model="$storage.consultantInfo.accountInfo.password" required>
+                  </div>
+                </div>
+                <div class="col col-md-4">
+                  <div class="form-group">
+                    <input type="password" name="confirmPass" class="form-control" id="gp-confirmPass" placeholder="*Confirm Password" ng-model="$storage.consultantInfo.accountInfo.confirmPass" compare-to="$storage.consultantInfo.accountInfo.password">
+                    <span ng-show="consultantSignUpStep1.confirmPass.$error.compareTo && consultantSignUpStep1.confirmPass.$touched" class="gp-error">This field must match what you entered in the above password field</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="companyName" class="form-control" id="gp-companyName" placeholder="Company Name" ng-model="$storage.consultantInfo.accountInfo.companyName">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="referralCode" class="form-control" id="gp-referralCode" placeholder="Referral Code (Optional)" ng-model="$storage.consultantInfo.accountInfo.referralCode">
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div style="display:flex;align-items: center; ">
+                <div ng-controller="recaptchaCtrl">
+                  <div  vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()"></div>
+                </div>
+                <md-checkbox aria-label="Checkbox 1" ng-model="terms" class="md-gpSolidBlue md-raised" style="margin-left:15px;" required> I agree to the <a href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">Terms of Service</a></md-checkbox>
+              </div>
+              <div class="row gp-btnWrapper">
+                <div class="col col-md-6 gp-backBtn">
+                  <button class="btn btn-default btn-outline" ng-click="goBackToSignUp()">Back</button>
+                </div>
+                <div class="col col-md-6 gp-nextBtn">
+                  <button class="btn btn-warning" type="submit" ng-click="goToStepLinkedIn($storage.consultantInfo.accountInfo)" ng-disabled="consultantSignUpStep1.$invalid">Next</button>
+                </div>
+                <div class="gp-SubmitError col col-md-12">
+                  <span ng-show="duplicateEmails" class="gp-error">*This email is already associated with an account.  Please use the Log In link at the top right to log in.</span>
+                </div>
+                <div class="gp-SubmitError col col-md-12">
+                  <span ng-show="consultantSignUpStep1.$invalid">*Please fill out required fields to continue.</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ///////////////////// SIGN Up - Linked In //////////////////////// -->
+  <div class="gp-StepContainer  gp-mainBodyWidth md-whiteframe-2dp" ng-show="showLinkedInStep">
+    <div class="gp-StepContainer  gp-mainBodyWidth md-whiteframe-2dp">
+      <div class="gp-Step3">
+        <div class="gp-Step3-Title gp-doubleHeader" ng-show="!linkedInProfileData">
+          <h1>Add Your LinkedIn Account Info</h1>
+          <h1>Improve Your Chances of getting Hired</h1>
+        </div>
+        <div class="gp-Step3-Title" ng-show="linkedInProfileData">
+          <h1>Click Submit to Get Started!</h1>
+        </div>
+        <p>
+          This information will be used to populate your profile and can be edited by you at anytime.  Thus, allowing you a better chance of matching you with opportunities.
+          app1url takes your privacy very seriously, this is a one time access that will help us, help you make a more complete profile.    For more information on our privacy policy read <a href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">here</a>.
+        </p>
+        <div class="row gp-btnWrapper">
+          <div class="col col-md-6" style="text-align: right;">
+            <button class="btn btn-warning" ng-click="appDemo1SetConsultantSignUpWithoutLinkedIn($storage.consultantInfo.accountInfo, 1)">Submit Without LinkedIn</button>
+          </div>
+          <div class="col col-md-6">
+              <div ng-show="!linkedInProfileData">
+                <a href=""><img ng-click="liAuth()" src="/images/icons/LinkedIn.png"></a>
+              </div>
+              <img ng-show="linkedInProfileData" src="/images/icons/LinkedInSubmit.png " alt="Submit" ng-click="appDemo1SetConsultantSignUp($storage.consultantInfo.accountInfo, linkedInProfileData)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

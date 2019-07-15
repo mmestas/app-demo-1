@@ -1,0 +1,276 @@
+<form name="editConsultantStripeBankInfoForm" id="editConsultantStripeBankInfo">
+  <div class="well">
+    <p>
+      When you provide services using app1url, you will receive payment for your services via an electronic transfer of funds directly to your bank account. Please follow the instructions below to provide the information associated with the bank account where you would like your payments deposited.
+    </p>
+    <p>
+      For your security and protection, we are required by federal law to verify the bank account provided is owned by you. For this reason, personal information is required below.
+    </p>
+    <p>
+      We take the privacy and security of your personal information seriously. As such, we use Stripe, one of the most secure payment processors available. app1url does not store your personal information, instead, your information is encrypted and tokenized to facilitate the electronic transfer of funds using Stripe.
+    </p>
+  </div>
+
+  <div>
+    <section>
+      <div class="gp-flex gp-alignFlexCenter gp-mb20">
+          <div class="circle cir-sm" data-ng-class="{'cir-default': !addressSectionIncomplete, 'cir-danger': addressSectionIncomplete}"><span>1</span></div>
+          <div class="gp-ml10">Home Address <small>(<span class="gp-text-danger">Required</span>)</small></div>
+      </div>
+      <div class="gp-flex gp-alignFlexCenter">
+        <div class="form-group gp-mr5">
+          <label for="Address">Street</label>
+          <input type="text" class="form-control" name="Address" data-ng-model="editablePaymentInfo.address" required style="min-width:292px;" data-ng-class="{'errorFields': (!editablePaymentInfo.address && formHasError) || !addressExists}">
+        </div>
+        <div class="form-group gp-mr5">
+          <label for="City">City</label>
+          <input type="text" class="form-control" name="City" data-ng-model="editablePaymentInfo.city" required data-ng-class="{'errorFields': (!editablePaymentInfo.city && formHasError) || !cityExists}">
+        </div>
+        <div class="form-group gp-mr5">
+          <label><span>State</span></label>
+          <select data-ng-options="state.Abbreviation as state.name for state in statesList" data-ng-model="editablePaymentInfo.state" required data-ng-class="{'errorFields': !editablePaymentInfo.state && formHasError}">
+              <option value="">Select</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="zip">Postal Code</label>
+          <input type="text" class="form-control" name="zip" data-ng-model="editablePaymentInfo.zip" required data-ng-class="{'errorFields': (!editablePaymentInfo.zip && formHasError) || !zipExists}" style="width:100px;">
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+  <div class="gp-flex gp-mb20">
+    <div class="gp-mr20 gp-width-50" >
+      <section>
+          <div class="gp-flex gp-alignFlexCenter gp-mb20">
+            <div class="circle cir-sm" data-ng-class="{'cir-default': !bankInfoSectionIncomplete, 'cir-danger': bankInfoSectionIncomplete}"><span>2</span></div>
+            <div class="gp-ml10">Banking Information <small>(<span class="gp-text-danger">Required</span>)</small></div>
+          </div>
+          <div class="gp-mb20"><img src="/images/checkRoutingInfo.png" class="gp-width-100"></div>
+          <div class="">
+              <div class="form-group">
+                  <label>Account Type</label>
+                  <select data-ng-model="editablePaymentInfo.consultantAccountType" data-ng-options="accType.id as accType.name for accType in accountTypes" data-ng-disabled="true">
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label>Account Holder First Name</label>
+                  <input type="text" class="form-control" name="AHFN" data-ng-model="editablePaymentInfo.accountHolderFirstName" required data-ng-class="{'errorFields': (!editablePaymentInfo.accountHolderFirstName && formHasError) || !firstNameExists}">
+              </div>
+              <div class="form-group">
+                  <label>Account Holder Last Name</label>
+                  <input type="text" class="form-control" name="AHLN" data-ng-model="editablePaymentInfo.accountHolderLastName" required data-ng-class="{'errorFields': (!editablePaymentInfo.accountHolderLastName && formHasError) || !lastNameExists}">
+              </div>
+              <div class="form-group" data-ng-if="editablePaymentInfo.consultantAccountType === 2">
+                  <label>Legal Name of the Company</label>
+                  <input type="text" class="form-control" name="companyName" data-ng-model="editablePaymentInfo.businessName" required data-ng-class="{'errorFields': (!editablePaymentInfo.businessName && formHasError) || !businessNameExists}">
+              </div>
+              <div class="form-group">
+                  <label for="BRN">Bank Routing Number</label>
+                  <input type="text" class="form-control" name="BRN" data-ng-model="editablePaymentInfo.bankRoutingNumber" maxlength="9" required data-ng-class="{'errorFields': (!editablePaymentInfo.bankRoutingNumber && formHasError) || !bankAccountNumberExists}" >
+              </div>
+              <div class="form-group">
+                  <label for="BAN">Account Number</label>
+                  <input type="text" class="form-control" name="BAN" data-ng-model="editablePaymentInfo.bankAccountNumber" data-ng-class="{'errorFields': (!editablePaymentInfo.bankAccountNumber && formHasError)}" placeholder="Up to 17 digits">
+              </div>
+              <!-- Not necessary for editing ?? -->
+              <!-- <div class="form-group">
+                  <label for="CAN">Confirm Account Number</label>
+                  <input type="text" class="form-control" name="CAN"  data-ng-model="editablePaymentInfo.confirmBAN" compare-to="editablePaymentInfo.bankAccountNumber" required data-ng-class="{'errorFields': !editablePaymentInfo.confirmBAN && formHasError}" placeholder="Up to 17 digits" ng-readonly="stateExists">
+                  <span data-ng-show="editConsultantStripeBankInfoForm.CAN.$error.compareTo && editConsultantStripeBankInfoForm.CAN.$touched" class="gp-error">This field must match what you entered above</span>
+              </div> -->
+          </div>
+      </section>
+    </div>
+    <div class="gp-width-50">
+      <section>
+          <div class="gp-flex gp-alignFlexCenter gp-mb20">
+            <div class="circle cir-sm" data-ng-class="{'cir-default': !verificationInfoSectionIncomplete, 'cir-danger': verificationInfoSectionIncomplete}"><span>3</span></div>
+            <div class="gp-ml10">Verification Information I <small>(<span class="gp-text-danger">Required</span>)</small></div>
+          </div>
+          <div class="">
+            <div class="form-group" data-ng-if="!taxIdExists || (editablePaymentInfo.consultantAccountType === 1 && !ssnExists)">
+              <label for="EIN">Tax Identification Number</label>
+              <input type="text" class="form-control" name="EIN" data-ng-model="editablePaymentInfo.identificationNumber" ssn-formated placeholder="###-##-####" required data-ng-class="{'errorFields': (!editablePaymentInfo.identificationNumber && formHasError) || !ssnExists}" data-ng-if="editablePaymentInfo.consultantAccountType === 1">
+              <input type="text" class="form-control" name="EIN" data-ng-model="editablePaymentInfo.identificationNumber" ein-formated placeholder="##-#######" required data-ng-class="{'errorFields': !editablePaymentInfo.identificationNumber && formHasError}" data-ng-if="editablePaymentInfo.consultantAccountType === 2">
+            </div>
+            <div class="form-group" data-ng-if="editablePaymentInfo.consultantAccountType === 2">
+              <label for="SSN">Social Security Number (last 4 digits)</label>
+              <input type="text" class="form-control" name="SSN" data-ng-model="editablePaymentInfo.SSNLast4"  limit-number maxlength="4" placeholder="####" required data-ng-class="{'errorFields': (!editablePaymentInfo.identificationNumber && formHasError) || !ssnExists}" ng-readonly="ssnExists" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Date of Birth</label>
+            <md-input-container class="md-block md-gpBlue-theme" md-is-error="!editablePaymentInfo.dob && formHasError">
+              <md-datepicker data-ng-model="editablePaymentInfo.dob" md-current-view="year" name="dob" data-ng-required="true" md-max-date="dobMaxDate" md-min-date="dobMinDate" md-placeholder="D.O.B." data-ng-class="{'md-errorField': (!editablePaymentInfo.dob && formHasError) || !dobExists}" data-ng-disabled="dobExists"></md-datepicker>
+            </md-input-container>
+          </div>
+      </section>
+      <section data-ng-class="{'errorFields': verificationDocsSectionIncomplete}">
+        <div class="gp-flex gp-alignFlexCenter gp-mb20">
+          <div class="circle cir-sm cir-default" data-ng-class="{'cir-default': !verificationDocsSectionIncomplete, 'cir-danger': verificationDocsSectionIncomplete}"><span>4</span></div>
+          <div class="gp-ml10">Verification Information II</div>
+        </div>
+        <div data-ng-if="documentIsVerified">
+            Your I.D. has been verified.
+        </div>
+        <div class="gp-mb20"  data-ng-if="!documentIsVerified">
+            <p class="gp-error font-xxs">
+                Once deposits exceed $10,000, we may require users to provide additional information to verify their ID.  You can void any potential delays by providing the information now.
+            </p>
+            <p class="font-xxs">
+              Use your phone to capture a color photo of your passport, or the front and back image of your drivers license, or a government issued ID. (Format must be .jpg or .png)
+            </p>
+        </div>
+        <div data-ng-if="!documentIsVerified">
+          <div>
+            <md-radio-group data-ng-model="editablePaymentInfo.idType" name="acctType" class="gp-flex">
+
+              <!-- PASSPORT -->
+              <div class="gp-mr20 gp-width-45"  data-ng-hide="hidePassportOption">
+                 <md-radio-button data-ng-value="1" value="1" class="gpBlue font-xs">Passport</md-radio-button>
+                 <i class="fa fa-paperclip" data-ng-class="{'gp-text-danger': !identification.front && formHasError}">
+                   <div id="identificationPhoto" class="dragNDrop" name="identificationPhoto"
+                   ngf-select ngf-drop
+                   data-ng-model="identification.front"
+                   ngf-model-invalid="invalidFiles"
+                   ngf-model-options="modelOptionsObj"
+                   ngf-multiple="false"
+                   ngf-pattern="'.jpg,.png,.jpeg'"
+                   ngf-accept="'.jpg,.png,.jpeg'"
+                   data-ng-disabled="editablePaymentInfo.idType === 2"
+                   ngf-select-disabled="editablePaymentInfo.idType === 2"
+                   ngf-drop-disabled="editablePaymentInfo.idType === 2"
+                   ngf-capture="capture"
+                   ngf-drag-over-class="dragOverClassObj"
+                   ngf-validate="validateObj"
+                   ngf-resize="resizeObj"
+                   ngf-resize-if="resizeIfFn($file, $width, $height)"
+                   ngf-dimensions="dimensionsFn($file, $width, $height)"
+                   ngf-duration="durationFn($file, $duration)"
+                   ngf-keep="keepDistinct ? 'distinct' : keep"
+                   ngf-fix-orientation="true"
+                   ngf-max-files="1"
+                   ngf-max-size = "5MB"
+                   ngf-ignore-invalid="ignoreInvalid"
+                   ngf-run-all-validations="runAllValidations"
+                   ngf-allow-dir="allowDir" class="drop-box"
+                   ngf-drop-available="dropAvailable"
+                   >
+                     &nbsp;
+                   </div>
+                   <span data-ng-class="{'gp-text-danger': !identification.front && formHasError}">
+                     <span data-ng-if="!identification.front.name || editablePaymentInfo.idType === 2">Attach Image</span>
+                     <span data-ng-if="identification.front.name && editablePaymentInfo.idType === 1">{{identification.front.name}}</span>
+                   </span>
+                 </i>
+                 <label class="upload" for="identificationPhoto"  data-ng-if="editablePaymentInfo.idType === 1">
+                   <img ngf-src="identification.front" class="gp-width-100">
+                 </label>
+              </div>
+
+              <!-- DRIVER'S LICENSE -->
+              <div class="gp-width-45"  data-ng-hide="hideLicenseOption">
+                  <md-radio-button data-ng-value="2" value="2" class="gpBlue font-xs">Driver's License</md-radio-button>
+                  <i class="fa fa-paperclip" data-ng-class="{'gp-text-danger': !identification.front && formHasError}">
+                    <div id="identificationPhoto" class="dragNDrop" name="identificationPhoto"
+                    ngf-select ngf-drop
+                    data-ng-model="identification.front"
+                    ngf-model-invalid="invalidFiles"
+                    ngf-model-options="modelOptionsObj"
+                    ngf-multiple="false"
+                    ngf-pattern="'.jpg,.png,.jpeg'"
+                    ngf-accept="'.jpg,.png,.jpeg'"
+                    data-ng-disabled="editablePaymentInfo.idType === 1"
+                    ngf-select-disabled="editablePaymentInfo.idType === 1"
+                    ngf-drop-disabled="editablePaymentInfo.idType === 1"
+                    ngf-capture="capture"
+                    ngf-drag-over-class="dragOverClassObj"
+                    ngf-validate="validateObj"
+                    ngf-resize="resizeObj"
+                    ngf-resize-if="resizeIfFn($file, $width, $height)"
+                    ngf-dimensions="dimensionsFn($file, $width, $height)"
+                    ngf-duration="durationFn($file, $duration)"
+                    ngf-keep="keepDistinct ? 'distinct' : keep"
+                    ngf-fix-orientation="true"
+                    ngf-max-files="1"
+                    ngf-max-size = "5MB"
+                    ngf-ignore-invalid="ignoreInvalid"
+                    ngf-run-all-validations="runAllValidations"
+                    ngf-allow-dir="allowDir" class="drop-box"
+                    ngf-drop-available="dropAvailable"
+                    >
+                      &nbsp;
+                    </div>
+                    <span data-ng-class="{'gp-text-danger': !identification.front && formHasError}">
+                      <span data-ng-if="!identification.front.name || editablePaymentInfo.idType === 1">Attach Front Image</span>
+                      <span data-ng-if="identification.front.name && editablePaymentInfo.idType === 2" >{{identification.front.name}}</span>
+                    </span>
+                  </i>
+                  <label class="upload" for="identificationPhoto" data-ng-if="editablePaymentInfo.idType === 2">
+                    <img ngf-src="identification.front" class="gp-width-100">
+                  </label>
+
+                  <i class="fa fa-paperclip" data-ng-class="{'gp-text-danger': !identification.front && formHasError}">
+                    <div id="identificationPhoto" class="dragNDrop" name="identificationPhoto"
+                    ngf-select ngf-drop
+                    data-ng-model="identification.back"
+                    ngf-model-invalid="invalidFiles"
+                    ngf-model-options="modelOptionsObj"
+                    ngf-multiple="false"
+                    ngf-pattern="'.jpg,.png,.jpeg'"
+                    ngf-accept="'.jpg,.png,.jpeg'"
+                    data-ng-disabled="editablePaymentInfo.idType === 1"
+                    ngf-select-disabled="editablePaymentInfo.idType === 1"
+                    ngf-drop-disabled="editablePaymentInfo.idType === 1"
+                    ngf-capture="capture"
+                    ngf-drag-over-class="dragOverClassObj"
+                    ngf-validate="validateObj"
+                    ngf-resize="resizeObj"
+                    ngf-resize-if="resizeIfFn($file, $width, $height)"
+                    ngf-dimensions="dimensionsFn($file, $width, $height)"
+                    ngf-duration="durationFn($file, $duration)"
+                    ngf-keep="keepDistinct ? 'distinct' : keep"
+                    ngf-fix-orientation="true"
+                    ngf-max-files="1"
+                    ngf-max-size = "5MB"
+                    ngf-ignore-invalid="ignoreInvalid"
+                    ngf-run-all-validations="runAllValidations"
+                    ngf-allow-dir="allowDir" class="drop-box"
+                    ngf-drop-available="dropAvailable"
+                    >
+                      &nbsp;
+                    </div>
+                    <span data-ng-class="{'gp-text-danger': !identification.back && formHasError}">
+                      <span data-ng-if="!identification.back.name || editablePaymentInfo.idType === 1">Attach Back Image</span>
+                      <span data-ng-if="identification.back.name && editablePaymentInfo.idType === 2" >{{identification.back.name}}</span>
+                    </span>
+                  </i>
+                  <label class="upload" for="identificationPhoto" data-ng-if="editablePaymentInfo.idType === 2">
+                    <img ngf-src="identification.back" class="gp-width-100">
+                  </label>
+
+              </div>
+              <div class="gp-width-10">
+                  <a class="btn btn-xs" data-ng-click="undoSelect(editablePaymentInfo)">Clear</a>
+              </div>
+            </md-radio-group>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="gp-mb20">
+      <md-checkbox aria-label="Checkbox 1" data-ng-model="terms" class="md-gpSolidBlue md-raised gp-ml15 font-s" required> I have read and agree to the <a href="https://stripe.com/us/ssa" target="_blank"><strong>Terms and Conditions</strong></a> for the <a href="https://stripe.com/" target="_blank"><strong>Stripe</strong></a> payment processor</md-checkbox>
+  </div>
+  <div class="gp-error" ng-show="showResponseError">{{errorMsg}}</div>
+  <div id="toastMsg"></div>
+  <div class="gp-flex">
+    <button class="btn btn-primary" data-ng-click="appDemo1SetUserPaymentBank(editablePaymentInfo, editConsultantStripeBankInfoForm, identification)" data-ng-disabled="!terms">Save Changes</button>
+  </div>
+
+</form>

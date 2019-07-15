@@ -1,0 +1,26 @@
+<div ng-hide="showConsultantSkillsEditFields">
+  <!-- <div class="customTooltip">
+    <span class="customTooltip-panels">Select the professional category and skills where you have expertise and experience.</span>
+    <div class="gp-consultantEditSectionWithBtn"><h4>Expert Category & Skills (20%)</h4><i class="fa fa-pencil-alt" ng-click="editConsultantSkills(consultantInfo)"></i></div>
+  </div> -->
+
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">Expert Category & Skills (20%)
+        <span class="customTooltip-panels">Select the professional category and skills where you have expertise and experience.</span>
+      </span>
+    </h4>
+    <i class="fa fa-pencil-alt" ng-click="editConsultantSkills(consultantInfo)"></i>
+  </div>
+
+  <div class="profileSectionInner">
+    <h3 class="h3"><span class="small">Skills</span></h3>
+    <ul class="gp-consultantSkillsList">
+      <li ng-repeat="skill in consultantSkills">{{skill.skillName}}</li>
+    </ul>
+    <h3 class="h3"><span class="small">Categories</span></h3>
+    <ul class="gp-consultantCategoriesList">
+      <li ng-repeat="category in consultantCategories">{{category.name}}</li>
+    </ul>
+  </div>
+</div>

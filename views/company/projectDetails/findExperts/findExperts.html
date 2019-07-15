@@ -1,0 +1,151 @@
+<div class="row gp-row gp-panelSection">
+  <div ng-include="'/views/company/projectDetails/findExperts/findExpertFilters.html'"></div>
+  <div class="col col-md-9 gp-expertSearchResults">
+    <div class="gp-flex">
+      <div class="gp-addedFilters form-group" style="display: flex;flex-direction: column;justify-content: space-between;min-width: 105px;margin-right: 10px;">
+        <div class="form-group">
+          <label style="font-size:12px; min-width:105px;">Filter Results On:</label>
+          <div class="dropdown">
+            <button class="btn btn-primary btn-outline btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="width:105px; padding:2px 10px 2px 2px; position:relative;">
+              <span>{{filterResultsOn}}</span>
+            <span class="caret" style="position: absolute;right: 3px;top: 43%;"></span></button>
+            <ul class="dropdown-menu gp-sortFilterList" style="margin-top: -5px; padding: 5px 7px; min-width: 105px; border-top-left-radius: 0; border-top-right-radius: 0;">
+              <li ng-click="filterKeywordsBy(true, 'Any Keyword')">Any Keyword</li>
+              <li ng-click="filterKeywordsBy(false, 'All Keywords')">All Keywords</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="gp-addedFilters form-group flex-grow:1;" style="width: calc(100% - 35px);">
+        <span ng-repeat="rating in filter.RatingFilter">
+          <button class="btn btn-default btn-xs" type="button" ng-if="rating.selected" ng-click="clearRating(rating)">{{rating.ratingValue}} stars <i class="fa fa-times"></i></button>
+        </span>
+        <span ng-repeat="cf in filter.CategoryFilter">
+          <span ng-repeat="sub in cf.subCategories">
+            <button class="btn btn-default btn-xs" type="button" ng-if="sub.selected" ng-click="clearSubCat(sub)">{{sub.name}} <i class="fa fa-times"></i></button>
+          </span>
+        </span>
+        <span ng-repeat="agency in filter.AgencyFilter">
+          <button class="btn btn-default btn-xs" type="button" ng-if="agency.selected" ng-click="clearAgency(agency)">{{agency.name}} <i class="fa fa-times"></i></button>
+        </span>
+        <!--Added 3.23.18 -->
+        <span ng-repeat="certification in filter.CertificationsFilter">
+          <button class="btn btn-default btn-xs" type="button" ng-if="certification.selected" ng-click="clearCertification(certification)">{{certification.name}} <i class="fa fa-times"></i></button>
+        </span>
+
+        <span ng-repeat="level in filter.SecurityFilter">
+          <button class="btn btn-default btn-xs" type="button" ng-if="level.selected" ng-click="clearSecurityLevel(level)">{{level.name}} <i class="fa fa-times"></i></button>
+        </span>
+        <span ng-repeat="verification in filter.VerificationFilter">
+          <button class="btn btn-default btn-xs" type="button" ng-if="verification.selected" ng-click="clearVerification(verification)">{{verification.name}} <i class="fa fa-times"></i></button>
+        </span>
+        <span ng-repeat="city in citiesFilterArray track by $index ">
+          <!-- <button class="btn btn-default btn-xs" type="button" ng-click="removeCity($index)">{{city.city}}, {{city.state}} <i class="fa fa-times"></i></button> -->
+          <button class="btn btn-default btn-xs" type="button" ng-click="removeCity($index)">{{city.state}} <i class="fa fa-times"></i></button>
+        </span>
+        <span ng-repeat="keyword in keywordFilterArray track by $index">
+          <button class="btn btn-primary btn-xs" type="button" ng-click="clearKeyword($index, keyword)">{{keyword}}<i class="fa fa-times"></i></button>
+        </span>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.ProfileFilter.profileCompletion" ng-click="clearProfileCompletion(filter.ProfileFilter)">profile {{filter.ProfileFilter.profileCompletion}}% complete <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.ResumeFilter.onlyWithResume" ng-click="clearHasResume(filter.ResumeFilter)">has resume  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.vipFilter.isVIP" ng-click="clearIsVIP(filter.vipFilter)">VIP/Senior Executives  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.AvailabilityFilter.Availability.name" ng-click="clearAvailability(filter.AvailabilityFilter)">{{filter.AvailabilityFilter.Availability.name}}  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.TypeFilter.advisoryBoardCandidate" ng-click="clearAdvisoryBoard(filter.TypeFilter)">Advisory Board Candidate  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.TypeFilter.checkFreelanceConsultant" ng-click="clearFreelance(filter.TypeFilter)">Freelance  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.TypeFilter.checkFreelanceConsultant && (filter.TypeFilter.freelanceHourlyRateMax > 0)" ng-click="resetHourlyRate(filter.TypeFilter, rangeSlider)">Hourly Rate: ${{rangeSlider.minValue}} - ${{rangeSlider.maxValue}}<i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.TypeFilter.checkFullTimeEmployee" ng-click="clearFullTime(filter.TypeFilter)">Full-Time  <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.TypeFilter.checkFullTimeEmployee && (filter.TypeFilter.fullTimeAnnualSalaryMax > 0)" ng-click="resetSalary(filter.TypeFilter, rangeSlider)">Hourly Rate: ${{rangeSlider2.minValue}} - ${{rangeSlider2.maxValue}}<i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.VerificationFilter.verificationValue == 1" ng-click="clearVerification(filter.VerificationFilter)">Silver Verified <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.VerificationFilter.verificationValue == 2" ng-click="clearVerification(filter.VerificationFilter)">Gold Verified <i class="fa fa-times"></i></button>
+        <button class="btn btn-default btn-xs" type="button" ng-if="filter.VerificationFilter.verificationValue == 3" ng-click="clearVerification(filter.VerificationFilter)">Platinum Verified <i class="fa fa-times"></i></button>
+      </div>
+      <div>
+        <button class="btn btn-default btn-outline btn-sm gp-clearAllBtn" data-ng-click="clearAllFilter(filter)" style="margin-bottom:5px;">Clear All</button>
+        <div class="form-group">
+          <div class="dropdown">
+            <button class="btn btn-default btn-outline btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="width:145px;">
+              <span>{{sortByName}}</span>
+            <span class="caret" style="position: absolute;right: 8px;top: 45%;"></span></button>
+            <ul class="dropdown-menu gp-sortFilterList" style="margin-top:1px; padding: 5px 7px; min-width:140px;">
+              <li ng-repeat="sortFilter in findExpertSortBy" ng-click="sortOrderChange(sortFilter)" ng-class="{'gp-selectedFilter': sortFilter.id == selectedFilterId }">{{sortFilter.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- NG REPEAT -->
+    <div class="col col-md-12 gp-expertsList" ng-repeat="expert in expertList" star-rating-after-repeat >
+      <div class="col col-md-2 gp-expertPicLinks">
+        <div class="gp-expertPic"><img ng-src="{{envURL+expert.imageFilename}}"></div>
+        <div class="gp-addToFavBtn">
+          <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1SetConsultantToFavorites(expert)" ng-hide="expert.existsInFavorites">
+            <i class="far fa-heart"></i>&nbsp; Save
+          </button>
+          <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1RemoveConsultantFromFavorites(expert)" ng-show="expert.existsInFavorites" ng-class="{'gp-addedTo': expert.existsInFavorites}">
+            <span class="showRemove"><i class="far fa-heart"></i>&nbsp;  Remove</span>
+            <span class="hideRemove"><i class="fa fa-heart"></i>&nbsp; Added</span>
+          </button>
+        </div>
+        <div class="gp-addToShortListBtn"><button class="btn btn-primary btn-sm" ng-click="showEngagementInviteModal($event, expert)">Invite to Quote</button></div>
+        <div class="gp-addToBenchBtn gp-doubleBtns">
+            <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1SetConsultantToShortlist(expert)" ng-hide="expert.existsInShortlist">Shortlist <i class="fa fa-plus"></i></button>
+            <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1RemoveConsultantFromShortlist(expert)" ng-show="expert.existsInShortlist" ng-class="{'gp-addedTo': expert.existsInShortlist}">
+              <span class="showRemove">Remove</span>
+              <span class="hideRemove">In Shortlist</span>
+            </button>
+            <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1SetConsultantToBench(expert)" ng-hide="expert.existsInBench">Bench <i class="fa fa-plus"></i></button>
+            <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1RemoveConsultantFromBench(expert)" ng-show="expert.existsInBench" ng-class="{'gp-addedTo': expert.existsInBench}">
+              <span class="showRemove">Remove</span>
+              <span class="hideRemove">In Bench</span>
+            </button>
+        </div>
+
+      </div>
+      <div class="col col-md-7 gp-expertInfo">
+        <h4 class="gp-expertName">
+          <div ng-if="!expert.profileNamePrivate">
+            <span data-ng-click="showFullConsultantDetailsModal($event, expert, planInformation)">{{expert.name}}</span>
+            <small data-ng-if="expert.isVIP" style="margin-left:10px;"><i class="fa fa-trophy gp-gold"></i> VIP/Senior Executive</small>
+          </div>
+          <div ng-if="expert.profileNamePrivate">
+            <span data-ng-click="showFullConsultantDetailsModal($event, expert, planInformation)">{{expert.name | createInitials}}</span>
+            <small data-ng-if="expert.isVIP" style="margin-left:10px;"><i class="fa fa-trophy gp-gold"></i> VIP/Senior Executive</small>
+          </div>
+          <div><small class="gp-expertCo">{{expert.title}}<span ng-if="expert.company && expert.title">,</span> {{expert.company}}</small></div>
+        </h4>
+        <div class="gp-expertAddress">
+          <div ng-if="expert.city || expert.state.name"><i class="fa fa-map-marker-alt"></i> <span ng-if="expert.city">{{expert.city}}</span><span ng-if="expert.state.name">, {{expert.state.name}}</span> </div>
+          <div>Projects: {{expert.numberProjects + expert.legacyNumberProjects}} | Certifications: {{expert.certifications.length}}</div>
+        </div>
+        <div class="gp-expertDescription"><span ng-bind-html="expert.consultantDescription | limitTo : limitDescription150"></span><span ng-show="expert.consultantDescription.length > 150">...</span>
+        </div>
+        <div class="gp-expertSkills">
+          <div class="label label-default label-outline gp-expertSkillsLabel" ng-repeat="skill in expert.skills | limitTo : 3">{{skill.skillName}}</div>
+          <div ng-if="expert.skills.length > 3"><a href="#" ng-click="showFullConsultantDetailsModal($event, expert)">{{expert.skills.length - 3}} More</a></div>
+        </div>
+        <div class="gp-expertDeptLogos">
+          <img class="gp-expertAgencies" ng-repeat="agency in expert.agencies | limitTo : 4" ng-src="{{envURL+agency.imageFilename}}" ng-if="agency.imageFilename">&nbsp;
+          <span ng-if="expert.agencies.length > 4"><a href="#" ng-click="showFullConsultantDetailsModal($event, expert)">{{expert.agencies.length - 4}} More</a></span>
+        </div>
+      </div>
+      <div class="col col-md-3 gp-expertRating">
+        <h4 ng-show="expert.freelanceHourlyRate"> {{expert.freelanceHourlyRate | currency}} / hr</h4>
+        <h4 ng-if="!expert.freelanceHourlyRate">No Rate Provided</h4>
+        <input id="star{{$index}}" ng-model="expert.numValU" value="{{expert.averageReview}}" type="number" class="myrating" data-min=0 data-max=5 data-step=0.5 data-size="xs" title="">
+        <div ng-if="expert.verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"><i class="fa fa-certificate gp-silver"></i> Silver Verified</div>
+        <div ng-if="expert.verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"><i class="fa fa-certificate gp-gold"></i> Gold Verified</div>
+        <div ng-if="expert.verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"><i class="fa fa-certificate gp-platinum"></i> Platinum Verified</div>
+        <div>Member since {{myConvertDate(expert.joinDate) | date}} </div>
+        <div>Profile Completion {{expert.profileCompletion}}%</div>
+        <div data-ng-if="!expert.isVIP || (expert.isVIP && userInfo.accessSeniorExecutives)"><span ng-click="goToExpertDetails(expert)">Details Page</span></div>
+      </div>
+    </div>
+    <!-- END NG REPEAT -->
+    <div class="col col-md-12 ">
+      <section layout="row" layout-padding="">
+        <cl-paging flex cl-pages="paging.total" , cl-steps="6" , cl-page-changed="paging.onPageChanged()" , cl-align="center center" , cl-current-page="paging.current"></cl-paging>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,297 @@
+.ngViewWrapper {background-color: inherit; min-height: calc(100% - 227px);}
+//
+// **************** Page Structure ******************
+.gp-mainBodyWidth {width: 100%;max-width: 1200px; margin: auto;}
+.innerPadding {padding: 20px 20px;}
+.sidePadding{padding:10px;}
+.alignCenter {text-align: center;}
+.centerTextLineDivider {}
+.centerTextLineDivider { width:100%; text-align:center; border-bottom: 1px solid $govBlue; line-height:0.1em; margin:10px 0 20px; }
+.centerTextLineDivider span { background:#fff; padding:0 10px; }
+
+ul li {margin:0;}
+
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+:focus {
+    outline: -webkit-focus-ring-color auto 0;
+}
+
+.gp-pageTitle {margin:10px 0px 20px;}
+.gp-formSize {width:100%; max-width: 1200px; margin:auto;}
+.gp-doubleHeader h1 {margin:5px; padding:0;}
+.gp-usabilitySpace {background: transparent;padding: 15px;box-sizing: content-box;display: flex;justify-content: space-between; flex-wrap: wrap;}
+.gp-usabilitySpace h1, .gp-usabilitySpace h2, .gp-usabilitySpace h3, .gp-usabilitySpace h4 {padding:0; margin:0;}
+
+/************************** Borders *********************/
+.gp-simpleBorder {border: 1px solid $govLtGrey;}
+
+
+/****************************** ERRORS and WARNINGS ************************/
+.gp-SubmitError {text-align: center; color:$govDangerRed;padding-top: 15px;}
+.gp-errorMsgTop {text-align: center; color:$govDangerRed;padding-bottom: 15px;}
+.gp-error {color:$govDangerRed; font-weight:bold;}
+.gp-errOutline {border-color: $govDangerRed !important;} //Note: similar to .errorFields in forms.scss
+.gp-readMsg {background: $govMedOrange;}
+.btn-errorMsg {text-align: right;}
+.gp-consultantEditSectionWithBtn h4 span {color:$govWhite;}
+
+/************************** Semi Transparent Overlays *********************/
+.gp-defaultOverlay {background: rgba(113, 113, 113, 0.7);}
+.gp-primaryOverlay {background: rgba(46, 116, 146, 0.70);}
+.gp-warningOverlay {background: rgba(253, 135, 36, 0.70);}
+.gp-infoOverlay {background: rgba(52, 152, 219, 0.70);}
+.gp-successOverlay {background: rgba(83, 177, 83, 0.70);}
+.gp-dangerOverlay {background: rgba(231, 76, 60, 0.70);}
+
+/****************************** Images and Logos ************************/
+.gp-initialsLogo {height: 100%;width: 100%;background: $govBlue;color: $govWhite;font-size: 30px;font-size: 15px;border-radius: 50%;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+/****************************** STAR RATING ************************/
+.rating-container .filled-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: auto;
+    color: $govStarGoldLt;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-text-stroke: 1px $govStarGoldDk;
+    text-shadow: 0px 0px $govStarGold;
+}
+.rating-sm {font-size: 30px;line-height: 30px;}
+.rating-xs {font-size: 18px;}
+.rating-xxs {font-size: 17px;display: inline-block;}
+.rating-xxs  .glyphicon-star:before {}
+.rating-container .rating-input {height:0}
+
+/********************** iFrame *************************/
+iframe {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0;
+  width:100%;
+  // height:100vh;
+}
+
+/************************** UL and OL ****************************/
+  .gp-bubbleLI li, .gp-bubbleLI a {float:left;margin-right: 15px;margin-top: 5px;border: 1px solid $govMedLtGrey;padding: 5px 15px;border-radius: 15px;}
+  .gp-bubbleLI li:first-child {margin-top:5px;}
+
+
+/************************ IMAGE CROPPER *****************/
+.vivos-CropperWrapper {height:200px; width:200px;}
+.cropper {margin: 1.5rem;}
+.imgCropper-wrapper {margin: 7px auto 0 auto;max-width: 40rem;text-align: center;width: 100%;}
+.frame {border: 2px solid $govWhite;margin-bottom: 20px;}
+.frame > img {width: 100%;}
+
+#controls button {
+  margin: 0 5px;
+  background: $govWhite;
+  border: none;
+  cursor: pointer;
+  min-width: 2em;
+  font-size: 16px;
+  line-height: 30px;
+  transition: background 200ms ease-out;
+}
+#controls button:hover {background: $materializeBlue;}
+
+.result {
+  clear: both;
+  margin-top: 50px;
+  width: 200px;
+  height: 160px
+}
+.result img { width: 100%; }
+.imgCropper-controls {width: 110%;}
+
+/******************************************/
+.collapsible-body {border-top: 2px solid $govBorderGrey;}
+.collapsible-body div div {padding:0;}
+.progress.tight {height: 10px;}
+
+/*********************** RESPONSIVE Media Sizes ***********************/
+.gp-max480, .gp-max568, .gp-max768, .gp-max992 {display:none;}
+/************* BOOTSTRAP SIZES ********************/
+/****** Medium Devices *****/
+@media screen and (max-width:1200px) {
+
+}
+/****** Small Devices *****/
+@media screen and (max-width: 992px) {
+.gp-max992 {display:block;}
+}
+/****** iPad *****/
+@media screen and (max-width: 768px) {
+.gp-max768 {display:block;}
+}
+
+/************* OTHER SIZES ********************/
+/****** Medium Devices *****/
+@media screen and (max-width: 1100px) {
+
+}
+/****** iPhone 5 *****/
+@media screen and (max-width: 568px) {
+
+}
+/****** iPhone 4 *****/
+@media screen and (max-width: 480px) {
+.gp-min480 {display:none;}
+.gp-max480 {display:block;}
+}
+@media screen and (max-width: 320px) {
+
+}
+
+
+/*************** SideNav ****************/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: $govBlue;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+      a {
+         padding: 8px 8px 8px 32px;
+         text-decoration: none;
+         font-size: 25px;
+         color: $govMedGrey;
+         display: block;
+         transition: 0.3s;
+         @media screen and (max-height: 450px) { font-size: 18px; }
+
+     }
+     a:hover {color: $govGreyBG;}
+     .closebtn {
+         position: absolute;
+         top: 0;
+         right: 25px;
+         font-size: 31px;
+         margin-left: 50px;
+         color: $govWhite;
+     }
+     li.list-group-item {border-radius:0;border-bottom-color: $govBlue;border-right-color: $govBlue;border-left-color: $govBlue;border-top-color: $govWhite;margin-bottom:1px;}
+     @media screen and (max-height: 450px) { padding-top: 15px; }
+}
+
+/*************** FOOTER **************/
+.gpFooter  {background: $govMdDkGrey;color: rgba( $govWhite, .53 );padding: 10px;font-size: 12px;box-shadow: 0 3px 8px 0 rgba(0,0,0,.2), 0 3px 4px;
+  a {color: rgba( $govWhite, .53 );}
+  .gp-footerItems {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px 0;
+   }
+  .gp-footerSocialMedia {display: flex;justify-content:center;margin: 40px 0;
+      i {font-size: 18px;width: 40px;height: 40px;display: flex;align-items: center;justify-content: center;background-color:rgba( $govWhite, .53 );color: $govExDkGrey;border-radius:50%;margin: 0 10px;}
+    }
+  .gp-copyright {margin:15px 0; text-align: center;}
+  .gp-footerTerms {display:flex;
+    li {margin-left:5px;}
+    li:after {content: '|'; margin-left:5px;}
+    li:last-child:after {content: ''; margin-left:0px;}
+  }
+}
+
+/**************** BOCK UI *****************/
+.block-ui-message {
+  display: inline-block;
+  text-align: left;
+  background-color: $govBlue;
+  color: $govWhite;
+  padding: 20px;
+  border-radius: 0px;
+  font-size: 20px;
+  font-weight: 400;
+  filter: alpha(opacity=100);
+  position: relative;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+}
+
+@keyframes rotateIn {
+    0% {
+        transform-origin: center;
+        transform: rotate(-200deg);
+        opacity: 0
+    }
+    to {
+        transform-origin: center;
+        transform: none;
+        opacity: 1
+    }
+}
+
+//**************** Text Divider - Get Started Screen **********
+.gp-surroundingTextDivider {
+  line-height: 0.5;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.gp-surroundingTextDivider span {
+  display: inline-block;
+  position: relative;
+}
+.gp-surroundingTextDivider span:before,
+.gp-surroundingTextDivider span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-top: 2px dotted $govMedGrey;
+  top: 2px;
+  width: 260px;
+}
+.gp-surroundingTextDivider span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.gp-surroundingTextDivider span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+// Fix for angular hide show jumping.
+.ng-hide.ng-hide-animate {
+display: none !important;
+}
+//

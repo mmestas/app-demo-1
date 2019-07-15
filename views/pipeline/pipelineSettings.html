@@ -1,0 +1,62 @@
+<div class="gp-nav" company-dash-header></div>
+<div id="pipelineSettings" class="gp-mainBodyWidth gp-detailWrapper" ng-init="pipelineSettingsInit()">
+  <div class="gp-dashInner">
+    <div class="md-whiteframe-2dp gp-p20">
+      <div class="gp-flex gp-mb20">
+        <h4 class="gp-expertName">
+          {{companyInfo.companyName}} - Pipeline Settings
+        </h4>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="pipeline">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close"></md-icon>
+        </md-button>
+      </div>
+      <div ng-if="!userInfo.pipelineAdmin">The settings page is for Pipeline Admins only</div>
+      <div ng-if="userInfo.pipelineAdmin">
+        <form name="pipelineSettingsForm" class="pipelineSettingsForm">
+          <div class="row">
+            <div class="col-md-12">
+            </div>
+          </div>
+          <div class="row gp-mb15">
+            <div class="col-md-6">
+              <label>Stage Captions</label>
+            </div>
+            <div class="col-md-6">
+              <label>Stage Value (% value to contract estimate)</label>
+            </div>
+
+          </div>
+          <div class="row gp-flex gp-flex-wrap gp-alignFlexCenter" data-ng-repeat="stage in pipelineStages">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="" name="" class="form-control" id="" placeholder="" ng-model="stage.name" maxlength="25">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <input type="number" name="" class="form-control" id="" placeholder="" ng-model="stage.value">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <a ng-click="stage.hideColumn = !stage.hideColumn" data-ng-if="$index != 0">
+                  <span ng-if="!stage.hideColumn">hide column</span>
+                  <span ng-if="stage.hideColumn">show column</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row gp-flex gp-pt20">
+            <div class="col-md-9 gp-flex">
+              <button class="btn btn-default gp-mr20" ui-sref="pipeline">Cancel</button>
+              <button class="btn btn-primary" ng-click="appDemo1SetPipelineStages(pipelineStages)">Save Changes & Close</button>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

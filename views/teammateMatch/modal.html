@@ -1,0 +1,54 @@
+<md-dialog>
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>Message</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div class="md-dialog-content" ng-show="!isLoading && !messageSent">
+        <strong>{{result.pointOfContact}}</strong>
+        <br/>
+        <span>{{result.business}}</strong>
+        <br/><br/>
+        <strong>Subject</strong>
+        <br/><br/>
+        <input class="form-control" placeholder="Enter subject"/>
+        <div class="signature-box"></div>
+        <br/>
+        <label>Include NDA</label>
+        <input type="checkbox" ng-model="values.includeNDA" ng-value="false"/>
+        <div ng-show="values.includeNDA">
+            <br/>
+            <input type="text" class="form-control" ng-model="values.signature"/>
+            <span>Signature (typing in your name acts as your signature)</span>
+        </div>
+        <br/>
+        <p>
+            By checking the box and entering your name you are agreeing that you have read and agree to the <a ng-click="openNDA()">NDA</a>.
+            If you do not agree to the terms "click cancel"
+        </p>
+        <br/><br/>
+        <span>From: NAME, COMPANY</span>
+    </div>
+    <div class="md-dialog-content" ng-show="isLoading && !messageSent">
+        <center><h5>Sending message..</h5></center>
+    </div>
+    <div class="md-dialog-content" ng-show="!isLoading && messageSent">
+        <center><h5>Message sent..</h5></center>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+     Close
+    </md-button>
+    <md-button ng-show="!messageSent" class="md-primary" ng-click="send()">
+     Send Message
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

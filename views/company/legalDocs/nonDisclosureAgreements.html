@@ -1,0 +1,7 @@
+<div>
+  <ul class="list-group">
+    <li class="list-group-item" ng-if="engagement.consultantNDAAccepted && engagement.NDAPdfFile" ng-repeat="engagement in projectsWithSignatures">
+      <a ng-href="{{engagement.NDAPdfFile}}" target="_blank">{{engagement.project.title}} - {{engagement.consultant.name}} | signed: {{engagement.consultantNDAAcceptedDate | dateConverter | date: 'MM-dd-yyyy'}}</a>
+    </li>
+  </ul>
+</div>

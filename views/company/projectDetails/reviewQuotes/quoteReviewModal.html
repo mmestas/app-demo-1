@@ -1,0 +1,320 @@
+<md-dialog id="quoteReviewModal" class="gp-900Modal">
+  <div ng-hide="rejectDialog || showReplyDialog">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Engagement Agreement
+          <small>Please review completion dates and invoice terms before authorizing work</small>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" ng-hide="(showApproveToStartBtn || quoteDetails.companyInvoiceApproved) && (!quoteDetails.companyRejected && !quoteDetails.companyApproved)">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <section class="gp-modalHeader">
+        <div class="gp-projectInfo gp-modalHeaderWrapper">
+          <div>
+            <img ng-src="{{envURL+quoteDetails.consultant.imageFilename}}">
+            <h4>{{quoteDetails.consultant.name}}</h4>
+          </div>
+          <div class="gp-quickData">
+            <div>
+              <div>
+                <label>Completion Date</label>
+              </div>
+              <div>{{quoteDetails.endDate | dateConverter | date: 'MM-dd-yyyy'}}</div>
+            </div>
+            <div ng-if="quoteInvitationInfo.quoteType === 2">
+              <div>
+                <label>Quoted Hours</label>
+              </div>
+              <div>{{QuoteTotalHours()}}</div>
+            </div>
+            <div ng-if="quoteInvitationInfo.quoteType === 2">
+              <div>
+                <label>Rate</label>
+              </div>
+              <div>{{quoteDetails.consultant.freelanceHourlyRate | currency}}</div>
+            </div>
+            <div>
+              <div>
+                <label>Amount</label>
+              </div>
+              <div>{{quoteDetails.engagementAmount | currency}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="gp-flex gp-justifyFlexSpaceAround">
+          <div style="width: 60%;"class="">
+            <div>
+              <h5>{{quoteDetails.project.title}} -
+                <small>
+                  <em>{{quoteDetails.project.owner.name}}</em>
+                </small>
+              </h5>
+            </div>
+            <div data-ng-bind-html="quoteDetails.project.description"></div>
+          </div>
+          <div class="">
+            <div ng-if="quoteDetails.project.solicitationNumber">
+              <h5>RFP/Solicitation Reference -
+                <small>
+                  <em>{{quoteDetails.project.solicitationNumber}}</em>
+                </small>
+              </h5>
+            </div>
+            <div class="gp-flex gp-justifyFlexSpaceBetween">
+              <h5 class="gp-mr15">Start Date -
+                <small>{{quoteDetails.startDate | dateConverter | date: 'MM-dd-yyyy'}}</small>
+              </h5>
+              <h5>End Date -
+                <small>{{quoteDetails.endDate | dateConverter | date: 'MM-dd-yyyy'}}</small>
+              </h5>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!--///////////// QUOTE OVERVIEW ////////////////// -->
+      <!-- <section> -->
+      <md-toolbar class="md-hue-custom">
+        <div class="md-toolbar-tools gp-flex gp-justifyFlexSpaceBetween">
+          <div class="gp-flex gp-alignFlexCenter">
+            <i class="fa fa-plus-circle" ng-hide="openQR" ng-click="openQuoteOverview()"></i>
+            <i class="fa fa-minus-circle" ng-show="openQR" ng-click="closeQuoteOverview()"></i>
+            &nbsp;
+            <h4>Quote Details</h4>
+          </div>
+          <div>
+            <h5>This is {{beforeEngagementType}}
+              <strong>{{engagementtype}}</strong> agreement</h5>
+          </div>
+        </div>
+      </md-toolbar>
+      <div class="panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openQR}">
+        <section>
+          <div id="milestones">
+            <!-- Show if milestone type is HOURLY or FIXED PRICE-->
+                <!-- *************** -->
+                <div ng-if="quoteInvitationInfo.quoteType === 1">
+                  <div class="milestone" data-ng-repeat="task in quoteDetails.quoteInvitationInfo.qFix">
+                    <div class="gp-flex gp-justifyFlexSpaceBetween">
+                      <h4>Milestone {{$index + 1}}</h4>
+                      <div class="gp-flex gp-justifyFlexEnd">
+                        <h5>Milestone Price: <small>{{task.milestonePrice | currency}}</small></h5>
+                      </div>
+                    </div>
+                    <div>
+                      <h5>Deliverable</h5>
+                      <div>{{task.supportingNarrative}}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- *************** -->
+                <div ng-if="quoteInvitationInfo.quoteType === 2">
+                  <div class="milestone" data-ng-repeat="task in quoteDetails.quoteInvitationInfo.qHours">
+                    <div class="gp-flex gp-justifyFlexSpaceBetween">
+                      <h4>Milestone {{$index + 1}}</h4>
+                      <div class="gp-flex gp-justifyFlexSpaceBetween">
+                        <h5 class="gp-mr10">Estimated Hours: <small>{{task.hoursQuoted}}</small></h5>
+                        <h5 class="gp-mr10">Rate: <small>{{task.freelanceHourlyRate | currency}}</small></h5>
+                        <h5>Milestone Amount: <small>{{(task.hoursQuoted * task.freelanceHourlyRate) | currency}}</small></h5>
+                      </div>
+                    </div>
+                    <div>
+                      <h5>Deliverable</h5>
+                      <div>{{task.supportingNarrative}}</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- *************** -->
+                <div class="milestone recurringMilestone" ng-if="quoteInvitationInfo.quoteType === 3">
+                    <div class="gp-flex gp-justifyFlexSpaceBetween">
+                      <div class="gp-mr20">
+                        <h5>Deliverable</h5>
+                        <div>{{quoteDetails.quoteInvitationInfo.qRecurring.deliverableDescription}}</div>
+                      </div>
+                      <!-- Show if SINGLE Milestone/Task - RECURRING -->
+                      <div class="recurringMilestoneStats">
+                        <h5 class="gp-mr10">Recurring Billing Period:
+                          <small>{{recurringPeriodName}}</small>
+                        </h5>
+                        <h5 class="gp-mr10">Billing Start Date:
+                          <small>{{quoteDetails.quoteInvitationInfo.qRecurring.autoBillStartDate | dateConverter | date: 'MM-dd-yyyy'}}</small>
+                        </h5>
+                        <h5 class="gp-mr10">Number of Periods:
+                          <small>{{quoteDetails.quoteInvitationInfo.qRecurring.numberPeriods}}</small>
+                        </h5>
+                        <h5 class="gp-mr10">Recurring Billing Amount:
+                          <small>{{quoteDetails.quoteInvitationInfo.qRecurring.periodAmount | currency}}</small>
+                        </h5>
+                      </div>
+                    </div>
+                </div>
+                <!-- *************** -->
+                <div style="margin-top: 40px;"></div>
+            </div>
+
+            <div class="milestonesTotal gp-flex gp-justifyFlexEnd">
+              <!-- Show if milestone type is HOURLY -->
+              <div ng-if="quoteInvitationInfo.quoteType === 2">
+                <h5>Total Hours</h5>
+                <h5>{{QuoteTotalHours()}}</h5>
+                <!-- Total of all task hours goes here -->
+              </div>
+              <div class="gp-ml15">
+                <h5>Quote Total</h5>
+                <h5>{{QuoteTotal()| currency}}</h5>
+                <!-- Total of all milestones goes here (will change depending on quote type) -->
+              </div>
+            </div>
+
+      </div>
+
+      <!--///////////// ENGAGEMENT CONSULTANT - INVOICE AUTHORIZATION ////////////////// -->
+      <div ng-if="!quoteDetails.companyInvoiceApproved && !accountInfoData.bypassProcessingFee" ng-hide="showProjectFunding || quoteDetails.companyRejected">
+        <form name="invoiceAuth">
+          <md-toolbar class="md-hue-paleOrange">
+            <div class="md-toolbar-tools">
+              <i class="fa fa-plus-circle" ng-hide="openIA" ng-click="openInvoiceAuthorization()"></i>
+              <i class="fa fa-minus-circle" ng-show="openIA" ng-click="closeInvoiceAuthorization()"></i>
+              &nbsp;
+              <h4>Invoice Authorization</h4>
+            </div>
+          </md-toolbar>
+          <section class="gp-dialogueInnerContent panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openIA}">
+            <div class="gp-text-danger gp-mb10">*Consultant Engagement cannot start until a person duly authorized by the organization agrees to the invoice
+              payment terms.</div>
+            <div class="row gp-invoiceAuthorizationRadioGroup">
+              <md-radio-group ng-model="authorization">
+                <div class="col col-md-6">
+                  <md-radio-button ng-value="true" value="true" class="gpBlue">
+                    I certify that I am the person duly authorized by the organization and I agree to pay for this consultant engagement according
+                    to the invoice payment terms indicated herein. I understand I must also pay the app1url Processing fee
+                    to start this engagement.
+                  </md-radio-button>
+                </div>
+                <div class="col col-md-6">
+                  <md-radio-button ng-value="false" value="false" class="gpBlue" ng-click="appDemo1GetCompanyUsers()">
+                    I am NOT duly authorized by the organization to approve the invoice payment terms for this consultant engagement. Email a
+                    request for authorization to the person below.
+                  </md-radio-button>
+                </div>
+              </md-radio-group>
+            </div>
+            <div class="row gp-invoiceAuthorizationInputGroup">
+              <div class="col col-md-6">
+                <md-input-container class="md-block md-gpBlue-theme">
+                  <label for="signature">Signature</label>
+                  <input type="text" class="form-control" name="signature" ng-model="Signature" ng-disabled="!authorization">
+                </md-input-container>
+                <button class="btn btn-warning" ng-disabled="!authorization || !Signature" ng-click="agreeToPayProcessingFee(Signature)">I Agree</button>
+              </div>
+              <div class="col col-md-6">
+                <select class="form-control input-sm" style="margin-top: 19px; margin-bottom: 19px" ng-disabled="(authorization == null) || (authorization == true)"
+                  ng-model="$parent.authorizedPayer" name="authorizedPayer" ng-options="payer as payer.name for payer in rootCompanyUsers"
+                  ng-change="selectAuthorizedPayer($parent.authorizedPayer)">
+                  <option value="" style="display:none;">Select Authorized Payer</option>
+                </select>
+                <div class="md-errors-spacer" style=" min-height: 24px; min-width: 1px;"></div>
+                <md-input-container class="md-block md-gpBlue-theme" ng-show="showAddNewAP">
+                  <label for="addNewAP">Enter Email Address </label>
+                  <input type="email" name="addNewAP" ng-model="addNewAPEmail">
+                  <div ng-messages="invoiceAuth.addNewAP.$error" ng-show="invoiceAuth.addNewAP.$dirty">
+                    <div ng-message="email">Please enter a valid email.</div>
+                  </div>
+                </md-input-container>
+                <button id="sendAuthPayerRequest" class="btn btn-primary" ng-disabled="!addNewAPEmail && invoiceAuth.addNewAP.$error" ng-show="addNewAPEmail"
+                  ng-click="appDemo1ProcessEngagementInvoiceAuthorizedUserInvitation(quoteDetails.gpKey, addNewAPEmail)">Send Request</button>
+                <button class="btn btn-primary" ng-disabled="(authorization == null) || (authorization == true)" ng-show="showRequestAuthBtn"
+                  ng-click="processEngagementInvoiceAuthorizedUserSelected(quoteDetails.gpKey, $parent.authorizedPayer)">Request Authorization</button>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+      <!--///////////// AWARD PROJECT - PAYMENT AUTHORIZATION  ////////////////// -->
+      <section ng-show="((showProjectFunding || quoteDetails.companyInvoiceApproved)  && !quoteDetails.companyApproved) || quoteDetails.companyRejected">
+        <md-toolbar class="md-hue-paleOrange">
+          <div class="md-toolbar-tools">
+            <i class="fa fa-plus-circle" ng-hide="openFA" ng-click="openFundingAgreement()"></i>
+            <i class="fa fa-minus-circle" ng-show="openFA" ng-click="closeFundingAgreement()"></i>
+            &nbsp;
+            <h4 ng-if="!quoteDetails.companyRejected">Project Engagement Invoice Agreement</h4>
+            <h4 ng-if="quoteDetails.companyRejected">Reason for Rejecting Engagement Agreement</h4>
+          </div>
+        </md-toolbar>
+        <div ng-if="quoteDetails.companyRejected" class="gp-dialogueInnerContent panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openFA}">
+          <div>{{quoteDetails.companyRejectedExplanation}}</div>
+        </div>
+        <div class="gp-dialogueInnerContent panel-collapse gp-collapse gp-filterPanel" ng-class="{'gp-in' : openFA}" ng-if="!quoteDetails.companyRejected && !accountInfoData.bypassProcessingFee">
+          <div class="gp-notToExceed" ng-hide="showFundingAgreement" ng-if="!quoteDetails.companyInvoiceApproved">
+            <div class="text-danger">**NOTICE** I have reviewed the Engagement Estimate and agree to pay the associated invoice and app1url Processing
+              Fee.
+            </div>
+            <div>
+              <h4>app1url Processing Fee:
+                <span class="text-muted">{{(quoteDetails.engagementAmount * feeAmt) | currency}}</span>
+              </h4>
+            </div>
+            <div class="gp-ecommerceWrapper" ng-if="!quoteDetails.companyInvoiceApproved">
+              <form id="js-ecommercePayments2" name="ecommercePayments"></form>
+              <button class="btn btn-primary" type="submit" ng-click="agreeToPaymentFee(quoteDetails.gpKey, quoteDetails)">Submit Payment</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </md-dialog-content>
+    <!--///////////// FOOTER BUTTONS ////////////////// -->
+    <md-dialog-actions layout="row" id="triggerToast">
+      <span style="font-size:10px">
+      </span>
+      <md-button ng-click="cancel()" ng-hide="(showApproveToStartBtn || quoteDetails.companyInvoiceApproved) && (!quoteDetails.companyRejected && !quoteDetails.companyApproved)">Close</md-button>
+      <md-button ng-click="sendReplyMessage()">
+        <i class="fa fa-paper-plane"></i> Send Message</md-button>
+      <md-button ng-click="reject()" ng-if="!quoteDetails.companyRejected  && !quoteDetails.companyApproved" ng-hide="showFundingAgreement  || quoteDetails.companyInvoiceApproved">Reject Quote</md-button>
+      <md-button ng-click="approve()" ng-disabled="(!showApproveToStartBtn && !quoteDetails.companyInvoiceApproved) && !accountInfoData.bypassProcessingFee"
+        ng-if="(!quoteDetails.companyRejected && !quoteDetails.companyApproved) || accountInfoData.bypassProcessingFee" class="gp-SolidOrange btn btn-warning">Approve to Start</md-button>
+    </md-dialog-actions>
+  </div>
+
+  <div ng-if="rejectDialog" style="padding:20px;">
+    <md-dialog-content>
+      <select class="form-control input-sm gp-mb10" ng-model="explanationSelect" name="explanationSelect" ng-change="selectRejectionReason(explanationSelect)">
+        <option value="" style="display:none;">Select a Reason</option>
+        <option value="'Too many hours quoted'">Too many hours quoted</option>
+        <option value="'Rate higher than expected'">Rate higher than expected</option>
+        <option value="'Project changed'">Project changed</option>
+        <option value="0">Other</option>
+      </select>
+      <textarea ng-show="showTextareaRejection" ng-model="explanation" rows="4" style="width:100%;"></textarea>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancelExplanation()">
+        Cancel
+      </md-button>
+      <md-button ng-click="processEngagementReject(explanation, explanationSelect)">
+        Submit with explanation
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
+  <div ng-show="showReplyDialog" style="padding:20px;">
+    <md-dialog-content>
+      <label>Re: {{quoteDetails.project.title}}</label>
+      <br>
+      <label>To: {{quoteDetails.consultant.name}}</label>
+      <textarea ng-model="message" rows="4" style="width:100%;"></textarea>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="hideReplyModal()">Cancel</md-button>
+      <md-button ng-click="appDemo1ProcessCompanySendEngagementMessage(quoteDetails, message)">
+        <i class="fa fa-paper-plane"></i> Send</md-button>
+    </md-dialog-actions>
+  </div>
+</md-dialog>

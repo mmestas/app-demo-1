@@ -1,0 +1,54 @@
+<div ng-include="'views/opportunitySearch/osResultsFilters.html'"></div>
+
+<div class="panel panel-default osResultsPanel">
+  <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-2 osrlAgency">Agency</div>
+        <div class="col-md-2 osrlOpportunity">Opportunity</div>
+        <div class="col-md-2 osrlContract">Opportunity Type</div>
+        <div class="col-md-2 osrlNAICS">NAICS</div>
+        <div class="col-md-2 osrlClose">Close Date</div>
+        <div class="col-md-2 osrlAction">Action</div>
+      </div>
+  </div>
+  <div id="" class="osResultsList">
+    <div class="row" ng-repeat="opportunity in opportunities">
+      <div class="col-md-2 osrlAgency">
+        <img ng-if="opportunity.agency.imageFilename" data-ng-src="{{envURL+opportunity.agency.imageFilename}}">
+        <img ng-if="!opportunity.agency.imageFilename" data-ng-src="{{envURL}}/images/placeholders/default-img.svg">
+      </div>
+      <div class="col-md-2 osrlOpportunity" ng-click="openDetailsModal($event, opportunity)">
+        <div><strong>{{opportunity.name}}</strong></div>
+        <div>{{opportunity.agency.name}}</div>
+        <div>{{opportunity.setAside.name}}</div>
+      </div>
+      <div class="col-md-2 osrlContract"><div>{{opportunity.opportunityType.name | createSpacesFilter}}</div></div>
+      <div class="col-md-2 osrlNAICS"><div>{{opportunity.naicsCode}}</div></div>
+      <div class="col-md-2 osrlClose">
+        <div ng-if="opportunity.closeDate !== '/Date(-2209143600000)/'">{{opportunity.closeDate  | dateConverter | date}}</div>
+        <div ng-if="opportunity.closeDate === '/Date(-2209143600000)/'">N/A</div>
+      </div>
+      <div class="col-md-2 osrlAction">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog"></i>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <!-- <li ng-click="runTeammateMatchReport(opportunity)">Run Teammate Match Report</li> NOTE: Keep - to be reinstated later -->
+            <li ng-click="addOpportunityToFavorites(opportunity)">Add to Favorites</li>
+            <li ng-click="openAddOppToPipelineModal($event, opportunity)">Add to Pipeline</li>
+            <li ng-click="createProject(opportunity)" data-ng-if="!userInfo.isConsultant">Create Project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- END NG REPEAT -->
+    <!-- PAGINATION -->
+    <div class="col col-md-12 ">
+      <section layout="row" layout-padding="">
+        <cl-paging flex cl-pages="paging.total" , cl-steps="6" , cl-page-changed="paging.onPageChaged()" , cl-align="center center" , cl-current-page="paging.current"></cl-paging>
+      </section>
+    </div>
+  </div>
+</div>

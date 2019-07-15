@@ -1,0 +1,182 @@
+<div class="gp-nav" company-dash-header></div>
+<div id="postNewProject" class="gp-formSize">
+  <div class="gp-postAProject md-whiteframe-3dp" ng-init="osCreateProject()">
+    <div class="md-toolbar-tools">
+        <h2 class="gp-expertName">
+          Post a Project
+          <button class="btn btn-warning" type="submit" ng-click="createNewProject(projDetails, categories, file, file1, file2)" ng-disabled="createProjectFromOSForm.$invalid || (!projDetails.keywords.keyword1 && !projDetails.keywords.keyword2 && !projDetails.keywords.keyword3 && !projDetails.keywords.keyword4 && !projDetails.keywords.keyword5)">Publish</button>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+      <!-- <div ng-form="createProjectFromOSForm" id="newProjectForm" novalidate> -->
+        <form name="createProjectFromOSForm" id="newProjectForm">
+          <div class="gp-p20">
+              <div class="row" id="title">
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <label for="projectTitle">*What title best describes your project?</label>
+                    <input type="text" name="projectTitle" class="form-control" id="gp-projectTitle" placeholder="*Enter Project Title" ng-model="projDetails.title" required>
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <div class="form-group">
+                    <label for="projectTitle">*Who will own this project?</label>
+                    <select class="form-control" ng-model="projDetails.owner" ng-options="owner as owner.name for owner in companyUsers"></select>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="solicitation">
+                  <!-- <div class="col col-md-12">
+                    <div class="form-group">
+                      <label>*Is this project associated with a Government Solicitation?</label>
+                      <md-radio-group ng-model="projDetails.isSolicitation" ng-change="isSolicitation(projDetails.isSolicitation)" required>
+                          <md-radio-button ng-value="false" value="false" class="gpBlue"> No </md-radio-button>
+                          <md-radio-button ng-value="true" value="true" class="gpBlue">Yes</md-radio-button>
+                      </md-radio-group>
+                    </div>
+                  </div> -->
+                  <div class="col col-md-12 gp-pb20" ng-if="projDetails.agency.name">
+                    <div class="form-group">
+                      <label for="agency">Agency</label>
+                      <input type="text" class="form-control" id="agency" placeholder="*Enter RFP Solicitation Number" ng-model="projDetails.agency.name" readonly>
+                    </div>
+
+                    <!-- <div ng-if="showAgencies">
+                      <md-autocomplete flex
+                          required
+                          md-no-cache = "true"
+                          md-selected-item="selectedAgencyItem"
+                          md-search-text="searchAgencyText.searchText"
+                          md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText.searchText)"
+                          md-item-text="agencyItem.name"
+                          md-floating-label="Agency (Autocomplete)"
+                          md-selected-item-change="addAgency(selectedAgencyItem)"
+                          md-clear-button="true">
+                        <md-item-template>
+                          <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+                          <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                          No matches found.
+                        </md-not-found>
+                      </md-autocomplete>
+                    </div> -->
+                  </div>
+                  <div class="col col-md-6">
+                    <div class="form-group" ng-if="projDetails.solicitationNumber">
+                      <label for="gp-RFPTitle">Solicitation Title</label>
+                      <input type="text" class="form-control" id="gp-RFPTitle" placeholder="*Enter RFP Solicitation Title" ng-model="projDetails.solicitationTitle" readonly>
+                    </div>
+                  </div>
+                  <div class="col col-md-6">
+                    <div class="form-group" ng-if="projDetails.solicitationNumber">
+                      <label for="gp-RFPNumber">Solicitation Number</label>
+                      <input type="text" class="form-control" id="gp-RFPNumber" placeholder="*Enter RFP Solicitation Number" ng-model="projDetails.solicitationNumber" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row" id="description">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label for="comment">*Project Description:</label>
+                    <textarea class="form-control" rows="5" id="description" ng-model="projDetails.description"
+                    placeholder="*Please describe the nature of your project here. If this project is associated with a Government Solicitation, it may be helpful to insert the solicitation description here. Experts that review this information will determine if they can assist you based in part on the information you provide. If you decide to request a quote from experts, you can provide specific requirements they must satisfy at that time."
+                    required></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="radios">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label>Is expert required to work onsite?</label>
+                    <md-radio-group ng-model="projDetails.workOnSiteRequired">
+                      <md-radio-button ng-value="false" class="gpBlue" aria-label="No">No</md-radio-button>
+                      <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Yes</md-radio-button>
+                    </md-radio-group>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="keywords">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label>*What are the essential keywords an expert should match? <small>(Max 5)</small>
+                    </label>
+                    <div class="gp-projectKeywords">
+                      <div class="keywordBubble" ng-if="projDetails.keywords.keyword1" ng-click="removeKeyword(projDetails.keywords.keyword1, '1')"><span class="addedKeyword">{{projDetails.keywords.keyword1}}</span> <i class="fa fa-times"></i></div>
+                      <div class="keywordBubble" ng-if="projDetails.keywords.keyword2" ng-click="removeKeyword(projDetails.keywords.keyword2, '2')"><span class="addedKeyword">{{projDetails.keywords.keyword2}}</span> <i class="fa fa-times"></i></div>
+                      <div class="keywordBubble" ng-if="projDetails.keywords.keyword3" ng-click="removeKeyword(projDetails.keywords.keyword3, '3')"><span class="addedKeyword">{{projDetails.keywords.keyword3}}</span> <i class="fa fa-times"></i></div>
+                      <div class="keywordBubble" ng-if="projDetails.keywords.keyword4" ng-click="removeKeyword(projDetails.keywords.keyword4, '4')"><span class="addedKeyword">{{projDetails.keywords.keyword4}}</span> <i class="fa fa-times"></i></div>
+                      <div class="keywordBubble" ng-if="projDetails.keywords.keyword5" ng-click="removeKeyword(projDetails.keywords.keyword5, '5')"><span class="addedKeyword">{{projDetails.keywords.keyword5}}</span> <i class="fa fa-times"></i></div>
+                      <input type="text" class="form-control" id="keyword1" ng-model="keywordInput" ng-class="" ng-keyup="addKeywords($event, projDetails, keywordInput)"
+                      ng-disabled="projDetails.keywords.keyword1 && projDetails.keywords.keyword2 && projDetails.keywords.keyword3 && projDetails.keywords.keyword4 && projDetails.keywords.keyword5"
+                      placeholder="i.e. Seaport, Cost &amp; Pricing, Proposal, Manager"
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="anyKeyword">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label>Would you like expert profiles to contain "Any" or "All" of the keywords above?</label>
+                    <md-radio-group ng-model="projDetails.keywords.anyKeyword">
+                      <md-radio-button ng-value="true" class="gpBlue" aria-label="Yes">Any</md-radio-button>
+                      <md-radio-button ng-value="false" class="gpBlue" aria-label="No">All</md-radio-button>
+                    </md-radio-group>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="documents">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label>Do you have any files that may be helpful to attach? <small>(Max 3)</small></label>
+                  </div>
+                </div>
+                <div class="gp-mb15"><rf-upload-file class="gp-pl15"></rf-upload-file></div>
+              </div>
+              <div class="row" id="radios">
+                <div class="col col-md-12">
+                    <div class="form-group">
+                      <label>How much exposure do you want your project to get?</label>
+                      <md-radio-group ng-model="projDetails.exposure" class="radioColumn">
+                        <md-radio-button ng-value="2" class="gpBlue" aria-label="Targeted">Targeted <small>(Broadcast to experts that match a Keyword or Category of Expertise I selected)</small></md-radio-button>
+                        <!-- <md-radio-button ng-value="3" class="gpBlue" aria-label="Global">Global <small>(Broadcast this project to all experts registered in app1url)</small></md-radio-button> -->
+                        <md-radio-button ng-value="1" class="gpBlue" aria-label="None">None <small>(Only the experts I invite can see this project)</small></md-radio-button>
+                      </md-radio-group>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" id="radios">
+                  <div class="col col-md-12">
+                    <div class="form-group">
+                      <label>Privacy Mode</label>
+                      <md-radio-group ng-model="projDetails.keepPrivate" class="radioColumn">
+                        <md-radio-button ng-value="true" class="gpBlue" aria-label="On">On <small>(Hide my organization name and contact information)</small></md-radio-button>
+                        <md-radio-button ng-value="false" class="gpBlue" aria-label="Off">Off <small>(It's okay to show my organization name and contact information)</small></md-radio-button>
+                      </md-radio-group>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <div class="form-group">
+                    <label>*I have read and agree to the app1url <a href="http://helpcenter.app1urlapp.com/legal-center/app1url-non-circumvention-rules" target="_blank"><strong><u>Non-Circumention Rules</u></strong></a></label>
+                    &nbsp; <md-checkbox ng-model="nonCircumventionRules" aria-label="nonCircumventionRules" class="md-gpSolidBlue" required></md-checkbox>
+                  </div>
+                  </div>
+              </div>
+          </div>
+
+
+        <div class="row">
+          <md-button ng-click="cancel()">Cancel</md-button>
+          <button class="btn btn-warning" type="submit" ng-click="createNewProject(projDetails, categories, file, file1, file2)"
+          ng-disabled="createProjectFromOSForm.$invalid || !nonCircumventionRules || (!projDetails.keywords.keyword1 && !projDetails.keywords.keyword2 && !projDetails.keywords.keyword3 && !projDetails.keywords.keyword4 && !projDetails.keywords.keyword5)">Publish</button>
+        </div>
+      </form>
+    <!-- </div> -->
+  </div>
+</div>

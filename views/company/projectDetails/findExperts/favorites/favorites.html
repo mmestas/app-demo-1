@@ -1,0 +1,62 @@
+<div class="col col-md-12 gp-expertSearchResults">
+  <div ng-show="favorites.length < 1">You have no one currently in your Saved Consultants.  You can add Consultants under the "Search Results" tab underneath their profile picture.</div>
+
+    <div class="col col-md-12 gp-expertsList" ng-repeat="fav in favorites track by $index" star-rating-after-repeat>
+      <div class="col col-md-3 gp-expertPicLinks">
+        <div class="gp-expertPic"><img ng-src="{{envURL+fav.imageFilename}}"></div>
+        <div class="gp-addToBenchBtn">
+          <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1SetConsultantToShortlist(fav)" ng-class="{'gp-addedTo': fav.existsInShortlist}" ng-disabled="fav.existsInShortlist">
+            <span ng-hide="fav.existsInShortlist">Add to Shortlist</span>
+            <span ng-show="fav.existsInShortlist">Added to Shortlist</span>
+          </button>
+        </div>
+        <div class="gp-addToBenchBtn">
+          <button class="btn btn-primary btn-outline btn-sm" ng-click="appDemo1SetConsultantToBench(fav)" ng-class="{'gp-addedTo': fav.existsInBench}" ng-disabled="fav.existsInBench">
+            <span ng-hide="fav.existsInBench">Add to Bench</span>
+            <span ng-show="fav.existsInBench">Added to Bench</span>
+          </button>
+        </div>
+        <div class="gp-addToBenchBtn">
+          <button class="btn btn-primary btn-sm" ng-click="appDemo1RemoveConsultantFromFavorites(fav)">
+            Remove from Saved
+          </button>
+        </div>
+      </div>
+      <div class="col col-md-7 gp-expertInfo">
+        <h4 class="gp-expertName">
+          <div ng-if="!fav.profileNamePrivate">
+            <span data-ng-click="showFullConsultantDetailsModal($event, fav, planInformation)">{{fav.name}}</span>
+            <small data-ng-if="fav.isVIP" style="margin-left:10px;"><i class="fa fa-trophy gp-gold"></i> VIP/Senior Executive</small>
+          </div>
+          <div ng-if="fav.profileNamePrivate">
+            <span data-ng-click="showFullConsultantDetailsModal($event, fav, planInformation)">{{fav.name | createInitials}}</span>
+            <small data-ng-if="fav.isVIP" style="margin-left:10px;"><i class="fa fa-trophy gp-gold"></i> VIP/Senior Executive</small>
+          </div>
+          <div><small class="gp-expertCo">{{fav.title}}</small></div>
+        </h4>
+        <div class="gp-expertAddress">
+          <div ng-if="fav.city || fav.state.name"><i class="fa fa-map-marker-alt"></i> <span ng-if="fav.city">{{fav.city}}</span><span ng-if="fav.state.name">, {{fav.state.name}}</span> </div>
+          <div>Projects: {{fav.numberProjects}} | Certifications: {{fav.certifications.length}}</div>
+        </div>
+        <div class="gp-expertDescription"><span ng-bind-html="fav.consultantDescription | limitTo : limitDescription150"></span><span ng-show="fav.consultantDescription.length > 150">...</span>
+          <!-- <span ng-click="showFullConsultantDetailsModal($event, fav)">Read More</span> -->
+        </div>
+        <div class="gp-expertSkills">
+          <div class="label label-default label-outline gp-expertSkillsLabel" ng-repeat="skill in fav.skills | limitTo : 3">{{skill.skillName}}</div>
+          <div ng-if="fav.skills.length > 3"><a href="#" ng-click="showFullConsultantDetailsModal($event, fav)">{{fav.skills.length - 3}} More</a></div>
+        </div>
+        <div class="gp-expertDeptLogos">
+          <img class="gp-expertAgencies" ng-repeat="agency in fav.agencies | limitTo : 4" ng-src="{{envURL+agency.imageFilename}}">&nbsp;
+          <span ng-if="fav.agencies.length > 4"><a href="#">{{fav.agencies.length - 4}} More</a></span>
+        </div>
+      </div>
+      <div class="col col-md-2 gp-expertRating">
+        <h4 ng-show="fav.freelanceHourlyRate"> {{fav.freelanceHourlyRate | currency}} / hr</h4>
+        <div ng-if="fav.verification.gpKey === '{2cf9f736-b545-4141-801b-74e6c5bc71c1}'"><i class="fa fa-certificate gp-silver"></i> Silver Verified</div>
+        <div ng-if="fav.verification.gpKey === '{40fc325d-35d3-412c-bdb9-704451336652}'"><i class="fa fa-certificate gp-gold"></i> Gold Verified</div>
+        <div ng-if="fav.verification.gpKey === '{cd29a394-1b49-4166-924d-16199b9ad6dd}'"><i class="fa fa-certificate gp-platinum"></i> Platinum Verified</div>
+        <div>Member since {{myConvertDate(fav.joinDate) | date}} </div>
+        <div>Profile Completion {{fav.profileCompletion}}%</div>
+      </div>
+    </div>
+</div>

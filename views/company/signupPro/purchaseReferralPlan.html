@@ -1,0 +1,42 @@
+<div login-header class="gp-min480"></div>
+<div login-responsive-header class="gp-max480"></div>
+<div id="signUpStep4" class="view gp-signUpView" ng-init="planReferralPurchase()">
+  <div class="gp-signUpStatusBar gp-min480" layout-align="center center">
+    <h1>Purchase Your app1url Subscription</h1>
+  </div>
+  <md-toolbar class="md-hue-custom gp-min480">
+    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+      <div layout="column" layout-align="center center">
+        <h2 class="md-flex">Start project engagements with freelancers and more</h2>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <div class="gp-mainBodyWidth gp-StepContainer md-whiteframe-3dp">
+    <div class="gp-Step">
+      <!-- ///////////////////////////////// SELECT license //////////////////////////////////// -->
+      <div class="form-group gp-info">
+        <h3 class="text-center">{{appInfo.item.name}} Subscription</h3>
+      </div>
+      <div class="gp-price">Total Amount Due: {{appInfo.item.UnitPrice | currency}}</div>
+      <!-- ///////////////////////////////// ECOMMERCE //////////////////////////////////// -->
+      <div class="gp-ecommerceWrapper" ng-show="appInfo.item && (appInfo.item.UnitPrice > 0)">
+        <form id="js-ecommercePayments" name="ecommercePayments"></form>
+      </div>
+      <!-- ///////////////////////////////// ADDRESS //////////////////////////////////// -->
+      <div class="gp-price">Total Amount Due: {{appInfo.item.UnitPrice | currency}}</div>
+      <div class="gp-paymentAgreement abPayDetailECheckOnline" style="display:none;">  {{PaymentAcknowledgementContent}} </div>
+      <div class="gp-SubmitError col col-md-12">
+        <div class="row errorMsg gp-error gp-errorMsg" ng-show="ccError"><span class="fieldError">{{errorMsg}}</span></div>
+      </div>
+      <div class="row gp-btnWrapper">
+        <div class="col col-md-6 gp-backBtn">
+          <!-- <button class="btn btn-default btn-outline" ng-click="goBackToStep3()">Back</button> -->
+        </div>
+        <div class="col col-md-6 gp-nextBtn text-right">
+          <button class="btn btn-primary" type="submit" ng-click="submitPayment(appInfo)">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

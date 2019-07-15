@@ -1,0 +1,50 @@
+//app1url Colors
+$govBlue: #2e7392;
+$govBlueHover: darken( $govBlue, 5% );
+$govDkBlue: darken( $govBlue, 17% );
+$govLtBlue: lighten( $govBlue, 42% );
+// $govMdBlue: lighten(desaturate($govBlue, 7.26), 22.55);
+// $govMdBlue: lighten(desaturate($govBlue, 7.25), 22.5);
+$govMdBlue: lighten(desaturate(#2e7392, 5.19), 27.65);
+
+$materializeBlue: #2196F3;
+
+$govOrange: #fd8623;
+$govMedOrange: #f89f35;
+$govHoverOrange: #e47517;
+$govLogoOrange: #da5f10;
+
+$govGold: #ffd700;
+$govStarGold: #ffd400;
+$govStarGoldDk: #e6c001;
+$govStarGoldLt: #ffe500;
+
+$govGreen: #76c176;
+
+$govExDkGrey: #2f2f2f;
+$govDkGrey: #444444;
+$govMdDkGrey: #575757;
+$govGrey: #656565;
+
+$govMedGrey: #757575;
+$govMedLtGrey: #c5c5c5;
+$govLtGrey: #cccccc;
+$govLtGrey2: #f6f6f6;
+$govGreyBG: #ebebeb;
+$govBorderGrey: #eeeeee;
+$govBorderMdGrey: #a7a7a7;
+$govSilver: silver;
+$govPlatinum: #e5e4e2;
+
+
+$govLtGreyBlue: #acb6c0;
+$govMdGreyBlue: #a8bec7;
+$govMedLtBorderGrey: #dce4ec;
+$govLtBorderGrey: #e9eef3;
+
+$govWhite: #ffffff;
+
+$govDangerRed: #D1241B;
+
+// $govLtGreyBlue: #b3b9bf;
+// $govGreyBlue: ;

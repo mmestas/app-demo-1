@@ -1,0 +1,16 @@
+<div>
+  <!-- <span style="font-size:30px;cursor:pointer;padding-left: 10px;background: #fff" class="gp-max480" onclick="openNav()"> -->
+  <span style="font-size:30px;cursor:pointer;padding-left: 10px;background: #fff" class="gp-max480" >
+    <i class="fa fa-bars" ng-click="openNav()" style="color:#2E7492;"></i>
+    <img style="height:30px; " src="/images/app1url_Logo_Sm.png" ui-sref="signUp">
+  </span>
+  <div id="mySidenav" class="sidenav">
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+    <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+    <ul class="list-group">
+      <li class="list-group-item" ui-sref="signIn">Log In</li>
+      <li class="list-group-item" ng-click="goToStep1()">Find Consultants</li>
+      <li class="list-group-item" ng-click="goToConsultantSignUp()">Find Work</li>
+    </ul>
+  </div>
+</div>

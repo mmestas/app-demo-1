@@ -1,0 +1,79 @@
+<md-dialog> <md-toolbar class="md-gpBlue-theme">
+        <div class="md-toolbar-tools">
+            <h2>Add Opportunity To Pipeline</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form id="db_pl_add_opp_form" name="db_pl_add_opp_form" ng-submit="submit()">
+        <md-dialog-content>
+            <div class="md-dialog-content" ng-show="!isLoading && !addedToPipeline">
+                <!--
+                <div class="image-upload box" style="margin: 0 10px 0 25px; float: left;">
+                    <label for="file-input">
+                        <img ng-src="{{placeholderImg}}" width="100" height="100" />
+                    </label>
+                    <div class="abs-pos">
+                        <input id="file-1" name="file-1[]" type="file" class="inputfile inputfile-1" />
+                        <div class="label-container">
+                            <label for="file-1">&#43;</label>
+                        </div>
+                    </div>
+
+                </div>
+                -->
+                <div id="db_pl_add_opp_top_info_div" class="db_pl_add_opp_div">
+                     <select name="agency_name" ng-model="values.agency_name" ng-change="onChangeAgencyName(values.agency_name)" ng-options="option.name for option in agencies track by option.gpKey">
+                    <input placeholder="Opportunity Name" type="text" ng-model="values.opportunity_name" name="opportunity_name" id="opportunity_name" required /><br>
+                    <span class="input_error" ng-show="db_pl_add_opp_form.opportunity_name.$error.required && db_pl_add_opp_form.$submitted">Opportunity name is required.</span>
+
+                    <textarea placeholder="Opportunity Description" type="text" ng-model="values.opp_desc" name="opp_desc" id="Opportunity_desc" cols="75">Opportunity description</textarea><br>
+                    <input placeholder="Opportunity Link" type="text" ng-model="values.opp_link" name="opp_link" id="opp_link" value="Opportunity link" /> <br>
+                </div>
+                <div id="db_pl_add_opp_bottom_info_div">
+                    <div id="db_pl_add_opp_mid_div">
+                        <div class="db_pl_add_opp_mid_div">
+                            <label for="set_aside">Set Aside:</label>
+                            <select multiple ng-model="values.set_aside" ng-change="onChangeSetAside(values.set_aside)">
+                              <option ng-selected="option.selected" ng-repeat="option in setasidelist" ng-value="{{option}}">
+                                {{option.name}}
+                              </option>
+                            </select>
+                        </div>
+                        <div class="db_pl_add_opp_mid_div">
+                            <label for="contract_type">contract type:</label><br>
+                            <input placeholder="Type" type='text' ng-model="values.contract_type" name="contract_type" id="contract_type" /><br>
+                        </div>
+                        <div class="db_pl_add_opp_mid_div">
+                            <label for="naics">NAICS:</label><br>
+                            <input placeholder="NAICS" type='text' ng-model="values.naics" name="naics" id="naics" /><br>
+                        </div>
+                        <div class="db_pl_add_opp_mid_div">
+                            <label for="close_date">Close Date:</label><br>
+                            <input placeholder="date" type='date' ng-model="values.close_date" name="close_date" id="close_date" /><br>
+                        </div>
+                    </div>
+                    <div id="db_pl_add_opp_last_row">
+                        <label for="estimate_contract_value">Estimate Contract Value</label>
+                        <input placeholder="$" type="number" ng-model="values.estimate_contract_value" id="estimate_contract_value" name="estimate_contract_value" required />
+                        <span class="input_error" style="margin: 0px 0px 0px 30%;" ng-show = "db_pl_add_opp_form.estimate_contract_value.$error.required && db_pl_add_opp_form.$submitted">Value is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="md-dialog-content" ng-show="!isLoading && addedToPipeline">
+                <center><h5>Success!</h5></center>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions ng-show="!addedToPipeline" layout="row">
+            <md-button type="submit" class="md-primary">Submit</md-button><br>
+            <md-button class="md-primary" ng-click="cancel()">Close</md-button>
+        </md-dialog-actions>
+        <md-dialog-actions ng-show="addedToPipeline" layout="row">
+            <md-button class="md-primary" ng-click="cancel()">Close</md-button>
+        </md-dialog-actions>
+    </form>
+
+</md-dialog>

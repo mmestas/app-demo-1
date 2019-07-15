@@ -1,0 +1,115 @@
+/****************************** ToolTips ************************/
+.showAlertOnHover {display:none; font-size:13px;}
+.gp-readOnly:hover .showAlertOnHover {display:block;}
+.customTooltip {
+    position: relative;
+    zcursor: help;
+    color: $govBlue;
+}
+.customTooltip .customTooltiptext {
+    visibility: hidden;
+    position: absolute;
+    top: -1px;
+    width: 96%;
+    left: 2%;
+    left: 100%;
+    background-color: $govGreyBG;
+    color: $govGrey;
+    border: 1px solid $govMedLtGrey;
+    text-align: center;
+    padding: 5px 4px;
+    border-radius: 3px;
+    z-index: 1;
+    transition: opacity .6s;
+    font-size: 12px;
+}
+.customTooltip:hover .customTooltiptext,
+.customTooltip:hover .customTooltip-top,
+.customTooltip:hover .customTooltip-panels {
+    visibility: visible;
+}
+
+.customTooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    top: 10%;
+    left: 11%;
+    left: -18px;
+    margin-left: -5px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent $govGreyBG transparent transparent;
+}
+
+.customTooltip .customTooltip-top {
+    visibility: hidden;
+    position: absolute;
+    bottom: -80%;
+    left: 8%;
+    width: 100%;
+    margin-left: -69px;
+    background-color: $govGreyBG;
+    color: $govGrey;
+    border: 1px solid $govMedLtGrey;
+    text-align: center;
+    padding: 5px 4px;
+    border-radius: 3px;
+    z-index: 1;
+    transition: opacity .6s;
+    font-size: 12px;
+    bottom: 135%;
+    left: 11%;
+    margin-left: -60px;
+    min-width: 200px;
+}
+.customTooltip .customTooltip-top.tooltipForInfoMark {
+    left: 0%;
+    margin-left: -145%;
+}
+.customTooltip-top::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 11%;
+    margin-left: -5px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent transparent $govGreyBG transparent;
+}
+
+.customTooltip-top::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 11%;
+    margin-left: -5px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: $govGreyBG transparent transparent transparent;
+}
+.customTooltip .customTooltip-panels {
+    visibility: hidden;
+    position: absolute;
+    top: 33px;
+    left: 0%;
+    width: 300px;
+    background-color: $govGreyBG;
+    color: $govGrey;
+    border: 1px solid $govMedLtGrey;
+    text-align: left;
+    padding: 5px 4px;
+    border-radius: 3px;
+    z-index: 1;
+    font-size: 12px;
+}
+.customTooltip-panels::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 30px;
+    margin-left: -5px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent transparent $govGreyBG transparent;
+}

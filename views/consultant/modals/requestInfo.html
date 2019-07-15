@@ -1,0 +1,65 @@
+<md-dialog id="riModal" aria-label="NDA Required" class="gp-ConsultantRequestInfoModal" >
+  <form ng-cloak name="requestInfoForm">
+    <md-toolbar class="md-gpBlue-theme" ng-hide="msgSentSuccess">
+      <div class="md-toolbar-tools">
+        <h2>Message</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-toolbar class="md-gpBlue-theme" ng-show="msgSentSuccess">
+      <div class="md-toolbar-tools">
+        <h2>Success!</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div ng-hide="msgSentSuccess">
+        <section>
+          <div class="gp-projectInfo">
+            <div >
+              <span class="gp-mr15"><img ng-src="{{envURL+engInfoData.companyUser.ImageFilename}}"></span>
+              <h4>
+                <span >{{engInfoData.companyUser.name}}</span>
+                <small>{{engInfoData.companyUser.Company.city}}, {{engInfoData.companyUser.Company.state.Abbreviation}}</small>
+              </h4>
+            </div>
+          </div>
+        </section>
+        <div class="gp-subjectForMsg">Subject: {{engInfoData.project.title}} - more information needed to quote</div>
+        <md-input-container class="md-block gp-width-100">
+          <label><span class="gp-error fa fa-asterisk"></span> Enter Message</label>
+          <!-- <textarea ng-model="requestInfoMessage" md-maxlength="250" rows="5" md-select-on-focus></textarea> -->
+          <textarea ng-model="requestInfoMessage" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+        <div>From: {{engInfoData.consultant.name}}, {{engInfoData.consultant.title}}</div>
+      </div>
+
+      <div ng-show="msgSentSuccess">
+        Your Request for Information has been successfully submitted.
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()" ng-hide="msgSentSuccess">
+       Cancel
+      </md-button>
+      <button class="btn btn-primary" ng-click="consultantSendEngagementMessage(engInfoData, requestInfoMessage)" ng-disabled="!requestInfoMessage" ng-hide="msgSentSuccess">
+       Send Message
+      </button>
+      <button  class="btn btn-primary" ng-click="backToDashboard()" ng-show="msgSentSuccess">
+       Back to Dashboard
+      </button>
+      <md-button ng-click="cancel()" ng-show="msgSentSuccess">
+       Close Window
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

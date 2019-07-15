@@ -1,0 +1,44 @@
+<!-- HEADER -->
+<div class="login-container-header gp-dashboard-header">
+  <div class="container contrast-blue">
+    <div class="row">
+      <header>
+        <nav class="navbar navbar-default navbar-fixed-top ">
+          <div style="display: flex;">
+            <a class=" navbar-brand " href="/">
+              appDemo1
+            </a>
+            <ul class="nav navbar-nav">
+              <li ui-sref="consultant">DASHBOARD</li>
+              <li ui-sref="consultantLegalDocs">LEGAL DOCS</li>
+              <li>
+                <span data-toggle="dropdown" aria-expanded="false" ui-sref-active="is-active"> APPS <i class="fa fa-angle-down"></i></span>
+                <ul class="dropdown-menu">
+                  <li><a href="https://app1url.coglide.com/pwin"><i class="fa fa-calculator"></i> &nbsp; PWIN Calculator</a></li>
+                  <li><a href="#" ng-disabled="true"><i class="fa fa-handshake"></i> &nbsp; Opportunity Search (v2.1)</a></li>
+                  <li><a href="#" ng-disabled="true"><i class="fa fa-link"></i> &nbsp; Pipeline Tool (v2.1)</a></li>
+                </ul>
+              </li>
+              <a href="http://helpcenter.app1urlapp.com/academy" target="_blank"><li>ACADEMY</li></a>
+              <a href="http://helpcenter.app1urlapp.com" target="_blank"><li>HELP CENTER</li></a>
+            </ul>
+          </div>
+          <ul class="nav navbar-nav pull-right">
+            <li class="impersonateIcon" ng-click="restoreUser()" ng-if="userInfo.isImpersonateSession"><i class="fas fa-user-friends"></i> Stop Impersonation</li>
+            <li>
+              <span data-toggle="dropdown" aria-expanded="false">
+                <img ng-src="{{envURL+userInfo.ImageFilename}}" style="height:45px; width:45px; border-radius:50%;" ng-if="userInfo.ImageFilename">
+                <span>Hi {{userInfo.firstname}}! </span>
+                <i class="fa fa-angle-down"></i>
+              </span>
+              <ul class="dropdown-menu">
+                <li><a href="#" ui-sref="personalSettings"><i class="fa fa-lock"></i> &nbsp; Change Password</a></li>
+                <li><a href="#" data-ng-click="appDemo1ProcessLogout()"><i class="fa fa-sign-out-alt"></i> &nbsp; Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+app.filter('getDifferenceBetweenDates', function() {
+})

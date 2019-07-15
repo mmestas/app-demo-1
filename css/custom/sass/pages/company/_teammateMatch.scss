@@ -1,0 +1,120 @@
+#teammateMatch {
+    .tab-buttons {
+        width: 500px;
+    }
+    .tab-buttons:after {
+        clear: both;
+        display: block;
+        content: '';
+        margin: 0;
+    }
+    .tab-buttons li {
+        float: left;
+        width: 50%;
+        border-bottom: 2px solid transparent;
+    }
+    .tab-buttons li.active {
+        font-weight: 700;
+        border-bottom: 2px solid $govMedLtGrey;
+    }
+    .signature-box {
+        height: 150px;
+        width: 100%;
+        border: 1px solid $govMedLtGrey;
+    }
+    .middle-align-or {
+        padding: 0;
+        height: 82px;
+        text-align: center;
+        position:relative;
+    }
+    .middle-align-or .text {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+    }
+    .search-top {
+        margin-bottom: 20px;
+    }
+}
+
+#teammateMatchInvite {
+    .blue-heading {
+        background :$govBlue;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        margin-bottom: 10px;
+    }
+    .blue-heading h1 {
+        color: #FFF;
+    }
+   .blue-heading h3 {
+        color: #FFF;
+    }
+
+    .invite-top {
+        width: 100%;
+    }
+    .invite-top:after {
+        clear: both;
+        content: '';
+        display: block;
+        margin: 0;
+    }
+    .oppurtunity-content {
+        margin-top: 20px;
+        min-height: 400px;
+        .card {
+            .blue-heading {
+            }
+        }
+    }
+    .dimmed {
+        position: relative;
+    }
+    .dim-top {
+        z-index:  8999; /** one less than angularjs material modal **/
+        background: #3D3D3D;
+        opacity: .5;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 400px;
+        p {
+            font-size: 22px;
+            color: #FFF;
+            line-height: 400px;
+            text-align: center;
+        }
+    }
+    .invite-avatar {
+        width: 267px;
+        height: 350px;
+        position: relative;
+        .dim-top {
+            width: 267px;
+            height: 350px;
+        }
+    }
+    .invite-top-fields {
+         .col-md-2 {
+            position: relative;
+             .dim-top {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .submit-invite-nda .account-info {
+        margin: 10px 0;
+    }
+    .submit-invite-nda .account-info input {
+        margin-bottom: 10px;
+    }
+    .submit-invite-nda .account-info input:last-of-type {
+        margin-bottom: 0;
+    }
+
+}

@@ -1,0 +1,100 @@
+<div login-header class="gp-min480"></div>
+<div login-responsive-header class="gp-max480"></div>
+<div id="companySAMData" class="view gp-signUpView" ng-init="companySAMInit()">
+  <div class="gp-signUpStatusBar gp-min480" layout-align="center center">
+    <h1>Sign Up with app1url</h1>
+  </div>
+  <md-toolbar class="md-hue-custom gp-min480">
+    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+      <div layout="column" layout-align="center center">
+        <h2 class="md-flex">Create your account to access our exclusive network of top tier talent</h2>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <div class="gp-mainBodyWidth gp-StepContainer md-whiteframe-3dp">
+    <div class="gp-Step">
+      <div class="gp-Step-Title"><h1>Account Info</h1></div>
+      <div><h3><small>Registration in the System for Award Management (SAM) is required for access</small></h3></div>
+      <div ng-controller="recaptchaCtrl">
+        <form name="applicatonStep3" ng-submit="submit()">
+          <div ng-form="applicatonStep3" novalidate>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" id="gp-email" placeholder="*Your Email Address" ng-model="appInfo.email" required>
+                  <span ng-show="applicatonStep3.email.$touched && applicatonStep3.email.$invalid" class="gp-error">Please enter a valid email address</span>
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="text" name="CageCode" class="form-control" id="gp-cageCode" placeholder="*Cage Code" ng-model="appInfo.cageCode" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="text" name="firstName" class="form-control" id="gp-firstName" placeholder="*Your First Name" ng-model="appInfo.firstName" required>
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="text" name="lastName" class="form-control" id="gp-lastName" placeholder="*Your Last Name" ng-model="appInfo.lastName" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" id="gp-password" placeholder="*Password" ng-model="appInfo.password" required>
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="password" name="confirmPass" class="form-control" id="gp-confirmPass" placeholder="*Confirm Password" ng-model="appInfo.confirmPass" compare-to="appInfo.password">
+                  <span ng-show="applicatonStep3.confirmPass.$error.compareTo && applicatonStep3.confirmPass.$touched" class="gp-error">This field must match what you entered in the above password field</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <input type="text" name="referralCode" class="form-control" id="gp-referralCode" placeholder="Referral/Reseller code (Optional)" ng-model="appInfo.referralCode">
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <div vc-recaptcha theme="'light'" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)" on-expire="cbExpiration()"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-md-12">
+                <div class="form-group">
+                  <md-checkbox aria-label="Checkbox 1" ng-model="terms" class="md-gpSolidBlue md-raised" style="margin-left:15px;" required>
+                    I agree to the app1url <a href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service" target="_blank">Terms of Service</a>
+                  </md-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row gp-btnWrapper">
+                <div class="col col-md-6 col-md-offset-3">
+                  <button class="btn btn-warning signUpBtn" type="submit" ng-click="appDemo1SignUpStep01(appInfo)" ng-disabled="applicatonStep3.$invalid">Sign Up</button>
+                </div>
+            </div>
+            <div class="row gp-btnWrapper">
+              <div class="gp-SubmitError col col-md-12">
+                <span ng-show="duplicateEmails" class="gp-error">*This email is already associated with an account.  Please use the Log In link at the top right to log in.</span>
+                <span ng-show="differentEmailDomains" class="gp-error">*The email you entered does not match the organization domain</span>
+              </div>
+              <div class="gp-SubmitError col col-md-12">
+                <span ng-show="applicatonStep3.$invalid">*Please fill out required fields to continue.</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

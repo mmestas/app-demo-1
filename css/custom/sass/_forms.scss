@@ -1,0 +1,51 @@
+
+  input.form-control::-webkit-input-placeholder, /* Chrome/Opera/Safari */
+  textarea.form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: darken( $govLtGreyBlue, 10% );
+  }
+  input.form-control::-moz-placeholder, /* Firefox 19+ */
+  textarea.form-control::-moz-placeholder { /* Firefox 19+ */
+    color: darken( $govLtGreyBlue, 10% );
+  }
+  input.form-control:-ms-input-placeholder, /* IE 10+ */
+  textarea.form-control:-ms-input-placeholder { /* IE 10+ */
+    color: darken( $govLtGreyBlue, 10% );
+  }
+  input.form-control:-moz-placeholder, /* Firefox 18- */
+  textarea.form-control:-moz-placeholder { /* Firefox 18- */
+    color: darken( $govLtGreyBlue, 10% );
+  }
+
+  .errorFields {border-color: $govDangerRed !important; border-width: 2px !important;
+    background-color: lighten($govDangerRed, 50%) !important;
+  }
+  md-datepicker.md-errorField input {border-color: $govDangerRed !important; border-width: 2px !important;background-color: lighten($govDangerRed, 50%) !important}
+  //
+
+// Checkboxes and Radios
+.checkbox label, .radio label {padding-left:2px;}
+//Selects
+//z-index necessary for modals (normall is behind modal)
+.md-select-menu-container {z-index: 10000 !important;max-width: 310px; min-width: unset !important;}
+.md-select-menu-container.md-active {z-index: 10000 !important;}
+
+/******************* PLACEHOLDERS *****************/
+// ::-webkit-input-placeholder {color: #6a6a6a  !important;}
+// ::-moz-placeholder {color: #6a6a6a  !important;}
+// :-ms-input-placeholder {color: #6a6a6a  !important;}
+// :-moz-placeholder {color: #6a6a6a  !important;}
+
+#invitedAuthNewUserProfileForm form {
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 25px;
+  padding: 20px;
+}
+
+#invitedAuthFooter  {
+  padding:10px;
+
+  button:hover {
+    color: $govBlue;
+  }
+}

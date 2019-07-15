@@ -1,0 +1,60 @@
+<div id="consultantEditAgencies" ng-show="showConsultantEditAgencyFields">
+  <div class="gp-consultantEditSectionWithBtn"><h4>Edit Agencies & Contracts (15%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantAgencies(consultantInfoEditField, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantAgencies(consultantInfoEditField, false)">Save & Close</button>
+      &nbsp;
+      <!-- <button class="btn btn-sm btn-primary btn-outline btn-white" ng-click="cancelEditAgencies()">Close</button> -->
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditAgencies()"></i>
+    </div>
+  </div>
+  <div class="profileSectionInner">
+    <div style="margin-top: 10px;" >
+      <md-autocomplete flex
+          md-no-cache = "true"
+          md-selected-item="selectedAgencyItem"
+          md-search-text="searchAgencyText"
+          md-items="agencyItem in getAgenciesForAutoComplete(searchAgencyText)"
+          md-item-text="agencyItem.name"
+          md-floating-label="Lookup Agency (click here)"
+          md-selected-item-change="addAgency(agencyItem)"
+          md-clear-button="true">
+        <md-item-template>
+          <span md-highlight-text="searchAgencyText">{{agencyItem.name}}</span>
+          <span md-highlight-text="searchAgencyText" ng-if="agencyItem.acronymn">- {{agencyItem.acronymn}}</span>
+        </md-item-template>
+        <md-not-found ng-click="addAgency(searchAgencyText)">
+          No matches found.
+        </md-not-found>
+      </md-autocomplete>
+    </div>
+        <!-- No matches found. |  -->
+
+    <div class="gp-consultantListWrapper">
+      <h3 class="h3"><span class="small">Your Agencies</span></h3>
+      <div class="gp-consultantList" ng-repeat="agcy in agenciesFilterArray track by $index">
+      <!-- <div class="gp-consultantList" ng-repeat="agcy in agenciesFilterArrayEditList track by $index"> -->
+        <i class="far fa-times-circle" ng-click="removeAgency($index, agcy)"></i>
+           &nbsp; {{agcy.name}}
+      </div>
+    </div>
+
+  <!--NOTE: Keep Adding 5.1.18 -->
+    <form name="consultantEditContractsForm">
+      <div class="gp-consultantContracts">
+        <h3 class="h3"><span class="small">Your Contracts</span></h3>
+          <md-input-container class="md-gpBlue-theme" ng-repeat="contract in consultantContractsEditList track by $index" ng-class="{'last-item': $last}">
+            <input type="text" name="contract" class="form-control" ng-model="contract.name" aria-label="contract">
+            <i class="far fa-times-circle" ng-click="removeConsultantContract($index, contract)"></i>
+            <div ng-messages="consultantEditContractsForm.contract.$error || (contract.name === '')">
+              <div ng-message="required">Field cannot be empty!</div>
+            </div>
+          </md-input-container>
+          <button class="btn btn-sm btn-primary" ng-click="addConsultantContract()">Add Contract</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>

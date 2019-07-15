@@ -1,0 +1,19 @@
+// flexbox
+.gp-flex {display: flex;}
+.gp-flex-wrap {display: flex; flex-wrap:wrap;}
+.gp-flex-column {display: flex; flex-direction: column;}
+.gp-alignFlexCenter {align-items: center;}
+.gp-alignFlexEnd {align-items: flex-end;}
+.gp-justifyFlexSpaceBetween {justify-content: space-between;}
+.gp-justifyFlexSpaceAround {justify-content: space-around;}
+.gp-justifyFlexSpaceEvenly {justify-content: space-evenly;}
+.gp-justifyFlexCenter {justify-content: center;}
+.gp-justifyFlexEnd {justify-content: flex-end;}
+.gp-flex-grow-1 {flex-grow: 1;}
+
+//Non flex
+.floatRight {float:right;}
+//Toolbars
+.gp-toolbarFlex {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;align-content: center;width: 100%;}
+.gp-flexJustify {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;align-items: center;align-content: center;width: 100%;}
+.gp-flexStart {display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-start;align-items: center;align-content: center;width: 100%;}

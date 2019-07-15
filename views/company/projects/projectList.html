@@ -1,0 +1,35 @@
+<div class="gp-dashWrapper">
+  <div class="gp-dashInner" ng-init="myProjectsInit()">
+    <div class="gp-nav" company-dash-header></div>
+    <div class="gp-mainBodyWidth">
+      <div >
+        <div class="gp-listGroup">
+          <table ng-table="projectListTableParams" class="table gp-listTable" show-filter="true">
+            <tr ng-repeat="project in $data" class="md-whiteframe-2dp" ng-click="getProjectDetails(project)" ng-if="!project.archived">
+              <td title="'Project'" filter="titleFilter" sortable="'title'">
+                <div>
+                  <img src="{{project.agency.imageFilename}}" class="gp-agencyIcon" ng-if="project.agency.imageFilename"/>
+                  <div class="gp-initialsLogo" ng-if="!project.agency.imageFilename"><div>{{project.owner.name | createInitials}}</div></div>
+                   &nbsp; <h5>{{project.title | limitTo : 50}}<span ng-show="project.title.length > 50">...</span></h5>
+                </div>
+              </td>
+              <td title="'Owner'" filter="ownerFilter" sortable="'owner.name'">
+                {{project.owner.name}}
+              </td>
+              <td title="'Status'" filter="statusFilter" sortable="'status.name'">
+                <label class="label-primary" ng-if="project.status.gpKey === '{79839C99-B83A-4420-A867-10ACF3BBDAB5}'">{{project.status.name}}</label>
+                <label class="label-success" ng-if="project.status.gpKey === '{A40E44D2-332E-4D01-9039-28E52B5193FB}'">{{project.status.name}}</label>
+                <label class="label-warning" ng-if="(project.status.gpKey === '{74699447-4fad-47f9-9f68-48a3e86b7f5e}') && !project.archived">{{project.status.name}}</label>
+                <label class="label-default" ng-if="project.archived">Archived</label>
+              </td>
+              <td title="'Date Created'" filter="dateCreatedFilter" sortable="'dateCreated'">
+                <span>{{project.dateCreated}}</span>
+                <span><i class="fa fa-chevron-right"></i></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<md-dialog aria-label="NDA Required" class="gp-simpleDialogue">
+  <md-toolbar class="md-gpBlue-theme" ng-hide="msgSentSuccess">
+    <div class="md-toolbar-tools">
+      <h2 ng-hide="showReasonForRejection"><span ng-if="eInfoData.nda">NDA</span> &nbsp;<span ng-if="eInfoData.nda && eInfoData.oci">&</span> &nbsp;<span ng-if="eInfoData.oci">OCI</span> &nbsp;Signature Required</h2>
+      <h2 ng-show="showReasonForRejection">Reject Explanation</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <!-- <div class="gp-ndaDialogPadding"> -->
+
+      <form ng-cloak name="projectForm" ng-hide="showReasonForRejection">
+        <md-dialog-content>
+          <div ng-if="eInfoData.project.agency.name">
+            <h4>Project Info:</h4>
+            <h5><strong>Agency:</strong> {{eInfoData.project.agency.name}}</h5>
+            <h5><strong>Solicitation #:</strong> {{eInfoData.project.solicitationNumber}}</h5>
+            <h5><strong>Solicitation Title:</strong> {{eInfoData.project.solicitationTitle}}</h5>
+          </div>
+          <p>The project requirement for this customer is sensitive. Before providing access to the project details, the customer requires that you review the agreement(s) listed below and acknowledge with your electronic signature:</p>
+            <div class="gp-ndaOciChecboxes">
+              <div class="gp-ndaOciCheckbox" ng-if="eInfoData.nda">
+                <md-checkbox ng-model="eInfoData.consultantNDAAccepted" aria-label="NDA" ng-disabled="eInfoData.doesNotAgree" class="md-gpSolidBlue md-raised gp-costCheckbox" ng-change="acceptedChecked(eInfoData)">
+                  <label>I certify that I have read and accept the terms of the <a ng-if="eInfoData.nda" target="_blank" href="/files/NDA.docx">Non-Discloure Agreement (NDA)</a></label>
+                </md-checkbox>
+              </div>
+              <div class="gp-ndaOciCheckbox" ng-if="eInfoData.oci">
+                <md-checkbox ng-model="eInfoData.consultantOCIAccepted" aria-label="OCI" ng-disabled="eInfoData.doesNotAgree" class="md-gpSolidBlue md-raised gp-costCheckbox" ng-change="acceptedChecked(eInfoData)">
+                  <label>I certify that I have read and accept the terms of the <a ng-if="eInfoData.oci" target="_blank" href="/files/OCI.docx">Organizational Conflict of Interest (OCI)</a></label>
+                </md-checkbox>
+              </div>
+              <div class="gp-surroundingTextDivider"><span>OR</span> </div>
+              <div class="gp-ndaOciCheckbox" ng-if="eInfoData.oci || eInfoData.nda">
+                <md-checkbox ng-model="eInfoData.doesNotAgree" aria-label="reject" class="md-gpSolidBlue md-raised gp-costCheckbox" ng-disabled="eInfoData.consultantNDAAccepted || eInfoData.consultantOCIAccepted" ng-change="doesNotAgree(eInfoData)">
+                  <label>I cannot agree to the terms stated in the <span ng-if="eInfoData.nda">NDA </span><span ng-if="eInfoData.nda && eInfoData.oci">& </span><span ng-if="eInfoData.oci">OCI</span> </label>
+                </md-checkbox>
+              </div>
+            </div>
+            <md-input-container class="md-block" flex-gt-sm="" ng-hide="eInfoData.doesNotAgree">
+              <label>Signature</label>
+              <input required="$invalid && ($touched || isErrorGetter())" name="consultantName" ng-model="eInfoData.consultantNDASignature" >
+              <div class="hint">Typing your name acts as your signature</div>
+              <div ng-messages="projectForm.consultantName.$error">
+                <div ng-message="required">Signature is required.</div>
+              </div>
+            </md-input-container>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+          <md-button ng-click="cancel()">
+           Cancel
+          </md-button>
+          <md-button class="btn btn-primary" ng-click="agree(eInfoData)" ng-hide="eInfoData.doesNotAgree" ng-disabled="((eInfoData.oci && !eInfoData.consultantOCIAccepted) || (eInfoData.nda && !eInfoData.consultantNDAAccepted)) || !eInfoData.consultantNDASignature">
+           Agree
+          </md-button>
+          <md-button class="btn btn-primary" ng-click="reject(eInfoData)" ng-show="eInfoData.doesNotAgree" ng-disabled="!eInfoData.doesNotAgree">
+           Reject
+          </md-button>
+        </md-dialog-actions>
+      </form>
+
+
+
+    <form ng-cloak name="rejectionForm" ng-show="showReasonForRejection">
+      <md-dialog-content>
+        <textarea ng-model="reasonForRejection" rows="4" style="width:100%;"></textarea>
+      </md-dialog-content>
+      <md-dialog-actions layout="row">
+        <md-button ng-click="hideReasonForRejection()">
+         Cancel
+        </md-button>
+        <md-button ng-click="rejectWithoutReason(eInfoData)">
+         Submit without explanation
+        </md-button>
+        <md-button ng-click="rejectWithReason(eInfoData, reasonForRejection)">
+         Submit
+        </md-button>
+      </md-dialog-actions>
+    </form>
+
+  <!-- </div> -->
+</md-dialog>

@@ -1,0 +1,71 @@
+<div class="gp-nav" consultant-dash-header></div>
+<div id="gp-consultantDashboard" class="gp-dashWrapper"  ng-init="dashboardInit()">
+  <div class="gp-dashInner">
+       <div class="container-fluid">
+         <div class="row row-offcanvas row-offcanvas-left gp-mainBodyWidth">
+           <div class="col-md-9 col-md-push-3">
+             <div class="visible-sm visible-xs" style="height:45px;">
+               <div class="pull-left">
+                 <button type="button" class="btn btn-primary btn-xs gp-hamburgerMenu" data-toggle="offcanvas" title="Toggle sidebar"><i class="fa fa-bars"></i></button>
+                  <a class=" navbar-brand " href="/" style="height:45px; float:right;">
+                    app1url
+                  </a>
+                </div>
+             </div>
+             <div>
+                <div ui-view id="gp-customConsultantDash"></div>
+             </div>
+           </div>
+
+           <div class="col-xs-6 col-md-3 col-md-pull-9 sidebar-offcanvas gp-sideMenu" id="sidebar">
+             <div class="gp-conDashSideBox">
+               <div class="row md-whiteframe-2dp sidePadding">
+                 <div class="col col-md-12 gp-conDashProfPic">
+                   <img src="{{envURL+userInfo.ImageFilename}}">
+                   <div class="gp-conDashProfPicName">{{userInfo.name}}</div>
+                 </div>
+               </div>
+             </div>
+             <div class="list-group customTooltip" ng-if="consultantInfo.profileCompletion == 100">
+               <span class="customTooltiptext">Consultants with completed profiles get hired 8 times more often than those without.</span>
+               <a href="#" class="list-group-item gp-getStarted gp-flex gp-justifyFlexSpaceBetween" ui-sref="consultant.myProfile">
+                 <span><i class="fa fa-user"></i> &nbsp; My Profile</span> <span>{{consultantInfo.profileCompletion}}%</span>
+               </a>
+             </div>
+             <div class="list-group customTooltip" ng-if="consultantInfo.profileCompletion < 100 && consultantInfo.profileCompletion > 0">
+               <span class="customTooltiptext">Consultants with completed profiles get hired 8 times more often than those without.</span>
+               <a href="#" class="list-group-item gp-getStarted gp-flex gp-justifyFlexSpaceBetween" ui-sref="consultant.myProfile">
+                 <span><i class="fa fa-exclamation"></i> &nbsp; Edit Profile</span> <span>{{consultantInfo.profileCompletion}}%</span>
+               </a>
+             </div>
+             <div class="list-group customTooltip" ng-if="consultantInfo.profileCompletion == 0">
+               <span class="customTooltiptext">Consultants with completed profiles get hired 8 times more often than those without.</span>
+               <a href="#" class="list-group-item gp-getStarted gp-flex gp-justifyFlexSpaceBetween" ui-sref="consultant.myProfile">
+                 <span><i class="fa fa-exclamation"></i> &nbsp; Edit Profile - Get Started</span> <span>{{consultantInfo.profileCompletion}}%</span>
+               </a>
+             </div>
+             <div class="list-group">
+              <div class="list-group-item gp-displayResponsive gp-listHeader">Menu</div>
+              <a href="#" class="list-group-item" ui-sref="consultant.dashboard"><i class="fa fa-th-large"></i> &nbsp; Dashboard</a>
+              <a href="#" class="list-group-item" ui-sref="consultant.invites"><i class="fa fa-clock"></i> &nbsp;RFQ Invites <span class="badge btn-white">{{quoteInvites}}</span></a>
+              <a href="#" class="list-group-item" ui-sref="consultant.notifications"><i class="glyphicon glyphicon-comment"></i> &nbsp;Notifications <span class="badge btn-white">{{messageNotifications}}</span></a>
+              <a href="#" class="list-group-item" ui-sref="consultant.opportunities"><i class="fa fa-lightbulb"></i> &nbsp; Opportunities <span class="badge btn-white">{{ppNumber}}</span></a>
+              <a href="#" class="list-group-item" ui-sref="consultant.engagements"><i class="fa fa-tasks"></i> &nbsp; Engagements <span class="badge btn-white">{{incompleteEngagements.length}}</span></a>
+              <a href="#" class="list-group-item" ui-sref="consultant.paymentInfo"><i class="fa fa-credit-card"></i> &nbsp; Payment Info
+                <span class="badge btn-success" data-ng-if="stripeAccountVerified"><i class="fas fa-check"></i></span>
+                <span class="badge btn-danger" data-ng-if="!stripeAccountVerified"><i class="fas fa-exclamation"></i></span>
+              </a>
+              <a class="list-group-item" href="https://www.app1url.com/blog/" target="_blank"><i class="fa fa-rss"></i> &nbsp; Blog </a>
+              <div class="list-group-item gp-displayResponsive" data-ng-click="appDemo1ProcessLogout()"><i class="fa fa-sign-out-alt"></i> &nbsp; Log Out </div>
+             </div>
+           </div><!--/.sidebar-offcanvas-->
+         </div><!--/row-->
+        </div>
+
+<script>
+$(document).ready(function () {
+  $('[data-toggle="offcanvas"]').click(function () {
+    $('.row-offcanvas').toggleClass('active')
+  });
+});
+</script>

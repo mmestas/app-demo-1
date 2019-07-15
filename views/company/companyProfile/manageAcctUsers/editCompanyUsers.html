@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-md-4">
+      <md-input-container class="md-gpBlue-theme">
+        <label>* Select User to Edit (required)</label>
+        <md-select class="md-gpBlue-theme" ng-model="companyUser" ng-change="selectUserToEdit(companyUser)">
+          <md-option><em>None</em></md-option>
+          <md-option ng-repeat="poc in companyPointOfContacts" ng-value="poc">
+            {{poc.name}}
+          </md-option>
+        </md-select>
+        <div class="md-errors-spacer"></div>
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" ng-model="companyUserEdit.firstname" ng-disabled="disableCompanyEditFields">
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" ng-model="companyUserEdit.lastname" ng-disabled="disableCompanyEditFields">
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="email">Email (username)</label>
+        <input type="email" class="form-control" name="email" ng-model="companyUserEdit.email" ng-disabled="disableCompanyEditFields">
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" ng-model="companyUserEdit.password" ng-disabled="disableCompanyEditFields">
+      </md-input-container>
+    </div>
+    <div class="col col-md-4">
+      <md-input-container class="md-block md-gpBlue-theme" ng-if="(userInfo.role.gpKey === '{f87dc87e-d4c4-4e22-b025-f212cd659910}')">
+          <label>System Role</label>
+          <md-select class="md-gpBlue-theme" ng-model="companyUserEdit.role" ng-disabled="disableCompanyEditFields">
+            <md-option ng-repeat="role in roles" ng-value="role" >
+              {{role.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block md-gpBlue-theme" ng-if="(userInfo.role.gpKey === '{d9a2b6db-92e1-45f2-a9fa-db8240a7145b}')">
+          <label>System Role</label>
+          <md-select class="md-gpBlue-theme" ng-model="companyUserEdit.role" ng-disabled="disableCompanyEditFields">
+            <md-option ng-repeat="role in roles | filter: {'gpKey' : '!{f87dc87e-d4c4-4e22-b025-f212cd659910}'}" ng-value="role">
+              {{role.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" name="phone" ng-model="companyUserEdit.phone" phone-input ng-disabled="disableCompanyEditFields">
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label for="mobile">Mobile Phone</label>
+          <input type="text" class="form-control" name="mobile" ng-model="companyUserEdit.mobilePhone" phone-input ng-disabled="disableCompanyEditFields">
+        </md-input-container>
+      </div>
+      <div class="col col-md-4">
+        <md-input-container class="md-block md-gpBlue-theme">
+          <label>Mobile Carrier</label>
+          <md-select class="md-gpBlue-theme" ng-model="companyUserEdit.mobileCarrier" ng-disabled="disableCompanyEditFields">
+            <md-option ng-repeat="carrier in mobileCarriers" ng-value="carrier" >
+              {{carrier.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      </div>
+
+
+    <div  class="gp-allowTexts">
+      <label for="lastname">Allow Text Notifications</label>
+      <md-checkbox ng-model="companyUserEdit.allowTextNotifications" aria-label="textNotifications" class="md-gpSolidBlue"  ng-disabled="!companyUserEdit.mobileCarrier.name || !companyUserEdit.mobilePhone"></md-checkbox>
+      <span ng-if="!companyUserEdit.mobileCarrier.name || !companyUserEdit.mobilePhone">(*In order to select, Mobile Phone and Carrier are required)</span>
+    </div>
+
+
+    <div class="gp-ProfileButtons">
+      <md-button class="btn btn-default btn-outline" ng-click="closeEditUsers()">Close</md-button>
+      <md-button class="btn btn-primary" ng-click="saveUserEdits(companyUserEdit)" ng-disabled="disableCompanyEditFields">Update & Save</md-button>
+    </div>
+
+
+  </div>

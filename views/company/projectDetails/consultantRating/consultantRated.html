@@ -1,0 +1,59 @@
+<md-toolbar class="md-gpBlue-theme">
+  <div class="md-toolbar-tools">
+    <h2>You have already rated this consultant for this engagement</h2>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="cancel()">
+      <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-dialog-content>
+  <div style="padding:15px;">
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px;">
+      <img style="width:145px; border-radius:50%;" ng-src="{{envURL+engagementDetails.consultant.imageFilename}}">
+      <h3>{{engagementDetails.consultant.name}}</h3>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+      <div>
+        <h5>Below are the ratings you gave to this consultant for this task</h5>
+      </div>
+      <div>
+        <ul class="list-group gp-rateExpertInputs">
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Quality</strong>
+            <input id="quality" value="{{rated.quality}}" type="number" class="expertRated" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Timeliness</strong>
+            <input id="timeliness" value="{{rated.timeliness}}" type="number" class="expertRated" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Responsiveness</strong>
+            <input id="responsiveness" value="{{rated.responsiveness}}" type="number" class="expertRated" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li class="list-group-item">
+            <strong class="gp-ratingLabel">Cost</strong>
+            <input id="cost" value="{{rated.cost}}" type="number" class="expertRated" data-min=0 data-max=5 data-step=0.5 data-size="sm" title="">
+          </li>
+          <li >
+            <span class="gp-ratingLabel"><md-checkbox ng-model="rated.useForSimilarProjects" aria-label="use again" class="md-gpSolidBlue" ng-disabled="true"></md-checkbox></span>
+            <strong class="gp-checkboxRatingLabel">Yes, I would use this consultant again for similar projects</strong>
+          </li>
+          <li >
+            <span class="gp-ratingLabel"><md-checkbox ng-model="rated.wouldRecomendToOthers" aria-label="recommend" class="md-gpSolidBlue" ng-disabled="true"></md-checkbox></span>
+            <strong class="gp-checkboxRatingLabel">Yes, I would recommend this consultant to others</strong>
+          </li>
+          <li >
+            <textarea ng-model="rated.comments" aria-label="comments"  placeholder="Additional Comments" rows="4" readonly></textarea>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</md-dialog-content>
+<md-dialog-actions layout="row">
+  <md-button ng-click="hideRatingForm()">
+   Hide
+  </md-button>
+</md-dialog-actions>

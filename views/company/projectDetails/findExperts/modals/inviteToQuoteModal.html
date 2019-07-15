@@ -1,0 +1,171 @@
+<md-dialog id="inviteToQuoteModal" aria-label="Send Message"  >
+  <!--NOTE: adding this link in is only temporary -->
+  <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet">
+  <div ng-if="!inviteCongratulations">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Engagement Invite</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <form ng-cloak name="rfqInviteForm">
+      <md-dialog-content>
+        <div class="md-dialog-content" >
+          <md-toolbar class="md-gpWhite-theme gp-toolbarWithImageandName">
+            <div class="md-toolbar-tools">
+              <span class="gp-toolbarImageWrapper">
+                <img ng-src="{{envURL+slInfoData.imageFilename}}">
+              </span>
+              <h2>Request a quote from
+                <span ng-if="!slInfoData.profileNamePrivate">{{slInfoData.name}}</span>
+                <span ng-if="slInfoData.profileNamePrivate">{{slInfoData.name | createInitials}}</span>
+              </h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+          </md-toolbar>
+          <section>
+            <div layout-gt-xs="row">
+              <div flex-gt-xs>
+                <label>Project Title: </label>
+                 <div>{{projectInfoData.title}}</div>
+              </div>
+              <div flex-gt-xs>
+                <label>RFP/Solicitation Reference:</label>
+                <div>{{projectInfoData.solicitationTitle}} (#{{projectInfoData.solicitationNumber}})</div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div layout-gt-xs="row" class="gp-mb15">
+              <md-button class="md-fab md-mini gp-SolidBlue"><i class="far fa-calendar-alt"></i></md-button>
+              <div flex-gt-xs>
+              <label><i class="gp-error fa fa-asterisk"></i> Start Date</label>
+                <md-datepicker ng-model="invite.startDate" md-placeholder="Enter date" md-min-date="StartDateMin" md-max-date="StartDateMax" ng-change="getStartDate(invite.startDate)"></md-datepicker>
+              </div>
+              <div flex-gt-xs>
+                <label><i class="gp-error fa fa-asterisk"></i> End Date</label>
+                <md-datepicker ng-model="invite.endDate" md-placeholder="Enter date" md-min-date="EndDateMin" ng-change="getEndDate(invite.endDate)" ng-disabled="!invite.startDate"></md-datepicker>
+              </div>
+              <div flex-gt-xs>
+                <label><i class="gp-error fa fa-asterisk"></i> Quote Deadline</label>
+                <md-datepicker ng-model="invite.quoteDeadline" md-placeholder="Enter date" md-min-date="QuoteDeadlineMin" md-max-date="QuoteDateMax" ng-change="getQuoteDeadline(invite.quoteDeadline)"></md-datepicker>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="gp-pt10" ng-repeat="task in tasks track by $index">
+              <md-input-container class="md-block gp-width-100" style="margin:0;">
+                <label style="font-weight: 500;"><span class="gp-error fa fa-asterisk" ng-show="$first"></span> Task Description</label>
+                <textarea class="itqWorkDescription" style="border:1px solid #a7a7a7;" ng-model="task.workDescription" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+            </div>
+            <div class="gp-textAlignRt gp-mb15" ng-if="displayMultipleTaskInputs">
+              <button class="btn btn-primary btn-sm" ng-click="addTaskInput()">Add Task</button>
+            </div>
+          </section>
+          <section>
+            <div >
+              <label>Reference Document (Max 3)</label>
+            </div>
+            <div class="gp-mb15"><rf-upload-file></rf-upload-file></div>
+          </section>
+
+          <section>
+            <div class="gp-flex">
+              <md-button class="md-fab md-mini gp-SolidBlue"><i class="fa fa-flag-checkered"></i></md-button>
+              <div class="engageRequirements">
+                <label class="gp-mb15">NDA & OCI Requirements</label>
+                <div>
+                  <md-checkbox ng-model="invite.nda" aria-label="NDA" class="md-gpSolidDefault">
+                   Organization and Consultant must sign NDA in order to quote.
+                  </md-checkbox>
+                  <a class="customTooltip" target="_blank" href="/files/NDA.docx">
+                    <span class="customTooltip-top tooltipForInfoMark">Check this option if a fully executed NDA is required for this task. Click the "?" to download an example NDA</span>
+                    <i class="gp-text-warning fa fa-question-circle"></i>
+                  </a>
+                </div>
+                <div ng-if="invite.nda" class="inviteSignatureField">
+                  <md-input-container class="md-gpBlue-theme">
+                    <label for="ndaSignature">Signature</label>
+                    <input type="text" class="form-control" name="ndaSignature" ng-model="invite.companyNDASignature" required>
+                    <div ng-messages="rfqInviteForm.ndaSignature.$error" role="alert">
+                     <div ng-message="required">
+                      Enter your name to add your signature to this NDA request
+                     </div>
+                   </div>
+                  </md-input-container>
+                </div>
+                <div>
+                  <md-checkbox ng-model="invite.oci" aria-label="OCI" class="md-gpSolidDefault">
+                   Organization and Consultant must sign OCI in order to quote.
+                  </md-checkbox>
+                  <a class="customTooltip" target="_blank" href="/files/OCI.docx">
+                    <span class="customTooltip-top tooltipForInfoMark">Check this option if an OCI is required for this task.  Click the "?" to download an example OCI</span>
+                    <i class="gp-text-warning fa fa-question-circle"></i></a>
+                </div>
+                <div ng-if="invite.oci" class="inviteSignatureField">
+                  <md-input-container class="md-gpBlue-theme">
+                    <label for="ociSignature">Signature</label>
+                    <input type="text" class="form-control" name="ociSignature" ng-model="invite.companyOCISignature" required>
+                    <div ng-messages="rfqInviteForm.ociSignature.$error" role="alert">
+                     <div ng-message="required">
+                       Enter your name to add your signature to this OCI request
+                     </div>
+                   </div>
+                  </md-input-container>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section style="border-bottom:0;">
+            <div class="gp-flex">
+              <div class="engageRequirements">
+                <md-checkbox ng-model="TOS" aria-label="Confirmation" class="md-gpSolidDefault">
+                 <span class="gp-error fa fa-asterisk"></span> Yes, I understand and agree to the app1url <a class="gp-text-warning" target="_blank" href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service">Terms of Service</a> and <a class="gp-text-warning" target="_blank" href="http://helpcenter.app1urlapp.com/legal-center/app1url-terms-of-service">Privacy Policy</a>
+                </md-checkbox>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </md-dialog-content>
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+         Cancel
+        </md-button>
+        <md-button class="gp-SolidBlue" ng-click="sendITQMessage(invite, file, file1, file2 )"
+        ng-disabled="!TOS || !invite.startDate || !invite.endDate || !invite.quoteDeadline || (tasks[0].workDescription == '') || (invite.nda && !invite.companyNDASignature) || (invite.oci && !invite.companyNDASignature)
+        ">
+         <i class="fa fa-paper-plane"></i> &nbsp; Send Invite
+        </md-button>
+
+      </md-dialog-actions>
+    </form>
+  </div>
+  <div ng-if="inviteCongratulations" id="id-inviteCongratulations">
+    <md-toolbar class="md-gpBlue-theme">
+      <div class="md-toolbar-tools">
+        <h2>Congratulations</h2>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="gp-thankYouDialogue">Your invitation to quote has been successfully submitted!</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="backToDashboard()">
+       Back to Dashboard
+      </md-button>
+      <md-button ng-click="cancel()">
+       close
+      </md-button>
+    </md-dialog-actions>
+  </div>
+
+</md-dialog>

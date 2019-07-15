@@ -1,0 +1,22 @@
+<md-dialog style="max-width: 600px;">
+  <md-toolbar class="md-gpBlue-theme">
+    <div class="md-toolbar-tools">
+      <h2>Confirm</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div class="md-dialog-content">
+        You have selected "broadcast to targeted consultants."  This will send an email to all consultants matching your keywords.  Do you wish to continue?
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">No, I'll select a different option</md-button>
+    <md-button ng-click="continue()">Yes</md-button>
+  </md-dialog-actions>
+</md-dialog>

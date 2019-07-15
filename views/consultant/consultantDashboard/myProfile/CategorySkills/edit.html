@@ -1,0 +1,65 @@
+<div id="consultantSkillsFields" ng-show="showConsultantSkillsEditFields">
+  <div class="gp-consultantEditSectionWithBtn"><h4>Edit Expert Category & Skills (20%)</h4>
+    <div>
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantSkills(consultantInfoEditField, consultantSkillsEditList, consultantCategoriesEditList, true)">Save</button>
+      &nbsp;
+      <button class="btn btn-sm btn-warning" ng-click="saveConsultantSkills(consultantInfoEditField, consultantSkillsEditList, consultantCategoriesEditList, false)">Save & Close</button>
+      &nbsp;
+      <!-- <button class="btn btn-sm btn-primary btn-outline btn-white" ng-click="cancelEditConsultantSkills()">Close</button> -->
+      <i class="fa fa-times gp-closePanel" ng-click="cancelEditConsultantSkills()"></i>
+    </div>
+  </div>
+  <div class="profileSectionInner">
+    <form name="consultantEditSkillsForm">
+      <div class="row">
+        <div class="col col-md-12">
+          <h3 class="h3"><span class="small">Skills (10%)</span></h3>
+            <md-input-container class="md-gpBlue-theme" ng-repeat="skill in consultantSkillsEditList track by $index" ng-class="{'last-item': $last}">
+              <input type="text" name="skill" class="form-control" ng-model="skill.skillName" aria-label="skill" required>
+              <i class="far fa-times-circle" ng-click="removeConsultantSkill($index, skill)"></i>
+              <div ng-messages="consultantEditSkillsForm.skill.$error || (skill.skillName === undefined)">
+                <div ng-message="required">Field cannot be empty!</div>
+              </div>
+            </md-input-container>
+          <button class="btn btn-sm btn-primary" ng-click="addConsultantSkill()">Add Skill</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-12">
+          <h3 class="h3"><span class="small">Categories (10%)</span></h3>
+          <md-input-container class="md-gpBlue-theme" ng-repeat="category in consultantCategoriesEditList track by $index" ng-class="{'last-item': $last}">
+            <input type="text" class="form-control" ng-model="category.name" aria-label="category" readonly>
+            <i class="far fa-times-circle" ng-click="removeConsultantCategory($index, category)"></i>
+          </md-input-container>
+          <div class="gp-error gp-SubmitError" ng-show="showErrorMsg">You have already added this category</div>
+        </div>
+        <div class="col col-md-12">
+          <h3 class="h3"><span class="small">Add Categories</span></h3>
+        </div>
+        <div id="consultantcategorySelects" class="col col-md-12">
+          <div class="col col-md-6">
+            <md-input-container class="md-gpBlue-theme fp-firstSelect">
+            <label><span>First: Select a Category Group</span></label>
+              <md-select class="md-gpBlue-theme" ng-model="cat" ng-change="categorySelected(cat)">
+                <md-option ng-repeat="cat in categoryList" ng-value="cat" >
+                  {{cat.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div class="col col-md-6">
+            <md-input-container class="md-gpBlue-theme">
+              <label><span>Select a Subcategory to Add to List</span></label>
+              <md-select class="md-gpBlue-theme" ng-model="subCat" ng-change="addSubCategory(subCat)" ng-show="showSubCategory">
+                <md-option ng-repeat="subCat in subCategories" ng-value="subCat" >
+                  {{subCat.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div> <!-- END Expert Category & Skills -->

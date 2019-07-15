@@ -1,0 +1,25 @@
+<div id="" ng-hide="showConsultantEditAgencyFields">
+  <div class="gp-consultantEditSectionWithBtn">
+    <h4>
+      <span class="customTooltip">Agencies & Contracts (15%)
+        <span class="customTooltip-panels">Indicate any agencies where you have knowledge or experience in this section.</span>
+      </span>
+    </h4>
+    <!-- <i class="fa fa-pencil-alt" ng-click="editAgencies(consultantInfo.gpKey)"></i> -->
+    <i class="fa fa-pencil-alt" ng-click="editAgencies(consultantInfo)"></i>
+  </div>
+  <div class="profileSectionInner">
+    <h3 class="h3"><span class="small">Agencies</span></h3>
+    <ul class="gp-consultantSkillsList">
+      <li ng-repeat="agency in consultantAgencies">
+        <img ng-class="{'gp-consultantAgencyLogo': agency.imageFilename}" ng-src="{{envURL+agency.imageFilename}}">
+        &nbsp;{{agency.name}}</li>
+    </ul>
+
+    <h3 class="h3"><span class="small">Contracts</span></h3>
+    <ul class="gp-consultantSkillsList">
+      <li ng-repeat="contract in consultantContracts">{{contract.name}}</li>
+    </ul>
+
+  </div>
+</div>

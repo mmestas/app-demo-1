@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html ng-app="appDemo1" ng-cloak="">
+	<head>
+    <title ng-bind="title"></title>
+		<base href="/">
+    <!-- ///////////// Meta Tags /////////////// -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- ///////////// CSS Libraries/////////////// -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/ng-table/bundles/ng-table.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/hopscotch/0.3.1/css/hopscotch.min.css">
+
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.19/angular-material.min.css">
+		<link rel="stylesheet" type="text/css" href="https://material.angularjs.org/1.1.4/docs.css">
+		<link rel="stylesheet" type="text/css" href="/css/libraries/angular-block-ui.min.css?v=f5a4">
+		<link rel="stylesheet" type="text/css" href="/css/libraries/rzslider.min.css?v=744a">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/libraries/textAngular.css?v=aac0">
+
+    <!-- ///////////// CSS Application/////////////// -->
+		<link rel="stylesheet" type="text/css" href="/css/custom/app1url.css?v=6b16">
+
+		<script>
+		(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/07fb9355aeb440669a426c3c536523b9df954eba';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+		</script>
+
+		<!-- Global site tag (gtag.js) - Google Ads: 781276399 -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-781276399"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'AW-781276399');
+		</script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139774423-1"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-139774423-1');
+		</script>
+
+		<!-- Facebook Pixel Code -->
+		<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '309451756447332');
+		fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=309451756447332&ev=PageView&noscript=1"></noscript>
+		<!-- End Facebook Pixel Code -->
+
+		<!-- Facebook Pixel Code -->
+		<script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', '785063218510091');
+		  fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		  src="https://www.facebook.com/tr?id=785063218510091&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Facebook Pixel Code -->
+
+  </head>
+
+  <body id="appBody" class="gp-greyBG">
+    <div class="ngViewWrapper">
+		 	<div ui-view="" data-ng-cloak></div>
+		</div>
+		<div gp-footer="" ng-if="$state.current.name !== 'consultantMarketingSignUp'"></div>
+
+
+		<!-- ///////////// NECESSARY FOR I.E. MUST BE FIRST/////////////// -->
+		<script src="//cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find,MutationObserver"></script>
+		<!-- ///////////// JS Libraries /////////////// -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+		<script type="text/javascript" src="https://unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+		<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.19/angular-material.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+		<script type="text/javascript" src="/js/libraries/angular/material-angular-paging.js?v=6ce8"></script>
+		<script type="text/javascript" src="https://unpkg.com/ng-table/bundles/ng-table.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hopscotch/0.3.1/js/hopscotch.min.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/olegmdev/ng-hopscotch/master/src/ng-hopscotch.js"></script>
+
+		<script type="text/javascript" src="/js/libraries/angular/angular-block-ui.min.js?v=94e2"></script>
+		<script type="text/javascript" src="/js/libraries/angular/ng-file-upload-shim.js?v=6328"></script>
+		<script type="text/javascript" src="/js/libraries/angular/ng-file-upload.js?v=aa3c"></script>
+		<script type="text/javascript" src="/js/libraries/angular/angular-upload.min.js?v=2600"></script>
+		<script type="text/javascript" src="/js/libraries/angular/angular-recaptcha.js?v=19c7"></script>
+		<script type="text/javascript" src="/js/libraries/rangeSlider/rzslider.min.js?v=0b5b"></script>
+		<script type="text/javascript" src="/js/libraries/wysiwygEditor/textAngular-rangy.min.js?v=bffe"></script>
+		<script type="text/javascript" src="/js/libraries/wysiwygEditor/textAngular.min.js?v=f579"></script>
+		<script type="text/javascript" src="/js/libraries/angular-drag/angular-drag-and-drop-lists.min.js?v=fb61"></script>
+		<script type="text/javascript" src="/js/libraries/ng-storage/ng-storage.min.js?v=fb61"></script>
+
+		<!-- Load environment variables -->
+		<script type="text/javascript" src="/env/env.js?v=e28e"></script>
+		<script type="text/javascript" src="/js/app/app.js?v=5ca9"></script>
+		<script type="text/javascript" src="/env/constant.js?v=9521"></script>
+		<script type="text/javascript" src="/js/app/ui-router.js?v=9ff1"></script>
+
+		<script type="text/javascript">
+		if( (window.origin === 'https://www.app1urlapp.com') || (window.origin === 'https://app1urlapp.com') || (location.origin === 'https://www.app1urlapp.com') || (location.origin === 'https://app1urlapp.com') ){
+			document.write('<script type="text/javascript" src="https://platform.linkedin.com/in.js">api_key:77etqxtilgudcw<\/script>');
+		}
+		else if( (window.origin === 'http://app1stagingurl.sitefpo.com') || (location.origin === 'http://app1stagingurl.sitefpo.com') ) {
+			document.write('<script type="text/javascript" src="https://platform.linkedin.com/in.js">api_key:772utp34wape2e<\/script>');
+		}
+		else if( (window.origin === 'https://www.app1urlapp.com') || (location.origin === 'https://www.app1urlapp.com') ) {
+			document.write('<script type="text/javascript" src="https://platform.linkedin.com/in.js">api_key:77hxvl6ydt985t<\/script>');
+		}
+		else {
+			document.write('<script type="text/javascript" src="https://platform.linkedin.com/in.js">api_key:772utp34wape2e<\/script>');
+		}
+		</script>
+		<!-- CONTROLLERS -->
+		<script type="text/javascript" src="/js/libraries/recaptcha/recaptchaCtrl.js?v=ddef"></script>
+		<!-- Global -->
+		<script type="text/javascript" src="/views/globalModals/errorModalCtrl.js?v=450a"></script>
+		<script type="text/javascript" src="/views/globalModals/infoModalCtrl.js?v=f63a"></script>
+		<script type="text/javascript" src="/views/globalModals/toastCtrl.js?v=f63a"></script>
+		<!-- Company -->
+		<script type="text/javascript" src="/views/company/companyCtrl.js?v=db8d"></script>
+		<script type="text/javascript" src="/views/company/companyProfile/companyProfileCtrl.js?v=db8d"></script>
+		<script type="text/javascript" src="/views/company/signupPro/signUpCtrl.js?v=d644"></script>
+		<script type="text/javascript" src="/views/loginCtrl.js?v=4d5f"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/myProjectDetailsCtrl.js?v=0ca8"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/reviewQuotes/quoteReviewModalCtrl.js?v=5004"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/manageEngagements/engagementsToApproveModalCtrl.js?v=a6a3"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/findExperts/modals/fullConsultantDetailsModalCtrl.js?v=c313"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/findExperts/modals/inviteToQuoteCtrl.js?v=770d"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/findExperts/modals/groupInviteToQuoteCtrl.js?v=9c99"></script>
+		<script type="text/javascript" src="/views/company/projectDetails/findExperts/modals/sendMsgSLCtrl.js?v=b889"></script>
+		<script type="text/javascript" src="/views/company/invitedAuthorizedPayer/invitedAuthCtrl.js?v=0bd3"></script>
+		<script type="text/javascript" src="/views/company/postAProject/postAProjectCtrl.js?v=78ed"></script>
+		<script type="text/javascript" src="/views/company/legalDocs/legalDocsCtrl.js?v=5def"></script>
+		<script type="text/javascript" src="/views/company/dashboard/systemNotifications/replyModalCtrl.js?v=6859"></script>
+		<script type="text/javascript" src="/views/company/dashboard/projects/aysModalCtrl.js?v=a68b"></script>
+		<script type="text/javascript" src="/views/company/expertDetails/consultantDetailsCtrl.js?v=e552"></script>
+		<script type="text/javascript" src="/views/referenceRating/referenceRatingCtrl.js?v=a947"></script>
+		<script type="text/javascript" src="/views/company/plans/plans.js?v=4205"></script>
+		<script type="text/javascript" src="/views/company/companyInviteValidation/companyInviteValidationCtrl.js?v=f46d"></script>
+		<script type="text/javascript" src="/views/company/expiredMembership/index.js?v=f46d"></script>
+		<script type="text/javascript" src="/views/company/myAcctCtrl.js?v=f46d"></script>
+		<!-- Consultant -->
+		<script type="text/javascript" src="/views/consultant/consultantSignUp/consultantSignUpCtrl.js?v=a017"></script>
+		<script type="text/javascript" src="/views/consultant/consultantDashboard/consultantDashCtrl.js?v=d8b2"></script>
+		<script type="text/javascript" src="/views/consultant/consultantDashboard/quoteInvitation/quoteInvitationCtrl.js?v=6d18"></script>
+		<script type="text/javascript" src="/views/consultant/legalDocs/legalDocsCtrl.js?v=3ab3"></script>
+		<script type="text/javascript" src="/views/consultant/consultantDashboard/approvedProjects/approvedProjectsCtrl.js?v=cc78"></script>
+		<script type="text/javascript" src="/views/consultant/consultantDashboard/interestedOpportunities/sendIOMessageCtrl.js?v=018a"></script>
+		<script type="text/javascript" src="/views/consultant/consultantDashboard/systemNotifications/replytoMsgModalCtrl.js?v=a15b"></script>
+		<script type="text/javascript" src="/views/consultant/consultantInviteValidation/consultantInviteValidationCtrl.js?v=3802"></script>
+		<!-- Impersonation -->
+		<script type="text/javascript" src="/views/csa/index.js?v=2d8a"></script>
+		<script type="text/javascript" src="/views/adminDash/index.js?v=17ca"></script>
+		<script type="text/javascript" src="/views/admin-consultantDash/index.js?v=b97f"></script>
+		<!-- Apps -->
+		<script type="text/javascript" src="/views/pipeline/index.js?v=3eed"></script>
+		<script type="text/javascript" src="/views/pipeline/pipelineOpportunityDetailsCtrl.js?v=c4ab"></script>
+		<script type="text/javascript" src="/views/pipeline/addOpportunityModalCtrl.js?v=56ba"></script>
+		<script type="text/javascript" src="/views/pipeline/pipelineSettingsCtrl.js?v=9b23"></script>
+		<script type="text/javascript" src="/views/opportunitySearch/index.js?v=d0d9"></script>
+		<script type="text/javascript" src="/views/opportunitySearch/osDetailsCtrl.js?v=480f"></script>
+		<script type="text/javascript" src="/views/opportunitySearch/osAddToPipelineCtrl.js?v=9446"></script>
+		<script type="text/javascript" src="/views/opportunitySearch/osCreateProjectCtrl.js?v=97c4"></script>
+		<script type="text/javascript" src="/views/teammateMatch/index.js?v=8d0c"></script>
+		<script type="text/javascript" src="/views/teammateMatch/teammateMatchInviteCtrl.js?v=af48"></script>
+		<script type="text/javascript" src="/views/teammateMatch/modalCtrl.js?v=60fd"></script>
+		<!-- Design UI -->
+		<script type="text/javascript" src="/views/designUI/designUICtrl.js?v=aa0d"></script>
+
+		<!-- SERVICES -->
+		<script type="text/javascript" src="/js/app/services/apiSrvc.js?v=bcc0"></script>
+		<script type="text/javascript" src="/js/app/services/authSrvc.js?v=1321"></script>
+		<script type="text/javascript" src="/js/app/services/linkedInSrvc.js?v=4b59"></script>
+		<script type="text/javascript" src="/js/app/services/passDataSrvc.js?v=e40d"></script>
+		<script type="text/javascript" src="/js/app/services/envSrvc.js?v=6d6c"></script>
+		<script type="text/javascript" src="/js/app/services/commonFnSrvc.js?v=6d6c"></script>
+		<!-- FILTERS -->
+		<script type="text/javascript" src="/js/app/filters/dateFilter.js?v=7b9e"></script>
+		<script type="text/javascript" src="/js/app/filters/telephoneFilter.js?v=b3d9"></script>
+		<script type="text/javascript" src="/js/app/filters/maskFilter.js?v=9a48"></script>
+		<script type="text/javascript" src="/js/app/filters/socialSecurityFilter.js?v=6c11"></script>
+		<script type="text/javascript" src="/js/app/filters/einFilter.js?v=fbe6"></script>
+		<script type="text/javascript" src="/js/app/filters/createSpacesFilter.js?v=a63f"></script>
+		<script type="text/javascript" src="/js/app/filters/percentFilter.js?v=a63f"></script>
+		<script type="text/javascript" src="/js/app/filters/currency.js?v=2176"></script>
+		<script type="text/javascript" src="/js/app/filters/trusted.js?v=2176"></script>
+		<!-- DIRECTIVES -->
+		<script type="text/javascript" src="/js/app/directives/compareTo.js?v=4570"></script>
+		<script type="text/javascript" src="/js/app/directives/formatPhone.js?v=7da8"></script>
+		<script type="text/javascript" src="/js/app/directives/footer.js?v=1556"></script>
+		<script type="text/javascript" src="/js/app/directives/loginHeader.js?v=b3f3"></script>
+		<script type="text/javascript" src="/js/app/directives/loginResponsiveHeader.js?v=7de4"></script>
+		<script type="text/javascript" src="/js/app/directives/companyDashHeader.js?v=4155"></script>
+		<script type="text/javascript" src="/js/app/directives/consultantDashHeader.js?v=a757"></script>
+		<script type="text/javascript" src="/js/app/directives/csaDashHeader.js?v=0d62"></script>
+		<script type="text/javascript" src="/js/app/directives/adminDashHeader.js?v=dcc6"></script>
+		<script type="text/javascript" src="/js/app/directives/adminConsultantDashHeader.js?v=ebb9"></script>
+		<script type="text/javascript" src="/js/app/directives/starRatingDirective.js?v=ccf0"></script>
+		<script type="text/javascript" src="/js/app/directives/referenceFileUpload.js?v=ba1d"></script>
+		<script type="text/javascript" src="/js/app/directives/projectFileUpload.js?v=4fb2"></script>
+		<script type="text/javascript" src="/js/app/directives/numbersOnly.js?v=4fb2"></script>
+
+		<script type="text/javascript" src="/js/app/directives/currencyFormat.js?v=b67a"></script>
+		<script type="text/javascript" src="/js/app/directives/limitTo.js?v=bc90"></script>
+		<script type="text/javascript" src="/js/app/directives/createInitials.js?v=0d10"></script>
+		<script type="text/javascript" src="/js/app/directives/hopscotchTour.js?v=6aa1"></script>
+		<script type="text/javascript" src="/js/app/directives/angularClickOutside.js?v=6aa1"></script>
+
+
+		<!--///////////////////////// REORGANIZATION ////////////////////////// -->
+
+		<script type="text/javascript" src="/js/libraries/angular/angular-image-cropper.js?v=4ebe"></script>
+
+	</body>
+</html>

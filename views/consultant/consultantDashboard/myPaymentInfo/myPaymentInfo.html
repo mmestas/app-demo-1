@@ -1,0 +1,19 @@
+<!-- <div class=" md-whiteframe-2dp"  ng-init="getPaymentInformation()"> -->
+<div class=" md-whiteframe-2dp">
+    <div class="panel-heading">
+      <div>Banking/Payment Info
+        <span class="badge" data-ng-class="{'btn-danger': paymentInfo.LegalEntityVerificationStatus === 'unverified', 'btn-success': paymentInfo.LegalEntityVerificationStatus === 'verified', 'btn-info': paymentInfo.LegalEntityVerificationStatus === 'pending' }">{{paymentInfo.LegalEntityVerificationStatus | uppercase}}</span>
+        <!-- <button class="btn btn-sm btn-info" data-ng-click="oldForm = !oldForm">Click For
+          <span ng-show="!oldForm">Old Form</span><span ng-show="oldForm">New Form</span>
+        </button> -->
+      </div>
+      <div><i class="fa fa-times gp-closePanel gp-ml20" ui-sref="consultant.dashboard"></i></div>
+    </div>
+    <div class="panel-body">
+
+      <div ng-include="'views/consultant/consultantDashboard/myPaymentInfo/editPaymentInfo.html'" ng-if="!noStripeAccountOnRecord  && !oldForm"></div>
+      <div ng-include="'views/consultant/consultantDashboard/myPaymentInfo/addNewPaymentInfo.html'" ng-if="noStripeAccountOnRecord && !oldForm"></div>
+      <!-- <div ng-include="'views/consultant/consultantDashboard/myPaymentInfo/addNewPaymentInfo-Current.html'" ng-if="oldForm && noStripeAccountOnRecord"></div>
+      <div ng-include="'views/consultant/consultantDashboard/myPaymentInfo/editPaymentInfo-Current.html'" ng-if="oldForm && !noStripeAccountOnRecord"></div> -->
+    </div>
+  </div>

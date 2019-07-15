@@ -1,0 +1,50 @@
+<div class="gp-nav" company-dash-header></div>
+
+<div class="gp-dashWrapper gp-mainBodyWidth">
+  <div class="gp-dashInner">
+    <div class=" md-whiteframe-2dp" style="padding: 20px 50px;">
+
+
+      <div data-ng-if="showMessageBox || showErrorMessage">
+        <p class="gp-pt20 gp-pb20">
+          Your membership is currently expired, if you would like to renew, go to the "<a ui-sref="myAccount"><strong>My Account</strong></a>" page, or if you have a question about your account, please contact a CSA at app1url using the form below
+        </p>
+
+        <!-- Send a message -->
+        <div style="max-width: 900px; margin:auto;">
+          <div class="gp-pt20 gp-pb20">
+            <textarea name="name" rows="8" placeholder="Your Message*" class="form-control" ng-model="exMem.message">  </textarea>
+          </div>
+          <div class="gp-text-right">
+            <button class="btn btn-primary" data-ng-click="sendEmailMembershipExpiredRequest(exMem.message)">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Sent Success Msg -->
+      <div data-ng-if="showMessageSucessfullySent">
+        <div class="gp-pt20 gp-pb20">
+          <p>Your message has been sent! </p>
+          <p>You can still click <a ui-sref="myAccount"><strong>here</strong></a> to go to your <a ui-sref="myAccount"><strong>My Account</strong></a> page.</p>
+        </div>
+      </div>
+
+      <!-- Message Not Sent Error Msg -->
+      <div data-ng-if="showErrorMessage" class="gp-text-center">
+        <div class="gp-pt20 gp-pb20">
+          <p class="gp-text-danger">An error has occurred and your message was not sent.</p>
+          <p>
+          Please try sending your message again or call us directly at 1-888-385-9346.  You can also click <a ui-sref="myAccount"><strong>here</strong></a> to go to your <a ui-sref="myAccount"><strong>My Account</strong></a> page.
+          </p>
+
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

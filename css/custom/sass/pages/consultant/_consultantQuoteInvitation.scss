@@ -1,0 +1,105 @@
+#constultantQuoteInvitation {
+  .gp-quoteInviteWrapper {max-width: 1200px; width:100%;margin:auto;margin-top: 20px;
+    .quoteInviteBody {padding: 16px;
+      .qiInfo {
+        .qiInfoInner {margin-bottom:15px;}
+      }
+      .declineQuote {text-align: center;
+        .btn {width:200px;}
+      }
+      .qiRequestInfo {border-top: 2px dashed $govBorderGrey;}
+      .qiForms {
+        .qiFormsInner {border: 1px solid $govBorderGrey; padding:10px;
+          .quoteTypeSelection {border-bottom: 2px dashed $govBorderGrey;}
+          .quoteTypes { margin-top:15px;
+            #quoteType-fixed {
+              .qtFixed-milestone {}
+            }
+            #quoteType-hourly {
+              .qtHourly-milestone {}
+            }
+            #quoteType-recurring {}
+          }
+          .quoteButtons {
+            .btn {width: 130px;}
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+// .gp-qiSection {max-width: 1005px;margin: auto;padding: 5px 15px 15px;border-bottom: 2px solid #ebebeb;}
+textarea.ta-bind {width: 100%;}
+.gp-wysiwyg {}
+.gp-wysiwyg .btn {padding: 1px 4px;}
+.gp-wysiwygEditor {padding: 15px 0;}
+
+.customTextareaWithBtn {width: calc(100% - 100px); margin-right:10px;}
+.customRoundBtn {
+    border-radius: 50%;
+    height: 85px;
+    width: 85px;
+    white-space: normal;
+    font-size: 13px;
+    background: $govBlue;
+    color: $govWhite;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+
+    &:hover {background: darken($govBlue, 20);}
+}
+
+.quoteTypeLabel {}
+.quoteTypeSelect {max-width: 200px;}
+.qiPriceField {max-width: 125px;}
+
+.custom-mdDatepicker {
+    max-width: 135px;
+    margin: 0;
+    padding: 0;
+    padding-right: 5px;
+    border: 1px solid $govMedGrey;
+  .md-button.md-icon-button {
+    padding: 8px 0;
+    margin: 0;
+    margin-right: 5px;
+    width: auto;
+  }
+  .md-datepicker-triangle-button.md-button.md-icon-button {width:11px;}
+  .md-datepicker-expand-triangle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 7px solid;
+}
+  .md-icon-button+.md-datepicker-input-container {
+    margin:0; border-bottom-color: transparent;
+    .md-datepicker-input {
+      min-width: 90px;
+      max-width: 90px;
+    }
+  }
+}
+
+
+// NDA OCI Page
+// .gp-qiCompanyDetails {}
+  .gp-qiCDImgWrapper {text-align: center;}
+  .gp-qiCDImgWrapper img {width:100%;}
+// .gp-qiAgency {}
+// .gp-qiWorkDescription {}
+// .gp-qiWDReferenceFile {}
+// .gp-qiRate {}
+// .gp-qiRate input {width: 125px;}
+// .gp-consultantHourlyRate {font-size: 18px;}
+// .gp-qiButtons {text-align: center; padding-top: 15px;}

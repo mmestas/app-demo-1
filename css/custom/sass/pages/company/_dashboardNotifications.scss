@@ -1,0 +1,10 @@
+#dashboardNotifications {
+  li {
+    .collapsible-header {
+      .notificationHeader {font-size: 15px;display: flex; font-weight:600;
+        .notificationDate {width: 100px; margin-right:20px;}
+        .notificationSender {width: 200px; margin-right:20px;}
+      }
+    }
+  }
+}
